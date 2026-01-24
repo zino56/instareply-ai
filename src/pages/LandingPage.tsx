@@ -1,5 +1,6 @@
 import LandingNavbar from "@/components/landing/LandingNavbar";
 import HeroSection from "@/components/landing/HeroSection";
+import YellowBannerSection from "@/components/landing/YellowBannerSection";
 import ValuePropsSection from "@/components/landing/ValuePropsSection";
 import BeforeAfterSection from "@/components/landing/BeforeAfterSection";
 import OnboardingStepsSection from "@/components/landing/OnboardingStepsSection";
@@ -15,6 +16,7 @@ const LandingPage = () => {
       <LandingNavbar />
       <main>
         <HeroSection />
+        <YellowBannerSection />
         <div id="features">
           <ValuePropsSection />
         </div>
