@@ -15,6 +15,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        poppins: ['Poppins', 'system-ui', 'sans-serif'],
+        inter: ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -75,6 +77,14 @@ export default {
         facebook: {
           DEFAULT: "#1877F2",
           hover: "#166FE5",
+        },
+        landing: {
+          teal: "#0d9488",
+          "teal-dark": "#0f766e",
+          headline: "#1f2937",
+          subheadline: "#6b7280",
+          background: "#f9fafb",
+          footer: "#1f2937",
         },
       },
       borderRadius: {
