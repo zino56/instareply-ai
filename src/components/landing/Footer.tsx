@@ -1,16 +1,15 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
-import { Instagram, Twitter, Linkedin, Github } from "lucide-react";
+import { Twitter, Linkedin, Instagram, Github } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 const footerLinks = {
   product: [
-    { label: "Pricing", href: "#pricing" },
+    { label: "Product", href: "#" },
     { label: "Features", href: "#features" },
     { label: "Security", href: "#" },
-    { label: "Roadmap", href: "#" },
-    { label: "What's New", href: "#" },
+    { label: "Pricing", href: "#pricing" },
+    { label: "Status Page", href: "#" },
   ],
   resources: [
     { label: "Documentation", href: "#" },
@@ -26,12 +25,12 @@ const footerLinks = {
     { label: "Partners", href: "#" },
     { label: "Press Kit", href: "#" },
   ],
-  support: [
-    { label: "Contact Us", href: "#" },
-    { label: "FAQ", href: "#faq" },
-    { label: "Community", href: "#" },
-    { label: "Status Page", href: "#" },
-    { label: "Security", href: "#" },
+  legal: [
+    { label: "Privacy Policy", href: "#" },
+    { label: "Terms of Service", href: "#" },
+    { label: "Cookie Policy", href: "#" },
+    { label: "GDPR Compliance", href: "#" },
+    { label: "Subprocessors", href: "#" },
   ],
 };
 
@@ -45,39 +44,28 @@ const socialLinks = [
 const Footer = () => {
   const [email, setEmail] = useState("");
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle newsletter subscription
+    console.log("Newsletter signup:", email);
     setEmail("");
   };
 
   return (
-    <footer className="bg-black text-white">
+    <footer className="bg-mc-black">
       {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-5 md:px-10 py-16 md:py-20">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
-          {/* Brand Column */}
-          <div className="col-span-2 md:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-manychat-yellow flex items-center justify-center">
-                <span className="font-poppins font-bold text-lg text-black">I</span>
-              </div>
-              <span className="font-poppins font-bold text-xl text-white">InstaAI</span>
-            </Link>
-            <p className="font-inter text-sm text-white/70 leading-relaxed">
-              AI-powered Instagram DM automation for e-commerce brands.
-            </p>
-          </div>
-
-          {/* Product Links */}
+      <div className="max-w-[1280px] mx-auto px-5 md:px-[60px] py-[60px]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-10">
+          {/* Product Column */}
           <div>
-            <h4 className="font-poppins font-semibold text-sm text-white mb-4">Product</h4>
+            <h4 className="font-poppins font-bold text-base text-white mb-6">
+              Product
+            </h4>
             <ul className="space-y-3">
               {footerLinks.product.map((link, index) => (
                 <li key={index}>
                   <a
                     href={link.href}
-                    className="font-inter text-[13px] text-white/70 hover:text-manychat-yellow hover:underline transition-all duration-200"
+                    className="font-inter text-sm text-white/80 hover:text-mc-yellow transition-colors duration-200"
                   >
                     {link.label}
                   </a>
@@ -86,15 +74,17 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Resources Links */}
+          {/* Resources Column */}
           <div>
-            <h4 className="font-poppins font-semibold text-sm text-white mb-4">Resources</h4>
+            <h4 className="font-poppins font-bold text-base text-white mb-6">
+              Resources
+            </h4>
             <ul className="space-y-3">
               {footerLinks.resources.map((link, index) => (
                 <li key={index}>
                   <a
                     href={link.href}
-                    className="font-inter text-[13px] text-white/70 hover:text-manychat-yellow hover:underline transition-all duration-200"
+                    className="font-inter text-sm text-white/80 hover:text-mc-yellow transition-colors duration-200"
                   >
                     {link.label}
                   </a>
@@ -103,15 +93,17 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Company Links */}
+          {/* Company Column */}
           <div>
-            <h4 className="font-poppins font-semibold text-sm text-white mb-4">Company</h4>
+            <h4 className="font-poppins font-bold text-base text-white mb-6">
+              Company
+            </h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link, index) => (
                 <li key={index}>
                   <a
                     href={link.href}
-                    className="font-inter text-[13px] text-white/70 hover:text-manychat-yellow hover:underline transition-all duration-200"
+                    className="font-inter text-sm text-white/80 hover:text-mc-yellow transition-colors duration-200"
                   >
                     {link.label}
                   </a>
@@ -120,15 +112,17 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Support Links */}
+          {/* Legal Column */}
           <div>
-            <h4 className="font-poppins font-semibold text-sm text-white mb-4">Support</h4>
+            <h4 className="font-poppins font-bold text-base text-white mb-6">
+              Legal
+            </h4>
             <ul className="space-y-3">
-              {footerLinks.support.map((link, index) => (
+              {footerLinks.legal.map((link, index) => (
                 <li key={index}>
                   <a
                     href={link.href}
-                    className="font-inter text-[13px] text-white/70 hover:text-manychat-yellow hover:underline transition-all duration-200"
+                    className="font-inter text-sm text-white/80 hover:text-mc-yellow transition-colors duration-200"
                   >
                     {link.label}
                   </a>
@@ -140,30 +134,34 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="bg-[#0a0a0a] border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-5 md:px-10 py-6">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+      <div className="border-t border-[#333333]">
+        <div className="max-w-[1280px] mx-auto px-5 md:px-[60px] py-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Copyright */}
-            <p className="font-inter text-xs text-white/60 order-3 lg:order-1">
+            <p className="font-inter text-xs text-[#999999] order-3 md:order-1">
               © 2026 InstaAI. All rights reserved.
             </p>
 
             {/* Newsletter */}
-            <div className="flex flex-col items-center gap-3 order-1 lg:order-2 w-full lg:w-auto">
-              <p className="font-inter text-xs text-white/80">
+            <div className="order-1 md:order-2 w-full md:w-auto">
+              <p className="font-inter text-xs text-white/90 mb-3 text-center md:text-left">
                 Get weekly tips on Instagram sales automation
               </p>
-              <form onSubmit={handleSubscribe} className="flex gap-2 w-full max-w-sm lg:max-w-none">
-                <Input
+              <form onSubmit={handleSubmit} className="flex gap-2">
+                <input
                   type="email"
-                  placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 lg:w-56 bg-white/10 border border-manychat-yellow text-white placeholder:text-white/50 text-sm rounded-md px-3.5 py-2.5 h-auto focus:ring-manychat-yellow"
+                  placeholder="Enter your email"
+                  className="bg-white/10 border border-[#333333] rounded-md px-4 py-2.5 
+                    font-inter text-sm text-white placeholder:text-white/50
+                    focus:outline-none focus:border-mc-yellow transition-colors duration-200
+                    w-full md:w-[240px]"
                 />
                 <Button
                   type="submit"
-                  className="bg-manychat-yellow hover:bg-[#E5D600] text-black font-inter font-semibold text-xs px-5 py-2.5 h-auto rounded-md"
+                  className="bg-mc-yellow hover:bg-mc-hover-yellow text-mc-black font-poppins 
+                    font-bold text-xs px-5 py-2.5 h-auto rounded-md transition-all duration-200"
                 >
                   Subscribe
                 </Button>
@@ -171,13 +169,13 @@ const Footer = () => {
             </div>
 
             {/* Social Icons */}
-            <div className="flex items-center gap-4 order-2 lg:order-3">
+            <div className="flex items-center gap-4 order-2 md:order-3">
               {socialLinks.map((social, index) => (
                 <a
                   key={index}
                   href={social.href}
+                  className="text-white hover:text-mc-yellow transition-all duration-200 hover:rotate-6"
                   aria-label={social.label}
-                  className="text-white/70 hover:text-manychat-yellow transition-colors duration-200"
                 >
                   <social.icon className="w-5 h-5" />
                 </a>
