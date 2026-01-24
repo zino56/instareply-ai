@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Features", href: "#features" },
@@ -18,8 +18,8 @@ const LandingNavbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-landing-teal flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-white" />
+            <div className="w-8 h-8 rounded-lg bg-manychat-yellow flex items-center justify-center">
+              <span className="font-poppins font-bold text-lg text-black">I</span>
             </div>
             <span className="font-poppins font-bold text-xl text-foreground">InstaAI</span>
           </Link>
@@ -44,7 +44,7 @@ const LandingNavbar = () => {
             </Button>
             <Button
               asChild
-              className="bg-landing-teal hover:bg-landing-teal/90 text-white font-inter font-medium text-sm px-5 rounded-lg"
+              className="bg-manychat-yellow hover:bg-manychat-yellow/90 text-black font-inter font-semibold text-sm px-5 rounded-lg"
             >
               <Link to="/signup">Start Free</Link>
             </Button>
@@ -85,7 +85,7 @@ const LandingNavbar = () => {
               </Button>
               <Button
                 asChild
-                className="w-full bg-landing-teal hover:bg-landing-teal/90 text-white"
+                className="w-full bg-manychat-yellow hover:bg-manychat-yellow/90 text-black font-semibold"
               >
                 <Link to="/signup">Start Free</Link>
               </Button>

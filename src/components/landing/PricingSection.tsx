@@ -2,221 +2,290 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Check, Minus } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Slider } from "@/components/ui/slider";
 
 const plans = [
   {
-    name: "Starter",
-    monthlyPrice: 50,
-    description: "Best for testing automation",
+    name: "Free",
+    monthlyPrice: 0,
+    description: "Get started with access to InstaAI basic features to engage up to 1,000 contacts FREE OF CHARGE",
+    headerColor: "bg-[#E8F5E9]",
+    headerTextColor: "text-black",
     features: [
-      "50 conversations/day",
-      "1 Instagram page",
+      "Engage up to 1,000 Instagram DMs",
+      "Post to Instagram at prime times",
+      "Create 5 Custom Keyword Triggers",
+      "Auto-respond to Comments",
       "Basic analytics",
-      "Email support (24hr)",
-      "AI-powered responses",
     ],
-    popular: false,
-    cta: "Start Free",
+    cta: "Start for Free",
     ctaLink: "/signup",
   },
   {
     name: "Pro",
-    monthlyPrice: 150,
-    description: "Most popular. Ideal for growing stores.",
-    features: [
-      "500 conversations/day",
-      "Unlimited Instagram pages",
-      "Advanced analytics",
-      "Priority support (2hr)",
-      "Custom AI tone",
-      "A/B testing",
-      "Integrations",
-    ],
+    monthlyPrice: 15,
+    description: "Grow your business with access to all advanced Pro features, starting at:",
+    headerColor: "bg-manychat-green",
+    headerTextColor: "text-white",
     popular: true,
-    cta: "Start Free",
+    features: [
+      "Unlimited Instagram DMs",
+      "Post to Instagram at prime times",
+      "Unlimited Custom Keyword Triggers",
+      "Auto-respond to Comments",
+      "Automate Lead Capture via DMs",
+      "Access to Latest Features",
+      "Advanced analytics",
+    ],
+    cta: "Get Started",
     ctaLink: "/signup",
   },
   {
-    name: "Enterprise",
+    name: "Elite",
     monthlyPrice: null,
-    description: "For enterprise & agencies",
+    description: "Customize your InstaAI experience to meet (and exceed) your ambitious goals",
+    headerColor: "bg-manychat-blue",
+    headerTextColor: "text-white",
     features: [
-      "Unlimited conversations",
-      "Unlimited pages",
+      "Everything in Pro",
       "Dedicated account manager",
       "Custom integrations",
-      "White-label option",
+      "Priority Support",
       "SLA guarantee (99.9%)",
-      "Priority support",
+      "White-label option",
+      "Unlimited team members",
     ],
-    popular: false,
-    cta: "Request Demo",
+    cta: "Contact Us",
     ctaLink: "/contact",
   },
 ];
 
 const comparisonFeatures = [
-  { name: "Conversations/day", starter: "50", pro: "500", enterprise: "Unlimited" },
-  { name: "Instagram pages", starter: "1", pro: "Unlimited", enterprise: "Unlimited" },
-  { name: "Analytics level", starter: "Basic", pro: "Advanced", enterprise: "Advanced" },
-  { name: "Support tier", starter: "Email (24hr)", pro: "Priority (2hr)", enterprise: "Dedicated" },
-  { name: "Custom AI tone", starter: false, pro: true, enterprise: true },
-  { name: "Team members", starter: "1", pro: "5", enterprise: "Unlimited" },
-  { name: "API access", starter: false, pro: true, enterprise: true },
-  { name: "SLA guarantee", starter: false, pro: false, enterprise: true },
+  { name: "Full-featured 7-day/1000 contact free trial", starter: true, pro: true, enterprise: true },
+  { name: "Engage Unlimited Instagram DMs", starter: "1,000 max", pro: "Unlimited", enterprise: "Unlimited" },
+  { name: "Team members", starter: "3", pro: "Unlimited", enterprise: "Unlimited" },
+  { name: "Create Custom Keyword Triggers", starter: "10 keywords", pro: "Unlimited", enterprise: "Unlimited" },
+  { name: "Mobile App (iOS/Android)", starter: true, pro: true, enterprise: true },
+  { name: "Access to Latest Features", starter: false, pro: true, enterprise: true },
+  { name: "Unlimited Flow Builder Automations", starter: false, pro: true, enterprise: true },
+  { name: "Priority Support", starter: false, pro: false, enterprise: true },
+  { name: "Multiple Instagram Accounts per ManyChat/InstaAI account", starter: "Paid Add-on", pro: "No Branding", enterprise: "No Branding" },
 ];
 
 const PricingSection = () => {
-  const [isAnnual, setIsAnnual] = useState(false);
+  const [contactCount, setContactCount] = useState([500]);
+  const [billingTab, setBillingTab] = useState<"free" | "pro" | "elite">("pro");
 
-  const getPrice = (monthlyPrice: number | null) => {
-    if (monthlyPrice === null) return "Custom Pricing";
-    if (isAnnual) {
-      const annualMonthly = Math.round(monthlyPrice * 0.8);
-      return `$${annualMonthly}`;
-    }
-    return `$${monthlyPrice}`;
+  const getProPrice = () => {
+    const count = contactCount[0];
+    if (count <= 500) return 15;
+    if (count <= 1000) return 25;
+    if (count <= 2500) return 45;
+    if (count <= 5000) return 65;
+    if (count <= 10000) return 95;
+    return 95;
   };
 
   return (
-    <section className="py-16 md:py-[100px] px-5 md:px-10 bg-white">
-      <div className="max-w-[1300px] mx-auto">
+    <section className="py-16 md:py-[120px] px-5 md:px-10 bg-white">
+      <div className="max-w-[1200px] mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-4">
-          <h2 className="font-poppins font-bold text-[36px] md:text-[44px] text-[#001D3D] leading-tight">
-            Simple, Transparent Pricing
+        <div className="text-center mb-6">
+          <h2 className="font-poppins font-bold text-[36px] md:text-[48px] text-black leading-tight">
+            Choose an InstaAI plan that's right for you
           </h2>
-        </div>
-        <p className="font-inter text-lg text-[#6b7280] text-center mb-10 md:mb-[50px]">
-          Start free. Upgrade when you're ready.
-        </p>
-
-        {/* Billing Toggle */}
-        <div className="flex items-center justify-center mb-12 md:mb-[60px]">
-          <div className="inline-flex bg-[#f3f4f6] rounded-lg p-1">
-            <button
-              onClick={() => setIsAnnual(false)}
-              className={`font-inter font-semibold text-sm px-5 py-2 rounded-md transition-all duration-200 ${
-                !isAnnual
-                  ? "bg-[#FFD60A] text-[#001D3D]"
-                  : "text-[#6b7280] hover:text-[#001D3D]"
-              }`}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setIsAnnual(true)}
-              className={`font-inter font-semibold text-sm px-5 py-2 rounded-md transition-all duration-200 ${
-                isAnnual
-                  ? "bg-[#FFD60A] text-[#001D3D]"
-                  : "text-[#6b7280] hover:text-[#001D3D]"
-              }`}
-            >
-              Annual - Save 20%
-            </button>
-          </div>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 max-w-[1100px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1100px] mx-auto mt-12">
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`relative bg-white rounded-xl p-8 md:p-10 border transition-all duration-300 ${
-                plan.popular
-                  ? "border-t-[5px] border-t-[#FFD60A] border-[#e5e7eb] shadow-[0_8px_24px_rgba(255,214,10,0.15)] lg:scale-105"
-                  : "border-t-4 border-t-[#FFD60A] border-[#e5e7eb] hover:shadow-lg"
+              className={`relative bg-white rounded-2xl overflow-hidden border border-border transition-all duration-300 ${
+                plan.popular ? "shadow-yellow-glow lg:scale-105" : "hover:shadow-lg"
               }`}
             >
-              {/* Popular Badge */}
-              {plan.popular && (
-                <div className="absolute -top-3 right-4">
-                  <span className="bg-[#FFD60A] text-[#001D3D] text-[10px] font-poppins font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">
-                    Most Popular
-                  </span>
-                </div>
-              )}
-
-              {/* Plan Header */}
-              <div className="text-center mb-8">
-                <h3 className="font-poppins font-semibold text-xl md:text-2xl text-[#001D3D] mb-4">
+              {/* Colored Header */}
+              <div className={`${plan.headerColor} ${plan.headerTextColor} py-6 px-6`}>
+                <h3 className="font-poppins font-bold text-2xl mb-2">
                   {plan.name}
                 </h3>
-                <div className="mb-2">
-                  <span className={`font-poppins font-bold ${plan.monthlyPrice ? "text-[40px] md:text-[48px] text-[#FFD60A]" : "text-[32px] md:text-[36px] text-[#001D3D]"}`}>
-                    {getPrice(plan.monthlyPrice)}
-                  </span>
-                  {plan.monthlyPrice && (
-                    <span className="font-inter text-base text-[#6b7280]">/month</span>
-                  )}
-                </div>
-                {plan.monthlyPrice ? (
-                  <p className="font-inter text-xs text-[#6b7280]">
-                    Billed {isAnnual ? "annually" : "monthly"}
-                  </p>
+                <p className="text-sm opacity-90 leading-relaxed">
+                  {plan.description}
+                </p>
+              </div>
+
+              {/* Price */}
+              <div className="px-6 py-6 border-b border-border">
+                {plan.monthlyPrice !== null ? (
+                  <div className="flex items-baseline gap-1">
+                    <span className="font-poppins font-bold text-[48px] text-black">
+                      ${plan.name === "Pro" ? getProPrice() : plan.monthlyPrice}
+                    </span>
+                    <span className="font-inter text-base text-muted-foreground">/month</span>
+                  </div>
                 ) : (
-                  <p className="font-inter text-xs text-[#6b7280]">
-                    Tailored to your needs
-                  </p>
+                  <div>
+                    <span className="font-poppins font-bold text-[36px] text-black">
+                      Custom
+                    </span>
+                    <p className="font-inter text-sm text-muted-foreground mt-1">
+                      Contact for pricing
+                    </p>
+                  </div>
+                )}
+
+                {/* Popular Badge */}
+                {plan.popular && (
+                  <div className="mt-3">
+                    <span className="bg-manychat-green/10 text-manychat-green text-xs font-semibold px-3 py-1 rounded-full">
+                      Most Popular
+                    </span>
+                  </div>
                 )}
               </div>
 
-              {/* Features */}
-              <ul className="space-y-3 mb-8">
-                {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-[#FFD60A] flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <span className="font-inter text-sm text-[#001D3D]">
-                      {feature}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
               {/* CTA Button */}
-              <Button
-                asChild
-                className={`w-full font-inter font-semibold text-base py-3.5 h-auto rounded-lg transition-all duration-200 ${
-                  plan.popular
-                    ? "bg-[#001D3D] hover:bg-[#002a57] text-[#FFD60A] shadow-md hover:shadow-lg"
-                    : plan.name === "Enterprise"
-                    ? "bg-white border-2 border-[#001D3D] text-[#001D3D] hover:bg-[#001D3D] hover:text-white"
-                    : "bg-[#FFD60A] hover:bg-[#E5C009] text-[#001D3D]"
-                }`}
-                variant={plan.name === "Enterprise" ? "outline" : "default"}
-              >
-                <Link to={plan.ctaLink}>{plan.cta}</Link>
-              </Button>
+              <div className="px-6 py-4">
+                <Button
+                  asChild
+                  className={`w-full font-inter font-semibold text-base py-3.5 h-auto rounded-lg transition-all duration-200 ${
+                    plan.popular
+                      ? "bg-manychat-green hover:bg-manychat-green/90 text-white"
+                      : plan.name === "Elite"
+                      ? "bg-manychat-blue hover:bg-manychat-blue/90 text-white"
+                      : "bg-manychat-yellow hover:bg-[#E5D600] text-black"
+                  }`}
+                >
+                  <Link to={plan.ctaLink}>{plan.cta}</Link>
+                </Button>
+              </div>
 
-              {/* Footer */}
-              <p className="font-inter text-xs text-[#6b7280] italic text-center mt-4">
-                {plan.description}
-              </p>
+              {/* Features */}
+              <div className="px-6 pb-6">
+                <p className="font-inter text-xs text-muted-foreground mb-4 uppercase tracking-wide">
+                  {plan.name === "Elite" ? "Everything in Pro, plus:" : "What's included:"}
+                </p>
+                <ul className="space-y-3">
+                  {plan.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-manychat-green flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                      <span className="font-inter text-sm text-black">
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           ))}
         </div>
 
+        {/* Pricing Calculator */}
+        <div className="mt-20 max-w-[800px] mx-auto">
+          <div className="bg-white border border-border rounded-2xl p-8 shadow-card">
+            <h3 className="font-poppins font-bold text-[24px] md:text-[28px] text-black text-center mb-2">
+              Calculate the Cost and Billing of Your Monthly Plan
+            </h3>
+            <p className="font-inter text-base text-muted-foreground text-center mb-8">
+              Try our plan calculator below to see the price of your preferred tier.
+            </p>
+
+            <div className="mb-8">
+              <p className="font-inter text-sm text-muted-foreground mb-3">
+                How many Instagram contacts do you have?
+              </p>
+              <div className="text-center mb-4">
+                <span className="font-poppins font-bold text-[40px] text-black">
+                  {contactCount[0].toLocaleString()}
+                </span>
+              </div>
+              <Slider
+                value={contactCount}
+                onValueChange={setContactCount}
+                max={10000}
+                min={100}
+                step={100}
+                className="w-full"
+              />
+              <div className="flex justify-between mt-2">
+                <span className="font-inter text-xs text-muted-foreground">100</span>
+                <span className="font-inter text-xs text-muted-foreground">10,000</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              <button
+                onClick={() => setBillingTab("free")}
+                className={`py-3 px-4 rounded-lg font-inter font-semibold text-sm transition-all ${
+                  billingTab === "free"
+                    ? "bg-manychat-yellow text-black"
+                    : "bg-manychat-light-gray text-muted-foreground hover:bg-gray-200"
+                }`}
+              >
+                Start for Free
+              </button>
+              <button
+                onClick={() => setBillingTab("pro")}
+                className={`py-3 px-4 rounded-lg font-inter font-semibold text-sm transition-all ${
+                  billingTab === "pro"
+                    ? "bg-manychat-green text-white"
+                    : "bg-manychat-light-gray text-muted-foreground hover:bg-gray-200"
+                }`}
+              >
+                Get Pro
+              </button>
+              <button
+                onClick={() => setBillingTab("elite")}
+                className={`py-3 px-4 rounded-lg font-inter font-semibold text-sm transition-all ${
+                  billingTab === "elite"
+                    ? "bg-manychat-blue text-white"
+                    : "bg-manychat-light-gray text-muted-foreground hover:bg-gray-200"
+                }`}
+              >
+                Get Elite
+              </button>
+            </div>
+
+            <div className="mt-6 text-center">
+              <div className="flex items-center justify-center gap-8">
+                <div className="text-center">
+                  <p className="font-inter text-sm text-muted-foreground">Free Plan</p>
+                  <p className="font-poppins font-bold text-3xl text-black">$0</p>
+                </div>
+                <div className="text-center">
+                  <p className="font-inter text-sm text-muted-foreground">Pro Plan</p>
+                  <p className="font-poppins font-bold text-3xl text-manychat-green">${getProPrice()}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Feature Comparison Table */}
-        <div className="mt-16 md:mt-20">
-          <h3 className="font-poppins font-semibold text-2xl md:text-[28px] text-[#001D3D] text-center mb-10">
-            Feature Comparison
+        <div className="mt-20">
+          <h3 className="font-poppins font-bold text-[24px] md:text-[28px] text-black text-center mb-2">
+            Compare Plans
           </h3>
+          <p className="font-inter text-base text-muted-foreground text-center mb-10">
+            see all Pricing details
+          </p>
           
           <div className="max-w-[1000px] mx-auto overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="bg-[#FFD60A]">
-                  <th className="font-poppins font-semibold text-sm text-[#001D3D] text-left py-4 px-4 md:px-6">
-                    Feature
+                <tr>
+                  <th className="font-poppins font-semibold text-sm text-black text-left py-4 px-4 md:px-6 bg-manychat-light-gray">
+                    Features
                   </th>
-                  <th className="font-poppins font-semibold text-sm text-[#001D3D] text-center py-4 px-4">
-                    Starter
+                  <th className="font-poppins font-semibold text-sm text-center py-4 px-4 bg-[#E8F5E9]">
+                    Start for Free
                   </th>
-                  <th className="font-poppins font-semibold text-sm text-[#001D3D] text-center py-4 px-4">
-                    Pro
+                  <th className="font-poppins font-semibold text-sm text-white text-center py-4 px-4 bg-manychat-green">
+                    Get Pro
                   </th>
-                  <th className="font-poppins font-semibold text-sm text-[#001D3D] text-center py-4 px-4">
-                    Enterprise
+                  <th className="font-poppins font-semibold text-sm text-white text-center py-4 px-4 bg-manychat-blue">
+                    Get Elite
                   </th>
                 </tr>
               </thead>
@@ -224,42 +293,42 @@ const PricingSection = () => {
                 {comparisonFeatures.map((feature, index) => (
                   <tr 
                     key={index} 
-                    className="border-b border-[#e5e7eb] hover:bg-[#f9fafb] transition-colors"
+                    className="border-b border-border hover:bg-manychat-light-gray transition-colors"
                   >
-                    <td className="font-inter text-sm text-[#001D3D] py-4 px-4 md:px-6">
+                    <td className="font-inter text-sm text-black py-4 px-4 md:px-6">
                       {feature.name}
                     </td>
                     <td className="text-center py-4 px-4">
                       {typeof feature.starter === "boolean" ? (
                         feature.starter ? (
-                          <Check className="w-5 h-5 text-[#FFD60A] mx-auto" strokeWidth={3} />
+                          <Check className="w-5 h-5 text-manychat-green mx-auto" strokeWidth={2.5} />
                         ) : (
-                          <Minus className="w-5 h-5 text-[#d1d5db] mx-auto" />
+                          <Minus className="w-5 h-5 text-gray-300 mx-auto" />
                         )
                       ) : (
-                        <span className="font-inter text-sm text-[#001D3D]">{feature.starter}</span>
+                        <span className="font-inter text-sm text-muted-foreground">{feature.starter}</span>
                       )}
                     </td>
                     <td className="text-center py-4 px-4">
                       {typeof feature.pro === "boolean" ? (
                         feature.pro ? (
-                          <Check className="w-5 h-5 text-[#FFD60A] mx-auto" strokeWidth={3} />
+                          <Check className="w-5 h-5 text-manychat-green mx-auto" strokeWidth={2.5} />
                         ) : (
-                          <Minus className="w-5 h-5 text-[#d1d5db] mx-auto" />
+                          <Minus className="w-5 h-5 text-gray-300 mx-auto" />
                         )
                       ) : (
-                        <span className="font-inter text-sm text-[#001D3D]">{feature.pro}</span>
+                        <span className="font-inter text-sm text-black font-medium">{feature.pro}</span>
                       )}
                     </td>
                     <td className="text-center py-4 px-4">
                       {typeof feature.enterprise === "boolean" ? (
                         feature.enterprise ? (
-                          <Check className="w-5 h-5 text-[#FFD60A] mx-auto" strokeWidth={3} />
+                          <Check className="w-5 h-5 text-manychat-green mx-auto" strokeWidth={2.5} />
                         ) : (
-                          <Minus className="w-5 h-5 text-[#d1d5db] mx-auto" />
+                          <Minus className="w-5 h-5 text-gray-300 mx-auto" />
                         )
                       ) : (
-                        <span className="font-inter text-sm text-[#001D3D]">{feature.enterprise}</span>
+                        <span className="font-inter text-sm text-black font-medium">{feature.enterprise}</span>
                       )}
                     </td>
                   </tr>

@@ -25,10 +25,10 @@ const steps = [
 
 const OnboardingStepsSection = () => {
   return (
-    <section className="py-14 md:py-[100px] px-5 md:px-10 bg-white">
+    <section className="py-16 md:py-[100px] px-5 md:px-10 bg-white">
       <div className="max-w-[1100px] mx-auto">
         {/* Section Header */}
-        <h2 className="font-poppins font-bold text-[32px] md:text-[40px] text-[#001D3D] text-center mb-12 md:mb-[70px]">
+        <h2 className="font-poppins font-bold text-[32px] md:text-[40px] text-black text-center mb-12 md:mb-[70px]">
           Get started in 3 steps
         </h2>
 
@@ -37,20 +37,20 @@ const OnboardingStepsSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10 relative">
             {/* Connecting Lines (Desktop only) */}
             <div className="hidden md:flex absolute top-10 left-[calc(16.67%+40px)] right-[calc(16.67%+40px)] items-center justify-between">
-              <div className="flex-1 h-[3px] bg-[#FFD60A] relative">
-                <ArrowRight className="absolute -right-1 -top-2.5 w-6 h-6 text-[#FFD60A]" />
+              <div className="flex-1 h-[3px] bg-manychat-yellow relative">
+                <ArrowRight className="absolute -right-1 -top-2.5 w-6 h-6 text-manychat-yellow" />
               </div>
               <div className="w-20" />
-              <div className="flex-1 h-[3px] bg-[#FFD60A] relative">
-                <ArrowRight className="absolute -right-1 -top-2.5 w-6 h-6 text-[#FFD60A]" />
+              <div className="flex-1 h-[3px] bg-manychat-yellow relative">
+                <ArrowRight className="absolute -right-1 -top-2.5 w-6 h-6 text-manychat-yellow" />
               </div>
             </div>
 
             {steps.map((step, index) => (
               <div key={index} className="flex flex-col items-center text-center relative">
                 {/* Number Circle */}
-                <div className="w-[70px] h-[70px] md:w-20 md:h-20 rounded-full bg-[#FFD60A] flex items-center justify-center mb-6 shadow-lg">
-                  <span className="font-poppins font-bold text-[40px] md:text-[48px] text-[#001D3D]">
+                <div className="w-[70px] h-[70px] md:w-20 md:h-20 rounded-full bg-manychat-yellow flex items-center justify-center mb-6 shadow-lg">
+                  <span className="font-poppins font-bold text-[40px] md:text-[48px] text-black">
                     {step.number}
                   </span>
                 </div>
@@ -59,17 +59,17 @@ const OnboardingStepsSection = () => {
                 <span className="text-[40px] mb-4">{step.emoji}</span>
 
                 {/* Content */}
-                <h3 className="font-poppins font-semibold text-lg md:text-xl text-[#001D3D] mb-3">
+                <h3 className="font-poppins font-semibold text-lg md:text-xl text-black mb-3">
                   {step.title}
                 </h3>
-                <p className="font-inter text-sm text-[#6b7280] leading-relaxed max-w-xs">
+                <p className="font-inter text-sm text-muted-foreground leading-relaxed max-w-xs">
                   {step.description}
                 </p>
 
                 {/* Mobile Arrow */}
                 {index < steps.length - 1 && (
                   <div className="md:hidden mt-8 mb-2">
-                    <ArrowDown className="w-6 h-6 text-[#FFD60A]" />
+                    <ArrowDown className="w-6 h-6 text-manychat-yellow" />
                   </div>
                 )}
               </div>
@@ -81,7 +81,7 @@ const OnboardingStepsSection = () => {
         <div className="text-center mt-12 md:mt-[60px]">
           <Button 
             asChild
-            className="bg-[#FFD60A] hover:bg-[#E5C009] text-[#001D3D] font-inter font-semibold text-base py-3.5 px-8 h-auto rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+            className="bg-manychat-yellow hover:bg-[#E5D600] text-black font-inter font-semibold text-base py-3.5 px-8 h-auto rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
           >
             <Link to="/signup">Get Started Free Now</Link>
           </Button>

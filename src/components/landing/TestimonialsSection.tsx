@@ -54,42 +54,42 @@ const TestimonialsSection = () => {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="py-16 md:py-[100px] px-5 md:px-10 bg-white">
+    <section className="py-16 md:py-[100px] px-5 md:px-10 bg-manychat-light-gray">
       <div className="max-w-[750px] mx-auto">
         {/* Section Header */}
-        <h2 className="font-poppins font-bold text-[32px] md:text-[40px] text-[#001D3D] text-center mb-12 md:mb-16">
+        <h2 className="font-poppins font-bold text-[32px] md:text-[40px] text-black text-center mb-12 md:mb-16">
           What Our Customers Say
         </h2>
 
         {/* Testimonial Card */}
-        <div className="bg-white rounded-xl border border-[#e5e7eb] border-t-4 border-t-[#FFD60A] shadow-[0px_4px_12px_rgba(0,0,0,0.08)] p-8 md:p-[50px] transition-all duration-300">
+        <div className="bg-white rounded-xl border border-border shadow-card p-8 md:p-[50px] transition-all duration-300">
           {/* Stars */}
           <div className="flex justify-center gap-1 mb-6">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-[18px] h-[18px] fill-[#FFD60A] text-[#FFD60A]" />
+              <Star key={i} className="w-[18px] h-[18px] fill-manychat-yellow text-manychat-yellow" />
             ))}
           </div>
 
           {/* Quote */}
           <blockquote className="text-center mb-8">
-            <p className="font-inter text-lg md:text-xl text-[#001D3D] italic leading-relaxed">
+            <p className="font-inter text-lg md:text-xl text-black italic leading-relaxed">
               "{currentTestimonial.quote}"
             </p>
           </blockquote>
 
           {/* Customer Info */}
           <div className="flex flex-col items-center gap-3">
-            <div className="w-[50px] h-[50px] rounded-full bg-gradient-to-br from-[#FFD60A] to-[#E5C009] text-[#001D3D] flex items-center justify-center font-poppins font-semibold text-lg">
+            <div className="w-[50px] h-[50px] rounded-full bg-gradient-to-br from-manychat-yellow to-[#E5D600] text-black flex items-center justify-center font-poppins font-semibold text-lg">
               {currentTestimonial.avatar}
             </div>
             <div className="text-center">
-              <p className="font-poppins font-semibold text-base text-[#001D3D]">
+              <p className="font-poppins font-semibold text-base text-black">
                 {currentTestimonial.name}
               </p>
-              <p className="font-inter text-[13px] text-[#6b7280]">
+              <p className="font-inter text-[13px] text-muted-foreground">
                 {currentTestimonial.niche}
               </p>
-              <p className="font-inter text-[13px] text-[#6b7280]">
+              <p className="font-inter text-[13px] text-muted-foreground">
                 {currentTestimonial.followers}
               </p>
             </div>
@@ -100,7 +100,7 @@ const TestimonialsSection = () => {
         <div className="flex items-center justify-center gap-6 mt-8">
           <button
             onClick={goToPrevious}
-            className="w-9 h-9 md:w-10 md:h-10 rounded-full border border-[#e5e7eb] flex items-center justify-center text-[#001D3D] hover:bg-[#f9fafb] transition-colors"
+            className="w-9 h-9 md:w-10 md:h-10 rounded-full border border-border flex items-center justify-center text-black hover:bg-white transition-colors"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
@@ -115,8 +115,8 @@ const TestimonialsSection = () => {
                 aria-label={`Go to testimonial ${index + 1}`}
                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                   index === currentIndex
-                    ? "bg-[#FFD60A] w-6"
-                    : "bg-[#d1d5db] hover:bg-[#9ca3af]"
+                    ? "bg-manychat-yellow w-6"
+                    : "bg-gray-300 hover:bg-gray-400"
                 }`}
               />
             ))}
@@ -124,7 +124,7 @@ const TestimonialsSection = () => {
 
           <button
             onClick={goToNext}
-            className="w-9 h-9 md:w-10 md:h-10 rounded-full border border-[#e5e7eb] flex items-center justify-center text-[#001D3D] hover:bg-[#f9fafb] transition-colors"
+            className="w-9 h-9 md:w-10 md:h-10 rounded-full border border-border flex items-center justify-center text-black hover:bg-white transition-colors"
             aria-label="Next testimonial"
           >
             <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
