@@ -1,27 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
+  { label: "Home", href: "#" },
   { label: "Features", href: "#features" },
   { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Blog", href: "#" },
+  { label: "Docs", href: "#" },
 ];
 
 const LandingNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
-      <div className="max-w-7xl mx-auto px-5 md:px-10">
-        <div className="flex items-center justify-between h-16">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 h-[72px] transition-all duration-300 ${
+        isScrolled 
+          ? "bg-white shadow-md" 
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-[1280px] mx-auto px-5 md:px-[60px] h-full">
+        <div className="flex items-center justify-between h-full">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-manychat-yellow flex items-center justify-center">
-              <span className="font-poppins font-bold text-lg text-black">I</span>
+            <div className="w-8 h-8 rounded-lg bg-mc-yellow flex items-center justify-center">
+              <span className="font-poppins font-bold text-lg text-mc-black">I</span>
             </div>
-            <span className="font-poppins font-bold text-xl text-foreground">InstaAI</span>
+            <span className="font-poppins font-bold text-xl text-mc-black">InstaAI</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -30,7 +47,9 @@ const LandingNavbar = () => {
               <a
                 key={index}
                 href={link.href}
-                className="font-inter text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="font-inter text-sm text-mc-black hover:text-mc-yellow relative transition-colors duration-200
+                  after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-0.5 
+                  after:bg-mc-yellow after:transition-all after:duration-200 hover:after:w-full"
               >
                 {link.label}
               </a>
@@ -39,14 +58,20 @@ const LandingNavbar = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Button asChild variant="ghost" className="font-inter text-sm">
-              <Link to="/login">Log in</Link>
+            <Button
+              asChild
+              variant="ghost"
+              className="font-poppins font-bold text-sm text-mc-black border-2 border-mc-black 
+                hover:bg-mc-light-gray rounded-lg px-7 py-3 h-auto transition-all duration-200"
+            >
+              <Link to="/login">Sign In</Link>
             </Button>
             <Button
               asChild
-              className="bg-manychat-yellow hover:bg-manychat-yellow/90 text-black font-inter font-semibold text-sm px-5 rounded-lg"
+              className="bg-mc-yellow hover:bg-mc-hover-yellow text-mc-black font-poppins font-bold 
+                text-sm px-7 py-3 h-auto rounded-lg transition-all duration-200 hover:shadow-yellow"
             >
-              <Link to="/signup">Start Free</Link>
+              <Link to="/signup">Get Started</Link>
             </Button>
           </div>
 
@@ -57,22 +82,22 @@ const LandingNavbar = () => {
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-foreground" />
+              <X className="w-6 h-6 text-mc-black" />
             ) : (
-              <Menu className="w-6 h-6 text-foreground" />
+              <Menu className="w-6 h-6 text-mc-black" />
             )}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border animate-fade-in">
+          <div className="md:hidden absolute top-[72px] left-0 right-0 bg-white shadow-lg py-6 px-5 animate-fade-in">
             <nav className="flex flex-col gap-4 mb-6">
               {navLinks.map((link, index) => (
                 <a
                   key={index}
                   href={link.href}
-                  className="font-inter text-sm text-foreground py-2"
+                  className="font-inter text-base text-mc-black py-2 hover:text-mc-yellow transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -80,14 +105,18 @@ const LandingNavbar = () => {
               ))}
             </nav>
             <div className="flex flex-col gap-3">
-              <Button asChild variant="outline" className="w-full">
-                <Link to="/login">Log in</Link>
+              <Button
+                asChild
+                variant="outline"
+                className="w-full border-2 border-mc-black font-poppins font-bold"
+              >
+                <Link to="/login">Sign In</Link>
               </Button>
               <Button
                 asChild
-                className="w-full bg-manychat-yellow hover:bg-manychat-yellow/90 text-black font-semibold"
+                className="w-full bg-mc-yellow hover:bg-mc-hover-yellow text-mc-black font-poppins font-bold"
               >
-                <Link to="/signup">Start Free</Link>
+                <Link to="/signup">Get Started</Link>
               </Button>
             </div>
           </div>

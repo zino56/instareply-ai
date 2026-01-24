@@ -9,64 +9,61 @@ import { Link } from "react-router-dom";
 
 const faqs = [
   {
-    question: "What does InstaAI include?",
-    answer: "InstaAI includes AI-powered DM automation, comment-to-DM conversion, product catalog integration, analytics dashboard, and 24/7 automated responses. All plans include our core automation features.",
+    question: "Is this automation safe for my Instagram account?",
+    answer: "Yes. We use Meta's official Graph API (same as Instagram business tools). Zero account risk. We're an Official Meta Business Partner. Your account stays safe.",
   },
   {
-    question: "Who is InstaAI for?",
-    answer: "InstaAI is perfect for e-commerce brands, dropshipping stores, service providers, and anyone selling on Instagram who wants to automate customer conversations and boost sales.",
+    question: "Can the AI say wrong things (hallucinate)?",
+    answer: "No. We use strict Row-Level Security validation. AI only recommends products in your catalog. If you have 24 products, it can only mention those 24. 100% hallucination-proof.",
   },
   {
-    question: "How much does InstaAI cost?",
-    answer: "We offer three plans: Free ($0/month for up to 1,000 contacts), Pro ($15/month for unlimited contacts), and Elite (custom pricing for enterprise needs). All plans include core automation features.",
+    question: "Do I need coding skills?",
+    answer: "Not at all. Upload your products via CSV. Set your AI tone (friendly/professional/casual). Done. AI handles everything automatically. No code required.",
   },
   {
-    question: "How do I upgrade to the next tier of Pro?",
-    answer: "You can upgrade anytime from your dashboard. Go to Settings > Billing and select your new plan. Changes take effect immediately with prorated billing.",
+    question: "What if a customer asks something outside my product catalog?",
+    answer: "AI gracefully handles it. Either politely says 'I'm here to help with [your products]' or escalates to you for manual reply. Smart deflection, never robotic.",
   },
   {
-    question: "Are there additional charges for messages?",
-    answer: "No hidden fees. Your plan includes unlimited messages within your contact limit. Only pay for what you need based on your contact count.",
+    question: "How much revenue can I actually make?",
+    answer: "Average customer sees 4x conversion uplift from automation. Typical shop: $30k/month revenue → +$6k/month additional from InstaAI. Your results depend on product/audience.",
   },
   {
-    question: "How does Email and SMS pricing work?",
-    answer: "Email and SMS are optional add-ons. Email starts at $0.001 per message, SMS at $0.01 per message. You only pay for what you use.",
-  },
-  {
-    question: "Can I cancel my payment plan options at any time?",
-    answer: "Yes, you can cancel anytime. No long-term contracts. Your account stays active until the end of your billing period.",
-  },
-  {
-    question: "What payment terms do you accept?",
-    answer: "We accept all major credit cards (Visa, Mastercard, Amex), PayPal, and bank transfers for annual plans.",
-  },
-  {
-    question: "What is your refund policy for billing?",
-    answer: "We offer a 30-day money-back guarantee. If you're not satisfied, contact support for a full refund. No questions asked.",
+    question: "What if I need help setting things up?",
+    answer: "We offer 24/7 email support for all tiers. Pro and Enterprise get priority support with guaranteed 2-hour response times. Onboarding calls available for Enterprise.",
   },
 ];
 
 const FAQSection = () => {
   return (
-    <section className="py-16 md:py-[100px] px-5 md:px-10 bg-white">
+    <section id="faq" className="py-[60px] md:py-[100px] px-5 md:px-[60px] bg-mc-light-gray">
       <div className="max-w-[900px] mx-auto">
         {/* Section Header */}
-        <h2 className="font-poppins font-bold text-[28px] md:text-[36px] text-black text-center mb-12 md:mb-[60px] leading-tight">
-          Questions or InstaAI plan information and pricing info
+        <h2 className="font-poppins font-bold text-[28px] md:text-[40px] text-mc-black text-center mb-12 md:mb-16 leading-tight">
+          Frequently asked questions
         </h2>
 
         {/* FAQ Accordion */}
-        <Accordion type="single" collapsible className="space-y-1">
+        <Accordion type="single" collapsible className="space-y-4">
           {faqs.map((faq, index) => (
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className="bg-white border border-border rounded-none first:rounded-t-lg last:rounded-b-lg px-5 hover:bg-manychat-light-gray transition-colors duration-200 cursor-pointer data-[state=open]:bg-manychat-light-gray"
+              className="bg-white border border-[#E0E0E0] rounded-lg px-6 
+                hover:bg-[#F9F9F9] transition-colors duration-200 
+                data-[state=open]:bg-[#F9F9F9]"
             >
-              <AccordionTrigger className="font-poppins font-semibold text-[15px] md:text-[18px] text-black hover:no-underline py-5 pr-8 [&[data-state=open]>svg]:text-manychat-yellow [&>svg]:text-manychat-yellow">
+              <AccordionTrigger 
+                className="font-poppins font-bold text-base md:text-lg text-mc-black 
+                  hover:no-underline py-6 [&[data-state=open]>svg]:text-mc-yellow 
+                  [&>svg]:text-mc-black [&>svg]:transition-colors [&>svg]:duration-200
+                  hover:[&>svg]:text-mc-yellow"
+              >
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="font-inter text-[14px] md:text-[16px] text-muted-foreground leading-[1.8] pb-5 pt-2">
+              <AccordionContent 
+                className="font-inter text-[15px] text-mc-gray leading-relaxed pb-6"
+              >
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>
@@ -77,7 +74,9 @@ const FAQSection = () => {
         <div className="text-center mt-12">
           <Button 
             asChild
-            className="bg-manychat-yellow hover:bg-[#E5D600] text-black font-inter font-semibold text-lg py-4 px-10 h-auto rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+            className="bg-mc-yellow hover:bg-mc-hover-yellow text-mc-black font-poppins font-bold 
+              text-base md:text-lg py-4 px-10 h-auto rounded-lg shadow-yellow 
+              hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
           >
             <Link to="/signup">Try InstaAI for free</Link>
           </Button>
