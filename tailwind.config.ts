@@ -78,13 +78,20 @@ export default {
           DEFAULT: "#1877F2",
           hover: "#166FE5",
         },
+        // ManyChat Brand Colors
+        manychat: {
+          yellow: "#FFED00",
+          green: "#00B87C",
+          blue: "#4E5FFF",
+          black: "#000000",
+          "dark-gray": "#333333",
+          "light-gray": "#F5F5F5",
+        },
         landing: {
-          teal: "#0d9488",
-          "teal-dark": "#0f766e",
-          headline: "#1f2937",
-          subheadline: "#6b7280",
-          background: "#f9fafb",
-          footer: "#1f2937",
+          yellow: "#FFED00",
+          black: "#000000",
+          gray: "#666666",
+          "light-gray": "#F5F5F5",
         },
       },
       borderRadius: {
@@ -93,10 +100,11 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        'primary': '0 10px 40px -10px hsl(48 96% 53% / 0.4)',
-        'dark': '0 10px 40px -10px hsl(220 13% 10% / 0.5)',
+        'primary': '0 10px 40px -10px hsl(52 100% 50% / 0.4)',
+        'dark': '0 10px 40px -10px hsl(0 0% 0% / 0.5)',
         'card': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
         'card-hover': '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+        'yellow-glow': '0 8px 24px rgba(255, 237, 0, 0.15)',
       },
       keyframes: {
         "accordion-down": {

@@ -19,7 +19,7 @@ const BeforeAfterSection = () => {
     <section className="py-16 md:py-[100px] px-5 md:px-10 bg-white">
       <div className="max-w-[1100px] mx-auto">
         {/* Section Header */}
-        <h2 className="font-poppins font-bold text-[32px] md:text-[40px] text-[#001D3D] text-center mb-12 md:mb-[60px]">
+        <h2 className="font-poppins font-bold text-[32px] md:text-[40px] text-black text-center mb-12 md:mb-[60px]">
           Your Inbox: A Before & After
         </h2>
 
@@ -34,7 +34,7 @@ const BeforeAfterSection = () => {
               {beforeItems.map((item, index) => (
                 <li key={index} className="flex items-start gap-3">
                   <span className="text-[#ef4444] mt-0.5">•</span>
-                  <span className="font-inter text-sm text-[#1f2937] leading-relaxed">
+                  <span className="font-inter text-sm text-black leading-relaxed">
                     {item}
                   </span>
                 </li>
@@ -43,15 +43,15 @@ const BeforeAfterSection = () => {
           </div>
 
           {/* After Column */}
-          <div className="bg-[#f0fdf4] rounded-xl p-8 md:p-10 border-l-[5px] border-l-[#10b981] min-h-[320px] hover:shadow-lg transition-shadow duration-300">
-            <h3 className="font-poppins font-semibold text-2xl text-[#10b981] mb-6">
+          <div className="bg-[#f0fdf4] rounded-xl p-8 md:p-10 border-l-[5px] border-l-manychat-green min-h-[320px] hover:shadow-lg transition-shadow duration-300">
+            <h3 className="font-poppins font-semibold text-2xl text-manychat-green mb-6">
               ✅ After
             </h3>
             <ul className="space-y-4">
               {afterItems.map((item, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <span className="text-[#10b981] mt-0.5">•</span>
-                  <span className="font-inter text-sm text-[#1f2937] leading-relaxed">
+                  <span className="text-manychat-green mt-0.5">•</span>
+                  <span className="font-inter text-sm text-black leading-relaxed">
                     {item}
                   </span>
                 </li>
