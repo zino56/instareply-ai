@@ -1,86 +1,89 @@
 import { Button } from "@/components/ui/button";
-import { UserPlus, Instagram, Package, ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const steps = [
   {
     number: 1,
-    icon: UserPlus,
-    title: "Sign up for free",
-    description: "Create your account in 2 minutes. No credit card required. Start your 14-day free trial.",
+    emoji: "✅",
+    title: "Sign Up Free",
+    description: "Create account in 2 minutes. No credit card. Start 14-day trial.",
   },
   {
     number: 2,
-    icon: Instagram,
-    title: "Connect to Instagram",
-    description: "OAuth login. Click 'Connect'. Grant InstaAI permission to reply to DMs. That's it.",
+    emoji: "📱",
+    title: "Connect Instagram",
+    description: "OAuth login. Grant DM permissions. One click.",
   },
   {
     number: 3,
-    icon: Package,
-    title: "Go live in minutes",
-    description: "Upload your product CSV. Set your AI tone (friendly/professional). Automation starts instantly.",
+    emoji: "📦",
+    title: "Go Live",
+    description: "Upload products CSV. Set AI tone. Automation starts instantly.",
   },
 ];
 
 const OnboardingStepsSection = () => {
   return (
-    <section className="py-16 md:py-20 px-5 md:px-10 bg-white">
-      <div className="max-w-5xl mx-auto">
+    <section className="py-14 md:py-[100px] px-5 md:px-10 bg-white">
+      <div className="max-w-[1100px] mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="font-poppins font-bold text-3xl md:text-4xl text-landing-headline">
-            Get up and running in 3 simple steps
-          </h2>
-        </div>
+        <h2 className="font-poppins font-bold text-[32px] md:text-[40px] text-[#001D3D] text-center mb-12 md:mb-[70px]">
+          Get started in 3 steps
+        </h2>
 
         {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 relative">
-          {/* Connecting Lines (Desktop only) */}
-          <div className="hidden md:block absolute top-8 left-1/3 right-1/3 h-0.5 bg-landing-teal/30">
-            <ArrowRight className="absolute -right-3 -top-2.5 w-5 h-5 text-landing-teal" />
-          </div>
-          <div className="hidden md:block absolute top-8 left-2/3 right-0 w-1/3 h-0.5 bg-landing-teal/30">
-            <ArrowRight className="absolute right-[33%] -top-2.5 w-5 h-5 text-landing-teal" />
-          </div>
-
-          {steps.map((step, index) => (
-            <div key={index} className="flex flex-col items-center text-center relative">
-              {/* Number Circle */}
-              <div className="w-16 h-16 rounded-full bg-landing-teal text-white flex items-center justify-center mb-6 shadow-lg">
-                <span className="font-poppins font-bold text-2xl">{step.number}</span>
+        <div className="max-w-[1000px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10 relative">
+            {/* Connecting Lines (Desktop only) */}
+            <div className="hidden md:flex absolute top-10 left-[calc(16.67%+40px)] right-[calc(16.67%+40px)] items-center justify-between">
+              <div className="flex-1 h-[3px] bg-[#FFD60A] relative">
+                <ArrowRight className="absolute -right-1 -top-2.5 w-6 h-6 text-[#FFD60A]" />
               </div>
-
-              {/* Icon */}
-              <div className="w-12 h-12 rounded-xl bg-landing-teal/10 flex items-center justify-center mb-4">
-                <step.icon className="w-6 h-6 text-landing-teal" />
+              <div className="w-20" />
+              <div className="flex-1 h-[3px] bg-[#FFD60A] relative">
+                <ArrowRight className="absolute -right-1 -top-2.5 w-6 h-6 text-[#FFD60A]" />
               </div>
-
-              {/* Content */}
-              <h3 className="font-poppins font-semibold text-lg text-foreground mb-3">
-                {step.title}
-              </h3>
-              <p className="font-inter text-sm text-muted-foreground leading-relaxed max-w-xs">
-                {step.description}
-              </p>
-
-              {/* Mobile Arrow */}
-              {index < steps.length - 1 && (
-                <div className="md:hidden mt-6 mb-2">
-                  <ArrowRight className="w-5 h-5 text-landing-teal rotate-90" />
-                </div>
-              )}
             </div>
-          ))}
+
+            {steps.map((step, index) => (
+              <div key={index} className="flex flex-col items-center text-center relative">
+                {/* Number Circle */}
+                <div className="w-[70px] h-[70px] md:w-20 md:h-20 rounded-full bg-[#FFD60A] flex items-center justify-center mb-6 shadow-lg">
+                  <span className="font-poppins font-bold text-[40px] md:text-[48px] text-[#001D3D]">
+                    {step.number}
+                  </span>
+                </div>
+
+                {/* Emoji Icon */}
+                <span className="text-[40px] mb-4">{step.emoji}</span>
+
+                {/* Content */}
+                <h3 className="font-poppins font-semibold text-lg md:text-xl text-[#001D3D] mb-3">
+                  {step.title}
+                </h3>
+                <p className="font-inter text-sm text-[#6b7280] leading-relaxed max-w-xs">
+                  {step.description}
+                </p>
+
+                {/* Mobile Arrow */}
+                {index < steps.length - 1 && (
+                  <div className="md:hidden mt-8 mb-2">
+                    <ArrowDown className="w-6 h-6 text-[#FFD60A]" />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* CTA Button */}
-        <div className="text-center mt-16">
+        <div className="text-center mt-12 md:mt-[60px]">
           <Button 
             asChild
-            className="bg-landing-teal hover:bg-landing-teal/90 text-white font-inter font-medium text-base py-4 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+            className="bg-[#FFD60A] hover:bg-[#E5C009] text-[#001D3D] font-inter font-semibold text-base py-3.5 px-8 h-auto rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
           >
-            <Link to="/signup">Start free now</Link>
+            <Link to="/signup">Get Started Free Now</Link>
           </Button>
         </div>
       </div>
