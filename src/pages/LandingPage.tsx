@@ -3,6 +3,7 @@ import HeroSection from "@/components/landing/HeroSection";
 import YellowBannerSection from "@/components/landing/YellowBannerSection";
 import ValuePropsSection from "@/components/landing/ValuePropsSection";
 import BeforeAfterSection from "@/components/landing/BeforeAfterSection";
+import ConversionMetricSection from "@/components/landing/ConversionMetricSection";
 import OnboardingStepsSection from "@/components/landing/OnboardingStepsSection";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import FAQSection from "@/components/landing/FAQSection";
@@ -21,6 +22,7 @@ const LandingPage = () => {
           <ValuePropsSection />
         </div>
         <BeforeAfterSection />
+        <ConversionMetricSection />
         <OnboardingStepsSection />
         <TestimonialsSection />
         <div id="faq">
