@@ -1,12 +1,9 @@
-import { X, Check } from "lucide-react";
-
 const beforeItems = [
-  "Manual replies to every DM (takes 8 hours/week)",
-  "Copy-pasting the same replies 417 times",
+  "Manual replies to every DM",
+  "Copy-pasting same replies",
   "4-6 hour response delay",
-  "50% of hot leads abandon",
+  "50% of leads abandon",
   "Losing sales while you sleep",
-  "No data on customer intent",
 ];
 
 const afterItems = [
@@ -14,41 +11,30 @@ const afterItems = [
   "24/7 automation while you sleep",
   "Instant customer replies",
   "4x sales conversion uplift",
-  "Organized, tagged leads for follow-up",
-  "Real-time insights on customer intent",
+  "Organized, tagged leads",
 ];
 
 const BeforeAfterSection = () => {
   return (
-    <section className="py-16 md:py-20 px-5 md:px-10 bg-landing-background">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-16 md:py-[100px] px-5 md:px-10 bg-white">
+      <div className="max-w-[1100px] mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="font-poppins font-bold text-3xl md:text-4xl text-landing-headline mb-4">
-            Your Inbox: A Before & After
-          </h2>
-          <p className="font-inter text-base text-landing-subheadline">
-            More messages, less mess
-          </p>
-        </div>
+        <h2 className="font-poppins font-bold text-[32px] md:text-[40px] text-[#001D3D] text-center mb-12 md:mb-[60px]">
+          Your Inbox: A Before & After
+        </h2>
 
         {/* Before/After Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
           {/* Before Column */}
-          <div className="bg-red-50 rounded-xl p-8 border border-red-100">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
-                <X className="w-4 h-4 text-red-500" />
-              </div>
-              <h3 className="font-poppins font-semibold text-xl text-red-600">
-                Before
-              </h3>
-            </div>
+          <div className="bg-[#fff4f4] rounded-xl p-8 md:p-10 border-l-[5px] border-l-[#ef4444] min-h-[320px] hover:shadow-lg transition-shadow duration-300">
+            <h3 className="font-poppins font-semibold text-2xl text-[#ef4444] mb-6">
+              ❌ Before
+            </h3>
             <ul className="space-y-4">
               {beforeItems.map((item, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <X className="w-5 h-5 text-red-400 mt-0.5 flex-shrink-0" />
-                  <span className="font-inter text-sm text-foreground leading-relaxed">
+                  <span className="text-[#ef4444] mt-0.5">•</span>
+                  <span className="font-inter text-sm text-[#1f2937] leading-relaxed">
                     {item}
                   </span>
                 </li>
@@ -57,20 +43,15 @@ const BeforeAfterSection = () => {
           </div>
 
           {/* After Column */}
-          <div className="bg-green-50 rounded-xl p-8 border border-green-100">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
-                <Check className="w-4 h-4 text-green-600" />
-              </div>
-              <h3 className="font-poppins font-semibold text-xl text-green-600">
-                After
-              </h3>
-            </div>
+          <div className="bg-[#f0fdf4] rounded-xl p-8 md:p-10 border-l-[5px] border-l-[#10b981] min-h-[320px] hover:shadow-lg transition-shadow duration-300">
+            <h3 className="font-poppins font-semibold text-2xl text-[#10b981] mb-6">
+              ✅ After
+            </h3>
             <ul className="space-y-4">
               {afterItems.map((item, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span className="font-inter text-sm text-foreground leading-relaxed">
+                  <span className="text-[#10b981] mt-0.5">•</span>
+                  <span className="font-inter text-sm text-[#1f2937] leading-relaxed">
                     {item}
                   </span>
                 </li>
