@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const testimonials = [
   {
@@ -11,9 +10,9 @@ const testimonials = [
     avatar: "SC",
   },
   {
-    quote: "Before: 50 unanswered DMs per day. After: 100% response rate in less than 2 minutes.",
+    quote: "Before: 50 unanswered DMs per day. After: 100% response rate in <2 minutes.",
     name: "James Rodriguez",
-    niche: "E-commerce (Electronics)",
+    niche: "Electronics E-commerce",
     followers: "8.7k followers",
     avatar: "JR",
   },
@@ -25,7 +24,7 @@ const testimonials = [
     avatar: "ET",
   },
   {
-    quote: "We were drowning in DMs. InstaAI gave us our life back while actually increasing revenue.",
+    quote: "We were drowning in DMs. InstaAI gave us our life back while increasing revenue.",
     name: "Michael Park",
     niche: "Home Decor",
     followers: "12k followers",
@@ -36,11 +35,11 @@ const testimonials = [
 const TestimonialsSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Auto-advance every 6 seconds
+  // Auto-advance every 7 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
+    }, 7000);
     return () => clearInterval(timer);
   }, []);
 
@@ -55,44 +54,42 @@ const TestimonialsSection = () => {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="py-16 md:py-20 px-5 md:px-10 bg-landing-background">
-      <div className="max-w-3xl mx-auto">
+    <section className="py-16 md:py-[100px] px-5 md:px-10 bg-white">
+      <div className="max-w-[750px] mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="font-poppins font-bold text-3xl md:text-4xl text-landing-headline">
-            What Our Customers Say
-          </h2>
-        </div>
+        <h2 className="font-poppins font-bold text-[32px] md:text-[40px] text-[#001D3D] text-center mb-12 md:mb-16">
+          What Our Customers Say
+        </h2>
 
         {/* Testimonial Card */}
-        <div className="bg-white rounded-2xl border border-border shadow-lg p-8 md:p-12 transition-all duration-300">
+        <div className="bg-white rounded-xl border border-[#e5e7eb] border-t-4 border-t-[#FFD60A] shadow-[0px_4px_12px_rgba(0,0,0,0.08)] p-8 md:p-[50px] transition-all duration-300">
           {/* Stars */}
           <div className="flex justify-center gap-1 mb-6">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+              <Star key={i} className="w-[18px] h-[18px] fill-[#FFD60A] text-[#FFD60A]" />
             ))}
           </div>
 
           {/* Quote */}
           <blockquote className="text-center mb-8">
-            <p className="font-inter text-lg md:text-xl text-foreground italic leading-relaxed">
+            <p className="font-inter text-lg md:text-xl text-[#001D3D] italic leading-relaxed">
               "{currentTestimonial.quote}"
             </p>
           </blockquote>
 
           {/* Customer Info */}
           <div className="flex flex-col items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-landing-teal text-white flex items-center justify-center font-semibold">
+            <div className="w-[50px] h-[50px] rounded-full bg-gradient-to-br from-[#FFD60A] to-[#E5C009] text-[#001D3D] flex items-center justify-center font-poppins font-semibold text-lg">
               {currentTestimonial.avatar}
             </div>
             <div className="text-center">
-              <p className="font-poppins font-semibold text-sm text-foreground">
+              <p className="font-poppins font-semibold text-base text-[#001D3D]">
                 {currentTestimonial.name}
               </p>
-              <p className="font-inter text-xs text-muted-foreground">
+              <p className="font-inter text-[13px] text-[#6b7280]">
                 {currentTestimonial.niche}
               </p>
-              <p className="font-inter text-xs text-muted-foreground">
+              <p className="font-inter text-[13px] text-[#6b7280]">
                 {currentTestimonial.followers}
               </p>
             </div>
@@ -100,39 +97,38 @@ const TestimonialsSection = () => {
         </div>
 
         {/* Carousel Controls */}
-        <div className="flex items-center justify-center gap-4 mt-8">
-          <Button
-            variant="outline"
-            size="icon"
+        <div className="flex items-center justify-center gap-6 mt-8">
+          <button
             onClick={goToPrevious}
-            className="rounded-full border-border hover:bg-muted"
+            className="w-9 h-9 md:w-10 md:h-10 rounded-full border border-[#e5e7eb] flex items-center justify-center text-[#001D3D] hover:bg-[#f9fafb] transition-colors"
+            aria-label="Previous testimonial"
           >
-            <ChevronLeft className="w-5 h-5" />
-          </Button>
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+          </button>
 
           {/* Dots */}
-          <div className="flex gap-2">
+          <div className="flex gap-2.5">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
+                aria-label={`Go to testimonial ${index + 1}`}
                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                   index === currentIndex
-                    ? "bg-landing-teal w-6"
-                    : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                    ? "bg-[#FFD60A] w-6"
+                    : "bg-[#d1d5db] hover:bg-[#9ca3af]"
                 }`}
               />
             ))}
           </div>
 
-          <Button
-            variant="outline"
-            size="icon"
+          <button
             onClick={goToNext}
-            className="rounded-full border-border hover:bg-muted"
+            className="w-9 h-9 md:w-10 md:h-10 rounded-full border border-[#e5e7eb] flex items-center justify-center text-[#001D3D] hover:bg-[#f9fafb] transition-colors"
+            aria-label="Next testimonial"
           >
-            <ChevronRight className="w-5 h-5" />
-          </Button>
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
+          </button>
         </div>
       </div>
     </section>
