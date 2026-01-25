@@ -25,10 +25,8 @@ const LandingNavbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 h-[72px] transition-all duration-300 ${
-        isScrolled 
-          ? "bg-white shadow-md" 
-          : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 h-[72px] transition-all duration-300 bg-white ${
+        isScrolled ? "shadow-md" : ""
       }`}
     >
       <div className="max-w-[1280px] mx-auto px-5 md:px-[60px] h-full">
