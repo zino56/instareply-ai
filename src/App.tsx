@@ -12,6 +12,7 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Conversations from "./pages/Conversations";
 import Products from "./pages/Products";
+import AIKnowledge from "./pages/AIKnowledge";
 import Settings from "./pages/Settings";
 import Analytics from "./pages/Analytics";
 import NotFound from "./pages/NotFound";
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/conversations" element={<Conversations />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/ai-knowledge" element={<AIKnowledge />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/analytics" element={<Analytics />} />
           </Route>

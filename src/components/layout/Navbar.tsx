@@ -13,6 +13,7 @@ import {
   X,
   ChevronDown,
   Sparkles,
+  BookOpen,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -30,6 +31,7 @@ const navLinks = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/conversations', label: 'Conversations', icon: MessageSquare },
   { href: '/products', label: 'Products', icon: Package },
+  { href: '/ai-knowledge', label: 'AI Knowledge', icon: BookOpen },
   { href: '/settings', label: 'Settings', icon: Settings },
   { href: '/analytics', label: 'Analytics', icon: BarChart3 },
 ];
