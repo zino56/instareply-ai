@@ -77,13 +77,13 @@ export default function Login() {
       transition={{ duration: 0.4 }}
       className="space-y-8"
     >
-      {/* Mobile Logo */}
-      <div className="lg:hidden flex items-center justify-center gap-2 mb-8">
+      {/* Logo - Links back to home */}
+      <Link to="/" className="flex items-center justify-center lg:justify-start gap-2 mb-8 group">
         <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground">
           <Sparkles className="w-6 h-6" />
         </div>
-        <span className="text-2xl font-bold">InstaAI</span>
-      </div>
+        <span className="text-2xl font-bold group-hover:text-primary transition-colors">InstaAI</span>
+      </Link>
 
       <div className="space-y-2 text-center lg:text-left">
         <h2 className="text-2xl font-bold tracking-tight">Login to InstaAI</h2>
