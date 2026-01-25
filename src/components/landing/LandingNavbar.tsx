@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Home", href: "#" },
-  { label: "Features", href: "#features" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Blog", href: "#" },
-  { label: "Docs", href: "#" },
+  { label: "Home", href: "/", isRoute: true },
+  { label: "Features", href: "#features", isRoute: false },
+  { label: "Pricing", href: "/pricing", isRoute: true },
+  { label: "Blog", href: "#", isRoute: false },
+  { label: "Docs", href: "#", isRoute: false },
 ];
 
 const LandingNavbar = () => {
@@ -41,17 +41,29 @@ const LandingNavbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                className="font-inter text-sm text-mc-black hover:text-mc-yellow relative transition-colors duration-200
-                  after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-0.5 
-                  after:bg-mc-yellow after:transition-all after:duration-200 hover:after:w-full"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link, index) =>
+              link.isRoute ? (
+                <Link
+                  key={index}
+                  to={link.href}
+                  className="font-inter text-sm text-mc-black hover:text-mc-yellow relative transition-colors duration-200
+                    after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-0.5 
+                    after:bg-mc-yellow after:transition-all after:duration-200 hover:after:w-full"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={index}
+                  href={link.href}
+                  className="font-inter text-sm text-mc-black hover:text-mc-yellow relative transition-colors duration-200
+                    after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-0.5 
+                    after:bg-mc-yellow after:transition-all after:duration-200 hover:after:w-full"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
           </nav>
 
           {/* Desktop CTA */}
@@ -91,16 +103,27 @@ const LandingNavbar = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-[72px] left-0 right-0 bg-white shadow-lg py-6 px-5 animate-fade-in">
             <nav className="flex flex-col gap-4 mb-6">
-              {navLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.href}
-                  className="font-inter text-base text-mc-black py-2 hover:text-mc-yellow transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link, index) =>
+                link.isRoute ? (
+                  <Link
+                    key={index}
+                    to={link.href}
+                    className="font-inter text-base text-mc-black py-2 hover:text-mc-yellow transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={index}
+                    href={link.href}
+                    className="font-inter text-base text-mc-black py-2 hover:text-mc-yellow transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                )
+              )}
             </nav>
             <div className="flex flex-col gap-3">
               <Button
