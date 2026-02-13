@@ -103,12 +103,12 @@ const Pricing = () => {
 
   const faqs = [
     {
-      question: "What does InstaAI include?",
-      answer: "InstaAI includes AI-powered Instagram DM automation, comment automation, lead capture, analytics, and integrations. All plans include our core automation features with varying limits on conversations, pages, and advanced features."
+      question: "What does Conveero include?",
+      answer: "Conveero includes AI-powered Instagram DM automation, comment automation, lead capture, analytics, and integrations. All plans include our core automation features with varying limits on conversations, pages, and advanced features."
     },
     {
-      question: "Who is InstaAI for?",
-      answer: "InstaAI is designed for e-commerce stores, content creators, coaches, and businesses of all sizes who want to automate their Instagram engagement and convert followers into customers."
+      question: "Who is Conveero for?",
+      answer: "Conveero is designed for e-commerce stores, content creators, coaches, and businesses of all sizes who want to automate their Instagram engagement and convert followers into customers."
     },
     {
       question: "How does the free trial work?",
@@ -170,7 +170,7 @@ const Pricing = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="font-inter text-lg md:text-xl text-mc-gray max-w-[600px] mx-auto mb-10"
           >
-            Choose an InstaAI plan that's right for you. Start free, upgrade when you're ready.
+            Choose a Conveero plan that's right for you. Start free, upgrade when you're ready.
           </motion.p>
 
           {/* Billing Toggle */}
@@ -465,7 +465,7 @@ const Pricing = () => {
               Frequently Asked Questions
             </h2>
             <p className="font-inter text-mc-gray text-lg">
-              Everything you need to know about InstaAI pricing
+              Everything you need to know about Conveero pricing
             </p>
           </motion.div>
 

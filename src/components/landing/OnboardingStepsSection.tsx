@@ -13,7 +13,7 @@ const steps = [
     number: 2,
     icon: Instagram,
     title: "Connect to Instagram",
-    description: "OAuth login. Grant InstaAI permission. Click 'Connect' and you're done.",
+    description: "OAuth login. Grant Conveero permission. Click 'Connect' and you're done.",
   },
   {
     number: 3,

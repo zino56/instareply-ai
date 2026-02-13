@@ -34,9 +34,9 @@ const LandingNavbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-mc-yellow flex items-center justify-center">
-              <span className="font-poppins font-bold text-lg text-mc-black">I</span>
+              <span className="font-poppins font-bold text-lg text-mc-black">C</span>
             </div>
-            <span className="font-poppins font-bold text-xl text-mc-black">InstaAI</span>
+            <span className="font-poppins font-bold text-xl text-mc-black">Conveero</span>
           </Link>
 
           {/* Desktop Navigation */}

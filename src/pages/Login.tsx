@@ -82,11 +82,11 @@ export default function Login() {
         <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground">
           <Sparkles className="w-6 h-6" />
         </div>
-        <span className="text-2xl font-bold group-hover:text-primary transition-colors">InstaAI</span>
+        <span className="text-2xl font-bold group-hover:text-primary transition-colors">Conveero</span>
       </Link>
 
       <div className="space-y-2 text-center lg:text-left">
-        <h2 className="text-2xl font-bold tracking-tight">Login to InstaAI</h2>
+        <h2 className="text-2xl font-bold tracking-tight">Login to Conveero</h2>
         <p className="text-muted-foreground">
           Enter your credentials to access your dashboard
         </p>
@@ -189,7 +189,7 @@ export default function Login() {
       </div>
 
       <p className="text-center text-sm text-muted-foreground">
-        New to InstaAI?{' '}
+        New to Conveero?{' '}
         <Link to="/signup" className="text-primary font-medium hover:underline">
           Sign up
         </Link>

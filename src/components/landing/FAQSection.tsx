@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     question: "How much revenue can I actually make?",
-    answer: "Average customer sees 4x conversion uplift from automation. Typical shop: $30k/month revenue → +$6k/month additional from InstaAI. Your results depend on product/audience.",
+    answer: "Average customer sees 4x conversion uplift from automation. Typical shop: $30k/month revenue → +$6k/month additional from Conveero. Your results depend on product/audience.",
   },
   {
     question: "What if I need help setting things up?",
@@ -78,7 +78,7 @@ const FAQSection = () => {
               text-base md:text-lg py-4 px-10 h-auto rounded-lg shadow-yellow 
               hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
           >
-            <Link to="/signup">Try InstaAI for free</Link>
+            <Link to="/signup">Try Conveero for free</Link>
           </Button>
         </div>
       </div>

@@ -54,7 +54,7 @@ const HeroSection = () => {
                   <div key={i} className={`w-8 h-8 rounded-full bg-gradient-to-br ${gradient} border-2 border-mc-black`} />
                 ))}
               </div>
-              <span className="font-inter text-sm text-white/70">500+ brands trust InstaAI</span>
+              <span className="font-inter text-sm text-white/70">500+ brands trust Conveero</span>
             </div>
           </div>
 
@@ -109,7 +109,7 @@ const HeroSection = () => {
                     {/* AI Badge */}
                     <div className="flex justify-center mt-4">
                       <span className="bg-mc-magenta/10 text-mc-magenta font-inter text-xs font-medium px-3 py-1.5 rounded-full">
-                        ⚡ Powered by InstaAI
+                        ⚡ Powered by Conveero
                       </span>
                     </div>
                   </div>

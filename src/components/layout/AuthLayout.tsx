@@ -26,7 +26,7 @@ export function AuthLayout() {
             <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-primary-foreground/20 backdrop-blur-sm">
               <Sparkles className="w-8 h-8 text-primary-foreground" />
             </div>
-            <span className="text-3xl font-bold text-primary-foreground">InstaAI</span>
+            <span className="text-3xl font-bold text-primary-foreground">Conveero</span>
           </div>
           
           <h1 className="text-4xl xl:text-5xl font-bold text-primary-foreground leading-tight mb-6">
