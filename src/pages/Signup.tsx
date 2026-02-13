@@ -60,7 +60,7 @@ export default function Signup() {
       await signup(email, password, businessName);
       toast({
         title: 'Account created!',
-        description: 'Welcome to InstaAI. Let\'s get started!',
+        description: 'Welcome to Conveero. Let\'s get started!',
       });
       navigate('/dashboard');
     } catch (error) {
@@ -101,7 +101,7 @@ export default function Signup() {
         <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground">
           <Sparkles className="w-6 h-6" />
         </div>
-        <span className="text-2xl font-bold">InstaAI</span>
+        <span className="text-2xl font-bold">Conveero</span>
       </div>
 
       <div className="space-y-2 text-center lg:text-left">

@@ -139,7 +139,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Copyright */}
             <p className="font-inter text-xs text-[#999999] order-3 md:order-1">
-              © 2026 InstaAI. All rights reserved.
+              © 2026 Conveero. All rights reserved.
             </p>
 
             {/* Newsletter */}

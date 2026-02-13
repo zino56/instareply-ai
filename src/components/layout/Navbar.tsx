@@ -65,7 +65,7 @@ export function Navbar() {
             <Sparkles className="w-5 h-5" />
           </div>
           <span className="text-xl font-bold tracking-tight group-hover:text-primary transition-colors">
-            InstaAI
+            Conveero
           </span>
         </Link>
 

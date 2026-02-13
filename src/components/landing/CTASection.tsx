@@ -13,7 +13,7 @@ const CTASection = () => {
 
         {/* Subheadline */}
         <p className="font-inter text-base md:text-lg text-white/90 mb-10 max-w-[600px] mx-auto animate-fade-in" style={{ animationDelay: '100ms' }}>
-          Join 500+ e-commerce brands already using InstaAI.
+          Join 500+ e-commerce brands already using Conveero.
         </p>
 
         {/* Buttons */}

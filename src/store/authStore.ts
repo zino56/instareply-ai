@@ -5,7 +5,7 @@ import type { User, AuthState } from '@/types';
 // Mock user for development
 const mockUser: User = {
   id: 'mock-user-123',
-  email: 'demo@instaai.com',
+  email: 'demo@conveero.com',
   name: 'Demo Business',
   facebook_user_id: 'fb-123456',
   instagram_page_id: 'ig-789012',
@@ -94,7 +94,7 @@ export const useAuthStore = create<AuthState>()(
       },
     }),
     {
-      name: 'instaai-auth',
+      name: 'conveero-auth',
       partialize: (state) => ({
         user: state.user,
         isAuthenticated: state.isAuthenticated,

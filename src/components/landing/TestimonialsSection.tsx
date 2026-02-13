@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "Generated $65k in revenue in 3 months. InstaAI handles 90% of our customer replies.",
+    quote: "Generated $65k in revenue in 3 months. Conveero handles 90% of our customer replies.",
     name: "Sarah Chen",
     company: "Fashion & Beauty Store",
     followers: "15.3k",
@@ -27,7 +27,7 @@ const testimonials = [
     gradient: "from-purple-500 to-violet-500",
   },
   {
-    quote: "We were drowning in DMs. InstaAI gave us our life back while increasing revenue.",
+    quote: "We were drowning in DMs. Conveero gave us our life back while increasing revenue.",
     name: "Michael Park",
     company: "Home Decor",
     followers: "12k",
