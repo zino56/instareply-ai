@@ -1,12 +1,10 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import { Navbar } from './Navbar';
-import { useAuthStore } from '@/store/authStore';
+import { isAuthenticated } from '@/lib/api';
 
 export function AppLayout() {
-  const { isAuthenticated } = useAuthStore();
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+  if (!isAuthenticated()) {
+    return <Navigate to="/" replace />;
   }
 
   return (

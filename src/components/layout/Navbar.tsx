@@ -40,7 +40,7 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, logout } = useAuthStore();
+  const { clientStatus, logout } = useAuthStore();
 
   const handleLogout = () => {
     logout();
@@ -99,11 +99,11 @@ export function Navbar() {
               <Button variant="ghost" className="flex items-center gap-2 px-2">
                 <Avatar className="h-8 w-8">
                   <AvatarFallback className="bg-secondary text-secondary-foreground text-sm font-medium">
-                    {user ? getInitials(user.name) : 'U'}
+                    {clientStatus ? getInitials(clientStatus.name || 'U') : 'U'}
                   </AvatarFallback>
                 </Avatar>
                 <span className="text-sm font-medium max-w-[120px] truncate">
-                  {user?.name || 'User'}
+                  {clientStatus?.name || 'User'}
                 </span>
                 <ChevronDown className="w-4 h-4 text-muted-foreground" />
               </Button>
@@ -173,12 +173,12 @@ export function Navbar() {
                 <div className="flex items-center gap-3 px-4 py-2 mb-2">
                   <Avatar className="h-10 w-10">
                     <AvatarFallback className="bg-secondary text-secondary-foreground">
-                      {user ? getInitials(user.name) : 'U'}
+                      {clientStatus ? getInitials(clientStatus.name || 'U') : 'U'}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="font-medium text-sm">{user?.name || 'User'}</p>
-                    <p className="text-xs text-muted-foreground">{user?.email}</p>
+                    <p className="font-medium text-sm">{clientStatus?.name || 'User'}</p>
+                    <p className="text-xs text-muted-foreground">{clientStatus?.email}</p>
                   </div>
                 </div>
                 <Button
