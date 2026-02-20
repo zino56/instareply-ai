@@ -22,7 +22,6 @@ export interface AuthState {
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
   loginWithFacebook: () => Promise<void>;
-  mockLogin: () => void;
   signup: (email: string, password: string, name: string) => Promise<void>;
   logout: () => void;
 }
@@ -30,15 +29,15 @@ export interface AuthState {
 // Product Types
 export interface Product {
   id: string;
-  client_id: string;
+  client_id?: string;
   title: string;
   description: string;
   price: number;
   image_url?: string;
   category?: string;
   is_active: boolean;
-  created_at: string;
-  updated_at: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 // Conversation Types
@@ -51,8 +50,8 @@ export interface Message {
 
 export interface Conversation {
   id: string;
-  client_id: string;
-  sender_id: string;
+  client_id?: string;
+  sender_id?: string;
   sender_name: string;
   sender_avatar?: string;
   messages: Message[];
@@ -61,7 +60,7 @@ export interface Conversation {
   last_interaction_at: string;
   unread_count: number;
   is_resolved: boolean;
-  created_at: string;
+  created_at?: string;
 }
 
 // Dashboard Types
