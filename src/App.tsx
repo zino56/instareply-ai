@@ -7,6 +7,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import LandingPage from "./pages/LandingPage";
 import Pricing from "./pages/Pricing";
 import Signup from "./pages/Signup";
+import Login from "./pages/Login";
 import AuthCallback from "./pages/AuthCallback";
 import Dashboard from "./pages/Dashboard";
 import Conversations from "./pages/Conversations";
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/" element={<LandingPage />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
 
           {/* Auth Callback */}
           <Route path="/auth/callback" element={<AuthCallback />} />
