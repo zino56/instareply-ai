@@ -1,10 +1,19 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Sparkles, Instagram } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
+import { FormEvent, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { loginWithInstagram } from '@/lib/api';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -21,31 +30,50 @@ export default function Login() {
         </Link>
 
         <div className="space-y-2 text-center">
-          <h2 className="text-2xl font-bold tracking-tight">Login to Conveero</h2>
-          <p className="text-muted-foreground">
-            Connect your Instagram to start automating your DMs
-          </p>
+          <h2 className="text-2xl font-bold tracking-tight">Welcome back</h2>
+          <p className="text-muted-foreground">Login to your Conveero account</p>
         </div>
 
-        <Button
-          className="w-full h-12 font-semibold text-base gap-2"
-          onClick={() => loginWithInstagram()}
-        >
-          <Instagram className="w-5 h-5" />
-          Connect with Instagram
-        </Button>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <Label htmlFor="password">Password</Label>
+              <Link to="/forgot-password" className="text-xs text-primary hover:underline">
+                Forgot password?
+              </Link>
+            </div>
+            <Input
+              id="password"
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <Button type="submit" className="w-full h-12 font-semibold text-base">
+            Login
+          </Button>
+        </form>
 
         <p className="text-center text-sm text-muted-foreground">
           Don't have an account?{' '}
           <Link to="/signup" className="text-primary font-medium hover:underline">
             Sign up
           </Link>
-        </p>
-
-        <p className="text-center text-xs text-muted-foreground">
-          <Link to="/terms" className="hover:underline">Terms of Service</Link>
-          {' · '}
-          <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
         </p>
       </div>
     </motion.div>
