@@ -1,90 +1,53 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Sparkles, Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { api } from '@/lib/api';
-import { toast } from '@/hooks/use-toast';
+import { loginWithInstagram } from '@/lib/api';
 
 export default function Login() {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({ email: '', password: '' });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      await api.login(form);
-      navigate('/dashboard', { replace: true });
-    } catch (err: any) {
-      toast({
-        title: 'Sign in failed',
-        description: err?.message || 'Check your email and password.',
-        variant: 'destructive',
-      });
-      setLoading(false);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-slate-50">
-      <div className="mx-auto flex min-h-screen max-w-md flex-col px-6 py-10">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-slate-900 text-white font-bold">C</div>
-          <span className="text-lg font-semibold tracking-tight text-slate-900">Conveero</span>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="min-h-screen flex items-center justify-center bg-background p-8"
+    >
+      <div className="w-full max-w-md space-y-8">
+        <Link to="/" className="flex items-center justify-center gap-2 mb-8 group">
+          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground">
+            <Sparkles className="w-6 h-6" />
+          </div>
+          <span className="text-2xl font-bold group-hover:text-primary transition-colors">Conveero</span>
         </Link>
 
-        <div className="mt-12">
-          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">Welcome back</h1>
-          <p className="mt-2 text-sm text-slate-600">Sign in to your Conveero workspace.</p>
+        <div className="space-y-2 text-center">
+          <h2 className="text-2xl font-bold tracking-tight">Login to Conveero</h2>
+          <p className="text-muted-foreground">
+            Connect your Instagram to start automating your DMs
+          </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-8 space-y-5 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="space-y-2">
-            <Label htmlFor="email" className="text-slate-700">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              required
-              autoComplete="email"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="h-11"
-              placeholder="you@company.com"
-            />
-          </div>
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="password" className="text-slate-700">Password</Label>
-              <a href="#" className="text-xs font-medium text-slate-600 hover:text-slate-900">
-                Forgot password?
-              </a>
-            </div>
-            <Input
-              id="password"
-              type="password"
-              required
-              autoComplete="current-password"
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-              className="h-11"
-            />
-          </div>
+        <Button
+          className="w-full h-12 font-semibold text-base gap-2"
+          onClick={() => loginWithInstagram()}
+        >
+          <Instagram className="w-5 h-5" />
+          Connect with Instagram
+        </Button>
 
-          <Button type="submit" disabled={loading} className="h-11 w-full bg-slate-900 text-white hover:bg-slate-800">
-            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Sign in'}
-          </Button>
-        </form>
-
-        <p className="mt-6 text-center text-sm text-slate-600">
-          New to Conveero?{' '}
-          <Link to="/signup" className="font-medium text-slate-900 hover:underline">
-            Create an account
+        <p className="text-center text-sm text-muted-foreground">
+          Don't have an account?{' '}
+          <Link to="/signup" className="text-primary font-medium hover:underline">
+            Sign up
           </Link>
         </p>
+
+        <p className="text-center text-xs text-muted-foreground">
+          <Link to="/terms" className="hover:underline">Terms of Service</Link>
+          {' · '}
+          <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
+        </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
