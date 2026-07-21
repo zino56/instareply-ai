@@ -86,12 +86,28 @@ export default function Login() {
             </Button>
           </form>
 
+          {/* DEV BYPASS — REMOVE BEFORE PRODUCTION */}
+          {import.meta.env.DEV && (
+            <div className="pt-2">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleDevBypass}
+                className="w-full h-10 text-xs font-medium border-dashed"
+              >
+                Dev preview (bypass auth) — dev only
+              </Button>
+            </div>
+          )}
+          {/* END DEV BYPASS */}
+
           <p className="text-center text-sm text-muted-foreground">
             Don't have an account?{' '}
             <Link to="/signup" className="text-primary font-medium hover:underline rounded-sm focus-ring">
               Sign up
             </Link>
           </p>
+
         </div>
       </div>
     </motion.div>
