@@ -75,10 +75,10 @@ const PricingSection = () => {
           </h2>
 
           {/* Billing Toggle */}
-          <div className="inline-flex items-center bg-white rounded-lg p-1 shadow-sm">
+          <div className="inline-flex items-center bg-white rounded-lg p-1 shadow-[var(--shadow-sm)] border border-border">
             <button
               onClick={() => setIsAnnual(false)}
-              className={`font-inter text-sm px-6 py-2.5 rounded-md transition-all duration-200 ${
+              className={`font-inter text-sm px-6 py-2.5 rounded-md transition-all duration-200 focus-ring ${
                 !isAnnual
                   ? "bg-mc-yellow text-mc-black font-semibold"
                   : "text-mc-gray hover:text-mc-black"
@@ -88,7 +88,7 @@ const PricingSection = () => {
             </button>
             <button
               onClick={() => setIsAnnual(true)}
-              className={`font-inter text-sm px-6 py-2.5 rounded-md transition-all duration-200 ${
+              className={`font-inter text-sm px-6 py-2.5 rounded-md transition-all duration-200 focus-ring ${
                 isAnnual
                   ? "bg-mc-yellow text-mc-black font-semibold"
                   : "text-mc-gray hover:text-mc-black"
@@ -97,6 +97,7 @@ const PricingSection = () => {
               Annual - Save 20%
             </button>
           </div>
+
         </div>
 
         {/* Pricing Cards */}
@@ -104,12 +105,13 @@ const PricingSection = () => {
           {pricingTiers.map((tier, index) => (
             <div
               key={index}
-              className={`relative bg-white rounded-xl p-8 transition-all duration-300 ${
+              className={`relative bg-white rounded-2xl p-8 transition-all duration-300 ${
                 tier.highlighted
                   ? "border-[3px] border-mc-yellow shadow-yellow md:-translate-y-3"
-                  : "border border-[#E0E0E0] shadow-card hover:shadow-card-hover hover:-translate-y-1"
+                  : "border border-border shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:-translate-y-1"
               }`}
             >
+
               {/* Badge */}
               {tier.badge && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">

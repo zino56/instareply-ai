@@ -66,7 +66,7 @@ const TestimonialsSection = () => {
 
         {/* Testimonial Card */}
         <div className="max-w-[700px] mx-auto">
-          <div className="bg-white border border-[#E0E0E0] rounded-xl p-8 md:p-10 shadow-card transition-all duration-300">
+          <div className="bg-white border border-border rounded-2xl p-8 md:p-10 shadow-card transition-all duration-300">
             {/* Stars */}
             <div className="flex gap-1 mb-6 justify-center">
               {[...Array(5)].map((_, i) => (
@@ -109,7 +109,7 @@ const TestimonialsSection = () => {
             {/* Left Arrow */}
             <button
               onClick={goToPrevious}
-              className="p-2 text-mc-black hover:text-mc-yellow transition-colors duration-200"
+              className="p-2 rounded-full text-mc-black hover:text-mc-yellow hover:bg-mc-light-gray transition-colors duration-200 focus-ring"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-7 h-7" />
@@ -121,7 +121,7 @@ const TestimonialsSection = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                  className={`w-3 h-3 rounded-full transition-all duration-200 focus-ring ${
                     index === currentIndex
                       ? "bg-mc-yellow scale-110"
                       : "bg-[#D0D0D0] hover:bg-mc-gray"
@@ -134,11 +134,12 @@ const TestimonialsSection = () => {
             {/* Right Arrow */}
             <button
               onClick={goToNext}
-              className="p-2 text-mc-black hover:text-mc-yellow transition-colors duration-200"
+              className="p-2 rounded-full text-mc-black hover:text-mc-yellow hover:bg-mc-light-gray transition-colors duration-200 focus-ring"
               aria-label="Next testimonial"
             >
               <ChevronRight className="w-7 h-7" />
             </button>
+
           </div>
         </div>
       </div>

@@ -25,10 +25,11 @@ const LandingNavbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 h-[72px] transition-all duration-300 bg-white ${
-        isScrolled ? "shadow-md" : ""
+      className={`fixed top-0 left-0 right-0 z-50 h-[72px] transition-all duration-300 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 ${
+        isScrolled ? "shadow-[var(--shadow-sm)] border-b border-border" : "border-b border-transparent"
       }`}
     >
+
       <div className="max-w-[1280px] mx-auto px-5 md:px-[60px] h-full">
         <div className="flex items-center justify-between h-full">
           {/* Logo */}
@@ -46,7 +47,7 @@ const LandingNavbar = () => {
                 <Link
                   key={index}
                   to={link.href}
-                  className="font-inter text-sm text-mc-black hover:text-mc-yellow relative transition-colors duration-200
+                  className="font-inter text-sm text-mc-black hover:text-mc-yellow relative transition-colors duration-200 rounded-sm focus-ring
                     after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-0.5 
                     after:bg-mc-yellow after:transition-all after:duration-200 hover:after:w-full"
                 >
@@ -56,13 +57,14 @@ const LandingNavbar = () => {
                 <a
                   key={index}
                   href={link.href}
-                  className="font-inter text-sm text-mc-black hover:text-mc-yellow relative transition-colors duration-200
+                  className="font-inter text-sm text-mc-black hover:text-mc-yellow relative transition-colors duration-200 rounded-sm focus-ring
                     after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-0.5 
                     after:bg-mc-yellow after:transition-all after:duration-200 hover:after:w-full"
                 >
                   {link.label}
                 </a>
               )
+
             )}
           </nav>
 
@@ -87,7 +89,7 @@ const LandingNavbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 rounded-md focus-ring"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -97,6 +99,7 @@ const LandingNavbar = () => {
               <Menu className="w-6 h-6 text-mc-black" />
             )}
           </button>
+
         </div>
 
         {/* Mobile Menu */}
