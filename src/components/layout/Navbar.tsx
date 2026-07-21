@@ -70,7 +70,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-0.5">
+        <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.href;
             const Icon = link.icon;
@@ -88,7 +88,6 @@ export function Navbar() {
                 <Icon className="w-4 h-4" strokeWidth={1.75} />
                 {link.label}
               </Link>
-
             );
           })}
         </div>
