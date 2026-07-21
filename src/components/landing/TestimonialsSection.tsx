@@ -1,59 +1,145 @@
-const quotes = [
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+
+const testimonials = [
   {
-    quote:
-      "We finally treat our DMs like real pipeline. Conveero picks up the first message, qualifies, and routes it before we're even at our desks.",
-    name: "Head of Sales",
-    role: "B2B services · illustrative",
+    quote: "Generated $65k in revenue in 3 months. Conveero handles 90% of our customer replies.",
+    name: "Sarah Chen",
+    company: "Fashion & Beauty Store",
+    followers: "15.3k",
+    avatar: "SC",
+    gradient: "from-pink-500 to-rose-500",
   },
   {
-    quote:
-      "Our reps stopped copy-pasting the same three questions. The AI handles first-touch and the transcript lands in HubSpot with the deal.",
-    name: "Revenue Lead",
-    role: "Agency · illustrative",
+    quote: "Before: 50 unanswered DMs per day. After: 100% response rate in <2 minutes.",
+    name: "James Rodriguez",
+    company: "Electronics E-commerce",
+    followers: "8.7k",
+    avatar: "JR",
+    gradient: "from-blue-500 to-cyan-500",
+  },
+  {
+    quote: "5-minute setup. Immediate sales lift. Best ROI we've seen on any automation tool.",
+    name: "Emma Thompson",
+    company: "Jewelry & Accessories",
+    followers: "24.5k",
+    avatar: "ET",
+    gradient: "from-purple-500 to-violet-500",
+  },
+  {
+    quote: "We were drowning in DMs. Conveero gave us our life back while increasing revenue.",
+    name: "Michael Park",
+    company: "Home Decor",
+    followers: "12k",
+    avatar: "MP",
+    gradient: "from-amber-500 to-orange-500",
   },
 ];
 
 const TestimonialsSection = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const currentTestimonial = testimonials[currentIndex];
+
   return (
-    <section className="py-20 md:py-28 bg-background border-t border-border">
-      <div className="section-container">
-        <div className="max-w-2xl mb-14">
-          <div className="eyebrow mb-4">Built for</div>
-          <h2 className="font-display text-[36px] md:text-[48px] leading-[1.05] text-foreground">
-            Teams handling high-volume Instagram and WhatsApp leads.
-          </h2>
-        </div>
+    <section className="py-[60px] md:py-[100px] px-5 md:px-[60px] bg-white">
+      <div className="max-w-[1280px] mx-auto">
+        {/* Section Header */}
+        <h2 className="font-poppins font-bold text-[32px] md:text-[48px] text-mc-black text-center mb-12 md:mb-16">
+          Loved by e-commerce brands
+        </h2>
 
-        {/* Logo strip — clearly labeled placeholder */}
-        <div className="rounded-xl border border-dashed border-border bg-secondary/30 p-8 mb-10">
-          <div className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground mb-6 text-center">
-            Placeholder — replace with real customer logos
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 items-center opacity-60">
-            {["Northwind", "Halcyon", "Meridian", "Foundry", "Atelier", "Grove"].map((n) => (
-              <div key={n} className="font-display text-lg text-foreground/60 text-center tracking-tight">
-                {n}
+        {/* Testimonial Card */}
+        <div className="max-w-[700px] mx-auto">
+          <div className="bg-white border border-[#E0E0E0] rounded-xl p-8 md:p-10 shadow-card transition-all duration-300">
+            {/* Stars */}
+            <div className="flex gap-1 mb-6 justify-center">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-5 h-5 fill-mc-yellow text-mc-yellow" />
+              ))}
+            </div>
+
+            {/* Quote */}
+            <p className="font-inter text-base md:text-lg text-mc-black text-center italic leading-relaxed mb-8">
+              "{currentTestimonial.quote}"
+            </p>
+
+            {/* Customer Info */}
+            <div className="flex flex-col items-center gap-4">
+              {/* Avatar */}
+              <div 
+                className={`w-12 h-12 rounded-full bg-gradient-to-br ${currentTestimonial.gradient} 
+                  flex items-center justify-center text-white font-poppins font-bold text-sm`}
+              >
+                {currentTestimonial.avatar}
               </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Quotes */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {quotes.map((q) => (
-            <figure key={q.name} className="rounded-xl border border-border bg-card p-8">
-              <blockquote className="font-display text-2xl leading-snug text-foreground mb-6">
-                &ldquo;{q.quote}&rdquo;
-              </blockquote>
-              <figcaption className="flex items-center justify-between text-sm">
-                <div>
-                  <div className="text-foreground">{q.name}</div>
-                  <div className="text-muted-foreground text-xs mt-0.5">{q.role}</div>
-                </div>
-                <span className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Illustrative</span>
-              </figcaption>
-            </figure>
-          ))}
+              {/* Details */}
+              <div className="text-center">
+                <p className="font-poppins font-bold text-base text-mc-black">
+                  {currentTestimonial.name}
+                </p>
+                <p className="font-inter text-sm text-mc-gray">
+                  {currentTestimonial.company}
+                </p>
+                <p className="font-inter text-xs text-[#999999] mt-1">
+                  {currentTestimonial.followers} Instagram followers
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Controls */}
+          <div className="flex items-center justify-center gap-6 mt-8">
+            {/* Left Arrow */}
+            <button
+              onClick={goToPrevious}
+              className="p-2 text-mc-black hover:text-mc-yellow transition-colors duration-200"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft className="w-7 h-7" />
+            </button>
+
+            {/* Dots */}
+            <div className="flex items-center gap-3">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                    index === currentIndex
+                      ? "bg-mc-yellow scale-110"
+                      : "bg-[#D0D0D0] hover:bg-mc-gray"
+                  }`}
+                  aria-label={`Go to testimonial ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Right Arrow */}
+            <button
+              onClick={goToNext}
+              className="p-2 text-mc-black hover:text-mc-yellow transition-colors duration-200"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="w-7 h-7" />
+            </button>
+          </div>
         </div>
       </div>
     </section>

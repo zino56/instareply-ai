@@ -12,6 +12,7 @@ import {
   Menu,
   X,
   ChevronDown,
+  Sparkles,
   BookOpen,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -27,12 +28,12 @@ import { useAuthStore } from '@/store/authStore';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
-  { href: '/dashboard', label: 'Overview', icon: LayoutDashboard },
+  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/conversations', label: 'Conversations', icon: MessageSquare },
-  { href: '/products', label: 'Catalog', icon: Package },
-  { href: '/ai-knowledge', label: 'Knowledge', icon: BookOpen },
-  { href: '/analytics', label: 'Analytics', icon: BarChart3 },
+  { href: '/products', label: 'Products', icon: Package },
+  { href: '/ai-knowledge', label: 'AI Knowledge', icon: BookOpen },
   { href: '/settings', label: 'Settings', icon: Settings },
+  { href: '/analytics', label: 'Analytics', icon: BarChart3 },
 ];
 
 export function Navbar() {
@@ -46,19 +47,29 @@ export function Navbar() {
     navigate('/login');
   };
 
-  const getInitials = (name: string) =>
-    name.split(' ').map((n) => n[0]).join('').toUpperCase().slice(0, 2);
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/85 backdrop-blur">
-      <nav className="section-container flex h-14 items-center justify-between">
-        <Link to="/dashboard" className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-md bg-foreground flex items-center justify-center">
-            <span className="font-display text-background text-lg leading-none">C</span>
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <nav className="container flex h-16 items-center justify-between">
+        {/* Logo */}
+        <Link to="/dashboard" className="flex items-center gap-2 group">
+          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary text-primary-foreground">
+            <Sparkles className="w-5 h-5" />
           </div>
-          <span className="font-display text-lg text-foreground">Conveero</span>
+          <span className="text-xl font-bold tracking-tight group-hover:text-primary transition-colors">
+            Conveero
+          </span>
         </Link>
 
+        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.href;
@@ -68,10 +79,10 @@ export function Navbar() {
                 key={link.href}
                 to={link.href}
                 className={cn(
-                  'flex items-center gap-2 px-3 py-1.5 rounded-md text-sm transition-colors',
+                  'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200',
                   isActive
-                    ? 'bg-secondary text-foreground font-medium'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-secondary/60'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                 )}
               >
                 <Icon className="w-4 h-4" />
@@ -81,23 +92,27 @@ export function Navbar() {
           })}
         </div>
 
-        <div className="hidden md:flex items-center gap-3">
+        {/* User Menu - Desktop */}
+        <div className="hidden md:flex items-center gap-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="flex items-center gap-2 px-2 h-9">
-                <Avatar className="h-7 w-7">
-                  <AvatarFallback className="bg-secondary text-foreground text-xs font-medium">
+              <Button variant="ghost" className="flex items-center gap-2 px-2">
+                <Avatar className="h-8 w-8">
+                  <AvatarFallback className="bg-secondary text-secondary-foreground text-sm font-medium">
                     {clientStatus ? getInitials(clientStatus.name || 'U') : 'U'}
                   </AvatarFallback>
                 </Avatar>
-                <span className="text-sm max-w-[120px] truncate">{clientStatus?.name || 'User'}</span>
-                <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
+                <span className="text-sm font-medium max-w-[120px] truncate">
+                  {clientStatus?.name || 'User'}
+                </span>
+                <ChevronDown className="w-4 h-4 text-muted-foreground" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
               <DropdownMenuItem asChild>
                 <Link to="/settings" className="flex items-center gap-2 cursor-pointer">
-                  <User className="w-4 h-4" /> Profile
+                  <User className="w-4 h-4" />
+                  Profile
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
@@ -105,12 +120,14 @@ export function Navbar() {
                 onClick={handleLogout}
                 className="flex items-center gap-2 cursor-pointer text-destructive focus:text-destructive"
               >
-                <LogOut className="w-4 h-4" /> Sign out
+                <LogOut className="w-4 h-4" />
+                Logout
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
 
+        {/* Mobile Menu Button */}
         <Button
           variant="ghost"
           size="icon"
@@ -122,6 +139,7 @@ export function Navbar() {
         </Button>
       </nav>
 
+      {/* Mobile Navigation */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -130,7 +148,7 @@ export function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden border-t border-border bg-background"
           >
-            <div className="section-container py-4 space-y-1">
+            <div className="container py-4 space-y-2">
               {navLinks.map((link) => {
                 const isActive = location.pathname === link.href;
                 const Icon = link.icon;
@@ -140,21 +158,21 @@ export function Navbar() {
                     to={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
-                      'flex items-center gap-3 px-3 py-2.5 rounded-md text-sm transition-all',
+                      'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all',
                       isActive
-                        ? 'bg-secondary text-foreground font-medium'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-secondary/60'
+                        ? 'bg-primary text-primary-foreground'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                     )}
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-5 h-5" />
                     {link.label}
                   </Link>
                 );
               })}
-              <div className="pt-3 mt-3 border-t border-border">
-                <div className="flex items-center gap-3 px-3 py-2">
-                  <Avatar className="h-9 w-9">
-                    <AvatarFallback className="bg-secondary text-foreground">
+              <div className="pt-4 border-t border-border">
+                <div className="flex items-center gap-3 px-4 py-2 mb-2">
+                  <Avatar className="h-10 w-10">
+                    <AvatarFallback className="bg-secondary text-secondary-foreground">
                       {clientStatus ? getInitials(clientStatus.name || 'U') : 'U'}
                     </AvatarFallback>
                   </Avatar>
@@ -171,8 +189,8 @@ export function Navbar() {
                     handleLogout();
                   }}
                 >
-                  <LogOut className="w-4 h-4" />
-                  Sign out
+                  <LogOut className="w-5 h-5" />
+                  Logout
                 </Button>
               </div>
             </div>

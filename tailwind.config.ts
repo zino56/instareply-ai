@@ -7,18 +7,18 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "1.5rem",
-      screens: { "2xl": "1200px" },
+      padding: "2rem",
+      screens: {
+        "2xl": "1280px",
+      },
     },
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        poppins: ['Poppins', 'system-ui', 'sans-serif'],
         inter: ['Inter', 'system-ui', 'sans-serif'],
+        heading: ['Poppins', 'system-ui', 'sans-serif'],
         body: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['"Instrument Serif"', 'Times New Roman', 'serif'],
-        serif: ['"Instrument Serif"', 'Times New Roman', 'serif'],
-        heading: ['"Instrument Serif"', 'Times New Roman', 'serif'],
-        poppins: ['Inter', 'system-ui', 'sans-serif'], // legacy alias
       },
       colors: {
         border: "hsl(var(--border))",
@@ -76,20 +76,22 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        facebook: { DEFAULT: "#1877F2", hover: "#166FE5" },
-        // Legacy mc-* aliases remapped to the new premium palette so old
-        // usages still render on-brand while we migrate components.
+        facebook: {
+          DEFAULT: "#1877F2",
+          hover: "#166FE5",
+        },
+        // ManyChat Clone Colors
         mc: {
-          yellow: "#2F5D50",       // was neon yellow → evergreen accent
-          magenta: "#264A40",      // was magenta → accent hover
-          black: "#111111",
+          yellow: "#FFF100",
+          magenta: "#FF00FF",
+          black: "#000000",
           white: "#FFFFFF",
-          gray: "#5B5B57",
+          gray: "#666666",
           "dark-gray": "#1A1A1A",
-          "light-gray": "#FAFAF7",
-          "hover-yellow": "#264A40",
-          red: "#B23A2A",
-          green: "#3F7D58",
+          "light-gray": "#F5F5F5",
+          "hover-yellow": "#FFC300",
+          "red": "#EF4444",
+          "green": "#10B981",
         },
       },
       borderRadius: {
@@ -98,13 +100,12 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        'card': '0 1px 2px rgba(17,17,17,0.04)',
-        'card-hover': '0 1px 2px rgba(17,17,17,0.04), 0 8px 24px rgba(17,17,17,0.06)',
-        'elevated': '0 1px 2px rgba(17,17,17,0.04), 0 12px 32px rgba(17,17,17,0.08)',
-        'button': '0 1px 2px rgba(17,17,17,0.06)',
-        'hero': '0 20px 60px rgba(17,17,17,0.12)',
-        'yellow': '0 1px 2px rgba(17,17,17,0.04)', // legacy alias
-        'magenta': '0 1px 2px rgba(17,17,17,0.04)', // legacy alias
+        'card': '0 2px 8px rgba(0, 0, 0, 0.08)',
+        'card-hover': '0 8px 24px rgba(0, 0, 0, 0.12)',
+        'button': '0 4px 12px rgba(0, 0, 0, 0.15)',
+        'yellow': '0 8px 24px rgba(255, 241, 0, 0.3)',
+        'magenta': '0 8px 24px rgba(255, 0, 255, 0.4)',
+        'hero': '0 20px 60px rgba(0, 0, 0, 0.3)',
       },
       keyframes: {
         "accordion-down": {
@@ -116,23 +117,23 @@ export default {
           to: { height: "0", opacity: "0" },
         },
         "fade-in": {
-          from: { opacity: "0", transform: "translateY(12px)" },
+          from: { opacity: "0", transform: "translateY(20px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
         "fade-out": {
           from: { opacity: "1", transform: "translateY(0)" },
-          to: { opacity: "0", transform: "translateY(12px)" },
+          to: { opacity: "0", transform: "translateY(20px)" },
         },
         "slide-in-left": {
-          from: { opacity: "0", transform: "translateX(-20px)" },
+          from: { opacity: "0", transform: "translateX(-30px)" },
           to: { opacity: "1", transform: "translateX(0)" },
         },
         "slide-in-right": {
-          from: { opacity: "0", transform: "translateX(20px)" },
+          from: { opacity: "0", transform: "translateX(30px)" },
           to: { opacity: "1", transform: "translateX(0)" },
         },
         "scale-in": {
-          from: { opacity: "0", transform: "scale(0.97)" },
+          from: { opacity: "0", transform: "scale(0.95)" },
           to: { opacity: "1", transform: "scale(1)" },
         },
         "draw-line": {
@@ -155,7 +156,10 @@ export default {
         "draw-line": "draw-line 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         "pulse-soft": "pulse-soft 2s ease-in-out infinite",
       },
-      spacing: { '18': '4.5rem', '22': '5.5rem' },
+      spacing: {
+        '18': '4.5rem',
+        '22': '5.5rem',
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
