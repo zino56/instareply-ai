@@ -140,7 +140,7 @@ export default function Dashboard() {
                 </div>
                 <div className="mt-5">
                   <p className="text-[32px] font-bold text-foreground tabular-nums tracking-[-0.02em] leading-none">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground font-medium mt-2">{stat.label}</p>
+                  <p className="text-sm text-muted-foreground font-medium mt-1">{stat.label}</p>
                 </div>
               </CardContent>
             </Card>
@@ -153,10 +153,10 @@ export default function Dashboard() {
             <Card className="h-full rounded-2xl border border-border shadow-[var(--shadow-sm)]">
               <CardHeader className="pb-4"><CardTitle className="text-[15px] font-semibold">Quick Actions</CardTitle></CardHeader>
               <CardContent className="space-y-2.5">
-                <Button variant="outline" className="w-full justify-start h-11 group hover:bg-muted/60" asChild><Link to="/conversations"><MessageSquare className="w-4 h-4 mr-3" strokeWidth={1.75} />View All Conversations<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
-                <Button variant="outline" className="w-full justify-start h-11 group hover:bg-muted/60" asChild><Link to="/products"><Package className="w-4 h-4 mr-3" strokeWidth={1.75} />Manage Products<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
-                <Button variant="outline" className="w-full justify-start h-11 group hover:bg-muted/60" asChild><Link to="/settings"><Settings className="w-4 h-4 mr-3" strokeWidth={1.75} />Settings<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
-                <Button variant="outline" className="w-full justify-start h-11 group hover:bg-muted/60" asChild><Link to="/analytics"><BarChart3 className="w-4 h-4 mr-3" strokeWidth={1.75} />View Analytics<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
+                <Button variant="outline" className="w-full justify-start h-11 group hover:bg-muted/60 hover:border-border" asChild><Link to="/conversations"><MessageSquare className="w-4 h-4 mr-3" strokeWidth={1.75} />View All Conversations<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
+                <Button variant="outline" className="w-full justify-start h-11 group hover:bg-muted/60 hover:border-border" asChild><Link to="/products"><Package className="w-4 h-4 mr-3" strokeWidth={1.75} />Manage Products<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
+                <Button variant="outline" className="w-full justify-start h-11 group hover:bg-muted/60 hover:border-border" asChild><Link to="/settings"><Settings className="w-4 h-4 mr-3" strokeWidth={1.75} />Settings<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
+                <Button variant="outline" className="w-full justify-start h-11 group hover:bg-muted/60 hover:border-border" asChild><Link to="/analytics"><BarChart3 className="w-4 h-4 mr-3" strokeWidth={1.75} />View Analytics<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
               </CardContent>
             </Card>
           </motion.div>
@@ -169,11 +169,14 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 {recentConversations.length === 0 ? (
-                  <p className="text-muted-foreground text-center py-10 text-sm">No conversations yet. Connect your Instagram to get started!</p>
+                  <div className="flex flex-col items-center justify-center py-10 text-center">
+                    <MessageSquare className="w-8 h-8 text-muted-foreground/40 mb-3" strokeWidth={1.5} />
+                    <p className="text-muted-foreground text-sm max-w-[260px]">No conversations yet. Connect your Instagram to get started!</p>
+                  </div>
                 ) : (
                   <div className="space-y-0.5">
                     {recentConversations.map((conversation) => (
-                      <Link key={conversation.id} to={`/conversations?id=${conversation.id}`} className="flex items-center gap-4 px-3 py-3.5 rounded-xl hover:bg-muted/60 transition-colors group">
+                    <Link key={conversation.id} to={`/conversations?id=${conversation.id}`} className="flex items-center gap-4 px-3 py-3.5 rounded-xl hover:bg-muted/60 transition-colors group focus-ring">
                         <Avatar className="h-10 w-10 ring-1 ring-border">
                           <AvatarFallback className="bg-secondary text-secondary-foreground text-sm font-medium">{conversation.sender_name?.charAt(0) || '?'}</AvatarFallback>
                         </Avatar>
@@ -184,7 +187,7 @@ export default function Dashboard() {
                               <span className="text-[11px] text-muted-foreground tabular-nums shrink-0">{formatDistanceToNow(new Date(conversation.last_interaction_at), { addSuffix: true })}</span>
                             )}
                           </div>
-                          <p className="text-[13px] text-muted-foreground truncate mt-0.5">{conversation.last_message}</p>
+                          <p className="text-[13px] text-muted-foreground line-clamp-1 mt-0.5">{conversation.last_message}</p>
                         </div>
                         {(conversation.unread_count || 0) > 0 && <Badge className="bg-primary text-primary-foreground min-w-[22px] h-[22px] px-1.5 flex items-center justify-center text-[11px] font-semibold rounded-full">{conversation.unread_count}</Badge>}
                       </Link>
