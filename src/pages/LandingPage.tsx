@@ -1,32 +1,26 @@
 import LandingNavbar from "@/components/landing/LandingNavbar";
 import HeroSection from "@/components/landing/HeroSection";
-import FeaturesSection from "@/components/landing/FeaturesSection";
 import BeforeAfterSection from "@/components/landing/BeforeAfterSection";
 import OnboardingStepsSection from "@/components/landing/OnboardingStepsSection";
+import WorkflowPreviewSection from "@/components/landing/WorkflowPreviewSection";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
-import FAQSection from "@/components/landing/FAQSection";
 import PricingSection from "@/components/landing/PricingSection";
+import FAQSection from "@/components/landing/FAQSection";
 import CTASection from "@/components/landing/CTASection";
 import Footer from "@/components/landing/Footer";
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <LandingNavbar />
       <main>
         <HeroSection />
-        <div id="features">
-          <FeaturesSection />
-        </div>
         <BeforeAfterSection />
         <OnboardingStepsSection />
+        <WorkflowPreviewSection />
         <TestimonialsSection />
-        <div id="faq">
-          <FAQSection />
-        </div>
-        <div id="pricing">
-          <PricingSection />
-        </div>
+        <PricingSection />
+        <FAQSection />
         <CTASection />
       </main>
       <Footer />
