@@ -79,15 +79,16 @@ export function Navbar() {
                 key={link.href}
                 to={link.href}
                 className={cn(
-                  'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200',
+                  'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 focus-ring',
                   isActive
-                    ? 'bg-primary text-primary-foreground'
+                    ? 'bg-primary text-primary-foreground shadow-[var(--shadow-sm)]'
                     : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                 )}
               >
                 <Icon className="w-4 h-4" />
                 {link.label}
               </Link>
+
             );
           })}
         </div>

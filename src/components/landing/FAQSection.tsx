@@ -49,18 +49,19 @@ const FAQSection = () => {
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className="bg-white border border-[#E0E0E0] rounded-lg px-6 
-                hover:bg-[#F9F9F9] transition-colors duration-200 
-                data-[state=open]:bg-[#F9F9F9]"
+              className="bg-white border border-border rounded-xl px-6
+                hover:bg-[hsl(var(--surface))] transition-colors duration-200
+                data-[state=open]:bg-[hsl(var(--surface))] data-[state=open]:shadow-[var(--shadow-sm)]"
             >
               <AccordionTrigger 
                 className="font-poppins font-bold text-base md:text-lg text-mc-black 
-                  hover:no-underline py-6 [&[data-state=open]>svg]:text-mc-yellow 
+                  hover:no-underline py-6 rounded-md focus-ring [&[data-state=open]>svg]:text-mc-yellow 
                   [&>svg]:text-mc-black [&>svg]:transition-colors [&>svg]:duration-200
                   hover:[&>svg]:text-mc-yellow"
               >
                 {faq.question}
               </AccordionTrigger>
+
               <AccordionContent 
                 className="font-inter text-[15px] text-mc-gray leading-relaxed pb-6"
               >

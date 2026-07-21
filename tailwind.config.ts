@@ -25,7 +25,9 @@ export default {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
+        surface: "hsl(var(--surface))",
         foreground: "hsl(var(--foreground))",
+
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -100,13 +102,16 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        'card': '0 2px 8px rgba(0, 0, 0, 0.08)',
-        'card-hover': '0 8px 24px rgba(0, 0, 0, 0.12)',
-        'button': '0 4px 12px rgba(0, 0, 0, 0.15)',
+        'card': 'var(--shadow-sm)',
+        'card-hover': 'var(--shadow-md)',
+        'button': '0 4px 12px rgba(0, 0, 0, 0.12)',
         'yellow': '0 8px 24px rgba(255, 241, 0, 0.3)',
         'magenta': '0 8px 24px rgba(255, 0, 255, 0.4)',
         'hero': '0 20px 60px rgba(0, 0, 0, 0.3)',
+        'elevated-sm': 'var(--shadow-sm)',
+        'elevated-md': 'var(--shadow-md)',
       },
+
       keyframes: {
         "accordion-down": {
           from: { height: "0", opacity: "0" },

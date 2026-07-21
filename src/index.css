@@ -35,8 +35,8 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 94%;
-    --input: 0 0% 94%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
     --ring: 56 100% 50%;
 
     --radius: 0.5rem;
@@ -58,6 +58,9 @@
     --mc-light-gray: 0 0% 96%;
     --mc-hover-yellow: 45 100% 50%;
 
+    /* Neutral surface for section alternation */
+    --surface: 220 20% 98%;
+
     /* Sidebar - Dark Theme */
     --sidebar-background: 0 0% 6%;
     --sidebar-foreground: 0 0% 95%;
@@ -70,12 +73,15 @@
 
     /* Custom Properties */
     --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
-    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
-    --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
-    --shadow-button: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06), 0 10px 24px rgba(15, 23, 42, 0.08);
+    --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.06);
+    --shadow-card-hover: 0 4px 12px rgba(15, 23, 42, 0.06), 0 10px 24px rgba(15, 23, 42, 0.08);
+    --shadow-button: 0 4px 12px rgba(0, 0, 0, 0.12);
     --shadow-magenta: 0 8px 24px rgba(255, 0, 255, 0.4);
     --shadow-yellow: 0 8px 24px rgba(255, 241, 0, 0.3);
   }
+
 
   .dark {
     --background: 0 0% 6%;
@@ -162,16 +168,18 @@
 
   /* Card Styles */
   .card-elevated {
-    @apply bg-card border border-border rounded-lg shadow-[var(--shadow-card)] 
-           hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 
+    @apply bg-card border border-border rounded-2xl shadow-[var(--shadow-sm)]
+           hover:shadow-[var(--shadow-md)] hover:-translate-y-1
            transition-all duration-300;
   }
 
+
   /* Feature Card */
   .feature-card {
-    @apply bg-white border border-[#F0F0F0] rounded-lg p-8 
-           shadow-[0_2px_8px_rgba(0,0,0,0.08)]
-           hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:-translate-y-1
+    @apply bg-card border border-border rounded-2xl p-6 md:p-8
+           shadow-[var(--shadow-sm)]
+           hover:shadow-[var(--shadow-md)] hover:-translate-y-1
+           hover:border-border/70
            transition-all duration-300;
   }
 
@@ -208,12 +216,13 @@
   }
 
   .stat-value {
-    @apply text-3xl font-bold text-foreground;
+    @apply text-3xl font-bold text-foreground tabular-nums tracking-tight;
   }
 
   .stat-label {
     @apply text-sm text-muted-foreground font-medium;
   }
+
 
   /* Glass Effect */
   .glass {
@@ -342,10 +351,16 @@
     @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
   }
 
-  /* Focus Ring */
+  /* Focus Ring (keyboard only) */
   .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
+
+  /* Focus Ring on dark surfaces */
+  .focus-ring-on-dark {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-mc-black;
+  }
+
 
   /* Stagger Animation Delays */
   .stagger-1 { animation-delay: 0ms; }
