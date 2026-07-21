@@ -70,7 +70,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-0.5">
+        <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.href;
             const Icon = link.icon;
@@ -88,7 +88,6 @@ export function Navbar() {
                 <Icon className="w-4 h-4" strokeWidth={1.75} />
                 {link.label}
               </Link>
-
             );
           })}
         </div>
@@ -159,10 +158,10 @@ export function Navbar() {
                     to={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
-                      'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all',
+                      'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all focus-ring',
                       isActive
                         ? 'bg-primary text-primary-foreground'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
                     )}
                   >
                     <Icon className="w-5 h-5" />
