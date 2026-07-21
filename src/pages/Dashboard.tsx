@@ -92,8 +92,8 @@ export default function Dashboard() {
             </p>
           </div>
           <div className="flex gap-3">
-            <Button variant="outline" asChild><Link to="/settings"><Settings className="w-4 h-4 mr-2" strokeWidth={1.75} />Settings</Link></Button>
-            <Button asChild><Link to="/conversations"><MessageSquare className="w-4 h-4 mr-2" strokeWidth={1.75} />View Messages</Link></Button>
+            <Button variant="outline" className="gap-2 border-border/80 hover:border-border" asChild><Link to="/settings"><Settings className="w-4 h-4" strokeWidth={1.75} />Settings</Link></Button>
+            <Button className="gap-2" asChild><Link to="/conversations"><MessageSquare className="w-4 h-4" strokeWidth={1.75} />View Messages</Link></Button>
           </div>
         </motion.div>
 
