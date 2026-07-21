@@ -1,18 +1,32 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Sparkles } from 'lucide-react';
 import { FormEvent, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
   };
+
+  /* DEV BYPASS — REMOVE BEFORE PRODUCTION
+   * Sets a localStorage flag that AppLayout checks in dev only, so we can
+   * preview/edit the dashboard inside Lovable without a real session.
+   * The button is only rendered when import.meta.env.DEV is true, so it
+   * disappears entirely in production builds. */
+  const handleDevBypass = () => {
+    window.localStorage.setItem('conveero_dev_bypass', '1');
+    navigate('/dashboard', { replace: true });
+  };
+  /* END DEV BYPASS */
+
 
   return (
     <motion.div
@@ -72,12 +86,28 @@ export default function Login() {
             </Button>
           </form>
 
+          {/* DEV BYPASS — REMOVE BEFORE PRODUCTION */}
+          {import.meta.env.DEV && (
+            <div className="pt-2">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleDevBypass}
+                className="w-full h-10 text-xs font-medium border-dashed"
+              >
+                Dev preview (bypass auth) — dev only
+              </Button>
+            </div>
+          )}
+          {/* END DEV BYPASS */}
+
           <p className="text-center text-sm text-muted-foreground">
             Don't have an account?{' '}
             <Link to="/signup" className="text-primary font-medium hover:underline rounded-sm focus-ring">
               Sign up
             </Link>
           </p>
+
         </div>
       </div>
     </motion.div>
