@@ -168,10 +168,11 @@
 
   /* Card Styles */
   .card-elevated {
-    @apply bg-card border border-border rounded-lg shadow-[var(--shadow-card)] 
-           hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 
+    @apply bg-card border border-border rounded-2xl shadow-[var(--shadow-sm)]
+           hover:shadow-[var(--shadow-md)] hover:-translate-y-1
            transition-all duration-300;
   }
+
 
   /* Feature Card */
   .feature-card {
