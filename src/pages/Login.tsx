@@ -10,10 +10,23 @@ import { Label } from '@/components/ui/label';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
   };
+
+  /* DEV BYPASS — REMOVE BEFORE PRODUCTION
+   * Sets a localStorage flag that AppLayout checks in dev only, so we can
+   * preview/edit the dashboard inside Lovable without a real session.
+   * The button is only rendered when import.meta.env.DEV is true, so it
+   * disappears entirely in production builds. */
+  const handleDevBypass = () => {
+    window.localStorage.setItem('conveero_dev_bypass', '1');
+    navigate('/dashboard', { replace: true });
+  };
+  /* END DEV BYPASS */
+
 
   return (
     <motion.div
