@@ -158,10 +158,10 @@ export function Navbar() {
                     to={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
-                      'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all',
+                      'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all focus-ring',
                       isActive
                         ? 'bg-primary text-primary-foreground'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
                     )}
                   >
                     <Icon className="w-5 h-5" />
