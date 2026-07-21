@@ -4,11 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Home", href: "/", isRoute: true },
-  { label: "Features", href: "#features", isRoute: false },
-  { label: "Pricing", href: "/pricing", isRoute: true },
-  { label: "Blog", href: "#", isRoute: false },
-  { label: "Docs", href: "#", isRoute: false },
+  { label: "Product", href: "#workflow", isRoute: false },
+  { label: "How it works", href: "#how", isRoute: false },
+  { label: "Pricing", href: "#pricing", isRoute: false },
+  { label: "FAQ", href: "#faq", isRoute: false },
 ];
 
 const LandingNavbar = () => {
@@ -16,133 +15,90 @@ const LandingNavbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 8);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 h-[72px] transition-all duration-300 bg-white ${
-        isScrolled ? "shadow-md" : ""
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-background/85 backdrop-blur-md border-b border-border"
+          : "bg-transparent"
       }`}
     >
-      <div className="max-w-[1280px] mx-auto px-5 md:px-[60px] h-full">
-        <div className="flex items-center justify-between h-full">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-mc-yellow flex items-center justify-center">
-              <span className="font-poppins font-bold text-lg text-mc-black">C</span>
-            </div>
-            <span className="font-poppins font-bold text-xl text-mc-black">Conveero</span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link, index) =>
-              link.isRoute ? (
-                <Link
-                  key={index}
-                  to={link.href}
-                  className="font-inter text-sm text-mc-black hover:text-mc-yellow relative transition-colors duration-200
-                    after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-0.5 
-                    after:bg-mc-yellow after:transition-all after:duration-200 hover:after:w-full"
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <a
-                  key={index}
-                  href={link.href}
-                  className="font-inter text-sm text-mc-black hover:text-mc-yellow relative transition-colors duration-200
-                    after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-0.5 
-                    after:bg-mc-yellow after:transition-all after:duration-200 hover:after:w-full"
-                >
-                  {link.label}
-                </a>
-              )
-            )}
-          </nav>
-
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-4">
-            <Button
-              asChild
-              variant="ghost"
-              className="font-poppins font-bold text-sm text-mc-black border-2 border-mc-black 
-                hover:bg-mc-light-gray rounded-lg px-7 py-3 h-auto transition-all duration-200"
-            >
-              <Link to="/login">Sign In</Link>
-            </Button>
-            <Button
-              asChild
-              className="bg-mc-yellow hover:bg-mc-hover-yellow text-mc-black font-poppins font-bold 
-                text-sm px-7 py-3 h-auto rounded-lg transition-all duration-200 hover:shadow-yellow"
-            >
-              <Link to="/signup">Get Started</Link>
-            </Button>
+      <div className="section-container h-16 flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-md bg-foreground flex items-center justify-center">
+            <span className="font-display text-background text-lg leading-none">C</span>
           </div>
+          <span className="font-display text-xl text-foreground">Conveero</span>
+        </Link>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        {/* CTA */}
+        <div className="hidden md:flex items-center gap-3">
+          <Link
+            to="/login"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-mc-black" />
-            ) : (
-              <Menu className="w-6 h-6 text-mc-black" />
-            )}
-          </button>
+            Sign in
+          </Link>
+          <Button
+            asChild
+            className="h-9 rounded-[10px] bg-foreground text-background hover:bg-accent font-medium text-sm px-4"
+          >
+            <Link to="/signup">Book a demo</Link>
+          </Button>
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-[72px] left-0 right-0 bg-white shadow-lg py-6 px-5 animate-fade-in">
-            <nav className="flex flex-col gap-4 mb-6">
-              {navLinks.map((link, index) =>
-                link.isRoute ? (
-                  <Link
-                    key={index}
-                    to={link.href}
-                    className="font-inter text-base text-mc-black py-2 hover:text-mc-yellow transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ) : (
-                  <a
-                    key={index}
-                    href={link.href}
-                    className="font-inter text-base text-mc-black py-2 hover:text-mc-yellow transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </a>
-                )
-              )}
-            </nav>
-            <div className="flex flex-col gap-3">
-              <Button
-                asChild
-                variant="outline"
-                className="w-full border-2 border-mc-black font-poppins font-bold"
+        <button
+          className="md:hidden p-2 text-foreground"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+      </div>
+
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-background border-t border-border py-4 animate-fade-in">
+          <div className="section-container flex flex-col gap-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-2.5 text-sm text-foreground"
               >
-                <Link to="/login">Sign In</Link>
+                {link.label}
+              </a>
+            ))}
+            <div className="flex flex-col gap-2 pt-3 border-t border-border mt-2">
+              <Button asChild variant="outline" className="h-10">
+                <Link to="/login">Sign in</Link>
               </Button>
-              <Button
-                asChild
-                className="w-full bg-mc-yellow hover:bg-mc-hover-yellow text-mc-black font-poppins font-bold"
-              >
-                <Link to="/signup">Get Started</Link>
+              <Button asChild className="h-10 bg-foreground text-background hover:bg-accent">
+                <Link to="/signup">Book a demo</Link>
               </Button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </header>
   );
 };

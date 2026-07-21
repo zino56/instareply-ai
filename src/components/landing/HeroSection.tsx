@@ -1,139 +1,127 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Play } from "lucide-react";
+import { ArrowRight, Instagram, MessageCircle, Check } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background with overlay */}
-      <div className="absolute inset-0 bg-mc-black">
-        <div className="absolute inset-0 bg-gradient-to-br from-mc-black via-mc-black/90 to-mc-dark-gray" />
-      </div>
+    <section className="relative pt-32 md:pt-40 pb-20 md:pb-28 bg-background">
+      <div className="section-container">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center">
+          {/* Copy */}
+          <div className="animate-fade-in">
+            <div className="eyebrow mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+              For Instagram &amp; WhatsApp sales teams
+            </div>
 
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-5 md:px-[60px] pt-[120px] pb-[60px] md:pt-[120px] md:pb-[120px]">
-        <div className="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-12 lg:gap-8 items-center">
-          {/* Left Column - Text */}
-          <div className="animate-slide-in-left text-center lg:text-left">
-            <h1 className="font-poppins font-bold text-[40px] md:text-[72px] text-white leading-[1.1] tracking-[-0.02em] mb-6">
-              Make the most out of every conversation
+            <h1 className="font-display text-[44px] leading-[1.05] md:text-[68px] md:leading-[1.02] text-foreground mb-6">
+              Turn Instagram and WhatsApp DMs into&nbsp;qualified pipeline.
             </h1>
-            <p className="font-inter text-base md:text-lg text-white/90 leading-relaxed mb-10 max-w-[500px] mx-auto lg:mx-0">
-              Sell more, engage better, and grow your audience. AI-powered automation 
-              that turns messages into revenue.
+
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-[560px] mb-8">
+              Conveero replies, qualifies, follows up, and routes every conversation to
+              the right person — so no lead sits unread and no deal slips through the inbox.
             </p>
 
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+            <div className="flex flex-col sm:flex-row gap-3 mb-8">
               <Button
                 asChild
-                className="bg-mc-magenta hover:bg-[#E600E6] text-white font-poppins font-bold 
-                  text-base px-10 py-4 h-auto rounded-lg transition-all duration-200 
-                  hover:shadow-magenta hover:-translate-y-0.5"
+                className="h-11 rounded-[10px] bg-foreground text-background hover:bg-accent font-medium px-5"
               >
-                <Link to="/signup">GET STARTED FREE</Link>
+                <Link to="/signup">
+                  Start free <ArrowRight className="w-4 h-4 ml-1.5" />
+                </Link>
               </Button>
               <Button
                 asChild
                 variant="outline"
-                className="bg-transparent border-2 border-white text-white font-poppins font-bold 
-                  text-base px-10 py-4 h-auto rounded-lg transition-all duration-200 
-                  hover:bg-white/10 hover:border-mc-yellow group"
+                className="h-11 rounded-[10px] border-foreground text-foreground hover:bg-secondary font-medium px-5"
               >
-                <a href="#demo" className="flex items-center gap-2">
-                  <Play className="w-4 h-4 group-hover:text-mc-yellow transition-colors" />
-                  WATCH DEMO
-                </a>
+                <a href="#workflow">See it in action</a>
               </Button>
             </div>
 
-            {/* Trust Badge */}
-            <div className="flex items-center justify-center lg:justify-start gap-3">
-              <div className="flex -space-x-2">
-                {["from-pink-500 to-rose-500", "from-blue-500 to-cyan-500", "from-purple-500 to-violet-500", "from-amber-500 to-orange-500"].map((gradient, i) => (
-                  <div key={i} className={`w-8 h-8 rounded-full bg-gradient-to-br ${gradient} border-2 border-mc-black`} />
-                ))}
-              </div>
-              <span className="font-inter text-sm text-white/70">500+ brands trust Conveero</span>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+              <span className="inline-flex items-center gap-2"><Check className="w-4 h-4 text-accent" /> Instagram DM &amp; WhatsApp</span>
+              <span className="inline-flex items-center gap-2"><Check className="w-4 h-4 text-accent" /> Human handoff</span>
+              <span className="inline-flex items-center gap-2"><Check className="w-4 h-4 text-accent" /> Works with your CRM</span>
             </div>
           </div>
 
-          {/* Right Column - Mockup */}
-          <div className="animate-slide-in-right relative">
-            <div className="relative w-full max-w-[500px] mx-auto lg:ml-auto">
-              {/* Phone Mockup */}
-              <div className="bg-mc-dark-gray rounded-[24px] p-4 shadow-hero">
-                <div className="bg-white rounded-[16px] overflow-hidden">
-                  {/* Instagram Header */}
-                  <div className="bg-white border-b border-gray-100 px-4 py-3 flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-mc-magenta" />
-                    <span className="font-inter font-semibold text-sm text-mc-black">Instagram DMs</span>
+          {/* Product frame — illustrative */}
+          <div className="animate-slide-in-right">
+            <div className="relative">
+              <div className="absolute -top-3 left-4 text-[10px] uppercase tracking-[0.16em] text-muted-foreground/80 bg-background px-2">
+                Illustrative product preview
+              </div>
+              <div className="rounded-2xl border border-border bg-card shadow-hero overflow-hidden">
+                {/* Frame header */}
+                <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-secondary/40">
+                  <div className="flex gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/25" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/25" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/25" />
                   </div>
-                  
-                  {/* Chat Messages */}
-                  <div className="p-4 space-y-4 min-h-[300px]">
-                    {/* Incoming Message */}
-                    <div className="flex gap-3">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex-shrink-0" />
-                      <div className="bg-gray-100 rounded-2xl rounded-bl-md px-4 py-2.5 max-w-[80%]">
-                        <p className="font-inter text-sm text-mc-black">Hey! How much is this product? 🤔</p>
+                  <div className="ml-3 text-xs text-muted-foreground">conveero.app / inbox</div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-[1.15fr_1fr]">
+                  {/* Conversation */}
+                  <div className="p-5 border-b md:border-b-0 md:border-r border-border">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-xs font-medium text-foreground">MA</div>
+                        <div>
+                          <div className="text-sm font-medium text-foreground">Maya A.</div>
+                          <div className="text-[11px] text-muted-foreground flex items-center gap-1">
+                            <Instagram className="w-3 h-3" /> Instagram DM
+                          </div>
+                        </div>
                       </div>
+                      <span className="text-[10px] uppercase tracking-wider text-accent bg-accent/10 px-2 py-1 rounded">New lead</span>
                     </div>
 
-                    {/* Outgoing Message (AI) */}
-                    <div className="flex justify-end">
-                      <div className="bg-mc-yellow rounded-2xl rounded-br-md px-4 py-2.5 max-w-[80%]">
-                        <p className="font-inter text-sm text-mc-black">
-                          Hi! 👋 Great choice! This item is $49.99. Would you like me to send you the checkout link?
-                        </p>
+                    <div className="space-y-2.5">
+                      <div className="message-bubble-received">Hey, do you take clients based in Berlin? Looking for a Q3 launch.</div>
+                      <div className="message-bubble-sent">Yes — we do. Quick check so I can route you to the right person: what's your team size and target launch date?</div>
+                      <div className="message-bubble-received">Team of 12. Ideally launching mid-August.</div>
+                      <div className="flex items-center gap-2 pt-1">
+                        <span className="status-online" />
+                        <span className="text-[11px] text-muted-foreground">Conveero drafting reply…</span>
                       </div>
                     </div>
+                  </div>
 
-                    {/* Incoming Message */}
-                    <div className="flex gap-3">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex-shrink-0" />
-                      <div className="bg-gray-100 rounded-2xl rounded-bl-md px-4 py-2.5 max-w-[80%]">
-                        <p className="font-inter text-sm text-mc-black">Yes please! 💸</p>
-                      </div>
+                  {/* Qualification panel */}
+                  <div className="p-5 bg-secondary/30">
+                    <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground mb-3">Lead qualification</div>
+                    <div className="space-y-3 text-sm">
+                      <Row label="Intent" value="Enquiry — high" tone="accent" />
+                      <Row label="Team size" value="12" />
+                      <Row label="Timeline" value="Aug 2026" />
+                      <Row label="Region" value="Berlin, DE" />
+                      <Row label="Channel" value="Instagram" />
                     </div>
-
-                    {/* Outgoing Message (AI) */}
-                    <div className="flex justify-end">
-                      <div className="bg-mc-yellow rounded-2xl rounded-br-md px-4 py-2.5 max-w-[80%]">
-                        <p className="font-inter text-sm text-mc-black">
-                          Perfect! Here's your checkout link: shop.link/abc123 ✨
-                        </p>
+                    <div className="mt-5 pt-4 border-t border-border">
+                      <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground mb-2">Assigned</div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 rounded-full bg-foreground text-background text-[10px] flex items-center justify-center">LR</div>
+                          <span className="text-sm text-foreground">Lena R. · EMEA</span>
+                        </div>
+                        <span className="text-[10px] text-accent">Auto-routed</span>
                       </div>
-                    </div>
-
-                    {/* AI Badge */}
-                    <div className="flex justify-center mt-4">
-                      <span className="bg-mc-magenta/10 text-mc-magenta font-inter text-xs font-medium px-3 py-1.5 rounded-full">
-                        ⚡ Powered by Conveero
-                      </span>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Floating Stats */}
-              <div className="absolute -left-4 top-1/4 bg-white rounded-lg p-3 shadow-lg animate-fade-in hidden lg:block">
-                <div className="flex items-center gap-2">
-                  <span className="text-mc-green text-lg">📈</span>
-                  <div>
-                    <p className="font-poppins font-bold text-mc-black text-sm">4x</p>
-                    <p className="font-inter text-xs text-mc-gray">Conversion</p>
+                {/* Footer strip */}
+                <div className="flex items-center justify-between px-4 py-3 border-t border-border text-[11px] text-muted-foreground bg-card">
+                  <div className="flex items-center gap-3">
+                    <span className="inline-flex items-center gap-1.5"><Instagram className="w-3.5 h-3.5" /> Instagram</span>
+                    <span className="inline-flex items-center gap-1.5"><MessageCircle className="w-3.5 h-3.5" /> WhatsApp</span>
                   </div>
-                </div>
-              </div>
-
-              <div className="absolute -right-4 bottom-1/4 bg-white rounded-lg p-3 shadow-lg animate-fade-in hidden lg:block" style={{ animationDelay: '200ms' }}>
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">⚡</span>
-                  <div>
-                    <p className="font-poppins font-bold text-mc-black text-sm">&lt;2s</p>
-                    <p className="font-inter text-xs text-mc-gray">Response</p>
-                  </div>
+                  <span>Response time · under 1 min</span>
                 </div>
               </div>
             </div>
@@ -143,5 +131,14 @@ const HeroSection = () => {
     </section>
   );
 };
+
+function Row({ label, value, tone }: { label: string; value: string; tone?: "accent" }) {
+  return (
+    <div className="flex items-center justify-between">
+      <span className="text-muted-foreground">{label}</span>
+      <span className={tone === "accent" ? "text-accent font-medium" : "text-foreground"}>{value}</span>
+    </div>
+  );
+}
 
 export default HeroSection;
