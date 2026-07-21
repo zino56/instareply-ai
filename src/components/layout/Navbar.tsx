@@ -97,8 +97,8 @@ export function Navbar() {
         <div className="hidden md:flex items-center gap-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="flex items-center gap-2 px-2">
-                <Avatar className="h-8 w-8">
+              <Button variant="ghost" className="flex items-center gap-2 px-2 h-10 focus-ring">
+                <Avatar className="h-8 w-8 ring-1 ring-border">
                   <AvatarFallback className="bg-secondary text-secondary-foreground text-sm font-medium">
                     {clientStatus ? getInitials(clientStatus.name || 'U') : 'U'}
                   </AvatarFallback>
@@ -106,7 +106,7 @@ export function Navbar() {
                 <span className="text-sm font-medium max-w-[120px] truncate">
                   {clientStatus?.name || 'User'}
                 </span>
-                <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                <ChevronDown className="w-4 h-4 text-muted-foreground" strokeWidth={1.75} />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
