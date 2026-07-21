@@ -57,12 +57,12 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="container flex h-16 items-center justify-between">
+    <header className="sticky top-0 z-50 w-full border-b border-border/70 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70 shadow-[var(--shadow-sm)]">
+      <nav className="container flex h-[68px] items-center justify-between">
         {/* Logo */}
-        <Link to="/dashboard" className="flex items-center gap-2 group">
-          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary text-primary-foreground">
-            <Sparkles className="w-5 h-5" />
+        <Link to="/dashboard" className="flex items-center gap-2.5 group focus-ring rounded-lg">
+          <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-primary text-primary-foreground shadow-[var(--shadow-sm)]">
+            <Sparkles className="w-[18px] h-[18px]" strokeWidth={2} />
           </div>
           <span className="text-xl font-bold tracking-tight group-hover:text-primary transition-colors">
             Conveero
@@ -70,7 +70,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden md:flex items-center gap-0.5">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.href;
             const Icon = link.icon;
@@ -79,13 +79,13 @@ export function Navbar() {
                 key={link.href}
                 to={link.href}
                 className={cn(
-                  'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 focus-ring',
+                  'flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200 focus-ring',
                   isActive
-                    ? 'bg-primary text-primary-foreground shadow-[var(--shadow-sm)]'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                    ? 'bg-foreground/[0.06] text-foreground ring-1 ring-inset ring-border'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
                 )}
               >
-                <Icon className="w-4 h-4" />
+                <Icon className="w-4 h-4" strokeWidth={1.75} />
                 {link.label}
               </Link>
 
@@ -97,8 +97,8 @@ export function Navbar() {
         <div className="hidden md:flex items-center gap-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="flex items-center gap-2 px-2">
-                <Avatar className="h-8 w-8">
+              <Button variant="ghost" className="flex items-center gap-2 px-2 h-10 focus-ring">
+                <Avatar className="h-8 w-8 ring-1 ring-border">
                   <AvatarFallback className="bg-secondary text-secondary-foreground text-sm font-medium">
                     {clientStatus ? getInitials(clientStatus.name || 'U') : 'U'}
                   </AvatarFallback>
@@ -106,7 +106,7 @@ export function Navbar() {
                 <span className="text-sm font-medium max-w-[120px] truncate">
                   {clientStatus?.name || 'User'}
                 </span>
-                <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                <ChevronDown className="w-4 h-4 text-muted-foreground" strokeWidth={1.75} />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">

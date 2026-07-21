@@ -79,43 +79,43 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="container py-8 max-w-7xl">
-      <motion.div variants={container} initial="hidden" animate="show" className="space-y-8">
+    <div className="container py-8 md:py-10 max-w-7xl">
+      <motion.div variants={container} initial="hidden" animate="show" className="space-y-6 md:space-y-8">
         {/* Welcome Header */}
         <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">
+            <h1 className="text-[28px] md:text-[32px] font-bold tracking-[-0.02em] leading-tight">
               Hi, {clientStatus?.name || 'there'} 👋
             </h1>
-            <p className="text-muted-foreground mt-1">
+            <p className="text-muted-foreground mt-1.5 text-[15px]">
               Here's what's happening with your Instagram automation
             </p>
           </div>
           <div className="flex gap-3">
-            <Button variant="outline" asChild><Link to="/settings"><Settings className="w-4 h-4 mr-2" />Settings</Link></Button>
-            <Button asChild><Link to="/conversations"><MessageSquare className="w-4 h-4 mr-2" />View Messages</Link></Button>
+            <Button variant="outline" asChild><Link to="/settings"><Settings className="w-4 h-4 mr-2" strokeWidth={1.75} />Settings</Link></Button>
+            <Button asChild><Link to="/conversations"><MessageSquare className="w-4 h-4 mr-2" strokeWidth={1.75} />View Messages</Link></Button>
           </div>
         </motion.div>
 
         {/* Instagram Connection Status */}
         <motion.div variants={item}>
-          <Card className={cn('border-2 transition-all', isConnected ? 'border-success/30 bg-success/5' : 'border-warning/30 bg-warning/5')}>
-            <CardContent className="p-6">
+          <Card className={cn('rounded-2xl border shadow-[var(--shadow-sm)] transition-all', isConnected ? 'border-success/20 bg-success/[0.04]' : 'border-warning/25 bg-warning/[0.04]')}>
+            <CardContent className="p-5 md:p-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
-                  <div className={cn('w-14 h-14 rounded-xl flex items-center justify-center', isConnected ? 'bg-success/20' : 'bg-warning/20')}>
-                    <Instagram className={cn('w-7 h-7', isConnected ? 'text-success' : 'text-warning')} />
+                  <div className={cn('w-12 h-12 rounded-2xl flex items-center justify-center shrink-0', isConnected ? 'bg-success/15' : 'bg-warning/15')}>
+                    <Instagram className={cn('w-6 h-6', isConnected ? 'text-success' : 'text-warning')} strokeWidth={1.75} />
                   </div>
                   <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-semibold text-lg">{isConnected ? clientStatus?.instagram_page_name : 'No Page Connected'}</h3>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="font-semibold text-[17px] leading-tight">{isConnected ? clientStatus?.instagram_page_name : 'No Page Connected'}</h3>
                       {isConnected ? (
-                        <Badge variant="secondary" className="bg-success/20 text-success border-0"><CheckCircle2 className="w-3 h-3 mr-1" />Connected</Badge>
+                        <Badge variant="secondary" className="bg-success/10 text-success border-0 font-medium"><CheckCircle2 className="w-3 h-3 mr-1" />Connected</Badge>
                       ) : (
-                        <Badge variant="secondary" className="bg-warning/20 text-warning border-0"><AlertCircle className="w-3 h-3 mr-1" />Disconnected</Badge>
+                        <Badge variant="secondary" className="bg-warning/10 text-warning border-0 font-medium"><AlertCircle className="w-3 h-3 mr-1" />Disconnected</Badge>
                       )}
                     </div>
-                    <p className="text-sm text-muted-foreground mt-0.5">
+                    <p className="text-sm text-muted-foreground mt-1">
                       {isConnected ? 'AI is actively replying to your Instagram DMs' : 'Connect your Instagram page to start automating DMs'}
                     </p>
                   </div>
@@ -129,18 +129,18 @@ export default function Dashboard() {
         </motion.div>
 
         {/* Stats Grid */}
-        <motion.div variants={item} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <motion.div variants={item} className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
           {statCards.map((stat) => (
-            <Card key={stat.label} className="hover-scale">
+            <Card key={stat.label} className="rounded-2xl border border-border shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:-translate-y-0.5 transition-all duration-300">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
-                  <div className={cn('p-2.5 rounded-lg', stat.bgColor)}>
-                    <stat.icon className={cn('w-5 h-5', stat.color)} />
+                  <div className={cn('p-3 rounded-xl', stat.bgColor)}>
+                    <stat.icon className={cn('w-5 h-5', stat.color)} strokeWidth={1.75} />
                   </div>
                 </div>
-                <div className="mt-4">
-                  <p className="stat-value">{stat.value}</p>
-                  <p className="stat-label">{stat.label}</p>
+                <div className="mt-5">
+                  <p className="text-[32px] font-bold text-foreground tabular-nums tracking-[-0.02em] leading-none">{stat.value}</p>
+                  <p className="text-sm text-muted-foreground font-medium mt-2">{stat.label}</p>
                 </div>
               </CardContent>
             </Card>
@@ -150,43 +150,43 @@ export default function Dashboard() {
         {/* Quick Actions & Recent Conversations */}
         <div className="grid lg:grid-cols-3 gap-6">
           <motion.div variants={item}>
-            <Card className="h-full">
-              <CardHeader><CardTitle className="text-lg">Quick Actions</CardTitle></CardHeader>
-              <CardContent className="space-y-3">
-                <Button variant="outline" className="w-full justify-start" asChild><Link to="/conversations"><MessageSquare className="w-4 h-4 mr-3" />View All Conversations<ArrowRight className="w-4 h-4 ml-auto" /></Link></Button>
-                <Button variant="outline" className="w-full justify-start" asChild><Link to="/products"><Package className="w-4 h-4 mr-3" />Manage Products<ArrowRight className="w-4 h-4 ml-auto" /></Link></Button>
-                <Button variant="outline" className="w-full justify-start" asChild><Link to="/settings"><Settings className="w-4 h-4 mr-3" />Settings<ArrowRight className="w-4 h-4 ml-auto" /></Link></Button>
-                <Button variant="outline" className="w-full justify-start" asChild><Link to="/analytics"><BarChart3 className="w-4 h-4 mr-3" />View Analytics<ArrowRight className="w-4 h-4 ml-auto" /></Link></Button>
+            <Card className="h-full rounded-2xl border border-border shadow-[var(--shadow-sm)]">
+              <CardHeader className="pb-4"><CardTitle className="text-[15px] font-semibold">Quick Actions</CardTitle></CardHeader>
+              <CardContent className="space-y-2.5">
+                <Button variant="outline" className="w-full justify-start h-11 group hover:bg-muted/60" asChild><Link to="/conversations"><MessageSquare className="w-4 h-4 mr-3" strokeWidth={1.75} />View All Conversations<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
+                <Button variant="outline" className="w-full justify-start h-11 group hover:bg-muted/60" asChild><Link to="/products"><Package className="w-4 h-4 mr-3" strokeWidth={1.75} />Manage Products<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
+                <Button variant="outline" className="w-full justify-start h-11 group hover:bg-muted/60" asChild><Link to="/settings"><Settings className="w-4 h-4 mr-3" strokeWidth={1.75} />Settings<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
+                <Button variant="outline" className="w-full justify-start h-11 group hover:bg-muted/60" asChild><Link to="/analytics"><BarChart3 className="w-4 h-4 mr-3" strokeWidth={1.75} />View Analytics<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
               </CardContent>
             </Card>
           </motion.div>
 
           <motion.div variants={item} className="lg:col-span-2">
-            <Card className="h-full">
-              <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle className="text-lg">Recent Conversations</CardTitle>
-                <Button variant="ghost" size="sm" asChild><Link to="/conversations">View All<ArrowRight className="w-4 h-4 ml-1" /></Link></Button>
+            <Card className="h-full rounded-2xl border border-border shadow-[var(--shadow-sm)]">
+              <CardHeader className="flex flex-row items-center justify-between pb-4">
+                <CardTitle className="text-[15px] font-semibold">Recent Conversations</CardTitle>
+                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground -mr-2" asChild><Link to="/conversations">View All<ArrowRight className="w-4 h-4 ml-1" strokeWidth={1.75} /></Link></Button>
               </CardHeader>
               <CardContent>
                 {recentConversations.length === 0 ? (
-                  <p className="text-muted-foreground text-center py-8">No conversations yet. Connect your Instagram to get started!</p>
+                  <p className="text-muted-foreground text-center py-10 text-sm">No conversations yet. Connect your Instagram to get started!</p>
                 ) : (
-                  <div className="space-y-1">
+                  <div className="space-y-0.5">
                     {recentConversations.map((conversation) => (
-                      <Link key={conversation.id} to={`/conversations?id=${conversation.id}`} className="flex items-center gap-4 p-3 rounded-lg hover:bg-muted/50 transition-colors group">
-                        <Avatar className="h-10 w-10">
+                      <Link key={conversation.id} to={`/conversations?id=${conversation.id}`} className="flex items-center gap-4 px-3 py-3.5 rounded-xl hover:bg-muted/60 transition-colors group">
+                        <Avatar className="h-10 w-10 ring-1 ring-border">
                           <AvatarFallback className="bg-secondary text-secondary-foreground text-sm font-medium">{conversation.sender_name?.charAt(0) || '?'}</AvatarFallback>
                         </Avatar>
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between">
+                          <div className="flex items-center justify-between gap-3">
                             <p className="font-medium text-sm truncate">{conversation.sender_name}</p>
                             {conversation.last_interaction_at && (
-                              <span className="text-xs text-muted-foreground">{formatDistanceToNow(new Date(conversation.last_interaction_at), { addSuffix: true })}</span>
+                              <span className="text-[11px] text-muted-foreground tabular-nums shrink-0">{formatDistanceToNow(new Date(conversation.last_interaction_at), { addSuffix: true })}</span>
                             )}
                           </div>
-                          <p className="text-sm text-muted-foreground truncate">{conversation.last_message}</p>
+                          <p className="text-[13px] text-muted-foreground truncate mt-0.5">{conversation.last_message}</p>
                         </div>
-                        {(conversation.unread_count || 0) > 0 && <Badge className="badge-unread">{conversation.unread_count}</Badge>}
+                        {(conversation.unread_count || 0) > 0 && <Badge className="bg-primary text-primary-foreground min-w-[22px] h-[22px] px-1.5 flex items-center justify-center text-[11px] font-semibold rounded-full">{conversation.unread_count}</Badge>}
                       </Link>
                     ))}
                   </div>
