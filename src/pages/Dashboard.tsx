@@ -148,12 +148,21 @@ export default function Dashboard() {
                 </CardContent>
               </Card>
             ))}
-            <Card className="rounded-2xl border border-dashed border-border/70 bg-transparent hover:border-border hover:bg-muted/40 transition-all sm:col-span-2 xl:col-span-2 flex items-center justify-center">
-              <CardContent className="p-5 flex items-center gap-3 text-muted-foreground">
-                <div className="p-2 rounded-lg bg-muted"><Bot className="w-4 h-4" strokeWidth={1.75} /></div>
-                <p className="text-[13px]">More insights coming soon — response rate, resolution time, and AI accuracy.</p>
+            <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-muted/30 sm:col-span-2 xl:col-span-2">
+              <CardContent className="p-5 flex items-start gap-3 h-full">
+                <div className="p-2 rounded-lg bg-background border border-border/60 shrink-0">
+                  <Bot className="w-4 h-4 text-muted-foreground" strokeWidth={1.75} />
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <p className="text-[13px] font-medium text-foreground">More insights</p>
+                    <Badge variant="secondary" className="h-5 bg-background text-muted-foreground border border-border/60 font-medium text-[10px] uppercase tracking-wider">Soon</Badge>
+                  </div>
+                  <p className="mt-1 text-[12.5px] text-muted-foreground leading-relaxed">Response rate, resolution time, and AI accuracy will appear here as your conversation history grows.</p>
+                </div>
               </CardContent>
             </Card>
+
           </div>
         </motion.div>
 
