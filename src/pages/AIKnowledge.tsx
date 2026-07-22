@@ -192,7 +192,7 @@ export default function AIKnowledge() {
 
         {/* Upload Area */}
         <motion.div variants={item}>
-          <Card>
+          <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-card">
             <CardContent className="p-6">
               <div
                 onDragOver={handleDragOver}
