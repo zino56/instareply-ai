@@ -4,12 +4,19 @@ import { isAuthenticated } from '@/lib/api';
 
 /* DEV BYPASS — REMOVE BEFORE PRODUCTION
  * Allows entering the dashboard without a real token when running in
- * Lovable preview / local dev (import.meta.env.DEV === true) AND the
+ * local Vite dev, Lovable preview, or when ?dev=1 is in the URL AND the
  * localStorage flag "conveero_dev_bypass" is set (toggled from Login page).
- * Has zero effect in production builds. */
+ * Has zero effect on real production domains. */
+function isDevOrPreview(): boolean {
+  if (import.meta.env.DEV) return true;
+  if (typeof window === 'undefined') return false;
+  if (window.location.hostname.includes('lovable.app')) return true;
+  return new URLSearchParams(window.location.search).get('dev') === '1';
+}
+
 function hasDevBypass(): boolean {
   return (
-    import.meta.env.DEV &&
+    isDevOrPreview() &&
     typeof window !== 'undefined' &&
     window.localStorage.getItem('conveero_dev_bypass') === '1'
   );
