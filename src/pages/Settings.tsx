@@ -70,21 +70,22 @@ export default function Settings() {
   const hours = Array.from({ length: 24 }, (_, i) => ({ value: i.toString(), label: `${i.toString().padStart(2, '0')}:00` }));
 
   return (
-    <div className="container py-8 max-w-4xl">
-      <motion.div variants={container} initial="hidden" animate="show" className="space-y-6">
+    <div className="px-4 sm:px-6 lg:px-8 py-6 md:py-8 max-w-5xl mx-auto w-full">
+      <motion.div variants={container} initial="hidden" animate="show" className="space-y-6 md:space-y-8">
         <motion.div variants={item}>
-          <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
-          <p className="text-muted-foreground mt-1">Manage your account and automation preferences</p>
+          <h1 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.02em] leading-tight text-foreground">Settings</h1>
+          <p className="text-muted-foreground mt-1.5 text-[14px]">Manage your account and automation preferences.</p>
         </motion.div>
 
         <motion.div variants={item}>
           <Tabs defaultValue={defaultTab} className="space-y-6">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="auto-reply" className="gap-2"><Bot className="w-4 h-4 hidden sm:block" />Auto-Reply</TabsTrigger>
-              <TabsTrigger value="instagram" className="gap-2"><Instagram className="w-4 h-4 hidden sm:block" />Instagram</TabsTrigger>
-              <TabsTrigger value="personality" className="gap-2"><Sparkles className="w-4 h-4 hidden sm:block" />AI Personality</TabsTrigger>
-              <TabsTrigger value="account" className="gap-2"><User className="w-4 h-4 hidden sm:block" />Account</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4 h-10 bg-muted/60 p-1 rounded-xl">
+              <TabsTrigger value="auto-reply" className="gap-2 text-[13px] rounded-lg data-[state=active]:bg-card data-[state=active]:shadow-[var(--shadow-sm)]"><Bot className="w-4 h-4 hidden sm:block" strokeWidth={1.75} />Auto-Reply</TabsTrigger>
+              <TabsTrigger value="instagram" className="gap-2 text-[13px] rounded-lg data-[state=active]:bg-card data-[state=active]:shadow-[var(--shadow-sm)]"><Instagram className="w-4 h-4 hidden sm:block" strokeWidth={1.75} />Instagram</TabsTrigger>
+              <TabsTrigger value="personality" className="gap-2 text-[13px] rounded-lg data-[state=active]:bg-card data-[state=active]:shadow-[var(--shadow-sm)]"><Sparkles className="w-4 h-4 hidden sm:block" strokeWidth={1.75} />AI Personality</TabsTrigger>
+              <TabsTrigger value="account" className="gap-2 text-[13px] rounded-lg data-[state=active]:bg-card data-[state=active]:shadow-[var(--shadow-sm)]"><User className="w-4 h-4 hidden sm:block" strokeWidth={1.75} />Account</TabsTrigger>
             </TabsList>
+
 
             {/* Auto-Reply Tab */}
             <TabsContent value="auto-reply" className="space-y-6">

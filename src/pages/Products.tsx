@@ -121,67 +121,88 @@ export default function Products() {
   }
 
   return (
-    <div className="container py-8 max-w-7xl">
-      <motion.div variants={container} initial="hidden" animate="show" className="space-y-6">
+    <div className="px-4 sm:px-6 lg:px-8 py-6 md:py-8 max-w-[1400px] mx-auto w-full">
+      <motion.div variants={container} initial="hidden" animate="show" className="space-y-6 md:space-y-8">
         {/* Header */}
-        <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Products</h1>
-            <p className="text-muted-foreground mt-1">Manage your product catalog for AI responses</p>
+            <h1 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.02em] leading-tight text-foreground">Products</h1>
+            <p className="text-muted-foreground mt-1.5 text-[14px]">Manage your product catalog for AI-powered responses.</p>
           </div>
-          <Button onClick={() => setIsUploadOpen(true)}><Plus className="w-4 h-4 mr-2" />Add Products</Button>
+          <Button size="sm" className="h-9 gap-2" onClick={() => setIsUploadOpen(true)}><Plus className="w-4 h-4" strokeWidth={1.75} />Add Products</Button>
         </motion.div>
 
         {/* Stats */}
-        <motion.div variants={item} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <Card><CardContent className="p-6"><div className="flex items-center gap-4"><div className="p-3 rounded-lg bg-primary/10"><Package className="w-5 h-5 text-primary" /></div><div><p className="stat-value">{products.length}</p><p className="stat-label">Total Products</p></div></div></CardContent></Card>
-          <Card><CardContent className="p-6"><div className="flex items-center gap-4"><div className="p-3 rounded-lg bg-success/10"><ShoppingBag className="w-5 h-5 text-success" /></div><div><p className="stat-value">{activeProducts}</p><p className="stat-label">Active Products</p></div></div></CardContent></Card>
-          <Card><CardContent className="p-6"><div className="flex items-center gap-4"><div className="p-3 rounded-lg bg-info/10"><span className="text-info text-lg font-bold">$</span></div><div><p className="stat-value">${totalValue.toFixed(2)}</p><p className="stat-label">Total Catalog Value</p></div></div></CardContent></Card>
+        <motion.div variants={item} className="space-y-3">
+          <h2 className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">Overview</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:border-border transition-all duration-300 bg-card">
+              <CardContent className="p-5">
+                <div className="flex items-start justify-between"><p className="text-[13px] text-muted-foreground font-medium">Total Products</p><div className="p-2 rounded-lg bg-primary/10"><Package className="w-4 h-4 text-primary" strokeWidth={1.75} /></div></div>
+                <p className="mt-4 text-[28px] font-semibold text-foreground tabular-nums tracking-[-0.02em] leading-none">{products.length}</p>
+              </CardContent>
+            </Card>
+            <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:border-border transition-all duration-300 bg-card">
+              <CardContent className="p-5">
+                <div className="flex items-start justify-between"><p className="text-[13px] text-muted-foreground font-medium">Active Products</p><div className="p-2 rounded-lg bg-success/10"><ShoppingBag className="w-4 h-4 text-success" strokeWidth={1.75} /></div></div>
+                <p className="mt-4 text-[28px] font-semibold text-foreground tabular-nums tracking-[-0.02em] leading-none">{activeProducts}</p>
+              </CardContent>
+            </Card>
+            <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:border-border transition-all duration-300 bg-card">
+              <CardContent className="p-5">
+                <div className="flex items-start justify-between"><p className="text-[13px] text-muted-foreground font-medium">Catalog Value</p><div className="p-2 rounded-lg bg-info/10"><span className="text-info text-[13px] font-semibold w-4 h-4 flex items-center justify-center">$</span></div></div>
+                <p className="mt-4 text-[28px] font-semibold text-foreground tabular-nums tracking-[-0.02em] leading-none">${totalValue.toFixed(2)}</p>
+              </CardContent>
+            </Card>
+          </div>
         </motion.div>
 
         {/* Search */}
         <motion.div variants={item} className="relative max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <Input placeholder="Search products..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" strokeWidth={1.75} />
+          <Input placeholder="Search products..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9 h-9 text-[13px]" />
         </motion.div>
+
 
         {/* Products Grid */}
         <motion.div variants={item} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+
           {filteredProducts.map((product) => (
-            <Card key={product.id} className="overflow-hidden hover-scale group">
+            <Card key={product.id} className="overflow-hidden rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:border-border transition-all duration-300 group bg-card">
               <div className="aspect-square relative overflow-hidden bg-muted">
                 {product.image_url ? (
-                  <img src={product.image_url} alt={product.title} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
+                  <img src={product.image_url} alt={product.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center"><Package className="w-12 h-12 text-muted-foreground/50" /></div>
+                  <div className="w-full h-full flex items-center justify-center"><Package className="w-10 h-10 text-muted-foreground/40" strokeWidth={1.5} /></div>
                 )}
                 <div className="absolute top-2 right-2">
                   <DropdownMenu>
-                    <DropdownMenuTrigger asChild><Button variant="secondary" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"><MoreVertical className="w-4 h-4" /></Button></DropdownMenuTrigger>
+                    <DropdownMenuTrigger asChild><Button variant="secondary" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity shadow-[var(--shadow-sm)]"><MoreVertical className="w-4 h-4" strokeWidth={1.75} /></Button></DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem onClick={() => handleEditProduct(product)}><Edit2 className="w-4 h-4 mr-2" />Edit</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handleDeleteProduct(product)} className="text-destructive focus:text-destructive"><Trash2 className="w-4 h-4 mr-2" />Delete</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleEditProduct(product)}><Edit2 className="w-4 h-4 mr-2" strokeWidth={1.75} />Edit</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleDeleteProduct(product)} className="text-destructive focus:text-destructive"><Trash2 className="w-4 h-4 mr-2" strokeWidth={1.75} />Delete</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
-                {!product.is_active && <div className="absolute inset-0 bg-background/60 flex items-center justify-center"><Badge variant="secondary">Inactive</Badge></div>}
+                {!product.is_active && <div className="absolute inset-0 bg-background/60 flex items-center justify-center"><Badge variant="secondary" className="bg-background text-muted-foreground border border-border">Inactive</Badge></div>}
               </div>
               <CardContent className="p-4">
                 <div className="flex items-start justify-between gap-2 mb-2">
-                  <div>
-                    <h3 className="font-semibold text-sm line-clamp-1">{product.title}</h3>
-                    {product.category && <Badge variant="outline" className="text-xs mt-1">{product.category}</Badge>}
+                  <div className="min-w-0">
+                    <h3 className="font-semibold text-[13px] line-clamp-1 text-foreground">{product.title}</h3>
+                    {product.category && <Badge variant="outline" className="text-[10px] mt-1.5 font-medium border-border/70 text-muted-foreground uppercase tracking-wider">{product.category}</Badge>}
                   </div>
-                  <p className="font-bold text-primary">${(product.price || 0).toFixed(2)}</p>
+                  <p className="font-semibold text-[14px] text-foreground tabular-nums shrink-0">${(product.price || 0).toFixed(2)}</p>
                 </div>
-                <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{product.description}</p>
-                <div className="flex items-center justify-between">
-                  <Label htmlFor={`active-${product.id}`} className="text-xs text-muted-foreground">Active</Label>
+                <p className="text-[12px] text-muted-foreground line-clamp-2 mb-3 leading-relaxed">{product.description}</p>
+                <div className="flex items-center justify-between pt-3 border-t border-border/60">
+                  <Label htmlFor={`active-${product.id}`} className="text-[12px] text-muted-foreground font-medium">Active</Label>
                   <Switch id={`active-${product.id}`} checked={product.is_active} onCheckedChange={() => handleToggleActive(product.id)} />
                 </div>
               </CardContent>
             </Card>
           ))}
+
         </motion.div>
 
         {filteredProducts.length === 0 && (

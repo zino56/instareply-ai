@@ -174,29 +174,25 @@ export default function AIKnowledge() {
   const allReady = documents.length > 0 && readyDocuments === documents.length;
 
   return (
-    <div className="container py-8 max-w-4xl">
+    <div className="px-4 sm:px-6 lg:px-8 py-6 md:py-8 max-w-4xl mx-auto w-full">
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
-        className="space-y-6"
+        className="space-y-6 md:space-y-8"
       >
         {/* Header */}
-        <motion.div variants={item} className="text-center space-y-2">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
-            <BookOpen className="w-8 h-8 text-primary" />
-          </div>
-          <h1 className="text-3xl font-bold tracking-tight">
-            📚 Teach Your AI About Your Business
-          </h1>
-          <p className="text-muted-foreground max-w-lg mx-auto">
+        <motion.div variants={item}>
+          <h1 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.02em] leading-tight text-foreground">AI Knowledge Base</h1>
+          <p className="text-muted-foreground mt-1.5 text-[14px] max-w-2xl">
             Upload your business documents so the AI can provide accurate, personalized responses to your customers.
           </p>
         </motion.div>
 
+
         {/* Upload Area */}
         <motion.div variants={item}>
-          <Card>
+          <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-card">
             <CardContent className="p-6">
               <div
                 onDragOver={handleDragOver}
@@ -257,28 +253,24 @@ export default function AIKnowledge() {
 
         {/* What to Upload */}
         <motion.div variants={item}>
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2">
-                💡 What to upload
-              </CardTitle>
-              <CardDescription>
-                These documents help your AI provide accurate answers
-              </CardDescription>
+          <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-card">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-[14px] font-semibold text-foreground">Recommended documents</CardTitle>
+              <CardDescription className="text-[13px]">These documents help your AI provide accurate answers.</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {suggestedDocuments.map((doc) => (
                   <div
                     key={doc.label}
-                    className="flex items-start gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
+                    className="flex items-start gap-3 p-3 rounded-xl border border-border/60 bg-background hover:border-border hover:bg-muted/40 transition-colors"
                   >
-                    <div className="p-2 rounded-md bg-background">
-                      <doc.icon className="w-4 h-4 text-primary" />
+                    <div className="p-2 rounded-md bg-primary/10 shrink-0">
+                      <doc.icon className="w-4 h-4 text-primary" strokeWidth={1.75} />
                     </div>
-                    <div>
-                      <p className="text-sm font-medium">{doc.label}</p>
-                      <p className="text-xs text-muted-foreground">{doc.description}</p>
+                    <div className="min-w-0">
+                      <p className="text-[13px] font-medium text-foreground">{doc.label}</p>
+                      <p className="text-[11.5px] text-muted-foreground mt-0.5">{doc.description}</p>
                     </div>
                   </div>
                 ))}
@@ -289,25 +281,24 @@ export default function AIKnowledge() {
 
         {/* Uploaded Documents */}
         <motion.div variants={item}>
-          <Card>
-            <CardHeader>
+          <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-card">
+            <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    ✅ Your Documents
-                  </CardTitle>
-                  <CardDescription>
+                  <CardTitle className="text-[14px] font-semibold text-foreground">Your documents</CardTitle>
+                  <CardDescription className="text-[13px]">
                     {documents.length} document{documents.length !== 1 ? 's' : ''} uploaded
                   </CardDescription>
                 </div>
                 {allReady && (
-                  <Badge className="bg-primary/10 text-primary border-primary/20">
+                  <Badge className="bg-success/10 text-success border-0 h-5 font-medium">
                     <CheckCircle2 className="w-3 h-3 mr-1" />
                     All Ready
                   </Badge>
                 )}
               </div>
             </CardHeader>
+
             <CardContent>
               {documents.length === 0 ? (
                 <div className="text-center py-8 text-muted-foreground">
@@ -370,21 +361,23 @@ export default function AIKnowledge() {
         {documents.length > 0 && (
           <motion.div variants={item}>
             <Card className={cn(
-              'border-2',
-              allReady ? 'border-primary/30 bg-primary/5' : 'border-warning/30 bg-warning/5'
+              'rounded-2xl border shadow-[var(--shadow-sm)] bg-card',
+              allReady ? 'border-success/25' : 'border-warning/30'
             )}>
-              <CardContent className="p-6">
+              <CardContent className="p-5 md:p-6">
                 <div className="flex items-center gap-4">
-                  {allReady ? (
-                    <CheckCircle2 className="w-8 h-8 text-primary" />
-                  ) : (
-                    <AlertCircle className="w-8 h-8 text-warning" />
-                  )}
+                  <div className={cn('w-11 h-11 rounded-xl flex items-center justify-center shrink-0', allReady ? 'bg-success/12' : 'bg-warning/12')}>
+                    {allReady ? (
+                      <CheckCircle2 className="w-5 h-5 text-success" strokeWidth={1.75} />
+                    ) : (
+                      <AlertCircle className="w-5 h-5 text-warning" strokeWidth={1.75} />
+                    )}
+                  </div>
                   <div>
-                    <p className="font-semibold">
-                      {allReady ? 'Status: Ready! ✅' : 'Status: Processing...'}
+                    <p className="font-semibold text-[15px] text-foreground">
+                      {allReady ? 'Knowledge base is ready' : 'Processing documents…'}
                     </p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-[13px] text-muted-foreground mt-0.5">
                       {allReady
                         ? 'Your AI is using these documents to answer customer questions.'
                         : 'Some documents are still being processed. Please wait.'}
@@ -397,14 +390,17 @@ export default function AIKnowledge() {
         )}
 
         {/* Actions */}
-        <motion.div variants={item} className="flex justify-center gap-4">
-          <Button variant="outline" size="lg" onClick={() => document.querySelector<HTMLInputElement>('input[type="file"]')?.click()}>
-            ➕ Add More
+        <motion.div variants={item} className="flex flex-wrap gap-3">
+          <Button variant="outline" size="sm" className="h-9 gap-2" onClick={() => document.querySelector<HTMLInputElement>('input[type="file"]')?.click()}>
+            <Upload className="w-4 h-4" strokeWidth={1.75} />
+            Add more
           </Button>
-          <Button size="lg" disabled={!allReady || documents.length === 0}>
-            ✅ Continue
+          <Button size="sm" className="h-9 gap-2" disabled={!allReady || documents.length === 0}>
+            <CheckCircle2 className="w-4 h-4" strokeWidth={1.75} />
+            Continue
           </Button>
         </motion.div>
+
       </motion.div>
 
       {/* Delete Confirmation */}

@@ -104,7 +104,7 @@ export default function Conversations() {
   }
 
   return (
-    <div className="h-[calc(100vh-4rem)] flex bg-background">
+    <div className="h-[calc(100vh-3.5rem)] flex bg-background">
       {/* Conversation List */}
       <AnimatePresence mode="wait">
         {showConversationList && (
@@ -115,12 +115,13 @@ export default function Conversations() {
             className={cn('border-r border-border bg-card flex flex-col', isMobileView ? 'w-full' : 'w-80 lg:w-96')}
           >
             <div className="p-4 border-b border-border">
-              <h2 className="text-xl font-semibold mb-4">Conversations</h2>
+              <h2 className="text-[15px] font-semibold mb-3 text-foreground">Conversations</h2>
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input placeholder="Search conversations..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" strokeWidth={1.75} />
+                <Input placeholder="Search conversations..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9 h-9 text-[13px]" />
               </div>
             </div>
+
             <ScrollArea className="flex-1">
               <div className="p-2">
                 {filteredConversations.length === 0 ? (
