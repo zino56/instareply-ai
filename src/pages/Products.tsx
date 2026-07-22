@@ -121,29 +121,48 @@ export default function Products() {
   }
 
   return (
-    <div className="container py-8 max-w-7xl">
-      <motion.div variants={container} initial="hidden" animate="show" className="space-y-6">
+    <div className="px-4 sm:px-6 lg:px-8 py-6 md:py-8 max-w-[1400px] mx-auto w-full">
+      <motion.div variants={container} initial="hidden" animate="show" className="space-y-6 md:space-y-8">
         {/* Header */}
-        <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Products</h1>
-            <p className="text-muted-foreground mt-1">Manage your product catalog for AI responses</p>
+            <h1 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.02em] leading-tight text-foreground">Products</h1>
+            <p className="text-muted-foreground mt-1.5 text-[14px]">Manage your product catalog for AI-powered responses.</p>
           </div>
-          <Button onClick={() => setIsUploadOpen(true)}><Plus className="w-4 h-4 mr-2" />Add Products</Button>
+          <Button size="sm" className="h-9 gap-2" onClick={() => setIsUploadOpen(true)}><Plus className="w-4 h-4" strokeWidth={1.75} />Add Products</Button>
         </motion.div>
 
         {/* Stats */}
-        <motion.div variants={item} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <Card><CardContent className="p-6"><div className="flex items-center gap-4"><div className="p-3 rounded-lg bg-primary/10"><Package className="w-5 h-5 text-primary" /></div><div><p className="stat-value">{products.length}</p><p className="stat-label">Total Products</p></div></div></CardContent></Card>
-          <Card><CardContent className="p-6"><div className="flex items-center gap-4"><div className="p-3 rounded-lg bg-success/10"><ShoppingBag className="w-5 h-5 text-success" /></div><div><p className="stat-value">{activeProducts}</p><p className="stat-label">Active Products</p></div></div></CardContent></Card>
-          <Card><CardContent className="p-6"><div className="flex items-center gap-4"><div className="p-3 rounded-lg bg-info/10"><span className="text-info text-lg font-bold">$</span></div><div><p className="stat-value">${totalValue.toFixed(2)}</p><p className="stat-label">Total Catalog Value</p></div></div></CardContent></Card>
+        <motion.div variants={item} className="space-y-3">
+          <h2 className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">Overview</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:border-border transition-all duration-300 bg-card">
+              <CardContent className="p-5">
+                <div className="flex items-start justify-between"><p className="text-[13px] text-muted-foreground font-medium">Total Products</p><div className="p-2 rounded-lg bg-primary/10"><Package className="w-4 h-4 text-primary" strokeWidth={1.75} /></div></div>
+                <p className="mt-4 text-[28px] font-semibold text-foreground tabular-nums tracking-[-0.02em] leading-none">{products.length}</p>
+              </CardContent>
+            </Card>
+            <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:border-border transition-all duration-300 bg-card">
+              <CardContent className="p-5">
+                <div className="flex items-start justify-between"><p className="text-[13px] text-muted-foreground font-medium">Active Products</p><div className="p-2 rounded-lg bg-success/10"><ShoppingBag className="w-4 h-4 text-success" strokeWidth={1.75} /></div></div>
+                <p className="mt-4 text-[28px] font-semibold text-foreground tabular-nums tracking-[-0.02em] leading-none">{activeProducts}</p>
+              </CardContent>
+            </Card>
+            <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:border-border transition-all duration-300 bg-card">
+              <CardContent className="p-5">
+                <div className="flex items-start justify-between"><p className="text-[13px] text-muted-foreground font-medium">Catalog Value</p><div className="p-2 rounded-lg bg-info/10"><span className="text-info text-[13px] font-semibold w-4 h-4 flex items-center justify-center">$</span></div></div>
+                <p className="mt-4 text-[28px] font-semibold text-foreground tabular-nums tracking-[-0.02em] leading-none">${totalValue.toFixed(2)}</p>
+              </CardContent>
+            </Card>
+          </div>
         </motion.div>
 
         {/* Search */}
         <motion.div variants={item} className="relative max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <Input placeholder="Search products..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" strokeWidth={1.75} />
+          <Input placeholder="Search products..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9 h-9 text-[13px]" />
         </motion.div>
+
 
         {/* Products Grid */}
         <motion.div variants={item} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
