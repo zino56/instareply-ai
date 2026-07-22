@@ -6,6 +6,16 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
+/* DEV BYPASS — REMOVE BEFORE PRODUCTION
+ * Detects local Vite dev, Lovable preview host, or explicit ?dev=1 URL flag. */
+function showDevBypass(): boolean {
+  if (import.meta.env.DEV) return true;
+  if (typeof window === 'undefined') return false;
+  if (window.location.hostname.includes('lovable.app')) return true;
+  return new URLSearchParams(window.location.search).get('dev') === '1';
+}
+/* END DEV BYPASS */
+
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -87,7 +97,7 @@ export default function Login() {
           </form>
 
           {/* DEV BYPASS — REMOVE BEFORE PRODUCTION */}
-          {import.meta.env.DEV && (
+          {showDevBypass() && (
             <div className="pt-2">
               <Button
                 type="button"
