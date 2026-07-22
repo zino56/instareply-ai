@@ -7,7 +7,6 @@ import {
   BarChart3,
   Settings,
   Sparkles,
-  CreditCard,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -21,7 +20,6 @@ const mainLinks = [
 
 const workspaceLinks = [
   { href: '/settings', label: 'Settings', icon: Settings },
-  { href: '/pricing', label: 'Pricing', icon: CreditCard },
 ];
 
 interface SidebarProps {
