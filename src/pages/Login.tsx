@@ -97,7 +97,7 @@ export default function Login() {
           </form>
 
           {/* DEV BYPASS — REMOVE BEFORE PRODUCTION */}
-          {import.meta.env.DEV && (
+          {showDevBypass() && (
             <div className="pt-2">
               <Button
                 type="button"
