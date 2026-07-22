@@ -253,28 +253,24 @@ export default function AIKnowledge() {
 
         {/* What to Upload */}
         <motion.div variants={item}>
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2">
-                💡 What to upload
-              </CardTitle>
-              <CardDescription>
-                These documents help your AI provide accurate answers
-              </CardDescription>
+          <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-card">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-[14px] font-semibold text-foreground">Recommended documents</CardTitle>
+              <CardDescription className="text-[13px]">These documents help your AI provide accurate answers.</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {suggestedDocuments.map((doc) => (
                   <div
                     key={doc.label}
-                    className="flex items-start gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
+                    className="flex items-start gap-3 p-3 rounded-xl border border-border/60 bg-background hover:border-border hover:bg-muted/40 transition-colors"
                   >
-                    <div className="p-2 rounded-md bg-background">
-                      <doc.icon className="w-4 h-4 text-primary" />
+                    <div className="p-2 rounded-md bg-primary/10 shrink-0">
+                      <doc.icon className="w-4 h-4 text-primary" strokeWidth={1.75} />
                     </div>
-                    <div>
-                      <p className="text-sm font-medium">{doc.label}</p>
-                      <p className="text-xs text-muted-foreground">{doc.description}</p>
+                    <div className="min-w-0">
+                      <p className="text-[13px] font-medium text-foreground">{doc.label}</p>
+                      <p className="text-[11.5px] text-muted-foreground mt-0.5">{doc.description}</p>
                     </div>
                   </div>
                 ))}
@@ -285,25 +281,24 @@ export default function AIKnowledge() {
 
         {/* Uploaded Documents */}
         <motion.div variants={item}>
-          <Card>
-            <CardHeader>
+          <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-card">
+            <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    ✅ Your Documents
-                  </CardTitle>
-                  <CardDescription>
+                  <CardTitle className="text-[14px] font-semibold text-foreground">Your documents</CardTitle>
+                  <CardDescription className="text-[13px]">
                     {documents.length} document{documents.length !== 1 ? 's' : ''} uploaded
                   </CardDescription>
                 </div>
                 {allReady && (
-                  <Badge className="bg-primary/10 text-primary border-primary/20">
+                  <Badge className="bg-success/10 text-success border-0 h-5 font-medium">
                     <CheckCircle2 className="w-3 h-3 mr-1" />
                     All Ready
                   </Badge>
                 )}
               </div>
             </CardHeader>
+
             <CardContent>
               {documents.length === 0 ? (
                 <div className="text-center py-8 text-muted-foreground">
