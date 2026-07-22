@@ -174,25 +174,21 @@ export default function AIKnowledge() {
   const allReady = documents.length > 0 && readyDocuments === documents.length;
 
   return (
-    <div className="container py-8 max-w-4xl">
+    <div className="px-4 sm:px-6 lg:px-8 py-6 md:py-8 max-w-4xl mx-auto w-full">
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
-        className="space-y-6"
+        className="space-y-6 md:space-y-8"
       >
         {/* Header */}
-        <motion.div variants={item} className="text-center space-y-2">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
-            <BookOpen className="w-8 h-8 text-primary" />
-          </div>
-          <h1 className="text-3xl font-bold tracking-tight">
-            📚 Teach Your AI About Your Business
-          </h1>
-          <p className="text-muted-foreground max-w-lg mx-auto">
+        <motion.div variants={item}>
+          <h1 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.02em] leading-tight text-foreground">AI Knowledge Base</h1>
+          <p className="text-muted-foreground mt-1.5 text-[14px] max-w-2xl">
             Upload your business documents so the AI can provide accurate, personalized responses to your customers.
           </p>
         </motion.div>
+
 
         {/* Upload Area */}
         <motion.div variants={item}>
