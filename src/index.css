@@ -7,79 +7,78 @@
 
 @layer base {
   :root {
-    /* Core Brand Colors - ManyChat Clone */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    /* Canvas: soft off-white so elevated white cards read */
+    --background: 220 20% 98%;
+    --foreground: 222 22% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --card-foreground: 222 22% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover-foreground: 222 22% 11%;
 
-    /* Primary - Neon Yellow #FFF100 */
+    /* Primary — Conveero Yellow #FFF100 */
     --primary: 56 100% 50%;
     --primary-foreground: 0 0% 0%;
 
-    /* Secondary - Vibrant Magenta #FF00FF */
+    /* Secondary — Magenta (restrained accent only) */
     --secondary: 300 100% 50%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 220 16% 96%;
+    --muted-foreground: 220 10% 42%;
 
-    /* Accent - Light Yellow Tint */
     --accent: 56 100% 96%;
     --accent-foreground: 0 0% 0%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
     --ring: 56 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Extended ManyChat Palette */
-    --success: 145 80% 42%;
+    /* Status */
+    --success: 145 65% 40%;
     --success-foreground: 0 0% 100%;
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 0%;
     --info: 217 91% 60%;
     --info-foreground: 0 0% 100%;
 
-    /* ManyChat Brand Colors (HSL) */
+    /* Brand tokens */
     --mc-yellow: 56 100% 50%;
     --mc-magenta: 300 100% 50%;
     --mc-black: 0 0% 0%;
     --mc-dark-gray: 0 0% 10%;
     --mc-gray: 0 0% 40%;
-    --mc-light-gray: 0 0% 96%;
+    --mc-light-gray: 220 16% 96%;
     --mc-hover-yellow: 45 100% 50%;
 
-    /* Neutral surface for section alternation */
+    /* Surfaces */
     --surface: 220 20% 98%;
+    --surface-elevated: 0 0% 100%;
 
-    /* Sidebar - Dark Theme */
-    --sidebar-background: 0 0% 6%;
-    --sidebar-foreground: 0 0% 95%;
+    /* Sidebar — light rail matching canvas */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 22% 11%;
     --sidebar-primary: 56 100% 50%;
     --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 0 0% 15%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 0 0% 15%;
+    --sidebar-accent: 220 16% 96%;
+    --sidebar-accent-foreground: 222 22% 11%;
+    --sidebar-border: 220 15% 92%;
     --sidebar-ring: 56 100% 50%;
 
-    /* Custom Properties */
     --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
-    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.06);
-    --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06), 0 10px 24px rgba(15, 23, 42, 0.08);
-    --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.06);
-    --shadow-card-hover: 0 4px 12px rgba(15, 23, 42, 0.06), 0 10px 24px rgba(15, 23, 42, 0.08);
-    --shadow-button: 0 4px 12px rgba(0, 0, 0, 0.12);
-    --shadow-magenta: 0 8px 24px rgba(255, 0, 255, 0.4);
-    --shadow-yellow: 0 8px 24px rgba(255, 241, 0, 0.3);
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 2px 6px rgba(15, 23, 42, 0.05), 0 8px 20px rgba(15, 23, 42, 0.06);
+    --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow-card-hover: 0 2px 6px rgba(15, 23, 42, 0.05), 0 8px 20px rgba(15, 23, 42, 0.06);
+    --shadow-button: 0 1px 2px rgba(15, 23, 42, 0.08);
+    --shadow-magenta: 0 8px 24px rgba(255, 0, 255, 0.35);
+    --shadow-yellow: 0 8px 24px rgba(255, 241, 0, 0.28);
   }
 
 
