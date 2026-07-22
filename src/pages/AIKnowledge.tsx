@@ -361,21 +361,23 @@ export default function AIKnowledge() {
         {documents.length > 0 && (
           <motion.div variants={item}>
             <Card className={cn(
-              'border-2',
-              allReady ? 'border-primary/30 bg-primary/5' : 'border-warning/30 bg-warning/5'
+              'rounded-2xl border shadow-[var(--shadow-sm)] bg-card',
+              allReady ? 'border-success/25' : 'border-warning/30'
             )}>
-              <CardContent className="p-6">
+              <CardContent className="p-5 md:p-6">
                 <div className="flex items-center gap-4">
-                  {allReady ? (
-                    <CheckCircle2 className="w-8 h-8 text-primary" />
-                  ) : (
-                    <AlertCircle className="w-8 h-8 text-warning" />
-                  )}
+                  <div className={cn('w-11 h-11 rounded-xl flex items-center justify-center shrink-0', allReady ? 'bg-success/12' : 'bg-warning/12')}>
+                    {allReady ? (
+                      <CheckCircle2 className="w-5 h-5 text-success" strokeWidth={1.75} />
+                    ) : (
+                      <AlertCircle className="w-5 h-5 text-warning" strokeWidth={1.75} />
+                    )}
+                  </div>
                   <div>
-                    <p className="font-semibold">
-                      {allReady ? 'Status: Ready! ✅' : 'Status: Processing...'}
+                    <p className="font-semibold text-[15px] text-foreground">
+                      {allReady ? 'Knowledge base is ready' : 'Processing documents…'}
                     </p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-[13px] text-muted-foreground mt-0.5">
                       {allReady
                         ? 'Your AI is using these documents to answer customer questions.'
                         : 'Some documents are still being processed. Please wait.'}
@@ -388,14 +390,17 @@ export default function AIKnowledge() {
         )}
 
         {/* Actions */}
-        <motion.div variants={item} className="flex justify-center gap-4">
-          <Button variant="outline" size="lg" onClick={() => document.querySelector<HTMLInputElement>('input[type="file"]')?.click()}>
-            ➕ Add More
+        <motion.div variants={item} className="flex flex-wrap gap-3">
+          <Button variant="outline" size="sm" className="h-9 gap-2" onClick={() => document.querySelector<HTMLInputElement>('input[type="file"]')?.click()}>
+            <Upload className="w-4 h-4" strokeWidth={1.75} />
+            Add more
           </Button>
-          <Button size="lg" disabled={!allReady || documents.length === 0}>
-            ✅ Continue
+          <Button size="sm" className="h-9 gap-2" disabled={!allReady || documents.length === 0}>
+            <CheckCircle2 className="w-4 h-4" strokeWidth={1.75} />
+            Continue
           </Button>
         </motion.div>
+
       </motion.div>
 
       {/* Delete Confirmation */}
