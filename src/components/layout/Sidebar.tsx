@@ -71,13 +71,13 @@ export function Sidebar({ onNavigate }: SidebarProps) {
       {/* Nav */}
       <nav className="flex-1 overflow-y-auto px-3 py-5 space-y-6">
         <div className="space-y-1">
-          <p className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
+          <p className="px-3 pb-2 text-[12px] font-semibold uppercase tracking-[0.09em] text-muted-foreground/70">
             Main
           </p>
           {mainLinks.map(renderLink)}
         </div>
         <div className="space-y-1">
-          <p className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
+          <p className="px-3 pb-2 text-[12px] font-semibold uppercase tracking-[0.09em] text-muted-foreground/70">
             Workspace
           </p>
           {workspaceLinks.map(renderLink)}
