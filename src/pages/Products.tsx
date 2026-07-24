@@ -98,9 +98,13 @@ const emptyForm: FormValues = {
 
 const MAX_DESC = 500;
 
+const IS_DEV = import.meta.env.DEV;
+
 export default function Products() {
   const [searchParams] = useSearchParams();
-  const qaState = (searchParams.get('prodState') as QaState) || 'ready';
+  const qaState: QaState = IS_DEV
+    ? ((searchParams.get('prodState') as QaState) || 'ready')
+    : 'ready';
 
   const [products, setProducts] = useState<UiProduct[]>([]);
   const [status, setStatus] = useState<QaState>('loading');
@@ -135,30 +139,43 @@ export default function Products() {
     let cancelled = false;
     const load = async () => {
       setStatus('loading');
-      if (qaState === 'loading') return;
-      if (qaState === 'error') {
-        setTimeout(() => !cancelled && setStatus('error'), 400);
-        return;
-      }
-      if (qaState === 'empty') {
-        setTimeout(() => {
-          if (!cancelled) {
-            setProducts([]);
-            setStatus('ready');
-          }
-        }, 400);
-        return;
+      // Dev-only QA overrides
+      if (IS_DEV) {
+        if (qaState === 'loading') return;
+        if (qaState === 'error') {
+          setTimeout(() => !cancelled && setStatus('error'), 400);
+          return;
+        }
+        if (qaState === 'empty') {
+          setTimeout(() => {
+            if (!cancelled) {
+              setProducts([]);
+              setStatus('ready');
+            }
+          }, 400);
+          return;
+        }
       }
       try {
         const data = await api.getProducts();
         const arr = Array.isArray(data) ? data : data?.data || [];
         if (cancelled) return;
-        setProducts(arr.length ? (arr as UiProduct[]) : mockProducts);
+        // In dev, fall back to mock fixtures so the UI is visually testable.
+        // In production, an empty response means the client has no products.
+        if (arr.length === 0 && IS_DEV) {
+          setProducts(mockProducts);
+        } else {
+          setProducts(arr as UiProduct[]);
+        }
         setStatus('ready');
       } catch {
         if (cancelled) return;
-        setProducts(mockProducts);
-        setStatus('ready');
+        if (IS_DEV) {
+          setProducts(mockProducts);
+          setStatus('ready');
+        } else {
+          setStatus('error');
+        }
       }
     };
     load();

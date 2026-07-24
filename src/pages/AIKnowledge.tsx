@@ -70,12 +70,18 @@ function formatDate(date: Date) {
   });
 }
 
+const IS_DEV = import.meta.env.DEV;
+
 export default function AIKnowledge() {
   const [searchParams] = useSearchParams();
-  const qaState = (searchParams.get('knowledgeState') as QAState) || null;
+  const qaState: QAState = IS_DEV
+    ? ((searchParams.get('knowledgeState') as QAState) || null)
+    : null;
 
+  // Production: no backend endpoint for documents yet — start empty.
+  // Dev: seed with fixtures for visual QA, unless ?knowledgeState=empty.
   const [documents, setDocuments] = useState<KnowledgeDoc[]>(
-    qaState === 'empty' ? [] : seedDocuments,
+    !IS_DEV || qaState === 'empty' ? [] : seedDocuments,
   );
   const [uploading, setUploading] = useState<UploadingFile[]>([]);
   const [rejections, setRejections] = useState<{ name: string; reason: string }[]>([]);
