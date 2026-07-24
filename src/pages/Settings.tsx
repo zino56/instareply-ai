@@ -73,7 +73,7 @@ export default function Settings() {
     <div className="px-4 sm:px-6 lg:px-8 py-6 md:py-8 max-w-5xl mx-auto w-full">
       <motion.div variants={container} initial="hidden" animate="show" className="space-y-6 md:space-y-8">
         <motion.div variants={item}>
-          <h1 className="text-[24px] md:text-[28px] font-semibold tracking-tight md:tracking-[-0.02em] leading-tight text-foreground">Settings</h1>
+          <h1 className="text-[22px] md:text-[26px] font-semibold md:tracking-[-0.015em] leading-tight text-foreground">Settings</h1>
           <p className="text-muted-foreground mt-1.5 text-[14px]">Manage your account and automation preferences.</p>
         </motion.div>
 

@@ -58,11 +58,11 @@ export function Topbar({ onOpenMobileNav }: TopbarProps) {
             <Menu className="w-5 h-5" strokeWidth={1.75} />
           </Button>
           <div className="min-w-0">
-            <h1 className="text-[17px] md:text-[19px] font-semibold tracking-tight leading-tight truncate">
+            <h1 className="text-[16px] md:text-[18px] font-semibold tracking-tight md:tracking-[-0.01em] leading-tight truncate">
               {meta.title}
             </h1>
             {meta.subtitle && (
-              <p className="hidden sm:block text-[13px] text-muted-foreground truncate">
+              <p className="hidden lg:block text-[13px] text-muted-foreground truncate">
                 {meta.subtitle}
               </p>
             )}

@@ -112,10 +112,10 @@ export default function Conversations() {
             initial={isMobileView ? { x: -100, opacity: 0 } : false}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -100, opacity: 0 }}
-            className={cn('border-r border-border bg-card flex flex-col', isMobileView ? 'w-full' : 'w-80 lg:w-96')}
+            className={cn('border-r border-border/60 bg-card flex flex-col', isMobileView ? 'w-full' : 'w-80 lg:w-96')}
           >
-            <div className="p-4 border-b border-border/70">
-              <h2 className="text-[15px] font-semibold mb-3 text-foreground tracking-tight md:tracking-[-0.01em]">Conversations</h2>
+            <div className="p-4 border-b border-border/60">
+              <h2 className="text-[14px] font-semibold mb-3 text-foreground md:tracking-[-0.01em]">Conversations</h2>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" strokeWidth={1.75} />
                 <Input placeholder="Search conversations..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9 h-9 text-[13px]" />
@@ -129,7 +129,7 @@ export default function Conversations() {
                 ) : (
                   filteredConversations.map((conv) => (
                     <button key={conv.id} onClick={() => handleSelectConversation(conv.id)} className={cn('w-full text-left', selectedId === conv.id ? 'conversation-item-active' : 'conversation-item')}>
-                      <Avatar className="h-12 w-12 flex-shrink-0"><AvatarFallback className="bg-secondary text-secondary-foreground">{conv.sender_name?.charAt(0) || '?'}</AvatarFallback></Avatar>
+                      <Avatar className="h-10 w-10 flex-shrink-0"><AvatarFallback className="bg-secondary text-secondary-foreground text-[13px] font-medium">{conv.sender_name?.charAt(0) || '?'}</AvatarFallback></Avatar>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-1">
                           <span className="font-medium text-sm truncate">{conv.sender_name}</span>
@@ -155,7 +155,7 @@ export default function Conversations() {
           <motion.div initial={isMobileView ? { x: 100, opacity: 0 } : false} animate={{ x: 0, opacity: 1 }} exit={{ x: 100, opacity: 0 }} className="flex-1 flex flex-col">
             {selectedConversation ? (
               <>
-                <div className="h-16 px-4 border-b border-border flex items-center justify-between bg-card">
+                <div className="h-16 px-4 border-b border-border/60 flex items-center justify-between bg-card">
                   <div className="flex items-center gap-3">
                     {isMobileView && (
                       <Button variant="ghost" size="icon" onClick={() => { setSelectedId(null); setSearchParams({}); }}>
@@ -191,7 +191,7 @@ export default function Conversations() {
                   </div>
                 </ScrollArea>
 
-                <div className="p-4 border-t border-border bg-card">
+                <div className="p-4 border-t border-border/60 bg-card">
                   <form onSubmit={(e) => { e.preventDefault(); handleSendMessage(); }} className="flex gap-2 max-w-3xl mx-auto">
                     <Input placeholder="Type a message (manual reply)..." value={newMessage} onChange={(e) => setNewMessage(e.target.value)} className="flex-1" />
                     <Button type="submit" disabled={!newMessage.trim()}><Send className="w-4 h-4" /></Button>
