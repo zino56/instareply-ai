@@ -184,7 +184,7 @@ export default function Products() {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
-                {!product.is_active && <div className="absolute inset-0 bg-background/60 flex items-center justify-center"><Badge variant="secondary" className="bg-background text-muted-foreground border border-border">Inactive</Badge></div>}
+                {!product.is_active && <div className="absolute inset-0 bg-background/60 flex items-center justify-center"><Badge variant="secondary" className="h-5 px-1.5 text-[11px] font-medium rounded-md bg-background text-muted-foreground border border-border/70">Inactive</Badge></div>}
               </div>
               <CardContent className="p-4">
                 <div className="flex items-start justify-between gap-2 mb-2">
