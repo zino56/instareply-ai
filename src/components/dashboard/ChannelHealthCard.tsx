@@ -76,9 +76,9 @@ export function ChannelHealthCard({ status, channel, onRetry }: Props) {
                   </div>
                 )}
               </dl>
-              {(channel.status !== 'healthy' || channel.webhook !== 'ok') && (
+              {(channel.status === 'degraded' || channel.status === 'down' || channel.status === 'disconnected' || channel.webhook === 'error') && (
                 <Button variant="outline" size="sm" className="w-full h-9 press-scale" asChild>
-                  <Link to="/settings?tab=instagram">Reconnect</Link>
+                  <Link to="/settings?tab=instagram">{channel.status === 'disconnected' ? 'Connect Instagram' : 'Reconnect'}</Link>
                 </Button>
               )}
             </div>
