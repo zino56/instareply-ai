@@ -138,7 +138,7 @@ export default function Products() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:border-border transition-all duration-300 bg-card">
               <CardContent className="p-5">
-                <div className="flex items-start justify-between"><p className="text-[13px] text-muted-foreground font-medium">Total Products</p><div className="p-2 rounded-lg bg-primary/10"><Package className="w-4 h-4 text-primary" strokeWidth={1.75} /></div></div>
+                <div className="flex items-start justify-between"><p className="text-[13px] text-muted-foreground font-medium">Total Products</p><div className="p-2 rounded-lg bg-muted"><Package className="w-4 h-4 text-muted-foreground" strokeWidth={1.75} /></div></div>
                 <p className="mt-4 text-[28px] font-semibold text-foreground tabular-nums tracking-[-0.02em] leading-none">{products.length}</p>
               </CardContent>
             </Card>
