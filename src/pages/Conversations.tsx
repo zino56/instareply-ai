@@ -40,6 +40,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sh
 import { cn } from '@/lib/utils';
 import { formatDistanceToNow, format, isToday, isYesterday, differenceInMinutes } from 'date-fns';
 import { mockConversations, type MockConversation, type ConvAssignee } from '@/lib/conversationsMock';
+import { api } from '@/lib/api';
 import type { Message } from '@/types';
 
 type Segment = 'all' | 'unread' | 'attention' | 'resolved';
