@@ -36,6 +36,9 @@ const App = () => (
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/onboarding/connect-instagram" element={<ConnectInstagram />} />
 
             {/* Auth Callback */}
