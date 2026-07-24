@@ -1,5 +1,5 @@
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { LogOut, User, ChevronDown, Menu, Bell, HelpCircle } from 'lucide-react';
+import { LogOut, User, ChevronDown, Menu, Bell, HelpCircle, CreditCard } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
@@ -116,6 +116,12 @@ export function Topbar({ onOpenMobileNav }: TopbarProps) {
                 <Link to="/settings" className="flex items-center gap-2 cursor-pointer">
                   <User className="w-4 h-4" />
                   Profile
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/subscriptions" className="flex items-center gap-2 cursor-pointer">
+                  <CreditCard className="w-4 h-4" />
+                  Subscriptions
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
