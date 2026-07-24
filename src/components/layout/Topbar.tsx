@@ -118,6 +118,12 @@ export function Topbar({ onOpenMobileNav }: TopbarProps) {
                   Profile
                 </Link>
               </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/subscriptions" className="flex items-center gap-2 cursor-pointer">
+                  <CreditCard className="w-4 h-4" />
+                  Subscriptions
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onClick={handleLogout}
