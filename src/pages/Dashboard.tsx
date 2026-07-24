@@ -84,7 +84,7 @@ export default function Dashboard() {
         {/* Welcome Header */}
         <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <h1 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.02em] leading-tight text-foreground">
+            <h1 className="text-[24px] md:text-[28px] font-semibold tracking-tight md:tracking-[-0.02em] leading-tight text-foreground">
               Hi, {clientStatus?.name || 'there'} 👋
             </h1>
             <p className="text-muted-foreground mt-1.5 text-[14px]">
