@@ -1,69 +1,90 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import {
   MessageSquare,
-  TrendingUp,
-  Package,
   Instagram,
   ArrowRight,
   Settings,
-  BarChart3,
-  Clock,
   CheckCircle2,
   AlertCircle,
   Bot,
   Loader2,
+  Clock,
+  Sparkles,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useAuthStore } from '@/store/authStore';
 import { api } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import { formatDistanceToNow } from 'date-fns';
-import type { Conversation, DashboardStats } from '@/types';
+import type { Conversation } from '@/types';
 import { pageContainer as container, pageItem as item } from '@/lib/motion';
-import { AnimatedNumber } from '@/components/motion/AnimatedNumber';
+import { dashboardMock } from '@/lib/dashboardMock';
+import { SetupAlert } from '@/components/dashboard/SetupAlert';
+import { KpiCard } from '@/components/dashboard/KpiCard';
+import { NeedsAttentionList } from '@/components/dashboard/NeedsAttentionList';
+import { ChannelHealthCard } from '@/components/dashboard/ChannelHealthCard';
+import { QuickActionsCard } from '@/components/dashboard/QuickActionsCard';
+import { UsagePlanCard } from '@/components/dashboard/UsagePlanCard';
+import { FirstRunChecklist } from '@/components/dashboard/FirstRunChecklist';
+import { StatePanel } from '@/components/dashboard/StatePanel';
+
+type BlockStatus = 'loading' | 'error' | 'ready';
 
 export default function Dashboard() {
   const { clientStatus, fetchClientStatus } = useAuthStore();
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [loading, setLoading] = useState(true);
+  const [convStatus, setConvStatus] = useState<BlockStatus>('loading');
+  const [searchParams] = useSearchParams();
 
-  useEffect(() => {
-    const load = async () => {
-      setLoading(true);
-      try {
-        await fetchClientStatus();
-        const convData = await api.getConversations();
-        setConversations(Array.isArray(convData) ? convData : convData?.data || []);
-      } catch {
-        // fail silently, show empty state
-      }
-      setLoading(false);
-    };
-    load();
-  }, [fetchClientStatus]);
+  // Dev-only visual state override for QA: ?dashState=loading|error|empty
+  const stateOverride = searchParams.get('dashState');
+
+  const load = async () => {
+    setLoading(true);
+    setConvStatus('loading');
+    try {
+      await fetchClientStatus();
+      const convData = await api.getConversations();
+      setConversations(Array.isArray(convData) ? convData : convData?.data || []);
+      setConvStatus('ready');
+    } catch {
+      setConvStatus('error');
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => { load(); /* eslint-disable-next-line */ }, []);
 
   const isConnected = Boolean(clientStatus?.instagram_page_id);
   const recentConversations = conversations.slice(0, 5);
 
-  const stats: DashboardStats = {
-    total_messages_this_month: conversations.reduce((s, c) => s + (c.message_count || 0), 0),
-    response_rate: 0,
-    active_conversations: conversations.filter((c) => !c.is_resolved).length,
-    total_products: 0,
-    avg_response_time: '-',
-  };
+  // Compose setup steps: Instagram real, others from mock (until backend supports)
+  const setupSteps = useMemo(() => ([
+    { label: 'Connect Instagram', done: isConnected, href: '/settings?tab=instagram' },
+    { label: 'Add AI knowledge', done: dashboardMock.setup.aiKnowledge, href: '/ai-knowledge' },
+    { label: 'Add products', done: dashboardMock.setup.products, href: '/products' },
+  ]), [isConnected]);
 
-  const statCards = [
-    { label: 'Messages This Month', value: stats.total_messages_this_month, icon: MessageSquare, trend: null, color: 'text-muted-foreground', bgColor: 'bg-muted' },
-    { label: 'Active Conversations', value: stats.active_conversations, icon: Clock, trend: null, color: 'text-muted-foreground', bgColor: 'bg-muted' },
-  ];
+  const setupDone = setupSteps.filter((s) => s.done).length;
+  const firstRun = setupDone === 0 || stateOverride === 'empty';
 
-  if (loading) {
+  const kpiStatus: BlockStatus = stateOverride === 'loading' ? 'loading' : stateOverride === 'error' ? 'error' : 'ready';
+  const attentionStatus: BlockStatus = kpiStatus;
+  const channelStatus: BlockStatus = kpiStatus;
+  const usageStatus: BlockStatus = kpiStatus;
+  const convDisplayStatus: BlockStatus = stateOverride === 'loading' ? 'loading' : stateOverride === 'error' ? 'error' : convStatus;
+
+  const attentionItems = stateOverride === 'empty' ? [] : dashboardMock.attention;
+  const kpi = dashboardMock.kpis;
+
+  if (loading && !stateOverride) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
@@ -86,9 +107,26 @@ export default function Dashboard() {
           </div>
           <div className="flex gap-2.5">
             <Button variant="outline" size="sm" className="gap-2 h-9 press-scale" asChild><Link to="/settings"><Settings className="w-4 h-4" strokeWidth={1.75} />Settings</Link></Button>
-            <Button size="sm" className="gap-2 h-9 press-scale" asChild><Link to="/conversations"><MessageSquare className="w-4 h-4" strokeWidth={1.75} />View Messages</Link></Button>
+            <Button size="sm" className="gap-2 h-9 press-scale" asChild><Link to="/conversations"><MessageSquare className="w-4 h-4" strokeWidth={1.75} />View messages</Link></Button>
           </div>
         </motion.div>
+
+        {firstRun ? (
+          <motion.div variants={item}>
+            <FirstRunChecklist
+              tasks={[
+                { id: '1', label: 'Connect your Instagram page', description: 'Authorize Conveero to read and reply to DMs.', done: isConnected, href: '/settings?tab=instagram', cta: 'Connect' },
+                { id: '2', label: 'Train the AI on your brand', description: 'Upload a PDF or paste your knowledge base.', done: dashboardMock.setup.aiKnowledge, href: '/ai-knowledge', cta: 'Add' },
+                { id: '3', label: 'Add products to your catalog', description: 'So the AI can recommend the right item.', done: dashboardMock.setup.products, href: '/products', cta: 'Add' },
+                { id: '4', label: 'Set your reply preferences', description: 'Tone, hours, and auto-reply behavior.', done: false, href: '/settings', cta: 'Set up' },
+              ]}
+            />
+          </motion.div>
+        ) : (
+          <motion.div variants={item}>
+            <SetupAlert steps={setupSteps} />
+          </motion.div>
+        )}
 
         {/* Instagram Connection Status */}
         <motion.div variants={item}>
@@ -101,7 +139,7 @@ export default function Dashboard() {
                   </div>
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h3 className="font-semibold text-[15px] leading-tight text-foreground">{isConnected ? clientStatus?.instagram_page_name : 'No Page Connected'}</h3>
+                      <h3 className="font-semibold text-[15px] leading-tight text-foreground">{isConnected ? clientStatus?.instagram_page_name : 'No page connected'}</h3>
                       {isConnected ? (
                         <Badge variant="secondary" className="bg-success/10 text-success border-0 font-medium h-5"><CheckCircle2 className="w-3 h-3 mr-1" />Connected</Badge>
                       ) : (
@@ -113,104 +151,111 @@ export default function Dashboard() {
                     </p>
                   </div>
                 </div>
-                <Button variant={isConnected ? 'outline' : 'default'} size="sm" className="h-9" asChild>
-                  <Link to="/settings?tab=instagram">{isConnected ? 'Change Page' : 'Connect Page'}</Link>
+                <Button variant={isConnected ? 'outline' : 'default'} size="sm" className="h-9 press-scale" asChild>
+                  <Link to="/settings?tab=instagram">{isConnected ? 'Change page' : 'Connect page'}</Link>
                 </Button>
               </div>
             </CardContent>
           </Card>
         </motion.div>
 
-        {/* Overview Section */}
+        {/* KPI Row */}
         <motion.div variants={item} className="space-y-3">
-          <div className="flex items-center justify-between">
-            <h2 className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">Overview</h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-            {statCards.map((stat) => (
-              <Card key={stat.label} className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] transition-colors duration-200 bg-card">
-                <CardContent className="p-5">
-                  <div className="flex items-start justify-between">
-                    <p className="text-[13px] text-muted-foreground font-medium">{stat.label}</p>
-                    <div className={cn('p-2 rounded-lg', stat.bgColor)}>
-                      <stat.icon className={cn('w-4 h-4', stat.color)} strokeWidth={1.75} />
-                    </div>
-                  </div>
-                  <p className="mt-4 text-[26px] font-semibold text-foreground tabular-nums tracking-[-0.015em] leading-none"><AnimatedNumber value={stat.value} /></p>
-                  <p className="mt-2 text-[12px] text-muted-foreground">Updated just now</p>
-                </CardContent>
-              </Card>
-            ))}
-            <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-muted/30 sm:col-span-2 xl:col-span-2">
-              <CardContent className="p-5 flex items-start gap-3 h-full">
-                <div className="p-2 rounded-lg bg-background border border-border/60 shrink-0">
-                  <Bot className="w-4 h-4 text-muted-foreground" strokeWidth={1.75} />
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2">
-                    <p className="text-[13px] font-medium text-foreground">More insights</p>
-                    <Badge variant="secondary" className="h-5 bg-background text-muted-foreground border border-border/60 font-medium text-[10px] uppercase tracking-wider">Soon</Badge>
-                  </div>
-                  <p className="mt-1 text-[12.5px] text-muted-foreground leading-relaxed">Response rate, resolution time, and AI accuracy will appear here as your conversation history grows.</p>
-                </div>
-              </CardContent>
-            </Card>
-
+          <h2 className="text-[12px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">Overview</h2>
+          <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
+            <KpiCard label="Messages (7d)" value={kpi.messages7d.value} icon={MessageSquare} trend={kpi.messages7d.trend} spark={kpi.messages7d.spark} status={kpiStatus} />
+            <KpiCard label="Active conversations" value={kpi.activeConversations.value} icon={Clock} trend={kpi.activeConversations.trend} status={kpiStatus} />
+            <KpiCard label="AI reply rate" value={kpi.aiReplyRate.value * 100} icon={Sparkles} format={(n) => `${Math.round(n)}%`} trend={kpi.aiReplyRate.trend} status={kpiStatus} />
+            <KpiCard label="Needs attention" value={attentionItems.length || kpi.needsAttention.value} icon={AlertCircle} status={kpiStatus} emphasize />
           </div>
         </motion.div>
 
-        {/* Activity Section */}
-        <motion.div variants={item} className="space-y-3">
-          <h2 className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">Activity</h2>
-          <div className="grid lg:grid-cols-3 gap-5">
-            <Card className="h-full rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-card">
-              <CardHeader className="pb-3"><CardTitle className="text-[14px] font-semibold text-foreground">Quick Actions</CardTitle></CardHeader>
-              <CardContent className="space-y-2">
-                <Button variant="outline" className="w-full justify-start h-10 group text-[13px] font-medium bg-transparent hover:bg-muted/60" asChild><Link to="/conversations"><MessageSquare className="w-4 h-4 mr-3 text-muted-foreground" strokeWidth={1.75} />View All Conversations<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
-                <Button variant="outline" className="w-full justify-start h-10 group text-[13px] font-medium bg-transparent hover:bg-muted/60" asChild><Link to="/products"><Package className="w-4 h-4 mr-3 text-muted-foreground" strokeWidth={1.75} />Manage Products<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
-                <Button variant="outline" className="w-full justify-start h-10 group text-[13px] font-medium bg-transparent hover:bg-muted/60" asChild><Link to="/settings"><Settings className="w-4 h-4 mr-3 text-muted-foreground" strokeWidth={1.75} />Settings<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
-                <Button variant="outline" className="w-full justify-start h-10 group text-[13px] font-medium bg-transparent hover:bg-muted/60" asChild><Link to="/analytics"><BarChart3 className="w-4 h-4 mr-3 text-muted-foreground" strokeWidth={1.75} />View Analytics<ArrowRight className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground transition-colors" strokeWidth={1.75} /></Link></Button>
-              </CardContent>
-            </Card>
+        {/* Row: Needs Attention + Channel Health */}
+        <motion.div variants={item} className="grid lg:grid-cols-3 gap-5">
+          <div className="lg:col-span-2">
+            <NeedsAttentionList items={attentionItems} status={attentionStatus} onRetry={load} />
+          </div>
+          <ChannelHealthCard status={channelStatus} channel={dashboardMock.channel} onRetry={load} />
+        </motion.div>
 
-            <Card className="h-full lg:col-span-2 rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-card">
-              <CardHeader className="flex flex-row items-center justify-between pb-3">
-                <CardTitle className="text-[14px] font-semibold text-foreground">Recent Conversations</CardTitle>
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground -mr-2 h-8 text-[13px]" asChild><Link to="/conversations">View All<ArrowRight className="w-4 h-4 ml-1" strokeWidth={1.75} /></Link></Button>
-              </CardHeader>
-              <CardContent className="pt-0">
-                {recentConversations.length === 0 ? (
+        {/* Row: Recent Conversations + Quick Actions */}
+        <motion.div variants={item} className="grid lg:grid-cols-3 gap-5">
+          <Card className="h-full lg:col-span-2 rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-card">
+            <CardHeader className="flex flex-row items-center justify-between pb-3">
+              <CardTitle className="text-[14px] font-semibold text-foreground">Recent conversations</CardTitle>
+              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground -mr-2 h-8 text-[13px]" asChild><Link to="/conversations">View all<ArrowRight className="w-4 h-4 ml-1" strokeWidth={1.75} /></Link></Button>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <StatePanel
+                status={convDisplayStatus === 'ready' && recentConversations.length === 0 ? 'empty' : convDisplayStatus}
+                onRetry={load}
+                skeleton={<>
+                  {[0,1,2,3].map(i => (
+                    <div key={i} className="flex items-center gap-3 py-3">
+                      <Skeleton variant="shimmer" className="w-8 h-8 rounded-full" />
+                      <div className="flex-1 space-y-1.5">
+                        <Skeleton variant="shimmer" className="h-3.5 w-1/3" />
+                        <Skeleton variant="shimmer" className="h-3 w-2/3" />
+                      </div>
+                    </div>
+                  ))}
+                </>}
+                empty={
                   <div className="flex flex-col items-center justify-center py-12 text-center">
                     <div className="w-12 h-12 rounded-2xl bg-muted flex items-center justify-center mb-3">
                       <MessageSquare className="w-5 h-5 text-muted-foreground" strokeWidth={1.5} />
                     </div>
                     <p className="text-foreground text-[14px] font-medium">No conversations yet</p>
                     <p className="text-muted-foreground text-[13px] mt-1 max-w-[260px]">Connect your Instagram page to start receiving and automating DMs.</p>
+                    <Button size="sm" className="mt-4 h-9 press-scale" asChild><Link to="/settings?tab=instagram">Connect Instagram</Link></Button>
                   </div>
-                ) : (
-                  <div className="divide-y divide-border/60 -mx-2">
-                    {recentConversations.map((conversation) => (
-                      <Link key={conversation.id} to={`/conversations?id=${conversation.id}`} className="flex items-center gap-3 px-2 py-3 rounded-lg hover:bg-muted/50 transition-colors group focus-ring">
-                        <Avatar className="h-8 w-8 ring-1 ring-border">
-                          <AvatarFallback className="bg-secondary text-secondary-foreground text-[12px] font-medium">{conversation.sender_name?.charAt(0) || '?'}</AvatarFallback>
-                        </Avatar>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between gap-3">
-                            <p className="font-medium text-[13px] truncate text-foreground">{conversation.sender_name}</p>
-                            {conversation.last_interaction_at && (
-                              <span className="text-[12px] text-muted-foreground tabular-nums shrink-0">{formatDistanceToNow(new Date(conversation.last_interaction_at), { addSuffix: true })}</span>
-                            )}
-                          </div>
-                          <p className="text-[12px] text-muted-foreground line-clamp-1 mt-0.5">{conversation.last_message}</p>
+                }
+              >
+                <div className="divide-y divide-border/60 -mx-2">
+                  {recentConversations.map((conversation) => (
+                    <Link key={conversation.id} to={`/conversations?id=${conversation.id}`} className="flex items-center gap-3 px-2 py-3 rounded-lg hover:bg-muted/50 transition-colors group focus-ring">
+                      <Avatar className="h-8 w-8 ring-1 ring-border">
+                        <AvatarFallback className="bg-secondary text-secondary-foreground text-[12px] font-medium">{conversation.sender_name?.charAt(0) || '?'}</AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-3">
+                          <p className="font-medium text-[13px] truncate text-foreground">{conversation.sender_name}</p>
+                          {conversation.last_interaction_at && (
+                            <span className="text-[12px] text-muted-foreground tabular-nums shrink-0">{formatDistanceToNow(new Date(conversation.last_interaction_at), { addSuffix: true })}</span>
+                          )}
                         </div>
-                        {(conversation.unread_count || 0) > 0 && <Badge className="bg-primary text-primary-foreground min-w-[20px] h-5 px-1.5 flex items-center justify-center text-[11px] font-semibold rounded-full">{conversation.unread_count}</Badge>}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+                        <p className="text-[12px] text-muted-foreground line-clamp-1 mt-0.5">{conversation.last_message}</p>
+                      </div>
+                      {(conversation.unread_count || 0) > 0 && <Badge className="bg-primary text-primary-foreground min-w-[20px] h-5 px-1.5 flex items-center justify-center text-[11px] font-semibold rounded-full">{conversation.unread_count}</Badge>}
+                    </Link>
+                  ))}
+                </div>
+              </StatePanel>
+            </CardContent>
+          </Card>
+
+          <QuickActionsCard />
+        </motion.div>
+
+        {/* Row: Usage / Plan + insights placeholder */}
+        <motion.div variants={item} className="grid lg:grid-cols-3 gap-5">
+          <div className="lg:col-span-2">
+            <UsagePlanCard status={usageStatus} usage={dashboardMock.usage} onRetry={load} />
           </div>
+          <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-muted/30 h-full">
+            <CardContent className="p-5 flex items-start gap-3 h-full">
+              <div className="p-2 rounded-lg bg-background border border-border/60 shrink-0">
+                <Bot className="w-4 h-4 text-muted-foreground" strokeWidth={1.75} />
+              </div>
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <p className="text-[13px] font-medium text-foreground">More insights</p>
+                  <Badge variant="secondary" className="h-5 bg-background text-muted-foreground border border-border/60 font-medium text-[10px] uppercase tracking-wider">Soon</Badge>
+                </div>
+                <p className="mt-1 text-[12.5px] text-muted-foreground leading-relaxed">Resolution time, customer sentiment, and AI accuracy will appear here as your history grows.</p>
+              </div>
+            </CardContent>
+          </Card>
         </motion.div>
       </motion.div>
     </div>
