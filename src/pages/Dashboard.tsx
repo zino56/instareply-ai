@@ -278,9 +278,21 @@ export default function Dashboard() {
 
         {/* Row: Usage / Plan + insights placeholder */}
         <motion.div variants={item} className="grid lg:grid-cols-3 gap-5">
-          <div className="lg:col-span-2">
-            <UsagePlanCard status={usageStatus} usage={dashboardMock.usage} onRetry={load} />
-          </div>
+          {usage ? (
+            <div className="lg:col-span-2">
+              <UsagePlanCard status="ready" usage={usage} onRetry={load} />
+            </div>
+          ) : (
+            <Card className="lg:col-span-2 rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-card h-full">
+              <CardHeader className="pb-3"><CardTitle className="text-[14px] font-semibold text-foreground">Usage & plan</CardTitle></CardHeader>
+              <CardContent className="pt-0">
+                <div className="flex items-center justify-between gap-4">
+                  <p className="text-[13px] text-muted-foreground">Usage tracking will appear once your plan is active.</p>
+                  <Button variant="outline" size="sm" className="h-9 press-scale" asChild><Link to="/pricing">View plans</Link></Button>
+                </div>
+              </CardContent>
+            </Card>
+          )}
           <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-muted/30 h-full">
             <CardContent className="p-5 flex items-start gap-3 h-full">
               <div className="p-2 rounded-lg bg-background border border-border/60 shrink-0">
