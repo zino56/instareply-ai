@@ -183,7 +183,7 @@ export default function AIKnowledge() {
       >
         {/* Header */}
         <motion.div variants={item}>
-          <h1 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.02em] leading-tight text-foreground">AI Knowledge Base</h1>
+          <h1 className="text-[24px] md:text-[28px] font-semibold tracking-tight md:tracking-[-0.02em] leading-tight text-foreground">AI Knowledge Base</h1>
           <p className="text-muted-foreground mt-1.5 text-[14px] max-w-2xl">
             Upload your business documents so the AI can provide accurate, personalized responses to your customers.
           </p>
