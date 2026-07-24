@@ -265,8 +265,8 @@ export default function AIKnowledge() {
                     key={doc.label}
                     className="flex items-start gap-3 p-3 rounded-xl border border-border/60 bg-background hover:border-border hover:bg-muted/40 transition-colors"
                   >
-                    <div className="p-2 rounded-md bg-primary/10 shrink-0">
-                      <doc.icon className="w-4 h-4 text-primary" strokeWidth={1.75} />
+                    <div className="p-2 rounded-md bg-muted shrink-0">
+                      <doc.icon className="w-4 h-4 text-muted-foreground" strokeWidth={1.75} />
                     </div>
                     <div className="min-w-0">
                       <p className="text-[13px] font-medium text-foreground">{doc.label}</p>
