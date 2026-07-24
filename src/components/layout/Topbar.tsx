@@ -1,5 +1,5 @@
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { LogOut, User, ChevronDown, Menu, Bell, HelpCircle } from 'lucide-react';
+import { LogOut, User, ChevronDown, Menu, Bell, HelpCircle, CreditCard } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
