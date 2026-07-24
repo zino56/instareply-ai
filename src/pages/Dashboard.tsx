@@ -202,10 +202,10 @@ export default function Dashboard() {
         <motion.div variants={item} className="space-y-3">
           <h2 className="text-[12px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">Overview</h2>
           <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
-            <KpiCard label="Messages (7d)" value={kpi.messages7d.value} icon={MessageSquare} trend={kpi.messages7d.trend} spark={kpi.messages7d.spark} status={kpiStatus} />
-            <KpiCard label="Active conversations" value={kpi.activeConversations.value} icon={Clock} trend={kpi.activeConversations.trend} status={kpiStatus} />
-            <KpiCard label="AI reply rate" value={kpi.aiReplyRate.value * 100} icon={Sparkles} format={(n) => `${Math.round(n)}%`} trend={kpi.aiReplyRate.trend} status={kpiStatus} />
-            <KpiCard label="Needs attention" value={attentionItems.length || kpi.needsAttention.value} icon={AlertCircle} status={kpiStatus} emphasize />
+            <KpiCard label="Messages (7d)" value={null} icon={MessageSquare} status={kpiStatus} hint="Metric available soon" />
+            <KpiCard label="Active conversations" value={convStatus === 'ready' ? activeCount : null} icon={Clock} status={kpiStatus} />
+            <KpiCard label="AI reply rate" value={null} icon={Sparkles} format={(n) => `${Math.round(n)}%`} status={kpiStatus} hint="Metric available soon" />
+            <KpiCard label="Needs attention" value={attentionItems.length} icon={AlertCircle} status={kpiStatus} emphasize />
           </div>
         </motion.div>
 
