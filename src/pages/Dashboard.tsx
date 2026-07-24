@@ -66,8 +66,8 @@ export default function Dashboard() {
   };
 
   const statCards = [
-    { label: 'Messages This Month', value: stats.total_messages_this_month.toLocaleString(), icon: MessageSquare, trend: null, color: 'text-primary', bgColor: 'bg-primary/10' },
-    { label: 'Active Conversations', value: stats.active_conversations.toString(), icon: Clock, trend: null, color: 'text-info', bgColor: 'bg-info/10' },
+    { label: 'Messages This Month', value: stats.total_messages_this_month.toLocaleString(), icon: MessageSquare, trend: null, color: 'text-muted-foreground', bgColor: 'bg-muted' },
+    { label: 'Active Conversations', value: stats.active_conversations.toString(), icon: Clock, trend: null, color: 'text-muted-foreground', bgColor: 'bg-muted' },
   ];
 
   if (loading) {
