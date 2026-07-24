@@ -126,7 +126,7 @@ export default function Products() {
         {/* Header */}
         <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <h1 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.02em] leading-tight text-foreground">Products</h1>
+            <h1 className="text-[24px] md:text-[28px] font-semibold tracking-tight md:tracking-[-0.02em] leading-tight text-foreground">Products</h1>
             <p className="text-muted-foreground mt-1.5 text-[14px]">Manage your product catalog for AI-powered responses.</p>
           </div>
           <Button size="sm" className="h-9 gap-2" onClick={() => setIsUploadOpen(true)}><Plus className="w-4 h-4" strokeWidth={1.75} />Add Products</Button>
