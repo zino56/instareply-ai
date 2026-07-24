@@ -30,6 +30,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+import { pageContainer as container, pageItem as item } from '@/lib/motion';
 
 interface UploadedDocument {
   id: string;
@@ -39,18 +40,6 @@ interface UploadedDocument {
   status: 'processing' | 'ready' | 'error';
 }
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.05 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
 
 const suggestedDocuments = [
   { icon: HelpCircle, label: 'FAQ / Questions', description: 'Common customer questions' },

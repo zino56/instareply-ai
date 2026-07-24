@@ -24,15 +24,8 @@ import { api } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import { formatDistanceToNow } from 'date-fns';
 import type { Conversation, DashboardStats } from '@/types';
-
-const container = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.1 } },
-};
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
+import { pageContainer as container, pageItem as item } from '@/lib/motion';
+import { AnimatedNumber } from '@/components/motion/AnimatedNumber';
 
 export default function Dashboard() {
   const { clientStatus, fetchClientStatus } = useAuthStore();
@@ -66,8 +59,8 @@ export default function Dashboard() {
   };
 
   const statCards = [
-    { label: 'Messages This Month', value: stats.total_messages_this_month.toLocaleString(), icon: MessageSquare, trend: null, color: 'text-muted-foreground', bgColor: 'bg-muted' },
-    { label: 'Active Conversations', value: stats.active_conversations.toString(), icon: Clock, trend: null, color: 'text-muted-foreground', bgColor: 'bg-muted' },
+    { label: 'Messages This Month', value: stats.total_messages_this_month, icon: MessageSquare, trend: null, color: 'text-muted-foreground', bgColor: 'bg-muted' },
+    { label: 'Active Conversations', value: stats.active_conversations, icon: Clock, trend: null, color: 'text-muted-foreground', bgColor: 'bg-muted' },
   ];
 
   if (loading) {
@@ -92,8 +85,8 @@ export default function Dashboard() {
             </p>
           </div>
           <div className="flex gap-2.5">
-            <Button variant="outline" size="sm" className="gap-2 h-9" asChild><Link to="/settings"><Settings className="w-4 h-4" strokeWidth={1.75} />Settings</Link></Button>
-            <Button size="sm" className="gap-2 h-9" asChild><Link to="/conversations"><MessageSquare className="w-4 h-4" strokeWidth={1.75} />View Messages</Link></Button>
+            <Button variant="outline" size="sm" className="gap-2 h-9 press-scale" asChild><Link to="/settings"><Settings className="w-4 h-4" strokeWidth={1.75} />Settings</Link></Button>
+            <Button size="sm" className="gap-2 h-9 press-scale" asChild><Link to="/conversations"><MessageSquare className="w-4 h-4" strokeWidth={1.75} />View Messages</Link></Button>
           </div>
         </motion.div>
 
@@ -143,7 +136,7 @@ export default function Dashboard() {
                       <stat.icon className={cn('w-4 h-4', stat.color)} strokeWidth={1.75} />
                     </div>
                   </div>
-                  <p className="mt-4 text-[26px] font-semibold text-foreground tabular-nums tracking-[-0.015em] leading-none">{stat.value}</p>
+                  <p className="mt-4 text-[26px] font-semibold text-foreground tabular-nums tracking-[-0.015em] leading-none"><AnimatedNumber value={stat.value} /></p>
                   <p className="mt-2 text-[12px] text-muted-foreground">Updated just now</p>
                 </CardContent>
               </Card>
