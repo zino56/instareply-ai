@@ -19,6 +19,7 @@ import Products from "./pages/Products";
 import AIKnowledge from "./pages/AIKnowledge";
 import Settings from "./pages/Settings";
 import Analytics from "./pages/Analytics";
+import Subscriptions from "./pages/Subscriptions";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
