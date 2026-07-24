@@ -25,7 +25,7 @@ const label: Record<Status, string> = {
 
 interface Props {
   status: 'loading' | 'error' | 'ready';
-  channel: { name: string; status: Status; lastSyncAt: string; webhook: 'ok' | 'error' } | null;
+  channel: { name: string; status: Status; lastSyncAt: string | null; webhook: 'ok' | 'error' | 'unknown' } | null;
   onRetry?: () => void;
 }
 
