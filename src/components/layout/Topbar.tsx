@@ -51,7 +51,7 @@ export function Topbar({ onOpenMobileNav }: TopbarProps) {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden shrink-0"
+            className="md:hidden shrink-0 h-11 w-11"
             onClick={onOpenMobileNav}
             aria-label="Open navigation"
           >

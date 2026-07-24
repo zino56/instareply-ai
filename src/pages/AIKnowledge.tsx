@@ -183,7 +183,7 @@ export default function AIKnowledge() {
       >
         {/* Header */}
         <motion.div variants={item}>
-          <h1 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.02em] leading-tight text-foreground">AI Knowledge Base</h1>
+          <h1 className="text-[24px] md:text-[28px] font-semibold tracking-tight md:tracking-[-0.02em] leading-tight text-foreground">AI Knowledge Base</h1>
           <p className="text-muted-foreground mt-1.5 text-[14px] max-w-2xl">
             Upload your business documents so the AI can provide accurate, personalized responses to your customers.
           </p>
@@ -265,8 +265,8 @@ export default function AIKnowledge() {
                     key={doc.label}
                     className="flex items-start gap-3 p-3 rounded-xl border border-border/60 bg-background hover:border-border hover:bg-muted/40 transition-colors"
                   >
-                    <div className="p-2 rounded-md bg-primary/10 shrink-0">
-                      <doc.icon className="w-4 h-4 text-primary" strokeWidth={1.75} />
+                    <div className="p-2 rounded-md bg-muted shrink-0">
+                      <doc.icon className="w-4 h-4 text-muted-foreground" strokeWidth={1.75} />
                     </div>
                     <div className="min-w-0">
                       <p className="text-[13px] font-medium text-foreground">{doc.label}</p>
@@ -326,17 +326,17 @@ export default function AIKnowledge() {
                       </div>
                       <div className="flex items-center gap-2">
                         {doc.status === 'ready' && (
-                          <Badge variant="outline" className="text-primary border-primary/30 text-xs">
+                          <Badge variant="outline" className="h-5 px-1.5 text-[11px] font-medium rounded-md bg-success/10 text-success border-0">
                             Ready
                           </Badge>
                         )}
                         {doc.status === 'processing' && (
-                          <Badge variant="outline" className="text-warning border-warning/30 text-xs">
+                          <Badge variant="outline" className="h-5 px-1.5 text-[11px] font-medium rounded-md bg-warning/10 text-warning border-0">
                             Processing
                           </Badge>
                         )}
                         {doc.status === 'error' && (
-                          <Badge variant="outline" className="text-destructive border-destructive/30 text-xs">
+                          <Badge variant="outline" className="h-5 px-1.5 text-[11px] font-medium rounded-md bg-destructive/10 text-destructive border-0">
                             Error
                           </Badge>
                         )}

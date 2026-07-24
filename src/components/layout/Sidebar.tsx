@@ -38,7 +38,8 @@ export function Sidebar({ onNavigate }: SidebarProps) {
         to={link.href}
         onClick={onNavigate}
         className={cn(
-          'relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors focus-ring',
+          'relative flex items-center gap-3 px-3 rounded-lg text-[13px] font-medium transition-colors focus-ring',
+          'min-h-[44px] md:min-h-0 md:h-9',
           isActive
             ? 'bg-muted text-foreground'
             : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
@@ -70,13 +71,13 @@ export function Sidebar({ onNavigate }: SidebarProps) {
       {/* Nav */}
       <nav className="flex-1 overflow-y-auto px-3 py-5 space-y-6">
         <div className="space-y-1">
-          <p className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
+          <p className="px-3 pb-2 text-[12px] font-semibold uppercase tracking-[0.09em] text-muted-foreground/70">
             Main
           </p>
           {mainLinks.map(renderLink)}
         </div>
         <div className="space-y-1">
-          <p className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
+          <p className="px-3 pb-2 text-[12px] font-semibold uppercase tracking-[0.09em] text-muted-foreground/70">
             Workspace
           </p>
           {workspaceLinks.map(renderLink)}

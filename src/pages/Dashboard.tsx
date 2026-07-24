@@ -66,8 +66,8 @@ export default function Dashboard() {
   };
 
   const statCards = [
-    { label: 'Messages This Month', value: stats.total_messages_this_month.toLocaleString(), icon: MessageSquare, trend: null, color: 'text-primary', bgColor: 'bg-primary/10' },
-    { label: 'Active Conversations', value: stats.active_conversations.toString(), icon: Clock, trend: null, color: 'text-info', bgColor: 'bg-info/10' },
+    { label: 'Messages This Month', value: stats.total_messages_this_month.toLocaleString(), icon: MessageSquare, trend: null, color: 'text-muted-foreground', bgColor: 'bg-muted' },
+    { label: 'Active Conversations', value: stats.active_conversations.toString(), icon: Clock, trend: null, color: 'text-muted-foreground', bgColor: 'bg-muted' },
   ];
 
   if (loading) {
@@ -84,7 +84,7 @@ export default function Dashboard() {
         {/* Welcome Header */}
         <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <h1 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.02em] leading-tight text-foreground">
+            <h1 className="text-[24px] md:text-[28px] font-semibold tracking-tight md:tracking-[-0.02em] leading-tight text-foreground">
               Hi, {clientStatus?.name || 'there'} 👋
             </h1>
             <p className="text-muted-foreground mt-1.5 text-[14px]">
@@ -195,20 +195,20 @@ export default function Dashboard() {
                     <p className="text-muted-foreground text-[13px] mt-1 max-w-[260px]">Connect your Instagram page to start receiving and automating DMs.</p>
                   </div>
                 ) : (
-                  <div className="divide-y divide-border/60 -mx-2">
+                  <div className="divide-y divide-border/70 -mx-2">
                     {recentConversations.map((conversation) => (
-                      <Link key={conversation.id} to={`/conversations?id=${conversation.id}`} className="flex items-center gap-4 px-2 py-3 rounded-lg hover:bg-muted/50 transition-colors group focus-ring">
-                        <Avatar className="h-9 w-9 ring-1 ring-border">
-                          <AvatarFallback className="bg-secondary text-secondary-foreground text-[13px] font-medium">{conversation.sender_name?.charAt(0) || '?'}</AvatarFallback>
+                      <Link key={conversation.id} to={`/conversations?id=${conversation.id}`} className="flex items-center gap-3 px-2 py-3 rounded-lg hover:bg-muted/50 transition-colors group focus-ring">
+                        <Avatar className="h-8 w-8 ring-1 ring-border">
+                          <AvatarFallback className="bg-secondary text-secondary-foreground text-[12px] font-medium">{conversation.sender_name?.charAt(0) || '?'}</AvatarFallback>
                         </Avatar>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-3">
                             <p className="font-medium text-[13px] truncate text-foreground">{conversation.sender_name}</p>
                             {conversation.last_interaction_at && (
-                              <span className="text-[11px] text-muted-foreground tabular-nums shrink-0">{formatDistanceToNow(new Date(conversation.last_interaction_at), { addSuffix: true })}</span>
+                              <span className="text-[12px] text-muted-foreground tabular-nums shrink-0">{formatDistanceToNow(new Date(conversation.last_interaction_at), { addSuffix: true })}</span>
                             )}
                           </div>
-                          <p className="text-[12.5px] text-muted-foreground line-clamp-1 mt-0.5">{conversation.last_message}</p>
+                          <p className="text-[12px] text-muted-foreground line-clamp-1 mt-0.5">{conversation.last_message}</p>
                         </div>
                         {(conversation.unread_count || 0) > 0 && <Badge className="bg-primary text-primary-foreground min-w-[20px] h-5 px-1.5 flex items-center justify-center text-[11px] font-semibold rounded-full">{conversation.unread_count}</Badge>}
                       </Link>

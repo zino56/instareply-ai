@@ -126,7 +126,7 @@ export default function Products() {
         {/* Header */}
         <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <h1 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.02em] leading-tight text-foreground">Products</h1>
+            <h1 className="text-[24px] md:text-[28px] font-semibold tracking-tight md:tracking-[-0.02em] leading-tight text-foreground">Products</h1>
             <p className="text-muted-foreground mt-1.5 text-[14px]">Manage your product catalog for AI-powered responses.</p>
           </div>
           <Button size="sm" className="h-9 gap-2" onClick={() => setIsUploadOpen(true)}><Plus className="w-4 h-4" strokeWidth={1.75} />Add Products</Button>
@@ -138,7 +138,7 @@ export default function Products() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:border-border transition-all duration-300 bg-card">
               <CardContent className="p-5">
-                <div className="flex items-start justify-between"><p className="text-[13px] text-muted-foreground font-medium">Total Products</p><div className="p-2 rounded-lg bg-primary/10"><Package className="w-4 h-4 text-primary" strokeWidth={1.75} /></div></div>
+                <div className="flex items-start justify-between"><p className="text-[13px] text-muted-foreground font-medium">Total Products</p><div className="p-2 rounded-lg bg-muted"><Package className="w-4 h-4 text-muted-foreground" strokeWidth={1.75} /></div></div>
                 <p className="mt-4 text-[28px] font-semibold text-foreground tabular-nums tracking-[-0.02em] leading-none">{products.length}</p>
               </CardContent>
             </Card>
@@ -184,7 +184,7 @@ export default function Products() {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
-                {!product.is_active && <div className="absolute inset-0 bg-background/60 flex items-center justify-center"><Badge variant="secondary" className="bg-background text-muted-foreground border border-border">Inactive</Badge></div>}
+                {!product.is_active && <div className="absolute inset-0 bg-background/60 flex items-center justify-center"><Badge variant="secondary" className="h-5 px-1.5 text-[11px] font-medium rounded-md bg-background text-muted-foreground border border-border/70">Inactive</Badge></div>}
               </div>
               <CardContent className="p-4">
                 <div className="flex items-start justify-between gap-2 mb-2">

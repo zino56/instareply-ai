@@ -57,7 +57,7 @@ export default function Analytics() {
       <motion.div variants={container} initial="hidden" animate="show" className="space-y-6 md:space-y-8">
         <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <h1 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.02em] leading-tight text-foreground">Analytics</h1>
+            <h1 className="text-[24px] md:text-[28px] font-semibold tracking-tight md:tracking-[-0.02em] leading-tight text-foreground">Analytics</h1>
             <p className="text-muted-foreground mt-1.5 text-[14px]">Track your automation performance over time.</p>
           </div>
           <div className="flex items-center gap-2.5">
