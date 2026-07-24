@@ -25,6 +25,7 @@ import { formatDistanceToNow } from 'date-fns';
 import type { Conversation } from '@/types';
 import { pageContainer as container, pageItem as item } from '@/lib/motion';
 import { dashboardMock } from '@/lib/dashboardMock';
+import type { AttentionItem } from '@/lib/dashboardMock';
 import { SetupAlert } from '@/components/dashboard/SetupAlert';
 import { KpiCard } from '@/components/dashboard/KpiCard';
 import { NeedsAttentionList } from '@/components/dashboard/NeedsAttentionList';
@@ -36,6 +37,9 @@ import { StatePanel } from '@/components/dashboard/StatePanel';
 
 type BlockStatus = 'loading' | 'error' | 'ready';
 
+// Mock fixtures are ONLY allowed in local dev builds. Production ignores them entirely.
+const IS_DEV = import.meta.env.DEV;
+
 export default function Dashboard() {
   const { clientStatus, fetchClientStatus } = useAuthStore();
   const [conversations, setConversations] = useState<Conversation[]>([]);
@@ -44,7 +48,7 @@ export default function Dashboard() {
   const [searchParams] = useSearchParams();
 
   // Dev-only visual state override for QA: ?dashState=loading|error|empty
-  const stateOverride = searchParams.get('dashState');
+  const stateOverride = IS_DEV ? searchParams.get('dashState') : null;
 
   const load = async () => {
     setLoading(true);
@@ -65,24 +69,59 @@ export default function Dashboard() {
   const isConnected = Boolean(clientStatus?.instagram_page_id);
   const recentConversations = conversations.slice(0, 5);
 
-  // Compose setup steps: Instagram real, others from mock (until backend supports)
+  // Real setup signals. Product/knowledge counts aren't in clientStatus yet — treat as unknown (false) so users see the step.
+  const hasProducts = Boolean(clientStatus?.products_count && clientStatus.products_count > 0);
+  const hasKnowledge = Boolean(clientStatus?.knowledge_count && clientStatus.knowledge_count > 0);
+
   const setupSteps = useMemo(() => ([
     { label: 'Connect Instagram', done: isConnected, href: '/settings?tab=instagram' },
-    { label: 'Add AI knowledge', done: dashboardMock.setup.aiKnowledge, href: '/ai-knowledge' },
-    { label: 'Add products', done: dashboardMock.setup.products, href: '/products' },
-  ]), [isConnected]);
+    { label: 'Add AI knowledge', done: hasKnowledge, href: '/ai-knowledge' },
+    { label: 'Add products', done: hasProducts, href: '/products' },
+  ]), [isConnected, hasKnowledge, hasProducts]);
 
   const setupDone = setupSteps.filter((s) => s.done).length;
   const firstRun = setupDone === 0 || stateOverride === 'empty';
 
-  const kpiStatus: BlockStatus = stateOverride === 'loading' ? 'loading' : stateOverride === 'error' ? 'error' : 'ready';
+  // Derive real KPIs from what we actually have.
+  const unreadCount = conversations.reduce((n, c: any) => n + (c.unread_count || 0), 0);
+  const activeCount = conversations.filter((c: any) => (c.status ? c.status !== 'resolved' : true)).length;
+
+  const kpiStatus: BlockStatus = stateOverride === 'loading' ? 'loading' : stateOverride === 'error' ? 'error' : convStatus;
   const attentionStatus: BlockStatus = kpiStatus;
-  const channelStatus: BlockStatus = kpiStatus;
-  const usageStatus: BlockStatus = kpiStatus;
+  const channelStatus: BlockStatus = stateOverride === 'loading' ? 'loading' : stateOverride === 'error' ? 'error' : 'ready';
   const convDisplayStatus: BlockStatus = stateOverride === 'loading' ? 'loading' : stateOverride === 'error' ? 'error' : convStatus;
 
-  const attentionItems = stateOverride === 'empty' ? [] : dashboardMock.attention;
-  const kpi = dashboardMock.kpis;
+  // Build real "Needs attention" items from live signals.
+  const realAttention: AttentionItem[] = [];
+  if (!isConnected) {
+    realAttention.push({ id: 'ig', kind: 'disconnected', title: 'Instagram not connected', meta: 'Connect a page to start automating DMs', actionLabel: 'Connect', href: '/settings?tab=instagram' });
+  }
+  if (unreadCount > 0) {
+    realAttention.push({ id: 'unread', kind: 'unread', title: `${unreadCount} unread ${unreadCount === 1 ? 'message' : 'messages'}`, meta: 'Review in the inbox', actionLabel: 'Review', href: '/conversations' });
+  }
+  if (isConnected && !hasProducts) {
+    realAttention.push({ id: 'prod', kind: 'setup', title: 'No products in catalog', meta: 'AI can\u2019t recommend items yet', actionLabel: 'Add', href: '/products' });
+  }
+  if (isConnected && !hasKnowledge) {
+    realAttention.push({ id: 'kb', kind: 'setup', title: 'No AI knowledge uploaded', meta: 'Train the AI on your brand', actionLabel: 'Add', href: '/ai-knowledge' });
+  }
+
+  const attentionItems: AttentionItem[] = stateOverride === 'empty'
+    ? []
+    : IS_DEV && stateOverride
+      ? dashboardMock.attention
+      : realAttention;
+
+  // Channel derived from real client status.
+  const channel = {
+    name: 'Instagram' as const,
+    status: (isConnected ? 'healthy' : 'disconnected') as 'healthy' | 'disconnected',
+    lastSyncAt: null,
+    webhook: 'unknown' as const,
+  };
+
+  // Usage: no backend endpoint yet — hide unless dev override with mock.
+  const usage = IS_DEV && stateOverride ? dashboardMock.usage : null;
 
   if (loading && !stateOverride) {
     return (
@@ -163,10 +202,10 @@ export default function Dashboard() {
         <motion.div variants={item} className="space-y-3">
           <h2 className="text-[12px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">Overview</h2>
           <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
-            <KpiCard label="Messages (7d)" value={kpi.messages7d.value} icon={MessageSquare} trend={kpi.messages7d.trend} spark={kpi.messages7d.spark} status={kpiStatus} />
-            <KpiCard label="Active conversations" value={kpi.activeConversations.value} icon={Clock} trend={kpi.activeConversations.trend} status={kpiStatus} />
-            <KpiCard label="AI reply rate" value={kpi.aiReplyRate.value * 100} icon={Sparkles} format={(n) => `${Math.round(n)}%`} trend={kpi.aiReplyRate.trend} status={kpiStatus} />
-            <KpiCard label="Needs attention" value={attentionItems.length || kpi.needsAttention.value} icon={AlertCircle} status={kpiStatus} emphasize />
+            <KpiCard label="Messages (7d)" value={null} icon={MessageSquare} status={kpiStatus} hint="Metric available soon" />
+            <KpiCard label="Active conversations" value={convStatus === 'ready' ? activeCount : null} icon={Clock} status={kpiStatus} />
+            <KpiCard label="AI reply rate" value={null} icon={Sparkles} format={(n) => `${Math.round(n)}%`} status={kpiStatus} hint="Metric available soon" />
+            <KpiCard label="Needs attention" value={attentionItems.length} icon={AlertCircle} status={kpiStatus} emphasize />
           </div>
         </motion.div>
 
@@ -175,7 +214,7 @@ export default function Dashboard() {
           <div className="lg:col-span-2">
             <NeedsAttentionList items={attentionItems} status={attentionStatus} onRetry={load} />
           </div>
-          <ChannelHealthCard status={channelStatus} channel={dashboardMock.channel} onRetry={load} />
+          <ChannelHealthCard status={channelStatus} channel={channel} onRetry={load} />
         </motion.div>
 
         {/* Row: Recent Conversations + Quick Actions */}
@@ -239,9 +278,21 @@ export default function Dashboard() {
 
         {/* Row: Usage / Plan + insights placeholder */}
         <motion.div variants={item} className="grid lg:grid-cols-3 gap-5">
-          <div className="lg:col-span-2">
-            <UsagePlanCard status={usageStatus} usage={dashboardMock.usage} onRetry={load} />
-          </div>
+          {usage ? (
+            <div className="lg:col-span-2">
+              <UsagePlanCard status="ready" usage={usage} onRetry={load} />
+            </div>
+          ) : (
+            <Card className="lg:col-span-2 rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-card h-full">
+              <CardHeader className="pb-3"><CardTitle className="text-[14px] font-semibold text-foreground">Usage & plan</CardTitle></CardHeader>
+              <CardContent className="pt-0">
+                <div className="flex items-center justify-between gap-4">
+                  <p className="text-[13px] text-muted-foreground">Usage tracking will appear once your plan is active.</p>
+                  <Button variant="outline" size="sm" className="h-9 press-scale" asChild><Link to="/pricing">View plans</Link></Button>
+                </div>
+              </CardContent>
+            </Card>
+          )}
           <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-muted/30 h-full">
             <CardContent className="p-5 flex items-start gap-3 h-full">
               <div className="p-2 rounded-lg bg-background border border-border/60 shrink-0">

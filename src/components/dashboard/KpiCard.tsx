@@ -7,13 +7,14 @@ import type { Trend } from '@/lib/dashboardMock';
 
 interface KpiCardProps {
   label: string;
-  value: number;
+  value: number | null;
   icon: LucideIcon;
   format?: (n: number) => string;
   trend?: Trend;
   spark?: number[];
   status?: 'loading' | 'error' | 'ready';
   emphasize?: boolean; // yellow accent for "needs attention"
+  hint?: string;
 }
 
 function Sparkline({ data }: { data: number[] }) {
@@ -30,17 +31,19 @@ function Sparkline({ data }: { data: number[] }) {
   );
 }
 
-export function KpiCard({ label, value, icon: Icon, format, trend, spark, status = 'ready', emphasize }: KpiCardProps) {
+export function KpiCard({ label, value, icon: Icon, format, trend, spark, status = 'ready', emphasize, hint }: KpiCardProps) {
+  const hasValue = value !== null && value !== undefined;
+  const highlight = emphasize && hasValue && (value as number) > 0;
   return (
     <Card className={cn(
       'rounded-2xl border shadow-[var(--shadow-sm)] bg-card',
-      emphasize && value > 0 ? 'border-primary/40 bg-primary/[0.03]' : 'border-border/70',
+      highlight ? 'border-primary/40 bg-primary/[0.03]' : 'border-border/70',
     )}>
       <CardContent className="p-5">
         <div className="flex items-start justify-between">
           <p className="text-[13px] text-muted-foreground font-medium">{label}</p>
-          <div className={cn('p-2 rounded-lg', emphasize && value > 0 ? 'bg-primary/15' : 'bg-muted')}>
-            <Icon className={cn('w-4 h-4', emphasize && value > 0 ? 'text-foreground' : 'text-muted-foreground')} strokeWidth={1.75} />
+          <div className={cn('p-2 rounded-lg', highlight ? 'bg-primary/15' : 'bg-muted')}>
+            <Icon className={cn('w-4 h-4', highlight ? 'text-foreground' : 'text-muted-foreground')} strokeWidth={1.75} />
           </div>
         </div>
         {status === 'loading' ? (
@@ -50,13 +53,13 @@ export function KpiCard({ label, value, icon: Icon, format, trend, spark, status
         ) : (
           <div className="mt-4 flex items-end justify-between gap-3">
             <p className="text-[26px] font-semibold text-foreground tabular-nums tracking-[-0.015em] leading-none">
-              <AnimatedNumber value={value} format={format} />
+              {hasValue ? <AnimatedNumber value={value as number} format={format} /> : <span className="text-muted-foreground/60">—</span>}
             </p>
-            {spark && <Sparkline data={spark} />}
+            {spark && hasValue && <Sparkline data={spark} />}
           </div>
         )}
         <div className="mt-2 flex items-center gap-1.5 text-[12px]">
-          {trend && status === 'ready' ? (
+          {trend && status === 'ready' && hasValue ? (
             <>
               <span className={cn('inline-flex items-center gap-0.5 font-medium tabular-nums',
                 trend.direction === 'up' ? 'text-success' : trend.direction === 'down' ? 'text-destructive' : 'text-muted-foreground',
@@ -67,7 +70,7 @@ export function KpiCard({ label, value, icon: Icon, format, trend, spark, status
               <span className="text-muted-foreground">vs last 7d</span>
             </>
           ) : status === 'ready' ? (
-            <span className="text-muted-foreground">Updated just now</span>
+            <span className="text-muted-foreground">{hint ?? (hasValue ? 'Updated just now' : 'No data yet')}</span>
           ) : null}
         </div>
       </CardContent>
