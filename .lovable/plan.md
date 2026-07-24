@@ -1,61 +1,119 @@
-# Conveero — Enterprise SaaS Visual Polish
+# Dashboard Product-Completeness Pass
 
-## Visual principles adapted from the references
+Scope: `src/pages/Dashboard.tsx` only + small local components under `src/components/dashboard/`. No backend, routes, colors, or typography changes. Keep existing motion tokens (`pageContainer`, `pageItem`, `AnimatedNumber`).
 
-From the uploaded screenshots I'm adapting only the *visual system*, not their product:
+---
 
-- **Off-white canvas + elevated white cards** with hairline borders and soft shadows (not gradients).
-- **Persistent left sidebar** with grouped nav sections ("Main", "Workspace") and a calm active state (subtle tinted pill + 2px left indicator).
-- **Sticky topbar** with page title, breadcrumb/subtitle, search, and utility icons (help, notifications, avatar).
-- **KPI cards** — icon chip top-left, label, then large tabular-num value, then small delta line. Uniform height, 4-up on desktop.
-- **Generous whitespace + strict alignment** on 4px grid; consistent 24–32px section gaps; `rounded-2xl` on cards, `rounded-xl` on inputs/buttons.
-- **List/table hierarchy** — clear column headers, muted metadata, right-aligned numerics, status pills, hover row tint, focus ring.
-- **Restraint on color** — neutrals do 90% of the work; yellow reserved for primary CTA / active accent; magenta only for a single secondary accent (badges, highlights) — never as a fill on large surfaces.
+## 1. Information Architecture
 
-Explicitly **not** copying: Salezy logo/name, their icon set, gradient blue charts, fake revenue numbers, their exact grid, or their sidebar tool list.
+Top-to-bottom on desktop; single column on mobile:
 
-## What stays untouched
+```text
+┌───────────────────────────────────────────────────────────────┐
+│ Welcome header  (existing — kept)                             │
+├───────────────────────────────────────────────────────────────┤
+│ Setup Alert Banner  (only if setupComplete < 100%)            │
+├───────────────────────────────────────────────────────────────┤
+│ KPI Row  ── 4 cards ──────────────────────────────────────────│
+│  Messages 7d │ Active convos │ AI reply rate │ Needs attention│
+├───────────────────────────────────────┬───────────────────────┤
+│ Needs Attention  (list, 2/3 width)    │ Channel Health (1/3)  │
+├───────────────────────────────────────┼───────────────────────┤
+│ Recent Conversations  (2/3)           │ Quick Actions (1/3)   │
+├───────────────────────────────────────┼───────────────────────┤
+│ Usage / Plan  (2/3)                   │ (Quick Actions cont.) │
+└───────────────────────────────────────┴───────────────────────┘
+```
 
-- All routes, navigation items, page copy, backend calls, auth flow, dev bypass, API client, Zustand store, data fetching, and component behavior.
-- Brand palette: yellow `#FFF100` primary, magenta `#FF00FF` restrained accent, black/white/gray neutrals.
-- No new fake metrics, orders, charts, or seeded data. Empty states remain empty states.
+Empty-account variant: header + **First-run Checklist** replaces Setup Alert and hides Needs Attention / Recent Convos (shows empty states inline instead).
 
-## Files I will modify (visual only)
+---
 
-**Shared system**
-- `src/index.css` — refine neutral scale, surface token to off-white, tighten shadow tokens, adjust ring for light bg.
-- `tailwind.config.ts` — expose any new tokens if needed.
-- `src/components/layout/AppLayout.tsx` — swap to sidebar + topbar shell (keep auth gate identical).
-- `src/components/layout/Navbar.tsx` → become **Sidebar.tsx** + new **Topbar.tsx** (same nav links, same logout, same user menu, same mobile drawer behavior — visual restructure only).
+## 2. Sections & Components
 
-**Authenticated pages (className/structure-only polish)**
-- `src/pages/Dashboard.tsx`
-- `src/pages/Conversations.tsx`
-- `src/pages/Products.tsx`
-- `src/pages/AIKnowledge.tsx`
-- `src/pages/Analytics.tsx`
-- `src/pages/Settings.tsx`
-- `src/pages/Pricing.tsx`
-- `src/pages/onboarding/ConnectInstagram.tsx`
+New files under `src/components/dashboard/`:
 
-Landing, Login, Signup, AuthCallback, NotFound: **untouched**.
+- `SetupAlert.tsx` — dismissible banner. Shows N of 3 steps done (Instagram, AI knowledge, products). Warning-tint if incomplete, hidden when 100%.
+- `KpiCard.tsx` — unified KPI tile with label, `AnimatedNumber`, delta chip (▲/▼ + %), sparkline placeholder line, skeleton + error states.
+- `NeedsAttentionList.tsx` — grouped rows: unread DMs, failed replies, disconnected channels, missing setup. Each row: icon tile, title, meta, right-side action button (`Review`, `Reconnect`, `Fix`).
+- `RecentConversationsCompact.tsx` — refactor of existing recent list into its own component with skeleton/empty/error.
+- `ChannelHealthCard.tsx` — Instagram row with status dot (green/amber/red), last sync time, webhook status, "Reconnect" if unhealthy.
+- `QuickActionsCard.tsx` — existing 4 links, kept, moved into component.
+- `UsagePlanCard.tsx` — plan name, messages used / quota with progress bar, renewal date, "Upgrade" CTA (yellow — meaningful action).
+- `FirstRunChecklist.tsx` — 4 tasks with check circles, progress bar, primary CTA on next incomplete task.
 
-## Stages (I stop for review between each)
+Shared micro-primitives (local to dashboard folder):
 
-**Stage 1 — Shared layout & tokens**
-Refine `index.css` tokens (off-white canvas `--surface`, softened shadows, neutral border). Replace `Navbar` with a two-part shell: left `Sidebar` (grouped links, calm active pill, collapsed on mobile via existing drawer) and top `Topbar` (page title slot, right-side user menu + logout — same items as today). `AppLayout` composes them; auth gate unchanged.
+- `StatePanel` helper: renders `{loading|error|empty|children}` to keep every block covering the 4 required states without duplication.
 
-**Stage 2 — Dashboard**
-Rework layout inside existing `Dashboard.tsx`: page header block, Instagram connection card as a full-width status strip, KPI row using **only real values already computed** (`total_messages_this_month`, `active_conversations`) — no invented metrics. Quick Actions + Recent Conversations grid gets the refined card/list treatment. Empty states preserved.
+Motion: reuse `pageContainer`/`pageItem`; skeletons use existing `.skeleton-shimmer`.
 
-**Stage 3 — Remaining pages**
-Apply the same card, header, list, and table language to Conversations (premium inbox rows: avatar, name, snippet, time, unread pill, status tag), Products (structured card grid), AI Knowledge (document list with clear rows + upload zone), Analytics (real values only, no fake charts), Settings (sectioned panels with clear labels), Pricing (aligned tier cards), and Connect Instagram onboarding (calmer card, same CTA + skip).
+---
 
-## Guardrails I'll hold to
+## 3. Mock Data Shape
 
-- Every interactive element keeps a visible `focus-visible` ring.
-- No hardcoded color utilities — semantic tokens only.
-- No dependency additions.
-- Diffs stay reviewable per stage; I pause after Stage 1 and Stage 2 for your OK before continuing.
+Add `src/lib/dashboardMock.ts` with typed fixtures (used only inside Dashboard until backend is ready):
 
-Reply "approved" to start with Stage 1 (shared layout + tokens).
+```ts
+type Trend = { value: number; direction: 'up' | 'down' | 'flat' };
+
+type DashboardMock = {
+  setup: { instagram: boolean; aiKnowledge: boolean; products: boolean };
+  kpis: {
+    messages7d: { value: number; trend: Trend; spark: number[] };
+    activeConversations: { value: number; trend: Trend };
+    aiReplyRate: { value: number; trend: Trend }; // 0..1
+    needsAttention: { value: number };
+  };
+  attention: Array<{
+    id: string;
+    kind: 'unread' | 'failed' | 'disconnected' | 'setup';
+    title: string;
+    meta: string;
+    actionLabel: string;
+    href: string;
+  }>;
+  channel: {
+    name: 'Instagram';
+    status: 'healthy' | 'degraded' | 'down' | 'disconnected';
+    lastSyncAt: string;
+    webhook: 'ok' | 'error';
+  };
+  usage: {
+    plan: 'Free' | 'Starter' | 'Pro';
+    used: number;
+    quota: number;
+    renewsAt: string;
+  };
+};
+```
+
+Real values from `clientStatus` / conversations still flow in where already wired (Instagram connection, recent list). Everything else is mock; each block owns a `loading`/`error` toggle in state so QA can visually flip states via a dev-only query flag `?dashState=loading|error|empty`.
+
+---
+
+## 4. Mobile Layout Plan
+
+- Single column, 16px gutter.
+- Order: Header → Setup Alert → KPI (2×2 grid) → Needs Attention → Recent Conversations → Channel Health → Quick Actions → Usage/Plan.
+- KPI cards: `grid-cols-2` on `sm`, `grid-cols-4` on `xl` (unchanged pattern).
+- Right-column widgets (Channel Health, Quick Actions, Usage) collapse to full width under Needs Attention.
+- All action buttons keep `h-11` on mobile / `h-9` desktop to preserve 44px targets.
+- Sparklines hidden < `md` to keep density calm.
+- First-run checklist is full-width on all breakpoints.
+
+---
+
+## 5. Waits for Backend
+
+These render with mock data now, but need endpoints later:
+
+- KPI deltas + sparkline history (`/api/metrics/summary?range=7d`)
+- AI reply rate (`assistant_msgs / total_msgs`)
+- Failed reply events for Needs Attention (`/api/events?type=reply_failed`)
+- Webhook/channel health (`/api/channels/health`)
+- Plan + usage/quota (`/api/billing/usage`)
+- Setup completeness flags for `aiKnowledge` and `products` (currently only Instagram is real)
+- Dismiss-state persistence for Setup Alert (needs a user-pref endpoint or local key — will use `localStorage` until then)
+
+Once endpoints exist, swap `dashboardMock.ts` calls for real fetches; component contracts won't change.
