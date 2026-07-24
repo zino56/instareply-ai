@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   LayoutDashboard,
   MessageSquare,
@@ -38,7 +39,7 @@ export function Sidebar({ onNavigate }: SidebarProps) {
         to={link.href}
         onClick={onNavigate}
         className={cn(
-          'relative flex items-center gap-3 px-3 rounded-lg text-[13px] font-medium transition-colors focus-ring',
+          'relative flex items-center gap-3 px-3 rounded-lg text-[13px] font-medium transition-[background-color,color] duration-150 ease-out focus-ring',
           'min-h-[44px] md:min-h-0 md:h-9',
           isActive
             ? 'bg-muted text-foreground'
@@ -46,7 +47,11 @@ export function Sidebar({ onNavigate }: SidebarProps) {
         )}
       >
         {isActive && (
-          <span className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-r-full bg-primary" />
+          <motion.span
+            layoutId="sidebar-indicator"
+            transition={{ type: 'spring', stiffness: 500, damping: 40, mass: 0.6 }}
+            className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-r-full bg-primary"
+          />
         )}
         <Icon className="w-[18px] h-[18px] shrink-0" strokeWidth={1.75} />
         <span className="truncate">{link.label}</span>
