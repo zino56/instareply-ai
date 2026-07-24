@@ -60,9 +60,36 @@ const SEGMENTS: { id: Segment; label: string }[] = [
   { id: 'resolved', label: 'Resolved' },
 ];
 
+const IS_DEV = import.meta.env.DEV;
+
+// Best-effort coercion of unknown backend payload into the UI shape.
+// Missing fields degrade gracefully to safe defaults — never invent content.
+function coerceConversations(raw: unknown): MockConversation[] {
+  const arr = Array.isArray(raw) ? raw : Array.isArray((raw as any)?.data) ? (raw as any).data : [];
+  return arr.map((c: any, i: number): MockConversation => ({
+    id: String(c?.id ?? c?.conversation_id ?? `c-${i}`),
+    sender_name: c?.sender_name ?? c?.name ?? c?.username ?? 'Unknown',
+    handle: c?.handle ?? c?.username ?? undefined,
+    channel: 'instagram',
+    status: c?.is_resolved || c?.status === 'resolved' ? 'resolved' : 'open',
+    assignee: (c?.assignee as ConvAssignee) ?? 'unassigned',
+    ai_status: c?.ai_status ?? 'replied',
+    needs_attention: Boolean(c?.needs_attention),
+    unread_count: Number(c?.unread_count ?? 0),
+    is_resolved: Boolean(c?.is_resolved),
+    last_message: c?.last_message ?? '',
+    last_interaction_at:
+      c?.last_interaction_at ?? c?.updated_at ?? c?.created_at ?? new Date().toISOString(),
+    message_count: Number(c?.message_count ?? (Array.isArray(c?.messages) ? c.messages.length : 0)),
+    messages: Array.isArray(c?.messages) ? c.messages : [],
+  }));
+}
+
 export default function Conversations() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const qaState = (searchParams.get('convState') as QaState) || 'ready';
+  const qaState: QaState = IS_DEV
+    ? ((searchParams.get('convState') as QaState) || 'ready')
+    : 'ready';
 
   const [conversations, setConversations] = useState<MockConversation[]>([]);
   const [status, setStatus] = useState<QaState>('loading');
@@ -93,28 +120,49 @@ export default function Conversations() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Simulated load with QA states
+  // Load conversations
   useEffect(() => {
     let cancelled = false;
     setStatus('loading');
-    const t = setTimeout(() => {
-      if (cancelled) return;
-      if (qaState === 'loading') return;
-      if (qaState === 'error') {
-        setStatus('error');
-        return;
-      }
-      if (qaState === 'empty') {
-        setConversations([]);
+
+    // Dev-only QA overrides
+    if (IS_DEV) {
+      const t = setTimeout(() => {
+        if (cancelled) return;
+        if (qaState === 'loading') return;
+        if (qaState === 'error') {
+          setStatus('error');
+          return;
+        }
+        if (qaState === 'empty') {
+          setConversations([]);
+          setStatus('ready');
+          return;
+        }
+        setConversations(mockConversations);
         setStatus('ready');
-        return;
+      }, 450);
+      return () => {
+        cancelled = true;
+        clearTimeout(t);
+      };
+    }
+
+    // Production: fetch real data. No mock fallback.
+    (async () => {
+      try {
+        const data = await api.getConversations();
+        if (cancelled) return;
+        setConversations(coerceConversations(data));
+        setStatus('ready');
+      } catch {
+        if (cancelled) return;
+        setStatus('error');
       }
-      setConversations(mockConversations);
-      setStatus('ready');
-    }, 450);
+    })();
+
     return () => {
       cancelled = true;
-      clearTimeout(t);
     };
   }, [qaState]);
 
