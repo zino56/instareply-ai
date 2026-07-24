@@ -52,6 +52,7 @@ const App = () => (
               <Route path="/ai-knowledge" element={<AIKnowledge />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/analytics" element={<Analytics />} />
+              <Route path="/subscriptions" element={<Subscriptions />} />
             </Route>
 
             {/* 404 */}
