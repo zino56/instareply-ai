@@ -7,13 +7,14 @@ import type { Trend } from '@/lib/dashboardMock';
 
 interface KpiCardProps {
   label: string;
-  value: number;
+  value: number | null;
   icon: LucideIcon;
   format?: (n: number) => string;
   trend?: Trend;
   spark?: number[];
   status?: 'loading' | 'error' | 'ready';
   emphasize?: boolean; // yellow accent for "needs attention"
+  hint?: string;
 }
 
 function Sparkline({ data }: { data: number[] }) {
