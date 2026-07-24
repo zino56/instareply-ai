@@ -183,7 +183,7 @@ export default function AIKnowledge() {
       >
         {/* Header */}
         <motion.div variants={item}>
-          <h1 className="text-[24px] md:text-[28px] font-semibold tracking-tight md:tracking-[-0.02em] leading-tight text-foreground">AI Knowledge Base</h1>
+          <h1 className="text-[22px] md:text-[26px] font-semibold md:tracking-[-0.015em] leading-tight text-foreground">AI Knowledge Base</h1>
           <p className="text-muted-foreground mt-1.5 text-[14px] max-w-2xl">
             Upload your business documents so the AI can provide accurate, personalized responses to your customers.
           </p>
@@ -311,15 +311,15 @@ export default function AIKnowledge() {
                   {documents.map((doc) => (
                     <div
                       key={doc.id}
-                      className="flex items-center justify-between p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors group"
+                      className="flex items-center justify-between p-3 rounded-lg border border-border/60 bg-background hover:bg-muted/50 transition-colors group"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-md bg-background">
-                          <FileText className="w-5 h-5 text-primary" />
+                        <div className="p-2 rounded-md bg-muted">
+                          <FileText className="w-4 h-4 text-muted-foreground" strokeWidth={1.75} />
                         </div>
                         <div>
-                          <p className="font-medium text-sm">{doc.name}</p>
-                          <p className="text-xs text-muted-foreground">
+                          <p className="font-medium text-[13px] text-foreground">{doc.name}</p>
+                          <p className="text-[11.5px] text-muted-foreground tabular-nums mt-0.5">
                             {formatFileSize(doc.size)} • {formatDate(doc.uploadedAt)}
                           </p>
                         </div>

@@ -84,7 +84,7 @@ export default function Dashboard() {
         {/* Welcome Header */}
         <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <h1 className="text-[24px] md:text-[28px] font-semibold tracking-tight md:tracking-[-0.02em] leading-tight text-foreground">
+            <h1 className="text-[22px] md:text-[26px] font-semibold md:tracking-[-0.015em] leading-tight text-foreground">
               Hi, {clientStatus?.name || 'there'} 👋
             </h1>
             <p className="text-muted-foreground mt-1.5 text-[14px]">
@@ -135,7 +135,7 @@ export default function Dashboard() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
             {statCards.map((stat) => (
-              <Card key={stat.label} className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:border-border transition-all duration-300 bg-card">
+              <Card key={stat.label} className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] transition-colors duration-200 bg-card">
                 <CardContent className="p-5">
                   <div className="flex items-start justify-between">
                     <p className="text-[13px] text-muted-foreground font-medium">{stat.label}</p>
@@ -143,7 +143,7 @@ export default function Dashboard() {
                       <stat.icon className={cn('w-4 h-4', stat.color)} strokeWidth={1.75} />
                     </div>
                   </div>
-                  <p className="mt-4 text-[28px] font-semibold text-foreground tabular-nums tracking-[-0.02em] leading-none">{stat.value}</p>
+                  <p className="mt-4 text-[26px] font-semibold text-foreground tabular-nums tracking-[-0.015em] leading-none">{stat.value}</p>
                   <p className="mt-2 text-[12px] text-muted-foreground">Updated just now</p>
                 </CardContent>
               </Card>
@@ -195,7 +195,7 @@ export default function Dashboard() {
                     <p className="text-muted-foreground text-[13px] mt-1 max-w-[260px]">Connect your Instagram page to start receiving and automating DMs.</p>
                   </div>
                 ) : (
-                  <div className="divide-y divide-border/70 -mx-2">
+                  <div className="divide-y divide-border/60 -mx-2">
                     {recentConversations.map((conversation) => (
                       <Link key={conversation.id} to={`/conversations?id=${conversation.id}`} className="flex items-center gap-3 px-2 py-3 rounded-lg hover:bg-muted/50 transition-colors group focus-ring">
                         <Avatar className="h-8 w-8 ring-1 ring-border">

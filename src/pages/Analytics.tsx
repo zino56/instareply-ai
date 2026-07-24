@@ -43,9 +43,9 @@ export default function Analytics() {
   });
 
   const statCards = [
-    { label: 'Total Messages', value: totalMessages.toLocaleString(), icon: MessageSquare, change: '-', changeType: 'positive' as const, color: 'text-primary', bgColor: 'bg-primary/10' },
-    { label: 'Active Conversations', value: activeConvs.toString(), icon: Clock, change: '-', changeType: 'positive' as const, color: 'text-success', bgColor: 'bg-success/10' },
-    { label: 'Total Conversations', value: conversations.length.toString(), icon: TrendingUp, change: '-', changeType: 'positive' as const, color: 'text-info', bgColor: 'bg-info/10' },
+    { label: 'Total Messages', value: totalMessages.toLocaleString(), icon: MessageSquare, change: '-', changeType: 'positive' as const, color: 'text-muted-foreground', bgColor: 'bg-muted' },
+    { label: 'Active Conversations', value: activeConvs.toString(), icon: Clock, change: '-', changeType: 'positive' as const, color: 'text-muted-foreground', bgColor: 'bg-muted' },
+    { label: 'Total Conversations', value: conversations.length.toString(), icon: TrendingUp, change: '-', changeType: 'positive' as const, color: 'text-muted-foreground', bgColor: 'bg-muted' },
   ];
 
   if (loading) {
@@ -57,7 +57,7 @@ export default function Analytics() {
       <motion.div variants={container} initial="hidden" animate="show" className="space-y-6 md:space-y-8">
         <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <h1 className="text-[24px] md:text-[28px] font-semibold tracking-tight md:tracking-[-0.02em] leading-tight text-foreground">Analytics</h1>
+            <h1 className="text-[22px] md:text-[26px] font-semibold md:tracking-[-0.015em] leading-tight text-foreground">Analytics</h1>
             <p className="text-muted-foreground mt-1.5 text-[14px]">Track your automation performance over time.</p>
           </div>
           <div className="flex items-center gap-2.5">
@@ -77,13 +77,13 @@ export default function Analytics() {
           <h2 className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">Overview</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {statCards.map((stat) => (
-              <Card key={stat.label} className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:border-border transition-all duration-300 bg-card">
+              <Card key={stat.label} className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] transition-colors duration-200 bg-card">
                 <CardContent className="p-5">
                   <div className="flex items-start justify-between">
                     <p className="text-[13px] text-muted-foreground font-medium">{stat.label}</p>
                     <div className={cn('p-2 rounded-lg', stat.bgColor)}><stat.icon className={cn('w-4 h-4', stat.color)} strokeWidth={1.75} /></div>
                   </div>
-                  <p className="mt-4 text-[28px] font-semibold text-foreground tabular-nums tracking-[-0.02em] leading-none">{stat.value}</p>
+                  <p className="mt-4 text-[26px] font-semibold text-foreground tabular-nums tracking-[-0.015em] leading-none">{stat.value}</p>
                   <p className="mt-2 text-[12px] text-muted-foreground">Last {dateRange} days</p>
                 </CardContent>
               </Card>
