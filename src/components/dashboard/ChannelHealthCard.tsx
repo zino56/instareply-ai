@@ -61,16 +61,20 @@ export function ChannelHealthCard({ status, channel, onRetry }: Props) {
                 </div>
               </div>
               <dl className="space-y-2 text-[12.5px]">
-                <div className="flex items-center justify-between">
-                  <dt className="text-muted-foreground">Last sync</dt>
-                  <dd className="text-foreground tabular-nums">{formatDistanceToNow(new Date(channel.lastSyncAt), { addSuffix: true })}</dd>
-                </div>
-                <div className="flex items-center justify-between">
-                  <dt className="text-muted-foreground">Webhook</dt>
-                  <dd className={cn('font-medium', channel.webhook === 'ok' ? 'text-success' : 'text-destructive')}>
-                    {channel.webhook === 'ok' ? 'Delivering' : 'Failing'}
-                  </dd>
-                </div>
+                {channel.lastSyncAt && (
+                  <div className="flex items-center justify-between">
+                    <dt className="text-muted-foreground">Last sync</dt>
+                    <dd className="text-foreground tabular-nums">{formatDistanceToNow(new Date(channel.lastSyncAt), { addSuffix: true })}</dd>
+                  </div>
+                )}
+                {channel.webhook !== 'unknown' && (
+                  <div className="flex items-center justify-between">
+                    <dt className="text-muted-foreground">Webhook</dt>
+                    <dd className={cn('font-medium', channel.webhook === 'ok' ? 'text-success' : 'text-destructive')}>
+                      {channel.webhook === 'ok' ? 'Delivering' : 'Failing'}
+                    </dd>
+                  </div>
+                )}
               </dl>
               {(channel.status !== 'healthy' || channel.webhook !== 'ok') && (
                 <Button variant="outline" size="sm" className="w-full h-9 press-scale" asChild>
