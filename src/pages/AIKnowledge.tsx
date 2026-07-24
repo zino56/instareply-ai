@@ -326,17 +326,17 @@ export default function AIKnowledge() {
                       </div>
                       <div className="flex items-center gap-2">
                         {doc.status === 'ready' && (
-                          <Badge variant="outline" className="text-primary border-primary/30 text-xs">
+                          <Badge variant="outline" className="h-5 px-1.5 text-[11px] font-medium rounded-md bg-success/10 text-success border-0">
                             Ready
                           </Badge>
                         )}
                         {doc.status === 'processing' && (
-                          <Badge variant="outline" className="text-warning border-warning/30 text-xs">
+                          <Badge variant="outline" className="h-5 px-1.5 text-[11px] font-medium rounded-md bg-warning/10 text-warning border-0">
                             Processing
                           </Badge>
                         )}
                         {doc.status === 'error' && (
-                          <Badge variant="outline" className="text-destructive border-destructive/30 text-xs">
+                          <Badge variant="outline" className="h-5 px-1.5 text-[11px] font-medium rounded-md bg-destructive/10 text-destructive border-0">
                             Error
                           </Badge>
                         )}
