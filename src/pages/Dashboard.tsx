@@ -214,7 +214,7 @@ export default function Dashboard() {
           <div className="lg:col-span-2">
             <NeedsAttentionList items={attentionItems} status={attentionStatus} onRetry={load} />
           </div>
-          <ChannelHealthCard status={channelStatus} channel={dashboardMock.channel} onRetry={load} />
+          <ChannelHealthCard status={channelStatus} channel={channel} onRetry={load} />
         </motion.div>
 
         {/* Row: Recent Conversations + Quick Actions */}
