@@ -50,4 +50,14 @@ export const api = {
       body: JSON.stringify(data),
     }),
   getConversations: () => apiFetch<any>('/api/conversations'),
+  forgotPassword: (email: string) =>
+    apiFetch<{ ok: true }>('/api/auth/forgot-password', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    }),
+  resetPassword: (token: string, password: string) =>
+    apiFetch<{ ok: true }>('/api/auth/reset-password', {
+      method: 'POST',
+      body: JSON.stringify({ token, password }),
+    }),
 };
