@@ -38,7 +38,8 @@ export function Sidebar({ onNavigate }: SidebarProps) {
         to={link.href}
         onClick={onNavigate}
         className={cn(
-          'relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors focus-ring',
+          'relative flex items-center gap-3 px-3 rounded-lg text-[13px] font-medium transition-colors focus-ring',
+          'min-h-[44px] md:min-h-0 md:h-9',
           isActive
             ? 'bg-muted text-foreground'
             : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
