@@ -33,8 +33,7 @@ import { api } from '@/lib/api';
 import type { Product } from '@/types';
 import { useToast } from '@/hooks/use-toast';
 
-const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.05 } } };
-const item = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } };
+import { pageContainer as container, pageItem as item } from '@/lib/motion';
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
