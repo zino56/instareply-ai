@@ -9,6 +9,8 @@ import LandingPage from "./pages/LandingPage";
 import Pricing from "./pages/Pricing";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import ConnectInstagram from "./pages/onboarding/ConnectInstagram";
 import AuthCallback from "./pages/AuthCallback";
 import Dashboard from "./pages/Dashboard";
@@ -34,6 +36,8 @@ const App = () => (
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/onboarding/connect-instagram" element={<ConnectInstagram />} />
 
             {/* Auth Callback */}
