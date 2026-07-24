@@ -114,8 +114,8 @@ export default function Conversations() {
             exit={{ x: -100, opacity: 0 }}
             className={cn('border-r border-border bg-card flex flex-col', isMobileView ? 'w-full' : 'w-80 lg:w-96')}
           >
-            <div className="p-4 border-b border-border">
-              <h2 className="text-[15px] font-semibold mb-3 text-foreground">Conversations</h2>
+            <div className="p-4 border-b border-border/70">
+              <h2 className="text-[15px] font-semibold mb-3 text-foreground tracking-tight md:tracking-[-0.01em]">Conversations</h2>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" strokeWidth={1.75} />
                 <Input placeholder="Search conversations..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9 h-9 text-[13px]" />

@@ -73,7 +73,7 @@ export default function Settings() {
     <div className="px-4 sm:px-6 lg:px-8 py-6 md:py-8 max-w-5xl mx-auto w-full">
       <motion.div variants={container} initial="hidden" animate="show" className="space-y-6 md:space-y-8">
         <motion.div variants={item}>
-          <h1 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.02em] leading-tight text-foreground">Settings</h1>
+          <h1 className="text-[24px] md:text-[28px] font-semibold tracking-tight md:tracking-[-0.02em] leading-tight text-foreground">Settings</h1>
           <p className="text-muted-foreground mt-1.5 text-[14px]">Manage your account and automation preferences.</p>
         </motion.div>
 
@@ -144,9 +144,9 @@ export default function Settings() {
                         <div className="flex items-center gap-2 mb-1">
                           <h3 className="font-semibold text-lg">{isConnected ? clientStatus?.instagram_page_name : 'No Page Connected'}</h3>
                           {isConnected ? (
-                            <Badge variant="secondary" className="bg-success/20 text-success border-0"><CheckCircle className="w-3 h-3 mr-1" />Connected</Badge>
+                            <Badge variant="secondary" className="h-5 px-1.5 text-[11px] font-medium rounded-md bg-success/10 text-success border-0"><CheckCircle className="w-3 h-3 mr-1" />Connected</Badge>
                           ) : (
-                            <Badge variant="secondary" className="bg-warning/20 text-warning border-0"><AlertCircle className="w-3 h-3 mr-1" />Disconnected</Badge>
+                            <Badge variant="secondary" className="h-5 px-1.5 text-[11px] font-medium rounded-md bg-warning/10 text-warning border-0"><AlertCircle className="w-3 h-3 mr-1" />Disconnected</Badge>
                           )}
                         </div>
                       </div>
