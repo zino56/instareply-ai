@@ -146,7 +146,7 @@ export default function Subscriptions() {
       <motion.div variants={item} className="space-y-3">
         <div>
           <h2 className="text-[16px] font-semibold tracking-[-0.005em] text-foreground">Usage</h2>
-          <p className="text-[13px] text-muted-foreground">Live once usage tracking is enabled.</p>
+          <p className="text-[13px] text-muted-foreground">Usage tracking will be available soon.</p>
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {USAGE.map((m) => (
