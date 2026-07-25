@@ -76,7 +76,7 @@ function UsageTile({ metric }: { metric: UsageMetric }) {
           {hasValue ? metric.value!.toLocaleString() : <span className="text-muted-foreground/60">—</span>}
         </p>
         <p className="mt-2 text-[12px] text-muted-foreground">
-          {hasValue ? 'Updated just now' : 'Available once usage tracking is enabled.'}
+          {hasValue ? 'Updated just now' : 'Usage tracking will be available soon.'}
         </p>
       </CardContent>
     </Card>
