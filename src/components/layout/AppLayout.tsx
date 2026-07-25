@@ -1,33 +1,31 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Topbar } from './Topbar';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { isAuthenticated } from '@/lib/api';
 
-/* DEV BYPASS — REMOVE BEFORE PRODUCTION
- * Allows entering the dashboard without a real token when running in
- * local Vite dev, Lovable preview, or when ?dev=1 is in the URL AND the
- * localStorage flag "conveero_dev_bypass" is set (toggled from Login page).
- * Has zero effect on real production domains. */
-function isDevOrPreview(): boolean {
-  if (import.meta.env.DEV) return true;
-  if (typeof window === 'undefined') return false;
-  if (window.location.hostname.includes('lovable.app')) return true;
-  return new URLSearchParams(window.location.search).get('dev') === '1';
-}
-
+/**
+ * DEV BYPASS — active only when `import.meta.env.DEV` is true (local `vite`
+ * / `vite dev`). In every non-DEV build — production AND Lovable preview —
+ * the bypass is fully inert and any lingering flag is removed from
+ * localStorage so it can never be re-used.
+ */
 function hasDevBypass(): boolean {
-  return (
-    isDevOrPreview() &&
-    typeof window !== 'undefined' &&
-    window.localStorage.getItem('conveero_dev_bypass') === '1'
-  );
+  if (!import.meta.env.DEV) return false;
+  if (typeof window === 'undefined') return false;
+  return window.localStorage.getItem('conveero_dev_bypass') === '1';
 }
-/* END DEV BYPASS */
 
 export function AppLayout() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+  useEffect(() => {
+    // Defense in depth: in any non-DEV build, purge the bypass flag if present.
+    if (!import.meta.env.DEV && typeof window !== 'undefined') {
+      try { window.localStorage.removeItem('conveero_dev_bypass'); } catch { /* noop */ }
+    }
+  }, []);
 
   if (!isAuthenticated() && !hasDevBypass()) {
     return <Navigate to="/" replace />;

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useSearchParams } from 'react-router-dom';
 import {
@@ -19,7 +19,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useAuthStore } from '@/store/authStore';
-import { api } from '@/lib/api';
+import { api, withTimeout } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import { formatDistanceToNow } from 'date-fns';
 import type { Conversation } from '@/types';
@@ -41,26 +41,67 @@ type BlockStatus = 'loading' | 'error' | 'ready';
 const IS_DEV = import.meta.env.DEV;
 
 export default function Dashboard() {
-  const { clientStatus, fetchClientStatus } = useAuthStore();
+  const { clientStatus } = useAuthStore();
+  const setStore = useAuthStore.setState;
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [loading, setLoading] = useState(true);
   const [convStatus, setConvStatus] = useState<BlockStatus>('loading');
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [searchParams] = useSearchParams();
 
   // Dev-only visual state override for QA: ?dashState=loading|error|empty
   const stateOverride = IS_DEV ? searchParams.get('dashState') : null;
 
+  // Track mount so aborted/late responses don't setState on an unmounted tree.
+  const mountedRef = useRef(true);
+  useEffect(() => () => { mountedRef.current = false; }, []);
+
+  const REQUEST_TIMEOUT_MS = 15000;
+  const TIMEOUT_MESSAGE = 'The dashboard is taking longer than expected. Please try again.';
+
   const load = async () => {
     setLoading(true);
     setConvStatus('loading');
-    try {
-      await fetchClientStatus();
-      const convData = await api.getConversations();
+    setLoadError(null);
+
+    const totalStart = IS_DEV ? performance.now() : 0;
+    const timeOne = async <T,>(label: string, run: (signal: AbortSignal) => Promise<T>) => {
+      const start = IS_DEV ? performance.now() : 0;
+      try {
+        const value = await withTimeout(run, REQUEST_TIMEOUT_MS, TIMEOUT_MESSAGE);
+        if (IS_DEV) console.info(`[dashboard] ${label}_ms=${Math.round(performance.now() - start)}`);
+        return { ok: true as const, value };
+      } catch (err) {
+        if (IS_DEV) console.error(`[dashboard] ${label} failed`, err);
+        return { ok: false as const, error: err as Error };
+      }
+    };
+
+    // Fetch independent requests in parallel.
+    const [statusRes, convRes] = await Promise.all([
+      timeOne('dashboard_client_status', (signal) => api.getClientStatus({ signal })),
+      timeOne('dashboard_conversations', (signal) => api.getConversations({ signal })),
+    ]);
+
+    if (!mountedRef.current) return;
+
+    if (statusRes.ok) {
+      setStore({ clientStatus: statusRes.value });
+    }
+
+    if (convRes.ok) {
+      const convData: any = convRes.value;
       setConversations(Array.isArray(convData) ? convData : convData?.data || []);
       setConvStatus('ready');
-    } catch {
+    } else {
       setConvStatus('error');
     }
+
+    const firstError = !statusRes.ok ? statusRes.error : !convRes.ok ? convRes.error : null;
+    setLoadError(firstError ? firstError.message || TIMEOUT_MESSAGE : null);
+
+    if (IS_DEV) console.info(`[dashboard] dashboard_total_load_ms=${Math.round(performance.now() - totalStart)}`);
+
     setLoading(false);
   };
 
