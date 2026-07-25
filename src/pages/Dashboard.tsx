@@ -287,7 +287,7 @@ export default function Dashboard() {
               <CardHeader className="pb-3"><CardTitle className="text-[14px] font-semibold text-foreground">Usage & plan</CardTitle></CardHeader>
               <CardContent className="pt-0">
                 <div className="flex items-center justify-between gap-4">
-                  <p className="text-[13px] text-muted-foreground">Usage tracking will appear once your plan is active.</p>
+                  <p className="text-[13px] text-muted-foreground">Usage tracking will be available soon.</p>
                   <Button variant="outline" size="sm" className="h-9 press-scale" asChild><Link to="/pricing">View plans</Link></Button>
                 </div>
               </CardContent>
