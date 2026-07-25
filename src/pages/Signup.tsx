@@ -1,16 +1,18 @@
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Eye, EyeOff } from 'lucide-react';
 import { FormEvent, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import AuthBrandPanel from '@/components/auth/AuthBrandPanel';
 
 export default function Signup() {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -18,36 +20,44 @@ export default function Signup() {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="min-h-screen flex items-center justify-center bg-surface p-6 md:p-8"
-    >
-      <div className="w-full max-w-md">
-        <Link to="/" className="flex items-center justify-center gap-2 mb-8 group">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground">
-            <Sparkles className="w-6 h-6" />
-          </div>
-          <span className="text-2xl font-bold group-hover:text-primary transition-colors">Conveero</span>
-        </Link>
+    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-surface">
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35 }}
+        className="flex items-center justify-center p-6 md:p-10"
+      >
+        <div className="w-full max-w-[440px]">
+          <Link to="/" className="inline-flex items-center gap-2 mb-10 group">
+            <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-primary text-primary-foreground">
+              <Sparkles className="w-5 h-5" aria-hidden="true" />
+            </div>
+            <span className="text-xl font-bold group-hover:text-primary transition-colors">
+              Conveero
+            </span>
+          </Link>
 
-        <div className="bg-card border border-border rounded-2xl shadow-[var(--shadow-md)] p-8 space-y-6">
-          <div className="space-y-2 text-center">
-            <h2 className="text-2xl font-bold tracking-tight">Create your account</h2>
-            <p className="text-sm text-muted-foreground">Start automating your Instagram DMs today</p>
+          <div className="space-y-2 mb-8">
+            <h1 className="text-3xl font-bold tracking-tight">Create your account</h1>
+            <p className="text-base text-muted-foreground">
+              Start managing customer conversations in one place.
+            </p>
+            <p className="text-xs text-muted-foreground/80 pt-1">
+              Google sign-in is coming soon
+            </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5" noValidate>
             <div className="space-y-2">
               <Label htmlFor="name">Full name</Label>
               <Input
                 id="name"
                 type="text"
+                autoComplete="name"
                 placeholder="Jane Doe"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="h-11"
+                className="h-11 text-base"
                 required
               />
             </div>
@@ -57,41 +67,63 @@ export default function Signup() {
               <Input
                 id="email"
                 type="email"
+                autoComplete="email"
                 placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="h-11"
+                className="h-11 text-base"
                 required
               />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="h-11"
-                required
-              />
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="new-password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="h-11 text-base pr-11"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  aria-pressed={showPassword}
+                  className="absolute inset-y-0 right-0 flex items-center justify-center w-11 h-11 text-muted-foreground hover:text-foreground rounded-md focus-ring"
+                >
+                  {showPassword ? (
+                    <EyeOff className="w-4 h-4" aria-hidden="true" />
+                  ) : (
+                    <Eye className="w-4 h-4" aria-hidden="true" />
+                  )}
+                </button>
+              </div>
             </div>
 
-            <Button type="submit" className="w-full h-12 font-semibold text-base">
-              Create Account
+            <Button type="submit" className="w-full h-12 font-semibold text-base press-scale">
+              Create account
             </Button>
           </form>
 
-          <p className="text-center text-sm text-muted-foreground">
+          <p className="text-center text-sm text-muted-foreground mt-8">
             Already have an account?{' '}
             <Link to="/login" className="text-primary font-medium hover:underline rounded-sm focus-ring">
-              Login
+              Sign in
             </Link>
           </p>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
 
+      <AuthBrandPanel
+        eyebrow="Conveero"
+        title="One inbox. Every reply, already handled."
+        subtitle="Connect Instagram, upload your catalog, and let Conveero reply in your voice."
+      />
+    </div>
   );
 }
