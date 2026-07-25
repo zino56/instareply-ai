@@ -22,9 +22,9 @@ const PLAN_VM = {
 
 type UsageMetric = { key: string; label: string; value: number | null };
 const USAGE: UsageMetric[] = [
-  { key: 'messages', label: 'Messages this month', value: null },
+  { key: 'ai_replies', label: 'AI replies this month', value: null },
   { key: 'active', label: 'Active conversations', value: null },
-  { key: 'ai', label: 'AI responses', value: null },
+  { key: 'ai', label: 'AI replies', value: null },
   { key: 'docs', label: 'Knowledge documents', value: null },
 ];
 
