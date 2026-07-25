@@ -34,7 +34,7 @@ export function UsagePlanCard({ status, usage, onRetry }: Props) {
             return (
               <div className="space-y-3">
                 <div className="flex items-baseline justify-between">
-                  <p className="text-[13px] text-muted-foreground">Messages this cycle</p>
+                  <p className="text-[13px] text-muted-foreground">AI replies this cycle</p>
                   <p className="text-[13px] font-medium text-foreground tabular-nums">
                     {usage.used.toLocaleString()} <span className="text-muted-foreground">/ {usage.quota.toLocaleString()}</span>
                   </p>
