@@ -1,7 +1,7 @@
 import { Logo } from '@/components/brand/Logo';
 import { motion } from 'framer-motion';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { Sparkles, Eye, EyeOff, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { Eye, EyeOff, CheckCircle2, AlertTriangle } from 'lucide-react';
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

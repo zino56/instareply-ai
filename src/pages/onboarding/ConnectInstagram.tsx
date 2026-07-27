@@ -1,7 +1,7 @@
 import { Logo } from '@/components/brand/Logo';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import { Instagram, Sparkles } from 'lucide-react';
+import { Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { loginWithInstagram } from '@/lib/api';
 
