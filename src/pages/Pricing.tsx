@@ -1,531 +1,538 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { Check, Minus, Moon, Sun, Menu, X } from "lucide-react";
+import { Logo } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
-import { Slider } from "@/components/ui/slider";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Check, X, Zap, Shield, Headphones, ArrowRight } from "lucide-react";
-import LandingNavbar from "@/components/landing/LandingNavbar";
-import Footer from "@/components/landing/Footer";
+import { cn } from "@/lib/utils";
 
-const Pricing = () => {
-  const [isAnnual, setIsAnnual] = useState(false);
-  const [contacts, setContacts] = useState([5000]);
+type Billing = "monthly" | "yearly";
 
-  const pricingTiers = [
-    {
-      name: "Starter",
-      monthlyPrice: 49,
-      annualPrice: 470,
-      period: isAnnual ? "Billed annually" : "Billed monthly",
-      description: "Best for small shops testing automation",
-      features: [
-        "50 conversations/day",
-        "1 Instagram page",
-        "Basic analytics",
-        "Email support",
-        "AI-powered responses",
-        "Comment automation",
-        "DM templates",
-      ],
-      buttonText: "Start free trial",
-      buttonStyle: "primary",
-      highlighted: false,
-    },
-    {
-      name: "Pro",
-      monthlyPrice: 149,
-      annualPrice: 1435,
-      period: isAnnual ? "Billed annually" : "Billed monthly",
-      description: "Most popular. Ideal for growing stores.",
-      features: [
-        "500 conversations/day",
-        "Unlimited Instagram pages",
-        "Advanced analytics",
-        "Priority support (2hr response)",
-        "Custom AI tone",
-        "A/B testing",
-        "Zapier integration",
-        "Custom keywords",
-        "Lead capture forms",
-      ],
-      buttonText: "Start free trial",
-      buttonStyle: "magenta",
-      highlighted: true,
-      badge: "MOST POPULAR",
-    },
-    {
-      name: "Enterprise",
-      monthlyPrice: null,
-      annualPrice: null,
-      period: "Tailored to your needs",
-      description: "For high-volume brands and agencies.",
-      features: [
-        "Unlimited conversations/day",
-        "Unlimited Instagram pages",
-        "Dedicated account manager",
-        "Custom integrations",
-        "White-label option",
-        "SLA guarantees (99.9% uptime)",
-        "Priority support 24/7",
-        "API access",
-        "Custom AI training",
-      ],
-      buttonText: "Request demo",
-      buttonStyle: "outline",
-      highlighted: false,
-    },
-  ];
+interface Tier {
+  id: string;
+  name: string;
+  monthly: number;
+  blurb: string;
+  features: string[];
+  cta: string;
+  to: string;
+  popular?: boolean;
+}
 
-  const featureComparison = [
-    { feature: "Instagram DM Automation", starter: true, pro: true, enterprise: true },
-    { feature: "Comment Automation", starter: true, pro: true, enterprise: true },
-    { feature: "AI-Powered Responses", starter: true, pro: true, enterprise: true },
-    { feature: "DM Templates", starter: "5", pro: "Unlimited", enterprise: "Unlimited" },
-    { feature: "Custom Keywords", starter: "10", pro: "Unlimited", enterprise: "Unlimited" },
-    { feature: "Instagram Pages", starter: "1", pro: "Unlimited", enterprise: "Unlimited" },
-    { feature: "Conversations/Day", starter: "50", pro: "500", enterprise: "Unlimited" },
-    { feature: "Analytics Dashboard", starter: "Basic", pro: "Advanced", enterprise: "Custom" },
-    { feature: "A/B Testing", starter: false, pro: true, enterprise: true },
-    { feature: "Zapier Integration", starter: false, pro: true, enterprise: true },
-    { feature: "API Access", starter: false, pro: false, enterprise: true },
-    { feature: "Custom AI Training", starter: false, pro: false, enterprise: true },
-    { feature: "White-Label Option", starter: false, pro: false, enterprise: true },
-    { feature: "Dedicated Account Manager", starter: false, pro: false, enterprise: true },
-    { feature: "Support", starter: "Email", pro: "Priority (2hr)", enterprise: "24/7 Priority" },
-    { feature: "SLA Guarantee", starter: false, pro: "99%", enterprise: "99.9%" },
-  ];
+const TIERS: Tier[] = [
+  {
+    id: "free",
+    name: "Free",
+    monthly: 0,
+    blurb: "Try first-line automation on a single account.",
+    features: [
+      "25 messages / month",
+      "1 Instagram account",
+      "Inbox preview",
+      "Basic access only",
+      "No advanced automation",
+      "Conveero branding",
+    ],
+    cta: "Start free",
+    to: "/signup",
+  },
+  {
+    id: "starter",
+    name: "Starter",
+    monthly: 49,
+    blurb: "Automate the questions you answer every day.",
+    features: [
+      "1 Instagram account",
+      "DM auto-replies for common questions",
+      "Basic inbox assistant",
+      "Limited monthly AI usage",
+      "Email support",
+    ],
+    cta: "Choose Starter",
+    to: "/signup?plan=starter",
+  },
+  {
+    id: "growth",
+    name: "Growth",
+    monthly: 99,
+    blurb: "Handle repetitive DMs at scale with a shared inbox.",
+    features: [
+      "Up to 3 Instagram accounts",
+      "Shared inbox",
+      "AI reply suggestions + automation",
+      "Saved FAQs + quick replies",
+      "Analytics",
+      "Priority support",
+    ],
+    cta: "Start with Growth",
+    to: "/signup?plan=growth",
+    popular: true,
+  },
+  {
+    id: "scale",
+    name: "Scale",
+    monthly: 199,
+    blurb: "Keep multi-account inboxes moving with your whole team.",
+    features: [
+      "Up to 10 accounts (or custom)",
+      "Team access",
+      "Advanced automation",
+      "Reporting",
+      "Priority onboarding",
+      "Fast support",
+    ],
+    cta: "Choose Scale",
+    to: "/signup?plan=scale",
+  },
+];
 
-  const faqs = [
-    {
-      question: "What does Conveero include?",
-      answer: "Conveero includes AI-powered Instagram DM automation, comment automation, lead capture, analytics, and integrations. All plans include our core automation features with varying limits on conversations, pages, and advanced features."
-    },
-    {
-      question: "Who is Conveero for?",
-      answer: "Conveero is designed for e-commerce stores, content creators, coaches, and businesses of all sizes who want to automate their Instagram engagement and convert followers into customers."
-    },
-    {
-      question: "How does the free trial work?",
-      answer: "Start with a 14-day free trial on any plan. No credit card required. You'll have full access to all features in your selected plan. Cancel anytime before the trial ends."
-    },
-    {
-      question: "Can I upgrade or downgrade my plan?",
-      answer: "Yes! You can upgrade or downgrade at any time. When upgrading, you'll be charged the prorated difference. When downgrading, the change takes effect at your next billing cycle."
-    },
-    {
-      question: "Are there additional charges for messages?",
-      answer: "No hidden fees. Your plan includes a set number of daily conversations. If you consistently need more, we recommend upgrading to a higher tier for better value."
-    },
-    {
-      question: "How does Email and SMS pricing work?",
-      answer: "Email and SMS features are available on Pro and Enterprise plans. Email is included in your plan. SMS is charged at $0.01 per message sent, billed monthly based on usage."
-    },
-    {
-      question: "Can I cancel at any time?",
-      answer: "Absolutely. There are no long-term contracts. Cancel your subscription anytime from your account settings. You'll retain access until the end of your billing period."
-    },
-    {
-      question: "What payment methods do you accept?",
-      answer: "We accept all major credit cards (Visa, Mastercard, American Express), PayPal, and bank transfers for Enterprise plans. All payments are processed securely."
-    },
-    {
-      question: "What is your refund policy?",
-      answer: "We offer a 30-day money-back guarantee on all plans. If you're not satisfied within the first 30 days, contact support for a full refund, no questions asked."
-    },
-  ];
+const COMPARISON: { label: string; values: (string | boolean)[] }[] = [
+  { label: "Instagram accounts", values: ["1", "1", "Up to 3", "Up to 10 or custom"] },
+  { label: "Monthly messages / AI usage", values: ["25", "Limited", "Expanded", "High volume"] },
+  { label: "Automation level", values: ["None", "Common questions", "Suggestions + automation", "Advanced"] },
+  { label: "Team access", values: [false, false, "Shared inbox", "Full team access"] },
+  { label: "Analytics", values: [false, false, true, "Reporting"] },
+  { label: "Support", values: ["Community", "Email", "Priority", "Priority + onboarding"] },
+  { label: "Conveero branding", values: ["Shown", "Removed", "Removed", "Removed"] },
+];
 
-  const calculatePrice = (contactCount: number) => {
-    if (contactCount <= 1000) return { starter: 0, pro: 15 };
-    if (contactCount <= 5000) return { starter: 15, pro: 49 };
-    if (contactCount <= 10000) return { starter: 29, pro: 99 };
-    return { starter: 49, pro: 149 };
-  };
+const FAQS = [
+  {
+    q: "Can Conveero replace a community manager?",
+    a: "No. It handles first-line repetitive DMs and inbox load so your team focuses on high-value conversations.",
+  },
+  {
+    q: "What happens when I hit the Free limit?",
+    a: "You can upgrade instantly to keep responding.",
+  },
+  {
+    q: "Is yearly cheaper?",
+    a: "Yes — yearly billing includes 2 months free.",
+  },
+  {
+    q: "Can I change plans later?",
+    a: "Yes, upgrade or downgrade anytime.",
+  },
+  {
+    q: "Who is Growth for?",
+    a: "Active brands and small teams with real daily DM volume.",
+  },
+];
 
-  const calculatedPrice = calculatePrice(contacts[0]);
+const NAV = [
+  { label: "Home", to: "/" },
+  { label: "Pricing", to: "/pricing", active: true },
+  { label: "Sign in", to: "/login" },
+];
+
+function useTheme() {
+  const [isDark, setIsDark] = useState(
+    () => typeof document !== "undefined" && document.documentElement.classList.contains("dark"),
+  );
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+  }, [isDark]);
+  return { isDark, toggle: () => setIsDark((v) => !v) };
+}
+
+const PricingHeader = () => {
+  const { isDark, toggle } = useTheme();
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-white">
-      <LandingNavbar />
-      
-      {/* Hero Section */}
-      <section className="pt-[120px] pb-[60px] md:pb-[80px] px-5 md:px-[60px] bg-mc-light-gray">
-        <div className="max-w-[1280px] mx-auto text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="font-poppins font-bold text-[36px] md:text-[56px] text-mc-black leading-tight mb-6"
-          >
-            Simple, transparent pricing
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-inter text-lg md:text-xl text-mc-gray max-w-[600px] mx-auto mb-10"
-          >
-            Choose a Conveero plan that's right for you. Start free, upgrade when you're ready.
-          </motion.p>
+    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/65">
+      <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5 lg:px-8">
+        <Link to="/" className="flex items-center rounded-md focus-ring" aria-label="Conveero home">
+          <Logo markOnly variant={isDark ? "light" : "dark"} size="chrome" className="md:hidden" />
+          <Logo variant={isDark ? "light" : "dark"} size="nav" className="hidden md:block" />
+        </Link>
 
-          {/* Billing Toggle */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center bg-white rounded-lg p-1 shadow-sm"
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
+          {NAV.map((item) => (
+            <Link
+              key={item.label}
+              to={item.to}
+              aria-current={item.active ? "page" : undefined}
+              className={cn(
+                "rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200 focus-ring",
+                item.active
+                  ? "bg-muted text-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/60",
+              )}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors duration-200 hover:bg-muted hover:text-foreground focus-ring"
           >
-            <button
-              onClick={() => setIsAnnual(false)}
-              className={`font-inter text-sm px-6 py-2.5 rounded-md transition-all duration-200 ${
-                !isAnnual
-                  ? "bg-mc-yellow text-mc-black font-semibold"
-                  : "text-mc-gray hover:text-mc-black"
-              }`}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setIsAnnual(true)}
-              className={`font-inter text-sm px-6 py-2.5 rounded-md transition-all duration-200 ${
-                isAnnual
-                  ? "bg-mc-yellow text-mc-black font-semibold"
-                  : "text-mc-gray hover:text-mc-black"
-              }`}
-            >
-              Annual <span className="text-mc-magenta font-bold">- Save 20%</span>
-            </button>
-          </motion.div>
+            {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
+          <Button asChild className="hidden h-11 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground hover:bg-primary/90 md:inline-flex">
+            <Link to="/signup">Start free</Link>
+          </Button>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-foreground md:hidden focus-ring"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
-      </section>
+      </div>
 
-      {/* Pricing Cards */}
-      <section className="py-[60px] md:py-[80px] px-5 md:px-[60px] bg-mc-light-gray">
-        <div className="max-w-[1100px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {pricingTiers.map((tier, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative bg-white rounded-xl p-8 transition-all duration-300 ${
-                  tier.highlighted
-                    ? "border-[3px] border-mc-magenta shadow-magenta md:-translate-y-3"
-                    : "border border-[#E0E0E0] shadow-card hover:shadow-card-hover hover:-translate-y-1"
-                }`}
-              >
-                {tier.badge && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="bg-mc-magenta text-white font-poppins font-bold text-xs px-4 py-1.5 rounded-full">
-                      {tier.badge}
-                    </span>
-                  </div>
+      {open && (
+        <div className="border-t border-border bg-background px-5 py-3 md:hidden">
+          <nav className="flex flex-col" aria-label="Mobile">
+            {NAV.map((item) => (
+              <Link
+                key={item.label}
+                to={item.to}
+                onClick={() => setOpen(false)}
+                className={cn(
+                  "flex min-h-[44px] items-center rounded-md px-3 text-sm font-medium focus-ring",
+                  item.active ? "text-foreground" : "text-muted-foreground",
                 )}
-
-                <h3 className="font-poppins font-bold text-2xl md:text-[28px] text-mc-black mb-4">
-                  {tier.name}
-                </h3>
-
-                <div className="mb-2">
-                  {tier.monthlyPrice !== null ? (
-                    <span className="font-poppins font-bold text-5xl md:text-[56px] text-mc-black">
-                      ${isAnnual ? Math.round(tier.annualPrice! / 12) : tier.monthlyPrice}
-                    </span>
-                  ) : (
-                    <span className="font-poppins font-bold text-3xl md:text-[36px] text-mc-black">
-                      Custom
-                    </span>
-                  )}
-                  {tier.monthlyPrice !== null && (
-                    <span className="font-inter text-sm text-[#999999] ml-1">/month</span>
-                  )}
-                </div>
-
-                <p className="font-inter text-sm text-[#999999] mb-6">{tier.period}</p>
-
-                <ul className="space-y-3 mb-8">
-                  {tier.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-mc-yellow flex-shrink-0 mt-0.5" />
-                      <span className="font-inter text-[15px] text-mc-black leading-relaxed">
-                        {feature}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Button
-                  asChild
-                  className={`w-full font-poppins font-bold text-sm py-4 h-auto rounded-lg transition-all duration-200 ${
-                    tier.buttonStyle === "magenta"
-                      ? "bg-mc-magenta hover:bg-[#E600E6] text-white hover:shadow-magenta"
-                      : tier.buttonStyle === "outline"
-                      ? "bg-transparent border-2 border-mc-black text-mc-black hover:bg-mc-black hover:text-white"
-                      : "bg-mc-yellow hover:bg-mc-hover-yellow text-mc-black hover:shadow-yellow"
-                  }`}
-                >
-                  <Link to={tier.buttonStyle === "outline" ? "#contact" : "/signup"}>
-                    {tier.buttonText}
-                  </Link>
-                </Button>
-
-                <p className="font-inter text-xs text-[#999999] text-center mt-4">
-                  {tier.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Trust Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-8 mt-12 pt-8 border-t border-[#E0E0E0]">
-            <div className="flex items-center gap-2 text-mc-gray">
-              <Shield className="w-5 h-5" />
-              <span className="font-inter text-sm">30-day money-back guarantee</span>
-            </div>
-            <div className="flex items-center gap-2 text-mc-gray">
-              <Zap className="w-5 h-5" />
-              <span className="font-inter text-sm">14-day free trial</span>
-            </div>
-            <div className="flex items-center gap-2 text-mc-gray">
-              <Headphones className="w-5 h-5" />
-              <span className="font-inter text-sm">24/7 customer support</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Price Calculator */}
-      <section className="py-[60px] md:py-[80px] px-5 md:px-[60px] bg-white">
-        <div className="max-w-[700px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-mc-light-gray rounded-2xl p-8 md:p-10 shadow-card"
-          >
-            <h2 className="font-poppins font-bold text-[28px] md:text-[32px] text-mc-black text-center mb-2">
-              Calculate Your Monthly Cost
-            </h2>
-            <p className="font-inter text-mc-gray text-center mb-8">
-              Use our calculator to estimate the cost based on your Instagram contacts
-            </p>
-
-            <div className="mb-8">
-              <label className="font-inter text-sm text-mc-gray block mb-4">
-                How many Instagram contacts do you have?
-              </label>
-              <Slider
-                value={contacts}
-                onValueChange={setContacts}
-                max={10000}
-                min={100}
-                step={100}
-                className="mb-4"
-              />
-              <div className="text-center">
-                <span className="font-poppins font-bold text-4xl text-mc-black">
-                  {contacts[0].toLocaleString()}
-                </span>
-                <span className="font-inter text-mc-gray ml-2">contacts</span>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white rounded-xl p-6 border border-[#E0E0E0]">
-                <p className="font-inter text-sm text-mc-gray mb-1">Starter Plan</p>
-                <p className="font-poppins font-bold text-3xl text-mc-black">
-                  ${calculatedPrice.starter}
-                  <span className="text-sm font-normal text-mc-gray">/mo</span>
-                </p>
-                <Button asChild variant="outline" className="w-full mt-4 border-mc-black">
-                  <Link to="/signup">Get Started</Link>
-                </Button>
-              </div>
-              <div className="bg-white rounded-xl p-6 border-2 border-mc-magenta">
-                <p className="font-inter text-sm text-mc-magenta font-semibold mb-1">Pro Plan</p>
-                <p className="font-poppins font-bold text-3xl text-mc-black">
-                  ${calculatedPrice.pro}
-                  <span className="text-sm font-normal text-mc-gray">/mo</span>
-                </p>
-                <Button asChild className="w-full mt-4 bg-mc-magenta hover:bg-[#E600E6] text-white">
-                  <Link to="/signup">Get Started</Link>
-                </Button>
-              </div>
-            </div>
-
-            <p className="font-inter text-xs text-mc-gray text-center mt-6">
-              Prices shown are estimated base rates. Final price depends on usage and features.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Feature Comparison Table */}
-      <section className="py-[60px] md:py-[80px] px-5 md:px-[60px] bg-mc-light-gray">
-        <div className="max-w-[1100px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="font-poppins font-bold text-[32px] md:text-[40px] text-mc-black mb-4">
-              Compare Plans
-            </h2>
-            <p className="font-inter text-mc-gray text-lg">
-              See all features side by side
-            </p>
-          </motion.div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full bg-white rounded-xl overflow-hidden shadow-card">
-              <thead>
-                <tr className="bg-mc-black text-white">
-                  <th className="font-poppins font-bold text-left p-4 md:p-6 w-[40%]">Features</th>
-                  <th className="font-poppins font-bold text-center p-4 md:p-6 w-[20%]">Starter</th>
-                  <th className="font-poppins font-bold text-center p-4 md:p-6 w-[20%] bg-mc-magenta">Pro</th>
-                  <th className="font-poppins font-bold text-center p-4 md:p-6 w-[20%]">Enterprise</th>
-                </tr>
-              </thead>
-              <tbody>
-                {featureComparison.map((row, index) => (
-                  <tr
-                    key={index}
-                    className={`border-b border-[#E0E0E0] ${
-                      index % 2 === 0 ? "bg-white" : "bg-mc-light-gray"
-                    }`}
-                  >
-                    <td className="font-inter text-mc-black p-4 md:p-5">{row.feature}</td>
-                    <td className="text-center p-4 md:p-5">
-                      {typeof row.starter === "boolean" ? (
-                        row.starter ? (
-                          <Check className="w-5 h-5 text-green-500 mx-auto" />
-                        ) : (
-                          <X className="w-5 h-5 text-gray-300 mx-auto" />
-                        )
-                      ) : (
-                        <span className="font-inter text-mc-black">{row.starter}</span>
-                      )}
-                    </td>
-                    <td className="text-center p-4 md:p-5 bg-mc-magenta/5">
-                      {typeof row.pro === "boolean" ? (
-                        row.pro ? (
-                          <Check className="w-5 h-5 text-mc-magenta mx-auto" />
-                        ) : (
-                          <X className="w-5 h-5 text-gray-300 mx-auto" />
-                        )
-                      ) : (
-                        <span className="font-inter font-semibold text-mc-magenta">{row.pro}</span>
-                      )}
-                    </td>
-                    <td className="text-center p-4 md:p-5">
-                      {typeof row.enterprise === "boolean" ? (
-                        row.enterprise ? (
-                          <Check className="w-5 h-5 text-green-500 mx-auto" />
-                        ) : (
-                          <X className="w-5 h-5 text-gray-300 mx-auto" />
-                        )
-                      ) : (
-                        <span className="font-inter text-mc-black">{row.enterprise}</span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          <div className="text-center mt-8">
-            <Button asChild className="bg-mc-yellow hover:bg-mc-hover-yellow text-mc-black font-poppins font-bold px-8">
-              <Link to="/signup">
-                Start Your Free Trial
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-[60px] md:py-[80px] px-5 md:px-[60px] bg-white">
-        <div className="max-w-[800px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="font-poppins font-bold text-[32px] md:text-[40px] text-mc-black mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="font-inter text-mc-gray text-lg">
-              Everything you need to know about Conveero pricing
-            </p>
-          </motion.div>
-
-          <Accordion type="single" collapsible className="space-y-3">
-            {faqs.map((faq, index) => (
-              <AccordionItem
-                key={index}
-                value={`faq-${index}`}
-                className="bg-mc-light-gray rounded-xl border-none px-6"
               >
-                <AccordionTrigger className="font-poppins font-semibold text-mc-black text-left hover:no-underline py-5">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="font-inter text-mc-gray pb-5">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+                {item.label}
+              </Link>
             ))}
-          </Accordion>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-[60px] md:py-[80px] px-5 md:px-[60px] bg-mc-black">
-        <div className="max-w-[800px] mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-poppins font-bold text-[32px] md:text-[48px] text-white leading-tight mb-6"
-          >
-            Ready to automate your Instagram?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="font-inter text-lg text-white/80 mb-8"
-          >
-            Start your 14-day free trial today. No credit card required.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <Button asChild className="bg-mc-yellow hover:bg-mc-hover-yellow text-mc-black font-poppins font-bold px-10 py-6 h-auto text-lg">
-              <Link to="/signup">Get Started Free</Link>
+            <Button asChild className="mt-2 h-11 rounded-lg bg-primary text-sm font-semibold text-primary-foreground hover:bg-primary/90">
+              <Link to="/signup" onClick={() => setOpen(false)}>Start free</Link>
             </Button>
-            <Button asChild variant="outline" className="border-white text-white hover:bg-white/10 font-poppins font-bold px-10 py-6 h-auto text-lg">
-              <Link to="#contact">Contact Sales</Link>
-            </Button>
-          </motion.div>
+          </nav>
         </div>
-      </section>
+      )}
+    </header>
+  );
+};
 
-      <Footer />
+const BillingToggle = ({ value, onChange }: { value: Billing; onChange: (v: Billing) => void }) => (
+  <div className="flex flex-col items-center gap-3">
+    <div
+      role="radiogroup"
+      aria-label="Billing period"
+      className="inline-flex items-center rounded-xl border border-border bg-card p-1 shadow-[var(--shadow-sm)]"
+    >
+      {(["monthly", "yearly"] as Billing[]).map((option) => (
+        <button
+          key={option}
+          type="button"
+          role="radio"
+          aria-checked={value === option}
+          onClick={() => onChange(option)}
+          className={cn(
+            "min-h-[40px] rounded-lg px-5 text-sm font-medium capitalize transition-all duration-200 focus-ring",
+            value === option
+              ? "bg-primary text-primary-foreground shadow-[var(--shadow-sm)]"
+              : "text-muted-foreground hover:text-foreground",
+          )}
+        >
+          {option}
+        </button>
+      ))}
+    </div>
+    <p className="text-xs text-muted-foreground">
+      Yearly billing includes <span className="font-semibold text-foreground">2 months free</span>.
+    </p>
+  </div>
+);
+
+const PriceBlock = ({ tier, billing }: { tier: Tier; billing: Billing }) => {
+  if (tier.monthly === 0) {
+    return (
+      <div className="mt-5">
+        <div className="flex items-baseline gap-1.5">
+          <span className="font-poppins text-4xl font-bold tracking-[-0.02em] text-foreground">$0</span>
+          <span className="text-sm text-muted-foreground">/month</span>
+        </div>
+        <p className="mt-1.5 text-xs text-muted-foreground">Free forever, limited usage</p>
+      </div>
+    );
+  }
+
+  const effective = billing === "yearly" ? Math.round((tier.monthly * 10) / 12) : tier.monthly;
+
+  return (
+    <div className="mt-5">
+      <div className="flex items-baseline gap-1.5">
+        <span className="font-poppins text-4xl font-bold tracking-[-0.02em] text-foreground">${effective}</span>
+        <span className="text-sm text-muted-foreground">/month</span>
+      </div>
+      <p className="mt-1.5 text-xs text-muted-foreground">
+        {billing === "yearly" ? (
+          <>
+            ${tier.monthly * 10} billed yearly{" "}
+            <span className="text-muted-foreground/80 line-through">${tier.monthly}/mo</span>
+          </>
+        ) : (
+          "Billed monthly"
+        )}
+      </p>
+    </div>
+  );
+};
+
+const PricingCard = ({ tier, billing }: { tier: Tier; billing: Billing }) => (
+  <div
+    className={cn(
+      "relative flex h-full flex-col rounded-2xl border bg-card p-6 text-left transition-all duration-300",
+      tier.popular
+        ? "border-primary/70 shadow-[var(--shadow-md)] ring-1 ring-primary/30"
+        : "border-border shadow-[var(--shadow-sm)] hover:border-border hover:shadow-[var(--shadow-md)]",
+    )}
+  >
+    {tier.popular && (
+      <span className="absolute -top-2.5 left-6 rounded-full bg-primary px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-primary-foreground">
+        Most Popular
+      </span>
+    )}
+
+    <h3 className="font-poppins text-base font-semibold text-foreground">{tier.name}</h3>
+    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tier.blurb}</p>
+
+    <PriceBlock tier={tier} billing={billing} />
+
+    <Button
+      asChild
+      className={cn(
+        "mt-6 h-11 w-full rounded-lg text-sm font-semibold transition-all duration-200",
+        tier.popular
+          ? "bg-primary text-primary-foreground hover:bg-primary/90"
+          : "border border-border bg-transparent text-foreground hover:bg-muted",
+      )}
+    >
+      <Link to={tier.to}>{tier.cta}</Link>
+    </Button>
+
+    <ul className="mt-6 space-y-2.5 border-t border-border pt-6">
+      {tier.features.map((feature) => (
+        <li key={feature} className="flex items-start gap-2.5">
+          <Check
+            className={cn(
+              "mt-0.5 h-4 w-4 shrink-0",
+              tier.popular ? "text-primary" : "text-muted-foreground",
+            )}
+            aria-hidden
+          />
+          <span className="text-sm leading-relaxed text-foreground/90">{feature}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+const CellValue = ({ value }: { value: string | boolean }) => {
+  if (value === true) return <Check className="h-4 w-4 text-primary" aria-label="Included" />;
+  if (value === false) return <Minus className="h-4 w-4 text-muted-foreground/60" aria-label="Not included" />;
+  return <span className="text-sm text-foreground/90">{value}</span>;
+};
+
+const Pricing = () => {
+  const [billing, setBilling] = useState<Billing>("monthly");
+
+  return (
+    <div className="min-h-screen bg-background">
+      <PricingHeader />
+
+      <main>
+        {/* Hero */}
+        <section className="border-b border-border/70 px-5 py-14 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-[720px] text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Pricing</p>
+            <h1 className="mt-3 font-poppins text-3xl font-bold leading-[1.15] tracking-[-0.02em] text-foreground lg:text-[44px]">
+              Pricing that scales with your inbox
+            </h1>
+            <p className="mx-auto mt-4 max-w-[600px] text-[15px] leading-relaxed text-muted-foreground">
+              Start free, automate repetitive DMs, and upgrade when your message volume grows. Built for
+              brands, teams, and agencies that need faster first-line community handling.
+            </p>
+            <div className="mt-8 flex justify-center">
+              <BillingToggle value={billing} onChange={setBilling} />
+            </div>
+          </div>
+        </section>
+
+        {/* Cards */}
+        <section className="px-5 py-12 lg:px-8 lg:py-16">
+          <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            {TIERS.map((tier) => (
+              <PricingCard key={tier.id} tier={tier} billing={billing} />
+            ))}
+          </div>
+          <p className="mx-auto mt-6 max-w-[1200px] text-center text-xs text-muted-foreground">
+            Automate first-line replies. Keep your inbox moving. Free your team for high-value conversations.
+          </p>
+        </section>
+
+        {/* Comparison */}
+        <section className="border-t border-border/70 px-5 py-14 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-[1200px]">
+            <h2 className="font-poppins text-xl font-semibold tracking-[-0.01em] text-foreground lg:text-2xl">
+              Key differences
+            </h2>
+            <p className="mt-1.5 text-sm text-muted-foreground">
+              Only what actually changes between plans.
+            </p>
+
+            {/* Desktop table */}
+            <div className="mt-8 hidden overflow-hidden rounded-2xl border border-border bg-card lg:block">
+              <table className="w-full border-collapse text-left">
+                <caption className="sr-only">Conveero plan comparison</caption>
+                <thead>
+                  <tr className="border-b border-border bg-muted/40">
+                    <th scope="col" className="px-5 py-3.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                      Feature
+                    </th>
+                    {TIERS.map((tier) => (
+                      <th
+                        key={tier.id}
+                        scope="col"
+                        className={cn(
+                          "px-5 py-3.5 text-sm font-semibold",
+                          tier.popular ? "text-foreground" : "text-foreground/80",
+                        )}
+                      >
+                        {tier.name}
+                        {tier.popular && (
+                          <span className="ml-2 rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold uppercase text-primary-foreground">
+                            Popular
+                          </span>
+                        )}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {COMPARISON.map((row) => (
+                    <tr key={row.label} className="border-b border-border last:border-0">
+                      <th scope="row" className="px-5 py-4 text-sm font-medium text-muted-foreground">
+                        {row.label}
+                      </th>
+                      {row.values.map((value, i) => (
+                        <td key={i} className={cn("px-5 py-4", TIERS[i].popular && "bg-primary/[0.04]")}>
+                          <CellValue value={value} />
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile stacked */}
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:hidden">
+              {TIERS.map((tier, tierIndex) => (
+                <div key={tier.id} className="rounded-2xl border border-border bg-card p-5">
+                  <h3 className="font-poppins text-sm font-semibold text-foreground">{tier.name}</h3>
+                  <dl className="mt-3 space-y-2.5">
+                    {COMPARISON.map((row) => (
+                      <div key={row.label} className="flex items-start justify-between gap-4 border-b border-border/70 pb-2.5 last:border-0 last:pb-0">
+                        <dt className="text-xs text-muted-foreground">{row.label}</dt>
+                        <dd className="text-right">
+                          <CellValue value={row.values[tierIndex]} />
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ + trust */}
+        <section className="border-t border-border/70 px-5 py-14 lg:px-8 lg:py-20">
+          <div className="mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)]">
+            <div>
+              <h2 className="font-poppins text-xl font-semibold tracking-[-0.01em] text-foreground lg:text-2xl">
+                Questions, answered
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Conveero handles first-line replies so your team spends its time on the conversations that
+                actually need a human.
+              </p>
+              <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
+                <li className="flex items-center gap-2">
+                  <Check className="h-4 w-4 text-primary" aria-hidden /> Official Instagram messaging APIs
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="h-4 w-4 text-primary" aria-hidden /> Cancel or change plans anytime
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="h-4 w-4 text-primary" aria-hidden /> Human handover always available
+                </li>
+              </ul>
+            </div>
+
+            <Accordion type="single" collapsible className="space-y-3">
+              {FAQS.map((faq, i) => (
+                <AccordionItem
+                  key={faq.q}
+                  value={`faq-${i}`}
+                  className="rounded-xl border border-border bg-card px-5"
+                >
+                  <AccordionTrigger className="py-4 text-left text-sm font-medium text-foreground hover:no-underline focus-ring">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-4 text-sm leading-relaxed text-muted-foreground">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="px-5 pb-16 lg:px-8 lg:pb-24">
+          <div className="mx-auto flex max-w-[1200px] flex-col items-start justify-between gap-6 rounded-2xl border border-border bg-card p-8 shadow-[var(--shadow-sm)] md:flex-row md:items-center lg:p-10">
+            <div>
+              <h2 className="font-poppins text-xl font-semibold tracking-[-0.01em] text-foreground lg:text-2xl">
+                Keep your inbox moving
+              </h2>
+              <p className="mt-2 max-w-[520px] text-sm leading-relaxed text-muted-foreground">
+                Start on Free, automate the repetitive DMs, and upgrade when volume grows.
+              </p>
+            </div>
+            <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+              <Button asChild className="h-11 rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground hover:bg-primary/90">
+                <Link to="/signup">Start free</Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="h-11 rounded-lg border-border px-6 text-sm font-semibold text-foreground hover:bg-muted"
+              >
+                <Link to="/signup?plan=growth">Start with Growth</Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-border px-5 py-8 lg:px-8">
+        <div className="mx-auto flex max-w-[1200px] flex-col items-center justify-between gap-4 md:flex-row">
+          <Logo markOnly size="chrome" className="dark:hidden" />
+          <Logo markOnly variant="light" size="chrome" className="hidden dark:block" />
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} Conveero. First-line community replies, automated.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
