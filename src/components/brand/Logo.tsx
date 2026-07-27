@@ -1,5 +1,7 @@
 import logoDark from '@/assets/conveero-logo-dark.svg';
 import logoLight from '@/assets/conveero-logo-light.svg';
+import markDark from '@/assets/conveero-mark-dark.svg';
+import markLight from '@/assets/conveero-mark-light.svg';
 import { cn } from '@/lib/utils';
 
 /**
@@ -15,6 +17,13 @@ const SIZES = {
   auth: 'h-9 w-auto min-w-[132px]',
 } as const;
 
+/** Icon-only sizes — no reserved wordmark width, tighter optical presence. */
+const MARK_SIZES = {
+  chrome: 'h-8 w-8',
+  nav: 'h-9 w-9',
+  auth: 'h-11 w-11',
+} as const;
+
 export type LogoSize = keyof typeof SIZES;
 
 interface LogoProps {
@@ -22,6 +31,8 @@ interface LogoProps {
   variant?: 'dark' | 'light';
   /** Standardized size token. Prefer this over ad-hoc height classes. */
   size?: LogoSize;
+  /** Render the icon-only C mark instead of the full wordmark. */
+  markOnly?: boolean;
   className?: string;
 }
 
@@ -29,12 +40,24 @@ interface LogoProps {
  * Conveero brand lockup. No background box — the SVG keeps its own aspect ratio.
  * Use the `size` token so lockups align consistently across the app.
  */
-export function Logo({ variant = 'dark', size = 'chrome', className }: LogoProps) {
+export function Logo({ variant = 'dark', size = 'chrome', markOnly = false, className }: LogoProps) {
+  const src = markOnly
+    ? variant === 'light'
+      ? markLight
+      : markDark
+    : variant === 'light'
+      ? logoLight
+      : logoDark;
+
   return (
     <img
-      src={variant === 'light' ? logoLight : logoDark}
+      src={src}
       alt="Conveero"
-      className={cn('block shrink-0 select-none object-contain object-left', SIZES[size], className)}
+      className={cn(
+        'block shrink-0 select-none object-contain object-left',
+        markOnly ? MARK_SIZES[size] : SIZES[size],
+        className,
+      )}
       draggable={false}
     />
   );
