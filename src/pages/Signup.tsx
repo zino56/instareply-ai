@@ -28,13 +28,8 @@ export default function Signup() {
         className="flex items-center justify-center p-6 md:p-10"
       >
         <div className="w-full max-w-[440px]">
-          <Link to="/" className="inline-flex items-center gap-2 mb-10 group">
-            <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-primary text-primary-foreground">
-              <Sparkles className="w-5 h-5" aria-hidden="true" />
-            </div>
-            <span className="text-xl font-bold group-hover:text-primary transition-colors">
-              Conveero
-            </span>
+          <Link to="/" className="inline-flex items-center mb-10 group focus-ring rounded-lg">
+            <Logo className="h-8" />
           </Link>
 
           <div className="space-y-2 mb-8">

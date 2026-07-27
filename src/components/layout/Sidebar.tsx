@@ -63,13 +63,8 @@ export function Sidebar({ onNavigate }: SidebarProps) {
     <aside className="flex h-full w-full flex-col bg-card border-r border-border">
       {/* Brand */}
       <div className="h-[68px] px-5 flex items-center border-b border-border">
-        <Link to="/dashboard" onClick={onNavigate} className="flex items-center gap-2.5 group focus-ring rounded-lg">
-          <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-primary text-primary-foreground shadow-[var(--shadow-sm)]">
-            <Sparkles className="w-[18px] h-[18px]" strokeWidth={2} />
-          </div>
-          <span className="text-lg font-bold tracking-tight group-hover:text-primary transition-colors">
-            Conveero
-          </span>
+        <Link to="/dashboard" onClick={onNavigate} className="flex items-center group focus-ring rounded-lg">
+          <Logo className="h-7" />
         </Link>
       </div>
 
