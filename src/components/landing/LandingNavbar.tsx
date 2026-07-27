@@ -1,3 +1,4 @@
+import { Logo } from '@/components/brand/Logo';
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -33,11 +34,8 @@ const LandingNavbar = () => {
       <div className="max-w-[1280px] mx-auto px-5 md:px-[60px] h-full">
         <div className="flex items-center justify-between h-full">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-mc-yellow flex items-center justify-center">
-              <span className="font-poppins font-bold text-lg text-mc-black">C</span>
-            </div>
-            <span className="font-poppins font-bold text-xl text-mc-black">Conveero</span>
+          <Link to="/" className="flex items-center">
+            <Logo className="h-8" />
           </Link>
 
           {/* Desktop Navigation */}

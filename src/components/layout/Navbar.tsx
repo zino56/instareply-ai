@@ -1,3 +1,4 @@
+import { Logo } from '@/components/brand/Logo';
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,7 +13,6 @@ import {
   Menu,
   X,
   ChevronDown,
-  Sparkles,
   BookOpen,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -60,13 +60,8 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-border/70 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70 shadow-[var(--shadow-sm)]">
       <nav className="container flex h-[68px] items-center justify-between">
         {/* Logo */}
-        <Link to="/dashboard" className="flex items-center gap-2.5 group focus-ring rounded-lg">
-          <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-primary text-primary-foreground shadow-[var(--shadow-sm)]">
-            <Sparkles className="w-[18px] h-[18px]" strokeWidth={2} />
-          </div>
-          <span className="text-xl font-bold tracking-tight group-hover:text-primary transition-colors">
-            Conveero
-          </span>
+        <Link to="/dashboard" className="flex items-center group focus-ring rounded-lg">
+          <Logo className="h-7" />
         </Link>
 
         {/* Desktop Navigation */}

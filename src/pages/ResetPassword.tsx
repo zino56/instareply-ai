@@ -1,6 +1,7 @@
+import { Logo } from '@/components/brand/Logo';
 import { motion } from 'framer-motion';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { Sparkles, Eye, EyeOff, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { Eye, EyeOff, CheckCircle2, AlertTriangle } from 'lucide-react';
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -116,11 +117,8 @@ export default function ResetPassword() {
       className="min-h-screen flex items-center justify-center bg-surface p-6 md:p-8"
     >
       <div className="w-full max-w-md">
-        <Link to="/" className="flex items-center justify-center gap-2 mb-8 group">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground">
-            <Sparkles className="w-6 h-6" />
-          </div>
-          <span className="text-2xl font-bold group-hover:text-primary transition-colors">Conveero</span>
+        <Link to="/" className="flex items-center justify-center mb-8 group">
+          <Logo className="h-9" />
         </Link>
 
         <div className="bg-card border border-border rounded-2xl shadow-[var(--shadow-md)] p-8 space-y-6">
