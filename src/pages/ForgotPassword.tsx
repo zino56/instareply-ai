@@ -69,7 +69,7 @@ export default function ForgotPassword() {
     >
       <div className="w-full max-w-md">
         <Link to="/" className="flex items-center justify-center mb-8 group">
-          <Logo className="h-9" />
+          <Logo size="auth" />
         </Link>
 
         <div className="bg-card border border-border rounded-2xl shadow-[var(--shadow-md)] p-8 space-y-6">
