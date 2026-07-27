@@ -1,3 +1,4 @@
+import { Logo } from '@/components/brand/Logo';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Sparkles, ArrowLeft, CheckCircle2 } from 'lucide-react';

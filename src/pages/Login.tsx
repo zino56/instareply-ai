@@ -1,3 +1,4 @@
+import { Logo } from '@/components/brand/Logo';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { Sparkles, Eye, EyeOff } from 'lucide-react';
