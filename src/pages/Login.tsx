@@ -41,7 +41,7 @@ export default function Login() {
       >
         <div className="w-full max-w-[440px]">
           <Link to="/" className="inline-flex items-center mb-10 group focus-ring rounded-lg">
-            <Logo size="nav" />
+            <Logo size="auth" />
           </Link>
 
           <div className="space-y-2 mb-8">
