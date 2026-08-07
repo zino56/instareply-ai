@@ -1,7 +1,7 @@
-import logoDark from '@/assets/conveero-logo-dark.svg';
-import logoLight from '@/assets/conveero-logo-light.svg';
-import markDark from '@/assets/conveero-mark-dark.svg';
-import markLight from '@/assets/conveero-mark-light.svg';
+import logoDark from '@/assets/conveero-logo-dark.png';
+import logoLight from '@/assets/conveero-logo-light.png';
+import markDark from '@/assets/conveero-mark-dark.png';
+import markLight from '@/assets/conveero-mark-light.png';
 import { cn } from '@/lib/utils';
 
 /**
