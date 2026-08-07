@@ -12,10 +12,14 @@ export default function HeroSection() {
           <div className="text-center lg:text-left">
             <h1
               data-component="heading"
-              className="[font-family:'Poppins',_Inter,_system-ui,_sans-serif] font-bold text-[44px] md:text-[72px] text-white leading-[1.05] tracking-[-0.02em] mb-6"
+              className="[font-family:'Bricolage_Grotesque',_Poppins,_Inter,_system-ui,_sans-serif] font-extrabold text-[44px] md:text-[72px] text-white leading-[1.05] tracking-[-2.3px] max-md:tracking-[-1.32px] text-balance mb-6"
             >
-              Make the most out of every conversation
+              {"Make the most out of every "}
+              <mark className="inline px-3.5 max-md:px-2 rounded-sm bg-[#FFF100] text-black">
+                conversation
+              </mark>
             </h1>
+
             <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-[500px] mx-auto lg:mx-0">
               Sell more, engage better, and grow your audience. AI-powered automation that turns
               messages into revenue.
