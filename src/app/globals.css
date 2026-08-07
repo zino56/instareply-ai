@@ -1,9 +1,9 @@
 /* Cloned homepage design tokens, fonts and scoped resets.
    Ported to Tailwind v3: no @theme / @source / @import of tailwind layers.
-   Everything visual is scoped to `.zamili-page` so the dashboard and auth
+   Everything visual is scoped to `.conveero-page` so the dashboard and auth
    screens keep using the app's own design system untouched. */
 
-:where(.zamili-page) {
+:where(.conveero-page) {
   --background: rgb(244, 236, 216);
   --foreground: rgb(26, 14, 8);
   --primary: rgb(58, 36, 24);
@@ -30,7 +30,7 @@
   --color-014: rgba(26, 129, 255, 0.25);
 }
 
-:where(.zamili-page) {
+:where(.conveero-page) {
   /* fonts */
   --font-body: Inter, system-ui, -apple-system, sans-serif;
   --font-001: "Bricolage Grotesque", Inter, system-ui, sans-serif;
@@ -128,7 +128,7 @@
   --bp-1920: 1920px;
 }
 
-:where(.zamili-page) {
+:where(.conveero-page) {
   --clr-0: rgba(0, 0, 0, 0);
   --clr-1: rgb(11, 79, 173);
   --clr-2: rgba(11, 79, 173, 0.82);
@@ -158,7 +158,7 @@
   --clr-26: rgb(26, 16, 12);
 }
 
-:where(.zamili-page) {
+:where(.conveero-page) {
   --zm-foreground: var(--foreground);
   --zm-background: var(--background);
   --zm-primary: var(--primary);
@@ -916,50 +916,50 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-:where(.zamili-page), :where(.zamili-page) *, :where(.zamili-page) *::before, :where(.zamili-page) *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid currentColor; }
-:where(.zamili-page) ul, :where(.zamili-page) ol, :where(.zamili-page) menu { list-style: none; }
-:where(.zamili-page) a { color: inherit; text-decoration: none; }
-:where(.zamili-page) button, :where(.zamili-page) input, :where(.zamili-page) select, :where(.zamili-page) textarea, :where(.zamili-page) optgroup { font: inherit; color: inherit; background: transparent; border: 0; padding: 0; margin: 0; text-align: inherit; letter-spacing: inherit; }
-:where(.zamili-page) button { cursor: pointer; }
-:where(.zamili-page) table { border-collapse: separate; border-spacing: 0; }
-:where(.zamili-page) img, :where(.zamili-page) picture, :where(.zamili-page) video, :where(.zamili-page) canvas, :where(.zamili-page) svg { display: inline-block; }
-:where(.zamili-page) h1, :where(.zamili-page) h2, :where(.zamili-page) h3, :where(.zamili-page) h4, :where(.zamili-page) h5, :where(.zamili-page) h6, :where(.zamili-page) p, :where(.zamili-page) figure, :where(.zamili-page) blockquote, :where(.zamili-page) dl, :where(.zamili-page) dd { margin: 0; }
-:where(.zamili-page) h1, :where(.zamili-page) h2, :where(.zamili-page) h3, :where(.zamili-page) h4, :where(.zamili-page) h5, :where(.zamili-page) h6 { font-size: inherit; font-weight: inherit; }
-:where(.zamili-page) b, :where(.zamili-page) strong, :where(.zamili-page) th { font-weight: inherit; }
-:where(.zamili-page) em, :where(.zamili-page) i, :where(.zamili-page) cite, :where(.zamili-page) var, :where(.zamili-page) dfn, :where(.zamili-page) address, :where(.zamili-page) q { font-style: inherit; }
-:where(.zamili-page) small, :where(.zamili-page) big, :where(.zamili-page) sub, :where(.zamili-page) sup { font-size: inherit; }
-:where(.zamili-page) sub, :where(.zamili-page) sup { vertical-align: inherit; }
-:where(.zamili-page) code, :where(.zamili-page) kbd, :where(.zamili-page) samp, :where(.zamili-page) pre, :where(.zamili-page) tt, :where(.zamili-page) var { font-family: inherit; font-size: inherit; }
-:where(.zamili-page) mark { background-color: transparent; color: inherit; }
-:where(.zamili-page) abbr[title] { text-decoration: none; }
-:where(.zamili-page) fieldset, :where(.zamili-page) legend { min-width: 0; }
-:where(.zamili-page) { font-family: Inter, system-ui, -apple-system, sans-serif; color: var(--zm-foreground); background-color: var(--zm-background); }
+:where(.conveero-page), :where(.conveero-page) *, :where(.conveero-page) *::before, :where(.conveero-page) *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid currentColor; }
+:where(.conveero-page) ul, :where(.conveero-page) ol, :where(.conveero-page) menu { list-style: none; }
+:where(.conveero-page) a { color: inherit; text-decoration: none; }
+:where(.conveero-page) button, :where(.conveero-page) input, :where(.conveero-page) select, :where(.conveero-page) textarea, :where(.conveero-page) optgroup { font: inherit; color: inherit; background: transparent; border: 0; padding: 0; margin: 0; text-align: inherit; letter-spacing: inherit; }
+:where(.conveero-page) button { cursor: pointer; }
+:where(.conveero-page) table { border-collapse: separate; border-spacing: 0; }
+:where(.conveero-page) img, :where(.conveero-page) picture, :where(.conveero-page) video, :where(.conveero-page) canvas, :where(.conveero-page) svg { display: inline-block; }
+:where(.conveero-page) h1, :where(.conveero-page) h2, :where(.conveero-page) h3, :where(.conveero-page) h4, :where(.conveero-page) h5, :where(.conveero-page) h6, :where(.conveero-page) p, :where(.conveero-page) figure, :where(.conveero-page) blockquote, :where(.conveero-page) dl, :where(.conveero-page) dd { margin: 0; }
+:where(.conveero-page) h1, :where(.conveero-page) h2, :where(.conveero-page) h3, :where(.conveero-page) h4, :where(.conveero-page) h5, :where(.conveero-page) h6 { font-size: inherit; font-weight: inherit; }
+:where(.conveero-page) b, :where(.conveero-page) strong, :where(.conveero-page) th { font-weight: inherit; }
+:where(.conveero-page) em, :where(.conveero-page) i, :where(.conveero-page) cite, :where(.conveero-page) var, :where(.conveero-page) dfn, :where(.conveero-page) address, :where(.conveero-page) q { font-style: inherit; }
+:where(.conveero-page) small, :where(.conveero-page) big, :where(.conveero-page) sub, :where(.conveero-page) sup { font-size: inherit; }
+:where(.conveero-page) sub, :where(.conveero-page) sup { vertical-align: inherit; }
+:where(.conveero-page) code, :where(.conveero-page) kbd, :where(.conveero-page) samp, :where(.conveero-page) pre, :where(.conveero-page) tt, :where(.conveero-page) var { font-family: inherit; font-size: inherit; }
+:where(.conveero-page) mark { background-color: transparent; color: inherit; }
+:where(.conveero-page) abbr[title] { text-decoration: none; }
+:where(.conveero-page) fieldset, :where(.conveero-page) legend { min-width: 0; }
+:where(.conveero-page) { font-family: Inter, system-ui, -apple-system, sans-serif; color: var(--zm-foreground); background-color: var(--zm-background); }
 
 
-.zamili-page .text-foreground { color: var(--zm-foreground); }
-.zamili-page .text-background { color: var(--zm-background); }
-.zamili-page .text-primary { color: var(--zm-primary); }
-.zamili-page .text-muted-foreground { color: var(--zm-muted-foreground); }
-.zamili-page .text-accent { color: var(--zm-accent); }
-.zamili-page .text-surface { color: var(--zm-surface); }
-.zamili-page .bg-foreground { background-color: var(--zm-foreground); }
-.zamili-page .bg-background { background-color: var(--zm-background); }
-.zamili-page .bg-primary { background-color: var(--zm-primary); }
-.zamili-page .bg-accent { background-color: var(--zm-accent); }
-.zamili-page .bg-surface { background-color: var(--zm-surface); }
-.zamili-page .border-foreground { border-color: var(--zm-foreground); }
-.zamili-page .border-background { border-color: var(--zm-background); }
-.zamili-page .border-border { border-color: var(--zm-border); }
-.zamili-page .border-accent { border-color: var(--zm-accent); }
-.zamili-page .border-b-accent { border-bottom-color: var(--zm-accent); }
-.zamili-page .border-t-border { border-top-color: var(--zm-border); }
-.zamili-page .border-b-border { border-bottom-color: var(--zm-border); }
-.zamili-page .hover\\:text-accent:hover { color: var(--zm-accent); }
-.zamili-page .hover\\:text-foreground:hover { color: var(--zm-foreground); }
-.zamili-page .hover\\:text-background:hover { color: var(--zm-background); }
-.zamili-page .hover\\:bg-foreground:hover { background-color: var(--zm-foreground); }
-.zamili-page .hover\\:border-foreground:hover { border-color: var(--zm-foreground); }
-.zamili-page .hover\\:border-accent:hover { border-color: var(--zm-accent); }
+.conveero-page .text-foreground { color: var(--zm-foreground); }
+.conveero-page .text-background { color: var(--zm-background); }
+.conveero-page .text-primary { color: var(--zm-primary); }
+.conveero-page .text-muted-foreground { color: var(--zm-muted-foreground); }
+.conveero-page .text-accent { color: var(--zm-accent); }
+.conveero-page .text-surface { color: var(--zm-surface); }
+.conveero-page .bg-foreground { background-color: var(--zm-foreground); }
+.conveero-page .bg-background { background-color: var(--zm-background); }
+.conveero-page .bg-primary { background-color: var(--zm-primary); }
+.conveero-page .bg-accent { background-color: var(--zm-accent); }
+.conveero-page .bg-surface { background-color: var(--zm-surface); }
+.conveero-page .border-foreground { border-color: var(--zm-foreground); }
+.conveero-page .border-background { border-color: var(--zm-background); }
+.conveero-page .border-border { border-color: var(--zm-border); }
+.conveero-page .border-accent { border-color: var(--zm-accent); }
+.conveero-page .border-b-accent { border-bottom-color: var(--zm-accent); }
+.conveero-page .border-t-border { border-top-color: var(--zm-border); }
+.conveero-page .border-b-border { border-bottom-color: var(--zm-border); }
+.conveero-page .hover\\:text-accent:hover { color: var(--zm-accent); }
+.conveero-page .hover\\:text-foreground:hover { color: var(--zm-foreground); }
+.conveero-page .hover\\:text-background:hover { color: var(--zm-background); }
+.conveero-page .hover\\:bg-foreground:hover { background-color: var(--zm-foreground); }
+.conveero-page .hover\\:border-foreground:hover { border-color: var(--zm-foreground); }
+.conveero-page .hover\\:border-accent:hover { border-color: var(--zm-accent); }
 
 @keyframes hero-ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
