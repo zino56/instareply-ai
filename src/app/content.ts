@@ -6,7 +6,7 @@ export type ListRowDataItem = {
 };
 export const listRowData: ListRowDataItem[] = [
     { href: "#product", label: "Product" },
-    { href: "#create", label: "Create" },
+    { href: "#testimonials", label: "Customers" },
     { href: "#integrations", label: "Integrations" },
     { href: "#pricing", label: "Pricing" },
     { href: "#faq", label: "FAQ" }
@@ -43,9 +43,9 @@ export type MediaCardDataItem = {
   imgSrc: string;
 };
 export const mediaCardData: MediaCardDataItem[] = [
-    { title: "Open Inbox across channels", description: "Instagram, Messenger, WhatsApp, Telegram, and email in one thread view. Assign, reply, and keep context without tab hopping.", label: "Try Open Inbox", alt: "Zamili open inbox across social channels", imgSrc: "/assets/cloned/images/bec30c7817bc.png" },
-    { title: "Workflows that run on real events", description: "Trigger on comments, DMs, and form events. Branch, delay, and hand off to humans when the conversation needs a person.", label: "Start a workflow", alt: "Zamili workflow canvas", imgSrc: "/assets/cloned/images/323cff3bb6a9.png" },
-    { title: "Publish and measure in the same place", description: "Schedule posts, watch performance, and feed winning creatives back into your automations.", label: "Publish smarter", alt: "Zamili analytics dashboard", imgSrc: "/assets/cloned/images/84ca3162f02f.png" }
+    { title: "AI-powered responses", description: "Claude 3.5 understands customer intent and replies intelligently. No more robotic answers, and never a missed DM.", label: "See the AI inbox", alt: "Conveero AI inbox replying to Instagram DMs", imgSrc: "/assets/cloned/images/bec30c7817bc.png" },
+    { title: "Zero hallucinations", description: "The AI only recommends products in your catalog. 100% accurate, 100% on-brand, every single reply.", label: "How it stays accurate", alt: "Conveero product catalog grounding", imgSrc: "/assets/cloned/images/323cff3bb6a9.png" },
+    { title: "Real-time analytics", description: "Track conversations, conversions, and customer intent with dashboards built for operators, not analysts.", label: "See analytics", alt: "Conveero analytics dashboard", imgSrc: "/assets/cloned/images/84ca3162f02f.png" }
 ];
 
 export type ProductsItem = {
@@ -59,19 +59,19 @@ export type ProductsItem = {
   description3: string;
 };
 export const products: ProductsItem[] = [
-    { variant: "starter", title: "Starter", description: "10,000 Zamili tokens / month", price: "$9", label: "Start 7-day trial", stat: "10,000", description2: "For growing businesses", description3: "10,000 Zamili tokens / month" },
-    { variant: "pro", title: "Pro", description: "50,000 Zamili tokens / month", price: "$29.99", label: "Start 7-day trial", stat: "50,000", description2: "For professionals", description3: "50,000 Zamili tokens / month" },
-    { variant: "enterprise", title: "Enterprise", description: "Unlimited store products & orders", price: "$140", label: "Start 7-day trial", stat: "200,000", description2: "For large organizations", description3: "200,000 Zamili tokens / month" }
+    { variant: "starter", title: "Starter", description: "Automate the questions you answer every day", price: "$49", label: "Choose Starter", stat: "1", description2: "For solo operators", description3: "1 Instagram account · DM auto-replies · Email support" },
+    { variant: "pro", title: "Growth", description: "Handle repetitive DMs at scale with a shared inbox", price: "$99", label: "Choose Growth", stat: "3", description2: "Most popular", description3: "Up to 3 Instagram accounts · Shared inbox · Saved FAQs" },
+    { variant: "enterprise", title: "Scale", description: "For teams running high-volume community inboxes", price: "$199", label: "Choose Scale", stat: "10", description2: "For growing teams", description3: "Up to 10 accounts · Priority support · Advanced automation" }
 ];
 
 export type MediaTile3DataItem = {
   label: string;
 };
 export const mediaTile3Data: MediaTile3DataItem[] = [
-    { label: "Do I need to code to build automations?" },
-    { label: "Is there a free trial?" },
-    { label: "Can my team share one workspace?" },
-    { label: "How do tokens work on paid plans?" }
+    { label: "Can the AI say wrong things (hallucinate)?" },
+    { label: "Do I need coding skills?" },
+    { label: "What if a customer asks something outside my catalog?" },
+    { label: "What if I need help setting things up?" }
 ];
 
 export type TextLink2DataItem = {
@@ -79,11 +79,11 @@ export type TextLink2DataItem = {
   label: string;
 };
 export const textLink2Data: TextLink2DataItem[] = [
-    { href: "https://www.instagram.com/zamili.ai", label: "Instagram" },
-    { href: "https://www.facebook.com/zamili.ai", label: "Facebook" },
+    { href: "https://www.instagram.com/conveero", label: "Instagram" },
+    { href: "https://www.facebook.com/conveero", label: "Facebook" },
     { href: "https://www.youtube.com/@guidategadato", label: "YouTube" },
-    { href: "https://www.linkedin.com/company/zamili-ai", label: "LinkedIn" },
-    { href: "https://twitter.com/zamili_ai", label: "Twitter" }
+    { href: "https://www.linkedin.com/company/conveero", label: "LinkedIn" },
+    { href: "https://twitter.com/conveero", label: "Twitter" }
 ];
 
 export type ListRow3DataItem = {
@@ -93,11 +93,11 @@ export type ListRow3DataItem = {
 export const listRow3Data: ListRow3DataItem[] = [
     { href: "/site#product", label: "Features" },
     { href: "/site#pricing", label: "Pricing" },
-    { href: "https://app.zamili.ai/workflows", label: "Workflows" },
-    { href: "https://app.zamili.ai/workflows", label: "Automation" },
-    { href: "https://app.zamili.ai/analytics", label: "Analytics" },
-    { href: "https://app.zamili.ai/posts", label: "Post Management" },
-    { href: "https://app.zamili.ai/inbox", label: "Inbox" }
+    { href: "/dashboard", label: "Workflows" },
+    { href: "/dashboard", label: "Automation" },
+    { href: "/dashboard", label: "Analytics" },
+    { href: "/dashboard", label: "Post Management" },
+    { href: "/dashboard", label: "Inbox" }
 ];
 
 export type CtaSectionContentAction = {

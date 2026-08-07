@@ -23,18 +23,18 @@ export default function QuestionsAnsweredSection({ mediaTile3Data = mediaTile3Da
           <div className="border-b border-solid border-b-color-002 block" data-cid="n541">
             <button className="w-full flex py-5 justify-between items-center gap-5 [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-[1.375rem] font-bold leading-6.5 tracking-[-0.22px] cursor-pointer" data-cid="n542" data-component="button" aria-expanded="true" type="button">
               <span className="block" data-cid="n543">
-                What channels does Zamili support?
+                Is this automation safe for my Instagram account?
               </span>
               <Icon6 cid={"n544"} />
             </button>
             <div className="w-full max-w-[39.1125rem] block mb-5 pb-5 text-primary" data-cid="n545">
-              Instagram, Facebook Pages, Messenger, WhatsApp, Telegram, Gmail, and more. Connect the accounts you already use and automate from one inbox.
+              Yes. We use Meta's official Graph API, the same one Instagram business tools use, so there is zero account risk. Your account stays safe.
             </div>
           </div>
           {mediaTile3Data.map((d, i) => <MediaTile3 key={i} d={d} cids={MediaTile3_cids[i]} styles={MediaTile3_styles[i]} />)}
         </div>
         <div className="flex mt-14 flex-wrap justify-between items-center gap-5" data-cid="n562">
-          <a className="w-[10.8125rem] h-12 border border-solid border-foreground flex px-6.5 rounded-[999px] justify-center items-center gap-2 text-background font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap bg-foreground cursor-pointer hover:bg-color-001 hover:border-color-001" data-cid="n563" data-component="button" href="https://app.zamili.ai/join">
+          <a className="w-[10.8125rem] h-12 border border-solid border-foreground flex px-6.5 rounded-[999px] justify-center items-center gap-2 text-background font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap bg-foreground cursor-pointer hover:bg-color-001 hover:border-color-001" data-cid="n563" data-component="button" href="/signup">
             Start 7-day trial
           </a>
         </div>

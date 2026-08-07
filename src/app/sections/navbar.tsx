@@ -12,7 +12,7 @@ export default function Navbar({ listRowData = listRowDataContent } = {}) {
           <a className="h-8 flex items-center gap-2 [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-xl font-extrabold leading-8 tracking-[-0.4px] cursor-pointer hover:border-accent hover:text-accent hover:outline-accent hover:[text-decoration-color:var(--accent)]" data-cid="n5" data-component="link" href="#">
             <img className="w-8 h-8 block max-w-full rounded-lg overflow-clip object-contain aspect-[auto_32/32]" data-cid="n6" data-component="image" alt="" height="32" src="/assets/cloned/images/73dc1da22b19.png" width="32" />
             <span className="block" data-cid="n7">
-              Zamili
+              Conveero
             </span>
           </a>
           <ul className="border border-solid border-color-002 flex p-1.5 rounded-[999px] items-center gap-1 [list-style-type:none] list-outside bg-background max-lg:hidden" data-cid="n8">
@@ -27,10 +27,10 @@ export default function Navbar({ listRowData = listRowDataContent } = {}) {
                 <Icon cid={"n23"} />
               </button>
             </div>
-            <a className="h-9 border border-solid border-clr-0 flex px-4.5 rounded-[999px] justify-center items-center gap-2 text-sm font-semibold leading-3.5 tracking-[-0.07px] whitespace-nowrap text-nowrap cursor-pointer hover:border-color-001 hover:text-background hover:outline-background hover:[text-decoration-color:var(--color-001)] hover:underline" data-cid="n24" data-component="button" href="https://app.zamili.ai/login">
+            <a className="h-9 border border-solid border-clr-0 flex px-4.5 rounded-[999px] justify-center items-center gap-2 text-sm font-semibold leading-3.5 tracking-[-0.07px] whitespace-nowrap text-nowrap cursor-pointer hover:border-color-001 hover:text-background hover:outline-background hover:[text-decoration-color:var(--color-001)] hover:underline" data-cid="n24" data-component="button" href="/dashboard">
               Sign in
             </a>
-            <a className="w-[8.875rem] h-9 border border-solid border-foreground flex px-4.5 rounded-[999px] justify-center items-center gap-2 text-background text-sm font-semibold leading-3.5 tracking-[-0.07px] whitespace-nowrap text-nowrap bg-foreground cursor-pointer hover:bg-color-001 hover:border-color-001" data-cid="n25" data-component="button" href="https://app.zamili.ai/join">
+            <a className="w-[8.875rem] h-9 border border-solid border-foreground flex px-4.5 rounded-[999px] justify-center items-center gap-2 text-background text-sm font-semibold leading-3.5 tracking-[-0.07px] whitespace-nowrap text-nowrap bg-foreground cursor-pointer hover:bg-color-001 hover:border-color-001" data-cid="n25" data-component="button" href="/signup">
               Start 7-day trial
             </a>
           </div>

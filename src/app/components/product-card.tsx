@@ -33,7 +33,7 @@ export default function ProductCard({ d, cids, styles }: { d: ProductCardData; c
         {d.description3}
       </p>
       <ProductCardSlot1 d={d} />
-      <a data-cid={cids[7]} className={cn("h-12 border border-solid flex mt-8 px-6.5 rounded-[999px] justify-center items-center gap-2 font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap cursor-pointer", styles.className2)} data-component="button" href="https://app.zamili.ai/join">
+      <a data-cid={cids[7]} className={cn("h-12 border border-solid flex mt-8 px-6.5 rounded-[999px] justify-center items-center gap-2 font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap cursor-pointer", styles.className2)} data-component="button" href="/signup">
         Start 7-day trial
       </a>
     </article>

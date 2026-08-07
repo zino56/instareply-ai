@@ -18,7 +18,7 @@ export default function MediaCard({ d, cids, styles }: { d: MediaCardData; cids:
         <p data-cid={cids[3]} className="w-full max-w-[39.1125rem] block my-5 text-primary">
           {d.description}
         </p>
-        <a data-cid={cids[4]} className={cn("h-[31.3px] border-b-2 border-solid border-b-accent inline-flex mt-8 pb-[0.15rem] items-center gap-2 [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-[1.0625rem] font-extrabold leading-[1.6875rem] cursor-pointer", styles.className2)} data-component="button" href="https://app.zamili.ai/join">
+        <a data-cid={cids[4]} className={cn("h-[31.3px] border-b-2 border-solid border-b-accent inline-flex mt-8 pb-[0.15rem] items-center gap-2 [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-[1.0625rem] font-extrabold leading-[1.6875rem] cursor-pointer", styles.className2)} data-component="button" href="/signup">
           {d.label}
           <svg data-cid={cids[5]} className={cn("w-auto h-4.5 block max-w-full overflow-hidden focus:outline-clr-24 focus:[outline-style:auto] focus:outline-[5px]", styles.className3)} data-component="icon" aria-hidden="true" fill="none" height="18" viewBox="0 0 24 24" width="18">
             <path d="M5 12h12M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />

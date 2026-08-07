@@ -5,8 +5,8 @@ import Tile2, { type Tile2Data } from "../components/tile2";
 import { TextLink2_cids, ListRow3_cids, Tile2_cids } from "../_cids";
 import { textLink2Data as textLink2DataContent, listRow3Data as listRow3DataContent } from "../content";
 const Tile2_data: Tile2Data[] = [
-    { description: "Resources", href: "https://www.zamili.ai/documentation", label: "Documentation", href2: "/site#faq", label2: "FAQ", href3: "/site/alternatives", label3: "Competitors & Alternatives", href4: "mailto:support@zamili.ai", label4: "Support", href5: "https://www.zamili.ai/support", label5: "Help Center", href6: "/site#contact", label6: "Contact Us" },
-    { description: "Company", href: "/site#product", label: "About Us", href2: "/site#testimonials", label2: "Our Team", href3: "https://www.zamili.ai/#academy", label3: "AIX Academy", href4: "mailto:contact@zamili.ai", label4: "Contact", href5: "tel:+971506071246", label5: "+971 50 607 1246", href6: "https://www.trustpilot.com/review/zamili.ai", label6: "Reviews" },
+    { description: "Resources", href: "https://www.conveero/documentation", label: "Documentation", href2: "/site#faq", label2: "FAQ", href3: "/site/alternatives", label3: "Competitors & Alternatives", href4: "mailto:support@conveero", label4: "Support", href5: "https://www.conveero/support", label5: "Help Center", href6: "/site#contact", label6: "Contact Us" },
+    { description: "Company", href: "/site#product", label: "About Us", href2: "/site#testimonials", label2: "Our Team", href3: "https://www.conveero/#academy", label3: "AIX Academy", href4: "mailto:contact@conveero", label4: "Contact", href5: "tel:+971506071246", label5: "+971 50 607 1246", href6: "https://www.trustpilot.com/review/conveero.com", label6: "Reviews" },
     { description: "Legal", href: "/site/privacy", label: "Privacy Policy", href2: "/site/terms", label2: "Terms of Service", href3: "/site/privacy#cookies", label3: "Cookie Policy", href4: "/site/privacy#gdpr", label4: "GDPR Compliance", href5: "/site/terms#security", label5: "Security", href6: "/site/terms#sla", label6: "SLA" }
 ];
 /** Site footer. */
@@ -18,7 +18,7 @@ export default function Footer({ textLink2Data = textLink2DataContent, listRow3D
           <div className="block max-w-72" data-cid="n577">
             <a className="h-8 inline-flex items-center gap-2 [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-xl font-extrabold leading-8 cursor-pointer hover:border-color-010 hover:text-color-010 hover:outline-color-010 hover:[text-decoration-color:var(--color-010)]" data-cid="n578" data-component="link" href="/site">
               <img className="w-7 h-7 block max-w-full rounded-lg overflow-clip object-contain aspect-[auto_28/28]" data-cid="n579" data-component="image" alt="" height="28" src="/assets/cloned/images/73dc1da22b19.png" width="28" />
-              Zamili
+              Conveero
             </a>
             <p className="block max-w-[34.225rem] my-5 text-color-011 text-sm leading-[1.375rem]" data-cid="n580">
               Your AI companion for business automation and growth. Powered by AIX Training Academy.
@@ -64,7 +64,7 @@ export default function Footer({ textLink2Data = textLink2DataContent, listRow3D
             </button>
           </form>
           <p className="block max-w-[34.225rem] mt-5 text-sm leading-[1.375rem]" data-cid="n661">
-            <a className="inline text-accent font-semibold cursor-pointer hover:border-color-010 hover:text-color-010 hover:outline-color-010 hover:[text-decoration-color:var(--color-010)] hover:underline" data-cid="n662" data-component="link" href="https://app.zamili.ai/join">
+            <a className="inline text-accent font-semibold cursor-pointer hover:border-color-010 hover:text-color-010 hover:outline-color-010 hover:[text-decoration-color:var(--color-010)] hover:underline" data-cid="n662" data-component="link" href="/signup">
               Start your 7-day trial
             </a>
           </p>
@@ -72,14 +72,14 @@ export default function Footer({ textLink2Data = textLink2DataContent, listRow3D
         <div className="border-t border-solid border-t-border flex mt-14 pt-8 flex-wrap justify-between items-start gap-5" data-cid="n663">
           <div className="flex flex-col gap-3" data-cid="n664">
             <p className="block opacity-75 max-w-[34.225rem] text-sm leading-[1.375rem]" data-cid="n665">
-              © 2026 Zamili.ai. All rights reserved. Powered by AIX Training Academy.
+              © 2026 Conveero.ai. All rights reserved. Powered by AIX Training Academy.
             </p>
             <p className="block max-w-[500.7px] text-clr-17 text-[0.8125rem] leading-[1.3125rem]" data-cid="n666">
               Address: Dubai, Damac Hills, Jasmin B, Office 505, UAE
             </p>
           </div>
           <div className="flex flex-col items-end gap-3 max-lg:items-start" data-cid="n667">
-            <a className="h-10 border border-solid border-color-012 flex py-2 px-4 rounded-lg items-center gap-2 text-sm font-semibold leading-[1.375rem] bg-clr-18 cursor-pointer hover:bg-clr-23 hover:text-color-010 hover:outline-color-010 hover:[text-decoration-color:var(--color-010)]" data-cid="n668" data-component="button" href="https://www.trustpilot.com/review/zamili.ai" rel="noopener noreferrer" target="_blank">
+            <a className="h-10 border border-solid border-color-012 flex py-2 px-4 rounded-lg items-center gap-2 text-sm font-semibold leading-[1.375rem] bg-clr-18 cursor-pointer hover:bg-clr-23 hover:text-color-010 hover:outline-color-010 hover:[text-decoration-color:var(--color-010)]" data-cid="n668" data-component="button" href="https://www.trustpilot.com/review/conveero.com" rel="noopener noreferrer" target="_blank">
               Trustpilot 4.1/5
             </a>
             <div className="flex flex-wrap justify-end items-center gap-3 text-sm leading-[1.375rem] max-lg:justify-start" data-cid="n669">

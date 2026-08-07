@@ -35,7 +35,7 @@ export default function AllInOneSection({ mediaTileData = MediaTile_data, textLi
             <em className="inline text-foreground italic" data-cid="n275">
               Skip the tools, templates, and tabs.
             </em>
-            {" Generate photos and videos in Zamili, then post them directly to Instagram, Facebook, and TikTok — posts, Stories, Reels, and ads covered."}
+            {" Generate photos and videos in Conveero, then post them directly to Instagram, Facebook, and TikTok — posts, Stories, Reels, and ads covered."}
           </p>
         </div>
       </div>
@@ -57,7 +57,7 @@ export default function AllInOneSection({ mediaTileData = MediaTile_data, textLi
           <p className="w-full max-w-128 block text-primary" data-cid="n319">
             Built for cosmetics, real estate, creators — and every brand in between.
           </p>
-          <a className="w-[216.3px] h-12 border border-solid border-foreground flex px-6.5 rounded-[999px] justify-center items-center gap-2 text-background font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap bg-foreground cursor-pointer hover:bg-color-001 hover:border-color-001" data-cid="n320" data-component="button" href="https://app.zamili.ai/join">
+          <a className="w-[216.3px] h-12 border border-solid border-foreground flex px-6.5 rounded-[999px] justify-center items-center gap-2 text-background font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap bg-foreground cursor-pointer hover:bg-color-001 hover:border-color-001" data-cid="n320" data-component="button" href="/signup">
             Create your first post
           </a>
         </div>
