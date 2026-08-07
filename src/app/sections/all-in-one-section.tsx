@@ -57,7 +57,7 @@ export default function AllInOneSection({ mediaTileData = MediaTile_data, textLi
           <p className="w-full max-w-128 block text-primary" data-cid="n319">
             Built for cosmetics, real estate, creators — and every brand in between.
           </p>
-          <a className="w-[216.3px] h-12 border border-solid border-foreground flex px-6.5 rounded-[999px] justify-center items-center gap-2 text-background font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap bg-foreground cursor-pointer hover:bg-color-001 hover:border-color-001" data-cid="n320" data-component="button" href="/signup">
+          <a className="w-[216.3px] h-12 border border-solid border-foreground flex px-6.5 rounded-[999px] justify-center items-center gap-2 text-background font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap bg-foreground cursor-pointer hover:bg-[rgb(255,241,0)] hover:border-[rgb(255,241,0)] hover:text-foreground" data-cid="n320" data-component="button" href="/signup">
             Create your first post
           </a>
         </div>
