@@ -1,3 +1,4 @@
+import { Logo } from "@/components/brand/Logo";
 import TextLink2 from "../components/text-link2";
 import Icon from "../svgs/svg-icon";
 import ListRow3 from "../components/list-row3";
@@ -16,10 +17,10 @@ export default function Footer({ textLink2Data = textLink2DataContent, listRow3D
       <div className="block max-w-300 mx-auto px-8" data-cid="n575">
         <div className="grid items-start gap-8 grid-cols-[274.906px_183.266px_183.281px_183.266px_183.266px] max-md:grid-cols-1 md:max-lg:grid-cols-2" data-cid="n576">
           <div className="block max-w-72" data-cid="n577">
-            <a className="h-8 inline-flex items-center gap-2 [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-xl font-extrabold leading-8 cursor-pointer hover:border-color-010 hover:text-color-010 hover:outline-color-010 hover:[text-decoration-color:var(--color-010)]" data-cid="n578" data-component="link" href="/site">
-              <img className="w-7 h-7 block max-w-full rounded-lg overflow-clip object-contain aspect-[auto_28/28]" data-cid="n579" data-component="image" alt="" height="28" src="/assets/cloned/images/73dc1da22b19.png" width="28" />
-              Conveero
+            <a className="h-8 inline-flex items-center cursor-pointer" data-cid="n578" data-component="link" href="/site" aria-label="Conveero home">
+              <Logo variant="light" size="nav" />
             </a>
+
             <p className="block max-w-[34.225rem] my-5 text-color-011 text-sm leading-[1.375rem]" data-cid="n580">
               Your AI companion for business automation and growth. Powered by AIX Training Academy.
             </p>

@@ -1,3 +1,4 @@
+import { Logo } from "@/components/brand/Logo";
 import ListRow from "../components/list-row";
 import Icon from "../svgs/svg-icon";
 import Icon2 from "../svgs/svg-icon2";
@@ -9,12 +10,10 @@ export default function Navbar({ listRowData = listRowDataContent } = {}) {
     <header className="h-19 border-b border-solid border-b-clr-0 block sticky top-0 z-50 bg-background max-lg:h-16.5" data-cid="n2">
       <div className="h-full block max-w-300 mx-auto px-8" data-cid="n3">
         <nav className="h-full flex py-3 justify-between items-center gap-8" data-cid="n4" data-component="nav" aria-label="Primary">
-          <a className="h-8 flex items-center gap-2 [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-xl font-extrabold leading-8 tracking-[-0.4px] cursor-pointer hover:border-accent hover:text-accent hover:outline-accent hover:[text-decoration-color:var(--accent)]" data-cid="n5" data-component="link" href="#">
-            <img className="w-8 h-8 block max-w-full rounded-lg overflow-clip object-contain aspect-[auto_32/32]" data-cid="n6" data-component="image" alt="" height="32" src="/assets/cloned/images/73dc1da22b19.png" width="32" />
-            <span className="block" data-cid="n7">
-              Conveero
-            </span>
+          <a className="h-8 flex items-center cursor-pointer" data-cid="n5" data-component="link" href="#" aria-label="Conveero home">
+            <Logo size="nav" />
           </a>
+
           <ul className="border border-solid border-color-002 flex p-1.5 rounded-[999px] items-center gap-1 [list-style-type:none] list-outside bg-background max-lg:hidden" data-cid="n8">
             {listRowData.map((d, i) => <ListRow key={i} d={d} cids={ListRow_cids[i]} />)}
           </ul>
