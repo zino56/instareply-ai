@@ -1,3 +1,4 @@
+import { Logo } from "@/components/brand/Logo";
 import TextLink2 from "../components/text-link2";
 import Icon from "../svgs/svg-icon";
 import ListRow3 from "../components/list-row3";
