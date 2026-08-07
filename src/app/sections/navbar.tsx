@@ -30,7 +30,7 @@ export default function Navbar({ listRowData = listRowDataContent } = {}) {
             <a className="h-9 border border-solid border-clr-0 flex px-4.5 rounded-[999px] justify-center items-center gap-2 text-sm font-semibold leading-3.5 tracking-[-0.07px] whitespace-nowrap text-nowrap cursor-pointer hover:border-color-001 hover:text-background hover:outline-background hover:[text-decoration-color:var(--color-001)] hover:underline" data-cid="n24" data-component="button" href="/dashboard">
               Sign in
             </a>
-            <a className="w-[8.875rem] h-9 border border-solid border-foreground flex px-4.5 rounded-[999px] justify-center items-center gap-2 text-background text-sm font-semibold leading-3.5 tracking-[-0.07px] whitespace-nowrap text-nowrap bg-foreground cursor-pointer hover:bg-color-001 hover:border-color-001" data-cid="n25" data-component="button" href="/signup">
+            <a className="w-[8.875rem] h-9 border border-solid border-foreground flex px-4.5 rounded-[999px] justify-center items-center gap-2 text-background text-sm font-semibold leading-3.5 tracking-[-0.07px] whitespace-nowrap text-nowrap bg-foreground cursor-pointer hover:bg-[rgb(255,241,0)] hover:border-[rgb(255,241,0)] hover:text-foreground" data-cid="n25" data-component="button" href="/signup">
               Start 7-day trial
             </a>
           </div>

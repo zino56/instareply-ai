@@ -46,7 +46,7 @@ export default function HeroSection({ listRow2Data = ListRow2_data, logos = logo
             Sell more, engage better, and grow your audience. AI-powered automation that turns Instagram messages into revenue.
           </p>
           <div className="flex mt-8 flex-wrap justify-center gap-3" data-cid="n39">
-            <a className="h-12 border border-solid border-foreground flex px-6.5 rounded-[999px] justify-center items-center gap-2 text-color-004 font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap bg-foreground cursor-pointer hover:text-background hover:outline-background hover:[text-decoration-color:var(--background)]" data-cid="n40" data-component="button" href="/signup">
+            <a className="h-12 border border-solid border-foreground flex px-6.5 rounded-[999px] justify-center items-center gap-2 text-foreground font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap bg-[rgb(255,241,0)] border-[rgb(255,241,0)] cursor-pointer hover:bg-[rgb(255,214,0)] hover:border-[rgb(255,214,0)] hover:text-foreground" data-cid="n40" data-component="button" href="/signup">
               Get started free
               <Icon3 cid={"n41"} />
             </a>
