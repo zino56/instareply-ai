@@ -87,7 +87,7 @@ export default function LogoCloudSection2({ logo3Data = Logo3_data, logo4Data = 
       </div>
       <div className="block max-w-300 mx-auto px-8" data-cid="n232">
         <div className="flex mt-14 flex-col items-center gap-3 text-center" data-cid="n233">
-          <a className="w-[10.8125rem] h-12 border border-solid border-background flex px-6.5 rounded-[999px] justify-center items-center gap-2 text-foreground font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap bg-background cursor-pointer hover:bg-color-003 hover:border-color-003 hover:text-background hover:outline-background hover:[text-decoration-color:var(--background)]" data-cid="n234" data-component="button" href="https://app.zamili.ai/join">
+          <a className="w-[10.8125rem] h-12 border border-solid border-background flex px-6.5 rounded-[999px] justify-center items-center gap-2 text-foreground font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap bg-background cursor-pointer hover:bg-color-003 hover:border-color-003 hover:text-background hover:outline-background hover:[text-decoration-color:var(--background)]" data-cid="n234" data-component="button" href="/signup">
             Start 7-day trial
           </a>
         </div>

@@ -60,13 +60,13 @@ export default function OneWorkspaceForSection() {
           </div>
           <div className="border border-solid border-color-002 flex relative mt-8 rounded-4xl flex-col overflow-hidden bg-color-003 shadow-[var(--clr-8)_0px_1px_0px_0px]" data-cid="n261">
             <div className="block shrink-0 bg-color-003" data-cid="n262">
-              <img className="w-283.5 h-[35.4375rem] block max-w-full overflow-clip aspect-[auto_1600/1000] transform-[none] max-md:w-[19.3125rem] max-md:h-[9.6875rem] max-md:opacity-[0.0362024] max-md:transform-[matrix(1,0,0,1,0,-5.80773)] max-md:origin-[154.5px_77.2969px] md:max-lg:w-175.5 md:max-lg:h-[21.9375rem] 2xl:opacity-[0.99989] 2xl:transform-[matrix(1,0,0,1,0,9.58e-05)] 2xl:origin-[567px_283.695px]" data-cid="n263" data-component="image" alt="Store in Zamili" height="1000" src="/assets/cloned/images/38a086498d1a.png" width="1600" />
+              <img className="w-283.5 h-[35.4375rem] block max-w-full overflow-clip aspect-[auto_1600/1000] transform-[none] max-md:w-[19.3125rem] max-md:h-[9.6875rem] max-md:opacity-[0.0362024] max-md:transform-[matrix(1,0,0,1,0,-5.80773)] max-md:origin-[154.5px_77.2969px] md:max-lg:w-175.5 md:max-lg:h-[21.9375rem] 2xl:opacity-[0.99989] 2xl:transform-[matrix(1,0,0,1,0,9.58e-05)] 2xl:origin-[567px_283.695px]" data-cid="n263" data-component="image" alt="Store in Conveero" height="1000" src="/assets/cloned/images/38a086498d1a.png" width="1600" />
             </div>
             <div className="border-t border-solid border-t-border flex relative py-4 px-5 flex-wrap justify-between items-center shrink-0 gap-y-3 gap-x-4 text-background bg-foreground max-md:py-[0.85rem] max-md:px-4 max-md:flex-col max-md:justify-start max-md:items-stretch max-md:gap-[0.65rem] max-md:[flex-wrap:initial]" data-cid="n264">
               <p className="block min-w-0 max-w-128 grow text-surface-4 text-sm leading-[1.25rem] max-md:shrink-0 max-md:grow-[initial]" data-cid="n265">
                 Catalog, orders, and chat in one loop from click to checkout.
               </p>
-              <a className="h-[2.7rem] flex py-[0.65rem] px-4 rounded-xl justify-center items-center shrink-0 gap-2 text-color-004 text-sm font-bold leading-[1.375rem] whitespace-nowrap text-nowrap bg-accent cursor-pointer hover:bg-color-001" data-cid="n266" data-component="link" href="https://app.zamili.ai/join">
+              <a className="h-[2.7rem] flex py-[0.65rem] px-4 rounded-xl justify-center items-center shrink-0 gap-2 text-color-004 text-sm font-bold leading-[1.375rem] whitespace-nowrap text-nowrap bg-accent cursor-pointer hover:bg-color-001" data-cid="n266" data-component="link" href="/signup">
                 <span className="block" data-cid="n267">
                   Launch your store
                 </span>

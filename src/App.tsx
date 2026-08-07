@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { MotionConfig } from "framer-motion";
 import { AppLayout } from "@/components/layout/AppLayout";
-import LandingPage from "./pages/LandingPage";
+import HomePage from "./app/page";
 import Pricing from "./pages/Pricing";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -44,7 +44,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             {/* Landing Page */}
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />

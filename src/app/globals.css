@@ -1,73 +1,9 @@
-@layer theme, base, components, utilities;
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
-@source "./";
+/* Cloned homepage design tokens, fonts and scoped resets.
+   Ported to Tailwind v3: no @theme / @source / @import of tailwind layers.
+   Everything visual is scoped to `.conveero-page` so the dashboard and auth
+   screens keep using the app's own design system untouched. */
 
-/* Tailwind theme: color tokens (so bg-primary/text-foreground resolve to our vars) +
-   breakpoints. @theme inline keeps the var() reference (theme-swappable at runtime). */
-@theme inline {
-  --breakpoint-vp375: 375px;
-  --breakpoint-vp768: 768px;
-  --breakpoint-vp1280: 1280px;
-  --breakpoint-vp1920: 1920px;
-  --breakpoint-md: 572px;
-  --breakpoint-lg: 1025px;
-  --breakpoint-2xl: 1601px;
-  --color-foreground: var(--foreground);
-  --color-background: var(--background);
-  --color-clr-0: var(--clr-0);
-  --color-color-002: var(--color-002);
-  --color-primary: var(--primary);
-  --color-color-007: var(--color-007);
-  --color-surface-4: var(--surface-4);
-  --color-clr-1: var(--clr-1);
-  --color-clr-2: var(--clr-2);
-  --color-clr-3: var(--clr-3);
-  --color-color-004: var(--color-004);
-  --color-color-010: var(--color-010);
-  --color-surface-2: var(--surface-2);
-  --color-color-013: var(--color-013);
-  --color-clr-4: var(--clr-4);
-  --color-accent: var(--accent);
-  --color-color-009: var(--color-009);
-  --color-clr-5: var(--clr-5);
-  --color-clr-6: var(--clr-6);
-  --color-border: var(--border);
-  --color-surface: var(--surface);
-  --color-clr-7: var(--clr-7);
-  --color-color-003: var(--color-003);
-  --color-clr-8: var(--clr-8);
-  --color-color-005: var(--color-005);
-  --color-clr-9: var(--clr-9);
-  --color-clr-10: var(--clr-10);
-  --color-clr-11: var(--clr-11);
-  --color-color-008: var(--color-008);
-  --color-clr-12: var(--clr-12);
-  --color-clr-13: var(--clr-13);
-  --color-clr-14: var(--clr-14);
-  --color-clr-15: var(--clr-15);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-surface-3: var(--surface-3);
-  --color-color-001: var(--color-001);
-  --color-clr-16: var(--clr-16);
-  --color-color-014: var(--color-014);
-  --color-color-011: var(--color-011);
-  --color-color-006: var(--color-006);
-  --color-clr-17: var(--clr-17);
-  --color-color-012: var(--color-012);
-  --color-clr-18: var(--clr-18);
-  --color-clr-19: var(--clr-19);
-  --color-clr-20: var(--clr-20);
-  --color-clr-21: var(--clr-21);
-  --color-clr-22: var(--clr-22);
-  --color-clr-23: var(--clr-23);
-  --color-clr-24: var(--clr-24);
-  --color-clr-25: var(--clr-25);
-  --color-clr-26: var(--clr-26);
-}
-
-/* Design tokens (values). */
-:root {
+:where(.conveero-page) {
   --background: rgb(244, 236, 216);
   --foreground: rgb(26, 14, 8);
   --primary: rgb(58, 36, 24);
@@ -94,7 +30,7 @@
   --color-014: rgba(26, 129, 255, 0.25);
 }
 
-:root {
+:where(.conveero-page) {
   /* fonts */
   --font-body: Inter, system-ui, -apple-system, sans-serif;
   --font-001: "Bricolage Grotesque", Inter, system-ui, sans-serif;
@@ -192,7 +128,7 @@
   --bp-1920: 1920px;
 }
 
-:root {
+:where(.conveero-page) {
   --clr-0: rgba(0, 0, 0, 0);
   --clr-1: rgb(11, 79, 173);
   --clr-2: rgba(11, 79, 173, 0.82);
@@ -222,33 +158,15 @@
   --clr-26: rgb(26, 16, 12);
 }
 
-@layer base {
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid currentColor; }
-html { -webkit-text-size-adjust: 100%; line-height: normal; }
-body { margin: 0; }
-ul, ol, menu { list-style: none; }
-a { color: inherit; text-decoration: none; }
-button, input, select, textarea, optgroup { font: inherit; color: inherit; background: transparent; border: 0; padding: 0; margin: 0; text-align: inherit; letter-spacing: inherit; }
-button { cursor: pointer; }
-table { border-collapse: separate; border-spacing: 0; }
-img, picture, video, canvas, svg { display: inline-block; }
-/* Lottie runtime fit: the player re-mounts its svg/canvas into an absolute overlay that fills
-   the host's captured (per-viewport, definite) box. Force that runtime media to fit the box so
-   an aspect-mismatched viewBox (e.g. a portrait animation in a shorter, letterboxed source box)
-   can't inflate past the pinned height. Scoped to the runtime-marked host only. */
-[data-ditto-lottie] > div > svg, [data-ditto-lottie] > div > canvas { width: 100%; height: 100%; display: block; }
-h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd { margin: 0; }
-/* Neutralize UA text defaults to inherit so the generator's default-skipping is
-   correct: a property equal to its inherited value is simply not emitted. */
-h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
-b, strong, th { font-weight: inherit; }
-em, i, cite, var, dfn, address, q { font-style: inherit; }
-small, big, sub, sup { font-size: inherit; }
-sub, sup { vertical-align: inherit; }
-code, kbd, samp, pre, tt, var { font-family: inherit; font-size: inherit; }
-mark { background-color: transparent; color: inherit; }
-abbr[title] { text-decoration: none; }
-fieldset, legend { min-width: 0; }
+:where(.conveero-page) {
+  --zm-foreground: var(--foreground);
+  --zm-background: var(--background);
+  --zm-primary: var(--primary);
+  --zm-muted-foreground: var(--muted-foreground);
+  --zm-accent: var(--accent);
+  --zm-surface: var(--surface);
+  --zm-border: var(--border);
+}
 
 /* fonts */
 @font-face {
@@ -997,6 +915,51 @@ fieldset, legend { min-width: 0; }
   src: url("/assets/cloned/fonts/e4b4f443b6b8.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-html, body { overflow-x: clip; }
-}
+
+:where(.conveero-page), :where(.conveero-page) *, :where(.conveero-page) *::before, :where(.conveero-page) *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid currentColor; }
+:where(.conveero-page) ul, :where(.conveero-page) ol, :where(.conveero-page) menu { list-style: none; }
+:where(.conveero-page) a { color: inherit; text-decoration: none; }
+:where(.conveero-page) button, :where(.conveero-page) input, :where(.conveero-page) select, :where(.conveero-page) textarea, :where(.conveero-page) optgroup { font: inherit; color: inherit; background: transparent; border: 0; padding: 0; margin: 0; text-align: inherit; letter-spacing: inherit; }
+:where(.conveero-page) button { cursor: pointer; }
+:where(.conveero-page) table { border-collapse: separate; border-spacing: 0; }
+:where(.conveero-page) img, :where(.conveero-page) picture, :where(.conveero-page) video, :where(.conveero-page) canvas, :where(.conveero-page) svg { display: inline-block; }
+:where(.conveero-page) h1, :where(.conveero-page) h2, :where(.conveero-page) h3, :where(.conveero-page) h4, :where(.conveero-page) h5, :where(.conveero-page) h6, :where(.conveero-page) p, :where(.conveero-page) figure, :where(.conveero-page) blockquote, :where(.conveero-page) dl, :where(.conveero-page) dd { margin: 0; }
+:where(.conveero-page) h1, :where(.conveero-page) h2, :where(.conveero-page) h3, :where(.conveero-page) h4, :where(.conveero-page) h5, :where(.conveero-page) h6 { font-size: inherit; font-weight: inherit; }
+:where(.conveero-page) b, :where(.conveero-page) strong, :where(.conveero-page) th { font-weight: inherit; }
+:where(.conveero-page) em, :where(.conveero-page) i, :where(.conveero-page) cite, :where(.conveero-page) var, :where(.conveero-page) dfn, :where(.conveero-page) address, :where(.conveero-page) q { font-style: inherit; }
+:where(.conveero-page) small, :where(.conveero-page) big, :where(.conveero-page) sub, :where(.conveero-page) sup { font-size: inherit; }
+:where(.conveero-page) sub, :where(.conveero-page) sup { vertical-align: inherit; }
+:where(.conveero-page) code, :where(.conveero-page) kbd, :where(.conveero-page) samp, :where(.conveero-page) pre, :where(.conveero-page) tt, :where(.conveero-page) var { font-family: inherit; font-size: inherit; }
+:where(.conveero-page) mark { background-color: transparent; color: inherit; }
+:where(.conveero-page) abbr[title] { text-decoration: none; }
+:where(.conveero-page) fieldset, :where(.conveero-page) legend { min-width: 0; }
+:where(.conveero-page) { font-family: Inter, system-ui, -apple-system, sans-serif; color: var(--zm-foreground); background-color: var(--zm-background); }
+
+
+.conveero-page .text-foreground { color: var(--zm-foreground); }
+.conveero-page .text-background { color: var(--zm-background); }
+.conveero-page .text-primary { color: var(--zm-primary); }
+.conveero-page .text-muted-foreground { color: var(--zm-muted-foreground); }
+.conveero-page .text-accent { color: var(--zm-accent); }
+.conveero-page .text-surface { color: var(--zm-surface); }
+.conveero-page .bg-foreground { background-color: var(--zm-foreground); }
+.conveero-page .bg-background { background-color: var(--zm-background); }
+.conveero-page .bg-primary { background-color: var(--zm-primary); }
+.conveero-page .bg-accent { background-color: var(--zm-accent); }
+.conveero-page .bg-surface { background-color: var(--zm-surface); }
+.conveero-page .border-foreground { border-color: var(--zm-foreground); }
+.conveero-page .border-background { border-color: var(--zm-background); }
+.conveero-page .border-border { border-color: var(--zm-border); }
+.conveero-page .border-accent { border-color: var(--zm-accent); }
+.conveero-page .border-b-accent { border-bottom-color: var(--zm-accent); }
+.conveero-page .border-t-border { border-top-color: var(--zm-border); }
+.conveero-page .border-b-border { border-bottom-color: var(--zm-border); }
+.conveero-page .hover\\:text-accent:hover { color: var(--zm-accent); }
+.conveero-page .hover\\:text-foreground:hover { color: var(--zm-foreground); }
+.conveero-page .hover\\:text-background:hover { color: var(--zm-background); }
+.conveero-page .hover\\:bg-foreground:hover { background-color: var(--zm-foreground); }
+.conveero-page .hover\\:border-foreground:hover { border-color: var(--zm-foreground); }
+.conveero-page .hover\\:border-accent:hover { border-color: var(--zm-accent); }
+
+@keyframes hero-ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
