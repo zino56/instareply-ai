@@ -3,7 +3,7 @@
    Everything visual is scoped to `.zamili-page` so the dashboard and auth
    screens keep using the app's own design system untouched. */
 
-:root {
+.zamili-page {
   --background: rgb(244, 236, 216);
   --foreground: rgb(26, 14, 8);
   --primary: rgb(58, 36, 24);
@@ -30,7 +30,7 @@
   --color-014: rgba(26, 129, 255, 0.25);
 }
 
-:root {
+.zamili-page {
   /* fonts */
   --font-body: Inter, system-ui, -apple-system, sans-serif;
   --font-001: "Bricolage Grotesque", Inter, system-ui, sans-serif;
@@ -128,7 +128,7 @@
   --bp-1920: 1920px;
 }
 
-:root {
+.zamili-page {
   --clr-0: rgba(0, 0, 0, 0);
   --clr-1: rgb(11, 79, 173);
   --clr-2: rgba(11, 79, 173, 0.82);
@@ -158,7 +158,7 @@
   --clr-26: rgb(26, 16, 12);
 }
 
-:root {
+.zamili-page {
   --zm-foreground: var(--foreground);
   --zm-background: var(--background);
   --zm-primary: var(--primary);
