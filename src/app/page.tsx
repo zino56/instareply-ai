@@ -1,3 +1,4 @@
+import "./globals.css";
 import DropdownMenu from "./ditto/DropdownMenu";
 import Navbar from "./sections/navbar";
 import HeroSection from "./sections/hero-section";
@@ -16,7 +17,7 @@ import Footer from "./sections/footer";
 export default function Page() {
   return (
     <>
-      <div className="min-h-screen block" data-cid="n1" id="root">
+      <div className="zamili-page min-h-screen block" data-cid="n1" id="root">
         <Navbar />
         <main className="block" data-cid="n29">
           <HeroSection />
