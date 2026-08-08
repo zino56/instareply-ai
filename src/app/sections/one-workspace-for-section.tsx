@@ -32,7 +32,7 @@ export default function OneWorkspaceForSection() {
             </mark>
           </h2>
 
-          <p className="mt-6 max-w-2xl text-lg md:text-xl text-black/70 leading-relaxed" data-cid="n240">
+          <p className="mt-6 max-w-2xl text-lg md:text-xl text-black leading-relaxed" data-cid="n240">
             Launch proven automations in minutes or build custom flows that engage leads, nurture customers, and drive more sales.
           </p>
         </div>
