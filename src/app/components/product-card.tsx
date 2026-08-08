@@ -33,7 +33,7 @@ export default function ProductCard({ d, cids, styles }: { d: ProductCardData; c
         {d.description3}
       </p>
       <ProductCardSlot1 d={d} />
-      <a data-cid={cids[7]} className={cn("h-12 border border-solid flex mt-8 px-6.5 rounded-[999px] justify-center items-center gap-2 font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap cursor-pointer", styles.className2)} data-component="button" href="/signup">
+      <a data-cid={cids[7]} className={cn("h-12 border border-solid border-[rgb(255,241,0)] flex mt-8 px-6.5 rounded-[999px] justify-center items-center gap-2 font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap cursor-pointer bg-[rgb(255,241,0)] text-[rgb(26,14,8)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(255,241,0,0.35)] active:scale-[0.98] active:translate-y-0 focus-visible:ring-2 focus-visible:ring-[rgb(26,14,8)]/20 focus-visible:outline-none", styles.className2)} data-component="button" href="/signup">
         Get started
       </a>
     </article>
