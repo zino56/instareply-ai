@@ -27,18 +27,18 @@ export default function MediaTile2({ d, cids, styles }: { d: MediaTile2Data; cid
           <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27Z" fill="#00b67a" />
         </svg>
       </div>
-      <blockquote data-cid={cids[7]} className="block opacity-92 text-background">
+      <blockquote data-cid={cids[7]} className="block opacity-92 text-black">
         {d.text}
       </blockquote>
-      <figcaption data-cid={cids[8]} className="border-t border-solid border-t-border flex mt-5 pt-5 items-center gap-3">
-        <span data-cid={cids[9]} className="w-9 h-9 flex rounded-[50%] justify-center items-center shrink-0 text-color-004 text-sm font-bold leading-[1.375rem] bg-color-014" aria-hidden="true">
+      <figcaption data-cid={cids[8]} className="border-t border-solid border-t-border/50 flex mt-5 pt-5 items-center gap-3">
+        <span data-cid={cids[9]} className="w-9 h-9 flex rounded-[50%] justify-center items-center shrink-0 text-white text-sm font-bold leading-[1.375rem] bg-black" aria-hidden="true">
           {d.text2}
         </span>
         <span data-cid={cids[10]} className="block">
-          <p data-cid={cids[11]} className={cn("block max-w-[35.7875rem] text-background text-sm font-semibold leading-[1.375rem]", styles.className)}>
+          <p data-cid={cids[11]} className={cn("block max-w-[35.7875rem] text-black text-sm font-semibold leading-[1.375rem]", styles.className)}>
             {d.description}
           </p>
-          <p data-cid={cids[12]} className={cn("block max-w-[34.225rem] text-color-011 text-sm leading-[1.375rem]", styles.className2)}>
+          <p data-cid={cids[12]} className={cn("block max-w-[34.225rem] text-mc-gray text-sm leading-[1.375rem]", styles.className2)}>
             {d.description2}
           </p>
         </span>
