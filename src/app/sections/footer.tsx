@@ -66,7 +66,7 @@ export default function Footer({ textLink2Data = textLink2DataContent, listRow3D
           </form>
           <p className="block max-w-[34.225rem] mt-5 text-sm leading-[1.375rem]" data-cid="n661">
             <a className="inline text-accent font-semibold cursor-pointer hover:border-color-010 hover:text-color-010 hover:outline-color-010 hover:[text-decoration-color:var(--color-010)] hover:underline" data-cid="n662" data-component="link" href="/signup">
-              Start your 7-day trial
+              Get started
             </a>
           </p>
         </div>

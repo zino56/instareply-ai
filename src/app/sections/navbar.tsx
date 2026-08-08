@@ -30,7 +30,7 @@ export default function Navbar({ listRowData = listRowDataContent } = {}) {
               Sign in
             </a>
             <a className="w-[8.875rem] h-9 border border-solid border-foreground flex px-4.5 rounded-[999px] justify-center items-center gap-2 text-background text-sm font-semibold leading-3.5 tracking-[-0.07px] whitespace-nowrap text-nowrap bg-foreground cursor-pointer hover:bg-[rgb(255,241,0)] hover:border-[rgb(255,241,0)] hover:text-foreground" data-cid="n25" data-component="button" href="/signup">
-              Start 7-day trial
+              Get started
             </a>
           </div>
           <button className="w-10 h-10 hidden min-w-0 py-px px-1.5 rounded-md justify-center items-center [font-family:Arial] text-[0.8125rem] leading-[0.9375rem] text-center cursor-pointer max-lg:flex" data-cid="n26" aria-expanded="false" aria-label="Open menu" type="button">

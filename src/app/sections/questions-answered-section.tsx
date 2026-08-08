@@ -35,7 +35,7 @@ export default function QuestionsAnsweredSection({ mediaTile3Data = mediaTile3Da
         </div>
         <div className="flex mt-14 flex-wrap justify-between items-center gap-5" data-cid="n562">
           <a className="w-[10.8125rem] h-12 border border-solid border-foreground flex px-6.5 rounded-[999px] justify-center items-center gap-2 text-background font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap bg-foreground cursor-pointer hover:bg-color-001 hover:border-color-001" data-cid="n563" data-component="button" href="/signup">
-            Start 7-day trial
+            Get started
           </a>
         </div>
       </div>

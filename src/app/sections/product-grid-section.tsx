@@ -15,7 +15,7 @@ export default function ProductGridSection({ products = productsContent } = {}) 
             </mark>
           </h2>
           <p className="block max-w-[44rem] my-5 text-primary text-lg leading-[1.8125rem]" data-cid="n357">
-            Starter, Pro, or Enterprise. Every new account includes a 7-day trial. No free forever tier.
+            Starter, Pro, or Enterprise. Choose the plan that fits your volume.
           </p>
           <div className="border border-solid border-color-002 inline-flex mt-8 p-1.5 rounded-[999px] items-center gap-1 bg-background" data-cid="n358" aria-label="Monthly" role="group">
             <button className="h-10 flex px-4.5 rounded-[999px] items-center gap-2 text-background text-sm font-semibold leading-[1.0625rem] bg-foreground cursor-pointer" data-cid="n359" data-component="button" aria-pressed="true" type="button">
