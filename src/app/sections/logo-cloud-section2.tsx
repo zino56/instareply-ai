@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const beforeItems = [
   "Copy-pasting the same reply 417 times.",
   "Losing hot leads in endless DMs.",
