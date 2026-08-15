@@ -32,6 +32,7 @@ const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
+const Comments = lazy(() => import("./pages/Comments"));
 
 const queryClient = new QueryClient();
 
