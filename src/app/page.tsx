@@ -21,7 +21,6 @@ export default function Page() {
         <main className="block" data-cid="n29">
           <HeroSection />
           <HiConveeroLetSection />
-          <LogoCloudSection />
           <LogoCloudSection2 />
           <OneWorkspaceForSection />
           <AllInOneSection />
