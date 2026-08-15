@@ -51,12 +51,50 @@ export default function Navbar({ listRowData = listRowDataContent } = {}) {
               Get started
             </a>
           </div>
-          <button className="w-10 h-10 hidden min-w-0 py-px px-1.5 rounded-md justify-center items-center [font-family:Arial] text-[0.8125rem] leading-[0.9375rem] text-center cursor-pointer max-lg:flex" data-cid="n26" aria-expanded="false" aria-label="Open menu" type="button">
-            <Icon2 cid={"n27"} />
+          <button onClick={() => setOpen((v) => !v)} className="w-10 h-10 hidden min-w-0 py-px px-1.5 rounded-md justify-center items-center [font-family:Arial] text-[0.8125rem] leading-[0.9375rem] text-center cursor-pointer max-lg:flex" data-cid="n26" aria-expanded={open} aria-label={open ? "Close menu" : "Open menu"} type="button">
+            {open ? <X className="h-5.5 w-5.5" /> : <Icon2 cid={"n27"} />}
           </button>
         </nav>
         <div className="h-px border-t border-solid border-t-clr-0 grid invisible opacity-0 grid-cols-[minmax(0,_1fr)]" data-cid="n28" aria-hidden="true" />
       </div>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:hidden absolute left-0 right-0 top-full border-b border-solid border-b-clr-0 bg-background shadow-[0_12px_30px_-18px_rgba(0,0,0,0.6)]"
+          >
+            <nav aria-label="Mobile" className="mx-auto max-w-300 px-8 py-5">
+              <ul className="flex flex-col gap-1 [list-style-type:none]">
+                {listRowData.map((d, i) => (
+                  <li key={i}>
+                    <a
+                      href={d.href}
+                      onClick={() => setOpen(false)}
+                      className="block rounded-xl px-3 py-3 text-base font-semibold text-primary hover:bg-clr-19 hover:text-foreground"
+                    >
+                      {d.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-4 flex flex-col gap-2">
+                <a href="/dashboard" onClick={() => setOpen(false)} className="h-11 border border-solid border-clr-0 flex rounded-[999px] justify-center items-center text-sm font-semibold">
+                  Sign in
+                </a>
+                <a href="/signup" onClick={() => setOpen(false)} className="h-11 border border-solid border-foreground flex rounded-[999px] justify-center items-center bg-foreground text-background text-sm font-semibold hover:bg-[rgb(255,241,0)] hover:border-[rgb(255,241,0)] hover:text-foreground">
+                  Get started
+                </a>
+              </div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
+
   );
 }
