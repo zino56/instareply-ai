@@ -1,9 +1,10 @@
+import { Reveal } from "../motion";
 /** Product value proposition section. */
 export default function OneWorkspaceForSection() {
   return (
     <section className="block py-24 max-lg:py-14 bg-white" data-cid="n235" id="product">
       <div className="block max-w-300 mx-auto px-8" data-cid="n236">
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto" data-cid="n237">
+        <Reveal className="flex flex-col items-center text-center max-w-4xl mx-auto">
           <div className="mb-6" data-cid="n238">
             <svg
               width="48"
@@ -35,7 +36,7 @@ export default function OneWorkspaceForSection() {
           <p className="mt-6 max-w-2xl text-lg md:text-xl text-black leading-relaxed" data-cid="n240">
             Launch proven automations in minutes or build custom flows that engage leads, nurture customers, and drive more sales.
           </p>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

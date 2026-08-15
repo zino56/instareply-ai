@@ -1,3 +1,4 @@
+import { Reveal, Stagger, StaggerItem } from "../motion";
 import MediaTile2, { type MediaTile2Data } from "../components/media-tile2";
 import { MediaTile2_cids } from "../_cids";
 import { MediaTile2_styles } from "../_styles";
@@ -11,7 +12,7 @@ export default function GalleryShowcaseSection({ mediaTile2Data = MediaTile2_dat
   return (
     <section className="block py-24 text-black bg-accent max-lg:py-14" data-cid="n485" id="testimonials">
       <div className="block max-w-300 mx-auto px-8" data-cid="n486">
-        <div className="block max-w-160 mb-14 mx-auto text-center" data-cid="n487">
+        <Reveal className="block max-w-160 mb-14 mx-auto text-center">
           <h2 className="block [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-[3.1875rem] font-bold leading-[3.1875rem] tracking-[-1.28px] text-balance max-lg:text-4xl max-lg:leading-9 max-lg:tracking-[-0.9px] 2xl:text-[3.25rem] 2xl:leading-13 2xl:tracking-[-1.3px]" data-cid="n488" data-component="heading">
             What our users are saying
           </h2>
@@ -22,10 +23,14 @@ export default function GalleryShowcaseSection({ mediaTile2Data = MediaTile2_dat
             </a>
             {" · TrustScore 4.1/5"}
           </p>
-        </div>
-        <div className="grid gap-8 grid-cols-3 max-lg:grid-cols-1" data-cid="n491">
-          {mediaTile2Data.map((d, i) => <MediaTile2 key={i} d={d} cids={MediaTile2_cids[i]} styles={MediaTile2_styles[i]} />)}
-        </div>
+        </Reveal>
+        <Stagger className="grid gap-8 grid-cols-3 max-lg:grid-cols-1">
+          {mediaTile2Data.map((d, i) => (
+            <StaggerItem key={i} className="h-full transition-transform duration-200 hover:-translate-y-1">
+              <MediaTile2 d={d} cids={MediaTile2_cids[i]} styles={MediaTile2_styles[i]} />
+            </StaggerItem>
+          ))}
+        </Stagger>
         <div className="flex mt-14 flex-col flex-wrap justify-center items-center gap-3 text-center" data-cid="n531">
           <a className="w-[10.8125rem] h-12 border border-solid border-black flex mx-auto px-6.5 rounded-[999px] justify-center items-center gap-2 text-white font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap bg-black cursor-pointer hover:bg-mc-dark-gray hover:border-mc-dark-gray transition-colors duration-300" data-cid="n532" data-component="button" href="/signup">
             Get started

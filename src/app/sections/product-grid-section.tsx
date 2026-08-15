@@ -1,3 +1,4 @@
+import { Reveal, Stagger, StaggerItem } from "../motion";
 import ProductCard from "../components/product-card";
 import { ProductCard_cids } from "../_cids";
 import { ProductCard_styles } from "../_styles";
@@ -7,7 +8,7 @@ export default function ProductGridSection({ products = productsContent } = {}) 
   return (
     <section className="block py-24 max-lg:py-14" data-cid="n352" id="pricing">
       <div className="block max-w-300 mx-auto px-8" data-cid="n353">
-        <div className="block max-w-160 mb-14 mx-auto text-center" data-cid="n354">
+        <Reveal className="block max-w-160 mb-14 mx-auto text-center">
           <h2 className="block [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-[3.1875rem] font-bold leading-[3.1875rem] tracking-[-1.28px] text-balance max-lg:text-4xl max-lg:leading-9 max-lg:tracking-[-0.9px] 2xl:text-[3.25rem] 2xl:leading-13 2xl:tracking-[-1.3px]" data-cid="n355" data-component="heading">
             {"Simple plans that scale with "}
             <mark className="inline px-[0.575rem] rounded-sm bg-color-010 max-lg:px-[6.5px] 2xl:px-[0.5875rem]" data-cid="n356">
@@ -25,10 +26,14 @@ export default function ProductGridSection({ products = productsContent } = {}) 
               Yearly
             </button>
           </div>
-        </div>
-        <div className="w-full grid gap-8 grid-cols-1 lg:grid-cols-3" data-cid="n361">
-          {products.map((d, i) => <ProductCard key={d.variant} d={d} cids={ProductCard_cids[i]} styles={ProductCard_styles[i]} />)}
-        </div>
+        </Reveal>
+        <Stagger className="w-full grid gap-8 grid-cols-1 lg:grid-cols-3">
+          {products.map((d, i) => (
+            <StaggerItem key={d.variant} className="h-full">
+              <ProductCard d={d} cids={ProductCard_cids[i]} styles={ProductCard_styles[i]} />
+            </StaggerItem>
+          ))}
+        </Stagger>
       </div>
     </section>
   );
