@@ -2,6 +2,7 @@ import "./globals.css";
 import DropdownMenu from "./ditto/DropdownMenu";
 import Navbar from "./sections/navbar";
 import HeroSection from "./sections/hero-section";
+import DmSandboxSection from "./sections/dm-sandbox-section";
 import HiConveeroLetSection from "./sections/hi-conveero-let-section";
 import LogoCloudSection2 from "./sections/logo-cloud-section2";
 import OneWorkspaceForSection from "./sections/one-workspace-for-section";
@@ -20,6 +21,7 @@ export default function Page() {
         <Navbar />
         <main className="block" data-cid="n29">
           <HeroSection />
+          <DmSandboxSection />
           <HiConveeroLetSection />
           <LogoCloudSection2 />
           <OneWorkspaceForSection />
