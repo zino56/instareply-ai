@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { X } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import ListRow from "../components/list-row";
 import Icon from "../svgs/svg-icon";
@@ -8,12 +10,20 @@ import { listRowData as listRowDataContent } from "../content";
 /** Top navigation bar. */
 export default function Navbar({ listRowData = listRowDataContent } = {}) {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <header className={`h-19 block sticky top-0 z-50 max-lg:h-16.5 transition-all duration-300 ease-out ${scrolled ? "backdrop-blur-md bg-background/80 border-b border-solid border-b-clr-0 shadow-[0_1px_20px_-12px_rgba(0,0,0,0.5)]" : "bg-background border-b border-solid border-b-transparent"}`} data-cid="n2">
       <div className="h-full block max-w-300 mx-auto px-8" data-cid="n3">
