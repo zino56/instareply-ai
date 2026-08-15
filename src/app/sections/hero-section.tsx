@@ -83,16 +83,20 @@ export default function HeroSection() {
                 <a
                   href="/signup"
                   data-component="button"
-                  className="inline-flex w-full sm:w-auto items-center justify-center bg-[#FF00FF] hover:bg-[#E600E6] text-white font-bold text-sm tracking-wide px-10 py-4 rounded-lg transition-shadow duration-300 hover:shadow-[0_10px_30px_-10px_rgba(255,0,255,0.7)]"
+                  className="group relative inline-flex w-full sm:w-auto items-center justify-center overflow-hidden bg-[#FF00FF] hover:bg-[#E600E6] text-white font-bold text-sm tracking-wide px-10 py-4 rounded-lg transition-shadow duration-300 hover:shadow-[0_10px_30px_-10px_rgba(255,0,255,0.7)] active:scale-[0.97]"
                 >
-                  GET STARTED FREE
+                  <span className="relative z-10">GET STARTED FREE</span>
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 bg-white/30 opacity-0 transition-all duration-700 ease-out group-hover:left-[115%] group-hover:opacity-100 motion-reduce:hidden"
+                  />
                 </a>
               </Lift>
               <Lift>
                 <a
                   href="#product"
                   data-component="button"
-                  className="inline-flex w-full sm:w-auto items-center justify-center gap-2 border-2 border-white text-white font-bold text-sm tracking-wide px-10 py-4 rounded-lg transition-colors duration-300 hover:bg-white/10 hover:border-[#FFF100] hover:text-[#FFF100]"
+                  className="inline-flex w-full sm:w-auto items-center justify-center gap-2 border-2 border-white active:scale-[0.97] text-white font-bold text-sm tracking-wide px-10 py-4 rounded-lg transition-colors duration-300 hover:bg-white/10 hover:border-[#FFF100] hover:text-[#FFF100]"
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M8 5v14l11-7z" />

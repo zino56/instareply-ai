@@ -1,5 +1,6 @@
 import { Reveal, Stagger, StaggerItem } from "../motion";
 import ProductCard from "../components/product-card";
+import SpotlightCard from "../components/spotlight-card";
 import { ProductCard_cids } from "../_cids";
 import { ProductCard_styles } from "../_styles";
 import { products as productsContent } from "../content";
@@ -30,7 +31,9 @@ export default function ProductGridSection({ products = productsContent } = {}) 
         <Stagger className="w-full grid gap-8 grid-cols-1 lg:grid-cols-3">
           {products.map((d, i) => (
             <StaggerItem key={d.variant} className="h-full">
-              <ProductCard d={d} cids={ProductCard_cids[i]} styles={ProductCard_styles[i]} />
+              <SpotlightCard>
+                <ProductCard d={d} cids={ProductCard_cids[i]} styles={ProductCard_styles[i]} />
+              </SpotlightCard>
             </StaggerItem>
           ))}
         </Stagger>
