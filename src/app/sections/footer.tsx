@@ -9,12 +9,6 @@ export default function Footer() {
             <a href="/site" aria-label="Conveero home" className="h-8 inline-flex items-center">
               <Logo variant="light" size="nav" />
             </a>
-            <p className="mt-4 text-sm text-white/70">
-              Address: Dubai, Damac Hills, Jasmin B, Office 505, UAE
-            </p>
-            <p className="mt-2 text-sm text-white/70">
-              <a href="tel:+971506071246" className="hover:text-[rgb(255,241,0)]">+971 50 607 1246</a>
-            </p>
           </div>
 
           <div className="flex flex-wrap gap-6 text-sm text-white/70">
