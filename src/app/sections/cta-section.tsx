@@ -67,7 +67,7 @@ export default function CtaSection() {
             </h3>
             <p className="mt-2 text-black/70">Automate your selling, replying, and so much more!</p>
           </StaggerItem>
-        </div>
+        </Stagger>
 
         <div className="mt-14 flex items-center justify-center gap-4 max-sm:flex-col">
           <a
