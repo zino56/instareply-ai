@@ -83,7 +83,7 @@ export default function Navbar({ listRowData = listRowDataContent } = {}) {
                 ))}
               </ul>
               <div className="mt-4 flex flex-col gap-2">
-                <a href="/dashboard" onClick={() => setOpen(false)} className="h-11 border border-solid border-clr-0 flex rounded-[999px] justify-center items-center text-sm font-semibold">
+                <a href="/login" onClick={() => setOpen(false)} className="h-11 border border-solid border-clr-0 flex rounded-[999px] justify-center items-center text-sm font-semibold transition-all duration-300 hover:bg-[rgb(255,241,0)] hover:border-[rgb(255,241,0)] hover:text-black active:scale-[0.98]">
                   Sign in
                 </a>
                 <a href="/signup" onClick={() => setOpen(false)} className="h-11 border border-solid border-foreground flex rounded-[999px] justify-center items-center bg-foreground text-background text-sm font-semibold hover:bg-[rgb(255,241,0)] hover:border-[rgb(255,241,0)] hover:text-foreground">
