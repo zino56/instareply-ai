@@ -10,11 +10,11 @@ export default function ReadyToPutSection() {
             <Icon7 cid={"n568"} />
           </span>
           <h2 className="block mt-5 [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-[3.1875rem] font-bold leading-[3.1875rem] tracking-[-1.28px] text-balance max-lg:text-4xl max-lg:leading-9 max-lg:tracking-[-0.9px] 2xl:text-[3.25rem] 2xl:leading-13 2xl:tracking-[-1.3px]" data-cid="n569" data-component="heading">
-            {"Ready to put conversations to "}
+            {"Turn conversations into "}
             <mark className="inline px-[0.575rem] rounded-sm text-foreground bg-color-010 max-lg:px-[6.5px] 2xl:px-[0.5875rem]" data-cid="n570">
-              work
+              revenue
             </mark>
-            ?
+            .
           </h2>
           <p className="block opacity-88 max-w-[44rem] my-5 mx-auto text-lg leading-[1.8125rem]" data-cid="n571">
             Get started and connect your first channel in minutes.
