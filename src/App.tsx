@@ -32,6 +32,7 @@ const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
+const Comments = lazy(() => import("./pages/Comments"));
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ const App = () => (
             <Route path="/contact" element={<Suspense fallback={<RouteFallback />}><Contact /></Suspense>} />
             <Route path="/privacy" element={<Suspense fallback={<RouteFallback />}><Privacy /></Suspense>} />
             <Route path="/terms" element={<Suspense fallback={<RouteFallback />}><Terms /></Suspense>} />
+            <Route path="/comments" element={<Suspense fallback={<RouteFallback />}><Comments /></Suspense>} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
