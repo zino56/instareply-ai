@@ -27,6 +27,12 @@ const Settings = lazy(() => import("./pages/Settings"));
 const Analytics = lazy(() => import("./pages/Analytics"));
 const Subscriptions = lazy(() => import("./pages/Subscriptions"));
 
+// Static marketing/legal pages
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Terms = lazy(() => import("./pages/Terms"));
+
 const queryClient = new QueryClient();
 
 const RouteFallback = () => (
@@ -46,6 +52,10 @@ const App = () => (
             {/* Landing Page */}
             <Route path="/" element={<HomePage />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/about" element={<Suspense fallback={<RouteFallback />}><About /></Suspense>} />
+            <Route path="/contact" element={<Suspense fallback={<RouteFallback />}><Contact /></Suspense>} />
+            <Route path="/privacy" element={<Suspense fallback={<RouteFallback />}><Privacy /></Suspense>} />
+            <Route path="/terms" element={<Suspense fallback={<RouteFallback />}><Terms /></Suspense>} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
