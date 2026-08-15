@@ -3,7 +3,6 @@ import DropdownMenu from "./ditto/DropdownMenu";
 import Navbar from "./sections/navbar";
 import HeroSection from "./sections/hero-section";
 import HiConveeroLetSection from "./sections/hi-conveero-let-section";
-import LogoCloudSection from "./sections/logo-cloud-section";
 import LogoCloudSection2 from "./sections/logo-cloud-section2";
 import OneWorkspaceForSection from "./sections/one-workspace-for-section";
 import AllInOneSection from "./sections/all-in-one-section";
@@ -22,7 +21,6 @@ export default function Page() {
         <main className="block" data-cid="n29">
           <HeroSection />
           <HiConveeroLetSection />
-          <LogoCloudSection />
           <LogoCloudSection2 />
           <OneWorkspaceForSection />
           <AllInOneSection />
