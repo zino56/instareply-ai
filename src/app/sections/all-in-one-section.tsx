@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Video, MessageSquare, Info, ArrowRight } from "lucide-react";
+import { Lift, Reveal } from "../motion";
 
 const useCases = [
   {
@@ -37,7 +38,7 @@ export default function AllInOneSection() {
       <div className="max-w-300 mx-auto px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* Left card */}
-          <div className="bg-background rounded-2xl p-8 shadow-[0_10px_40px_rgba(0,0,0,0.12)]">
+          <Reveal className="bg-background rounded-2xl p-8 shadow-[0_10px_40px_rgba(0,0,0,0.12)] transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.18)]">
             <h2 className="[font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-[2.25rem] leading-[2.5rem] font-extrabold tracking-[-1px] text-foreground">
               See it in action...
             </h2>
@@ -63,16 +64,18 @@ export default function AllInOneSection() {
               ))}
             </ul>
 
+            <Lift className="mt-8">
             <a
               href="/signup"
-              className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-full bg-foreground px-6 font-semibold uppercase tracking-[0.12em] text-background transition-colors duration-300 hover:bg-[hsl(var(--mc-magenta))] hover:text-white"
+              className="inline-flex h-12 w-full items-center justify-center rounded-full bg-foreground px-6 font-semibold uppercase tracking-[0.12em] text-background transition-colors duration-300 hover:bg-[hsl(var(--mc-magenta))] hover:text-white"
             >
               Get started
             </a>
-          </div>
+            </Lift>
+          </Reveal>
 
           {/* Right: phone mockup */}
-          <div className="flex flex-col items-center gap-8">
+          <Reveal className="flex flex-col items-center gap-8" delay={0.1}>
             <div className="w-[19rem] rounded-[2.25rem] bg-black p-3 shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
               <div className="rounded-[1.75rem] bg-black overflow-hidden">
                 {/* header */}
@@ -116,7 +119,7 @@ export default function AllInOneSection() {
               Automate customer support — let Conveero handle the responses to
               common questions and provide immediate help to your audience
             </p>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>
