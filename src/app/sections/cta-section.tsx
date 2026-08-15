@@ -70,18 +70,22 @@ export default function CtaSection() {
         </Stagger>
 
         <div className="mt-14 flex items-center justify-center gap-4 max-sm:flex-col">
-          <a
-            href="/signup"
-            className="rounded-full bg-black text-white [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-sm font-extrabold tracking-[1px] uppercase px-8 py-4 transition-colors duration-300 hover:bg-[#FF00FF]"
-          >
-            Get started free
-          </a>
-          <a
-            href="/pricing"
-            className="rounded-full border-2 border-black text-black [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-sm font-extrabold tracking-[1px] uppercase px-8 py-4 transition-colors duration-300 hover:bg-[#FFF100]"
-          >
-            See plans
-          </a>
+          <Lift>
+            <a
+              href="/signup"
+              className="inline-block rounded-full bg-black text-white [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-sm font-extrabold tracking-[1px] uppercase px-8 py-4 transition-colors duration-300 hover:bg-[#FF00FF]"
+            >
+              Get started free
+            </a>
+          </Lift>
+          <Lift>
+            <a
+              href="/pricing"
+              className="inline-block rounded-full border-2 border-black text-black [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-sm font-extrabold tracking-[1px] uppercase px-8 py-4 transition-colors duration-300 hover:bg-[#FFF100]"
+            >
+              See plans
+            </a>
+          </Lift>
         </div>
       </div>
     </section>
