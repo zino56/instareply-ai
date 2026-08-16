@@ -1,4 +1,5 @@
 import "../globals.css";
+import { BackToTop } from "@/components/marketing/BackToTop";
 import Navbar from "./navbar";
 import Footer from "./footer";
 
@@ -38,6 +39,7 @@ export default function LegalPage({
         </div>
       </main>
       <Footer />
+      <BackToTop />
     </div>
   );
 }

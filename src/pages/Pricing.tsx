@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Check, Minus, Moon, Sun, Menu, X } from "lucide-react";
+import { BackToTop } from "@/components/marketing/BackToTop";
 import { Logo } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
 import {
@@ -339,6 +340,7 @@ const Pricing = () => {
           </p>
         </div>
       </footer>
+      <BackToTop />
     </div>
   );
 };

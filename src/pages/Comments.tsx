@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Heart, MessageSquare, Search, Share2, MessagesSquare } from "lucide-react";
 import "../app/globals.css";
+import { BackToTop } from "@/components/marketing/BackToTop";
 import Navbar from "../app/sections/navbar";
 import Footer from "../app/sections/footer";
 import { CommentSkeleton, useSkeleton } from "../app/components/skeleton";
@@ -406,6 +407,7 @@ export default function CommentsPage() {
       </main>
 
       <Footer />
+      <BackToTop />
     </div>
   );
 }
