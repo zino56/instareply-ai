@@ -183,7 +183,24 @@ export default function AllInOneSection() {
                   </div>
                 </div>
 
+                {loading ? (
+                  <div className="px-4 py-4 space-y-3" aria-hidden="true">
+                    <div className="flex justify-end">
+                      <Skeleton className="h-9 w-[70%] rounded-2xl" />
+                    </div>
+                    <div className="flex justify-start">
+                      <Skeleton className="h-14 w-[80%] rounded-2xl" />
+                    </div>
+                    <div className="rounded-2xl bg-white/5 p-3">
+                      <Skeleton className="h-32 w-full rounded-xl" />
+                      <Skeleton className="mt-3 h-3.5 w-2/3" />
+                      <Skeleton className="mt-2 h-3 w-1/2" />
+                      <Skeleton className="mt-3 h-9 w-full rounded-lg" />
+                    </div>
+                  </div>
+                ) : (
                 <AnimatePresence mode="wait">
+
                   <motion.div
                     key={active.id}
                     initial={{ opacity: 0, y: reduce ? 0 : 12 }}
