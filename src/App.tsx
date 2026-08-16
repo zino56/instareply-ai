@@ -9,6 +9,7 @@ import { MotionConfig } from "framer-motion";
 import { AppLayout } from "@/components/layout/AppLayout";
 import HomePage from "./app/page";
 import RoutePrefetch from "@/components/perf/RoutePrefetch";
+import { MarketingTransition } from "@/components/motion/MarketingTransition";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -52,6 +53,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <RoutePrefetch />
+          <MarketingTransition>
           <Routes>
             {/* Landing Page */}
             <Route path="/" element={<HomePage />} />
@@ -84,6 +86,7 @@ const App = () => (
             {/* 404 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </MarketingTransition>
         </BrowserRouter>
       </TooltipProvider>
     </MotionConfig>
