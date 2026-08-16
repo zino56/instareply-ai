@@ -73,7 +73,9 @@ export default function CommentsPage() {
   const [comments, setComments] = useState<CommentItem[]>(seedComments);
   const [liked, setLiked] = useState<Record<string, boolean>>({});
   const [filter, setFilter] = useState<Filter>("All");
+  const [search, setSearch] = useState("");
   const loadingComments = useSkeleton(800);
+
 
   const [form, setForm] = useState({ name: "", email: "", topic: "Question" as Topic, body: "" });
   const [errors, setErrors] = useState<{ name?: string; email?: string; body?: string }>({});
