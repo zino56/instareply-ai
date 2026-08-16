@@ -29,7 +29,7 @@ export default function Navbar({ listRowData = listRowDataContent } = {}) {
       <div className="h-full block max-w-300 mx-auto px-8" data-cid="n3">
         <nav className="h-full flex py-3 justify-between items-center gap-8" data-cid="n4" data-component="nav" aria-label="Primary">
           <a className="h-8 flex items-center cursor-pointer" data-cid="n5" data-component="link" href="#" aria-label="Conveero home">
-            <Logo size="nav" />
+            <Logo size="nav" priority />
           </a>
 
           <ul className="border border-solid border-color-002 flex p-1.5 rounded-[999px] items-center gap-1 [list-style-type:none] list-outside bg-background max-lg:hidden" data-cid="n8">
