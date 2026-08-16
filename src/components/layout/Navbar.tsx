@@ -61,7 +61,7 @@ export function Navbar() {
       <nav className="container flex h-[68px] items-center justify-between">
         {/* Logo */}
         <Link to="/dashboard" className="flex items-center group focus-ring rounded-lg">
-          <Logo size="chrome" priority />
+          <Logo size="chrome" />
         </Link>
 
         {/* Desktop Navigation */}

@@ -69,8 +69,8 @@ const PricingHeader = () => {
     <header className="sticky top-0 z-50 border-b border-border/80 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/65">
       <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5 lg:px-8">
         <Link to="/" className="flex items-center rounded-md focus-ring" aria-label="Conveero home">
-          <Logo markOnly variant={isDark ? "light" : "dark"} size="chrome" className="md:hidden" priority />
-          <Logo variant={isDark ? "light" : "dark"} size="nav" className="hidden md:block" priority />
+          <Logo markOnly variant={isDark ? "light" : "dark"} size="chrome" className="md:hidden" />
+          <Logo variant={isDark ? "light" : "dark"} size="nav" className="hidden md:block" />
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main">

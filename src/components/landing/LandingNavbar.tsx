@@ -35,7 +35,7 @@ const LandingNavbar = () => {
         <div className="flex items-center justify-between h-full">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <Logo size="nav" priority />
+            <Logo size="nav" />
           </Link>
 
           {/* Desktop Navigation */}

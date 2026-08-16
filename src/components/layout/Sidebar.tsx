@@ -64,7 +64,7 @@ export function Sidebar({ onNavigate }: SidebarProps) {
       {/* Brand */}
       <div className="h-[68px] px-5 flex items-center border-b border-border">
         <Link to="/dashboard" onClick={onNavigate} className="flex items-center group focus-ring rounded-lg">
-          <Logo size="chrome" priority />
+          <Logo size="chrome" />
         </Link>
       </div>
 

@@ -1,18 +1,20 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { easeOutQuiet, Lift } from "../motion";
+import { Skeleton, useSkeleton } from "../components/skeleton";
 
 /** Hero section — the page's lead block. */
 export default function HeroSection() {
   const reduce = useReducedMotion();
+  const loading = useSkeleton(600);
 
 
   const container = {
     hidden: {},
-    show: { transition: { staggerChildren: reduce ? 0 : 0.07, delayChildren: reduce ? 0 : 0.04 } },
+    show: { transition: { staggerChildren: reduce ? 0 : 0.09, delayChildren: reduce ? 0 : 0.05 } },
   };
   const item = {
     hidden: { opacity: 0, y: reduce ? 0 : 12 },
-    show: { opacity: 1, y: 0, transition: { duration: reduce ? 0.001 : 0.35, ease: easeOutQuiet } },
+    show: { opacity: 1, y: 0, transition: { duration: reduce ? 0.001 : 0.5, ease: easeOutQuiet } },
   };
 
   return (
@@ -57,24 +59,37 @@ export default function HeroSection() {
               </span>
             </motion.div>
 
-            <motion.h1
-              variants={item}
-              data-component="heading"
-              className="[font-family:'Bricolage_Grotesque',_Poppins,_Inter,_system-ui,_sans-serif] font-extrabold text-[44px] md:text-[72px] text-white leading-[1.05] tracking-[-2.3px] max-md:tracking-[-1.32px] text-balance mb-6"
-            >
-              {"Make the most out of every "}
-              <mark className="inline px-3.5 max-md:px-2 rounded-sm bg-[#FFF100] text-black">
-                conversation
-              </mark>
-            </motion.h1>
+            {loading ? (
+              <div className="mb-10 space-y-4" aria-hidden="true">
+                <Skeleton className="h-[46px] w-full max-w-[560px] md:h-[72px]" />
+                <Skeleton className="h-[46px] w-4/5 max-w-[460px] md:h-[72px]" />
+                <div className="space-y-3 pt-4">
+                  <Skeleton className="h-4 w-full max-w-[500px]" />
+                  <Skeleton className="h-4 w-3/5 max-w-[300px]" />
+                </div>
+              </div>
+            ) : (
+              <>
+                <motion.h1
+                  variants={item}
+                  data-component="heading"
+                  className="[font-family:'Bricolage_Grotesque',_Poppins,_Inter,_system-ui,_sans-serif] font-extrabold text-[44px] md:text-[72px] text-white leading-[1.05] tracking-[-2.3px] max-md:tracking-[-1.32px] text-balance mb-6"
+                >
+                  {"Make the most out of every "}
+                  <mark className="inline px-3.5 max-md:px-2 rounded-sm bg-[#FFF100] text-black">
+                    conversation
+                  </mark>
+                </motion.h1>
 
-            <motion.p
-              variants={item}
-              className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-[500px] mx-auto lg:mx-0"
-            >
-              Sell more, engage better, and grow your audience. AI-powered automation that turns
-              messages into revenue.
-            </motion.p>
+                <motion.p
+                  variants={item}
+                  className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-[500px] mx-auto lg:mx-0"
+                >
+                  Sell more, engage better, and grow your audience. AI-powered automation that turns
+                  messages into revenue.
+                </motion.p>
+              </>
+            )}
 
 
             <motion.div
@@ -131,7 +146,7 @@ export default function HeroSection() {
             className="relative"
             initial={{ opacity: 0, y: reduce ? 0 : 24, scale: reduce ? 1 : 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: reduce ? 0.001 : 0.45, delay: reduce ? 0 : 0.25, ease: easeOutQuiet }}
+            transition={{ duration: reduce ? 0.001 : 0.6, delay: reduce ? 0 : 0.35, ease: easeOutQuiet }}
           >
             <div className="relative w-full max-w-[500px] mx-auto lg:ml-auto">
               <div className="bg-[#111111] rounded-[24px] p-4 shadow-2xl">

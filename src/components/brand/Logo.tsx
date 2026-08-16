@@ -33,11 +33,6 @@ interface LogoProps {
   size?: LogoSize;
   /** Render the icon-only C mark instead of the full wordmark. */
   markOnly?: boolean;
-  /**
-   * Above-the-fold lockups (navbars, auth headers) load eagerly at high
-   * priority; everything else (footers) lazy-loads.
-   */
-  priority?: boolean;
   className?: string;
 }
 
@@ -45,7 +40,7 @@ interface LogoProps {
  * Conveero brand lockup. No background box — the SVG keeps its own aspect ratio.
  * Use the `size` token so lockups align consistently across the app.
  */
-export function Logo({ variant = 'dark', size = 'chrome', markOnly = false, priority = false, className }: LogoProps) {
+export function Logo({ variant = 'dark', size = 'chrome', markOnly = false, className }: LogoProps) {
   const src = markOnly
     ? variant === 'light'
       ? markLight
@@ -63,13 +58,9 @@ export function Logo({ variant = 'dark', size = 'chrome', markOnly = false, prio
         markOnly ? MARK_SIZES[size] : SIZES[size],
         className,
       )}
-      loading={priority ? 'eager' : 'lazy'}
-      decoding={priority ? 'sync' : 'async'}
-      fetchPriority={priority ? 'high' : 'auto'}
       draggable={false}
     />
   );
 }
-
 
 export default Logo;

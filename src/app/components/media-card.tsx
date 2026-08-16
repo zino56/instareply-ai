@@ -26,7 +26,7 @@ export default function MediaCard({ d, cids, styles }: { d: MediaCardData; cids:
         </a>
       </div>
       <div data-cid={cids[6]} className={cn("border border-solid border-color-002 block rounded-4xl overflow-hidden bg-color-003", styles.className4)}>
-        <img data-cid={cids[7]} className={cn("block max-w-full overflow-clip aspect-[auto_1200/800] max-md:w-[19.3125rem] max-md:h-[9.6875rem] md:max-lg:w-175.5 md:max-lg:h-[21.9375rem]", styles.className5)} data-component="image" alt={d.alt} height="800" src={d.imgSrc} width="1200" loading="lazy" decoding="async" />
+        <img data-cid={cids[7]} className={cn("block max-w-full overflow-clip aspect-[auto_1200/800] max-md:w-[19.3125rem] max-md:h-[9.6875rem] md:max-lg:w-175.5 md:max-lg:h-[21.9375rem]", styles.className5)} data-component="image" alt={d.alt} height="800" src={d.imgSrc} width="1200" />
       </div>
     </div>
   );

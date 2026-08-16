@@ -30,7 +30,7 @@ export function Reveal({
       initial={{ opacity: 0, y: reduce ? 0 : y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: reduce ? 0.001 : 0.35, delay: reduce ? 0 : delay, ease: easeOutQuiet }}
+      transition={{ duration: reduce ? 0.001 : 0.5, delay: reduce ? 0 : delay, ease: easeOutQuiet }}
     >
       {children}
     </Comp>
@@ -66,7 +66,7 @@ export function Stagger({
 
 export const staggerItemVariants: Variants = {
   hidden: { opacity: 0, y: 15 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: easeOutQuiet } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: easeOutQuiet } },
 };
 
 export function StaggerItem({ children, className }: { children: ReactNode; className?: string }) {

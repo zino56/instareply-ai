@@ -955,8 +955,6 @@ function ImagePreview({ url }: { url: string }) {
       src={url}
       alt="Preview"
       onError={() => setErr(true)}
-      loading="lazy"
-      decoding="async"
       className="w-full h-full object-cover"
     />
   );
@@ -1023,8 +1021,6 @@ function ProductCard({
             src={product.image_url}
             alt={product.title}
             onError={(e) => ((e.target as HTMLImageElement).style.display = 'none')}
-            loading="lazy"
-            decoding="async"
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
@@ -1190,7 +1186,7 @@ function ProductTable({
           >
             <div className="w-11 h-11 rounded-md bg-muted overflow-hidden flex items-center justify-center">
               {p.image_url ? (
-                <img src={p.image_url} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                <img src={p.image_url} alt="" className="w-full h-full object-cover" />
               ) : (
                 <Package className="w-4 h-4 text-muted-foreground/60" strokeWidth={1.5} />
               )}
