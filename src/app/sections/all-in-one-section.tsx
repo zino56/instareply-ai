@@ -74,6 +74,8 @@ export default function AllInOneSection() {
   const reduce = useReducedMotion();
   const [activeId, setActiveId] = useState(USE_CASES[0].id);
   const active = USE_CASES.find((u) => u.id === activeId)!;
+  const loading = useSkeleton(450, [activeId]);
+
 
   return (
     <section
