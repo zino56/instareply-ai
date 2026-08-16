@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { MotionConfig } from "framer-motion";
 import { AppLayout } from "@/components/layout/AppLayout";
+import { BackToTop } from "@/components/marketing/BackToTop";
 import HomePage from "./app/page";
 import RoutePrefetch from "@/components/perf/RoutePrefetch";
 import { MarketingTransition } from "@/components/motion/MarketingTransition";
@@ -87,6 +88,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
           </MarketingTransition>
+          <BackToTop />
         </BrowserRouter>
       </TooltipProvider>
     </MotionConfig>
