@@ -2,6 +2,8 @@ import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Video, MessageSquare, Info } from "lucide-react";
 import { easeOutQuiet, Lift, Reveal } from "../motion";
+import { Skeleton, useSkeleton } from "../components/skeleton";
+
 
 type UseCase = {
   id: string;
