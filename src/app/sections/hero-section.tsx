@@ -10,11 +10,11 @@ export default function HeroSection() {
 
   const container = {
     hidden: {},
-    show: { transition: { staggerChildren: reduce ? 0 : 0.09, delayChildren: reduce ? 0 : 0.05 } },
+    show: { transition: { staggerChildren: reduce ? 0 : 0.07, delayChildren: reduce ? 0 : 0.04 } },
   };
   const item = {
     hidden: { opacity: 0, y: reduce ? 0 : 12 },
-    show: { opacity: 1, y: 0, transition: { duration: reduce ? 0.001 : 0.5, ease: easeOutQuiet } },
+    show: { opacity: 1, y: 0, transition: { duration: reduce ? 0.001 : 0.35, ease: easeOutQuiet } },
   };
 
   return (
@@ -146,7 +146,7 @@ export default function HeroSection() {
             className="relative"
             initial={{ opacity: 0, y: reduce ? 0 : 24, scale: reduce ? 1 : 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: reduce ? 0.001 : 0.6, delay: reduce ? 0 : 0.35, ease: easeOutQuiet }}
+            transition={{ duration: reduce ? 0.001 : 0.45, delay: reduce ? 0 : 0.25, ease: easeOutQuiet }}
           >
             <div className="relative w-full max-w-[500px] mx-auto lg:ml-auto">
               <div className="bg-[#111111] rounded-[24px] p-4 shadow-2xl">
