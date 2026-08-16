@@ -963,3 +963,43 @@
 
 @keyframes hero-ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+
+/* ---- CSS-only skeleton shimmer (marketing site) ---- */
+.cv-skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.07);
+  animation: cv-skeleton-pulse 1.2s ease-in-out infinite;
+}
+.cv-skeleton--light { background-color: rgba(0, 0, 0, 0.08); }
+
+.cv-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.12),
+    transparent
+  );
+  animation: cv-skeleton-sweep 1.2s ease-in-out infinite;
+}
+.cv-skeleton--light::after {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+}
+
+@keyframes cv-skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.72; }
+}
+@keyframes cv-skeleton-sweep {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cv-skeleton { animation: none; opacity: 1; }
+  .cv-skeleton::after { display: none; }
+}
