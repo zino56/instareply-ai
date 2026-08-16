@@ -1,11 +1,9 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { easeOutQuiet, Lift } from "../motion";
-import { Skeleton, useSkeleton } from "../components/skeleton";
 
 /** Hero section — the page's lead block. */
 export default function HeroSection() {
   const reduce = useReducedMotion();
-  const loading = useSkeleton(600);
 
 
   const container = {
