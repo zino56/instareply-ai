@@ -126,23 +126,37 @@ export default function AllInOneSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* Left card */}
           <div className="bg-background rounded-2xl p-8 shadow-[0_10px_40px_rgba(0,0,0,0.12)] transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.18)]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active.id}
-                initial={{ opacity: 0, y: reduce ? 0 : 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: reduce ? 0 : -10 }}
-                transition={{ duration: reduce ? 0.001 : 0.25, ease: easeOutQuiet }}
-              >
-                <span className="inline-flex rounded-full bg-[hsl(var(--mc-yellow))] px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-black">
-                  {active.tab}
-                </span>
-                <h3 className="mt-4 [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-[2rem] leading-[2.25rem] font-extrabold tracking-[-1px] text-foreground">
-                  {active.headline}
-                </h3>
-                <p className="mt-4 text-foreground/70 leading-relaxed">{active.blurb}</p>
-              </motion.div>
-            </AnimatePresence>
+            {loading ? (
+              <div aria-hidden="true">
+                <Skeleton tone="light" className="h-6 w-28 rounded-full" />
+                <Skeleton tone="light" className="mt-4 h-8 w-full" />
+                <Skeleton tone="light" className="mt-2 h-8 w-3/4" />
+                <div className="mt-5 space-y-2.5">
+                  <Skeleton tone="light" className="h-3.5 w-full" />
+                  <Skeleton tone="light" className="h-3.5 w-11/12" />
+                  <Skeleton tone="light" className="h-3.5 w-2/3" />
+                </div>
+              </div>
+            ) : (
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active.id}
+                  initial={{ opacity: 0, y: reduce ? 0 : 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: reduce ? 0 : -10 }}
+                  transition={{ duration: reduce ? 0.001 : 0.25, ease: easeOutQuiet }}
+                >
+                  <span className="inline-flex rounded-full bg-[hsl(var(--mc-yellow))] px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-black">
+                    {active.tab}
+                  </span>
+                  <h3 className="mt-4 [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-[2rem] leading-[2.25rem] font-extrabold tracking-[-1px] text-foreground">
+                    {active.headline}
+                  </h3>
+                  <p className="mt-4 text-foreground/70 leading-relaxed">{active.blurb}</p>
+                </motion.div>
+              </AnimatePresence>
+            )}
+
 
             <Lift className="mt-8">
               <a
