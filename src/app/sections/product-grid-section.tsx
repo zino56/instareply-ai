@@ -1,13 +1,11 @@
 import { Reveal, Stagger, StaggerItem } from "../motion";
 import ProductCard from "../components/product-card";
 import SpotlightCard from "../components/spotlight-card";
-import { CardSkeleton, useSkeleton } from "../components/skeleton";
 import { ProductCard_cids } from "../_cids";
 import { ProductCard_styles } from "../_styles";
 import { products as productsContent } from "../content";
 /** Product Grid section. */
 export default function ProductGridSection({ products = productsContent } = {}) {
-  const loading = useSkeleton(700);
 
   return (
     <section className="block py-24 max-lg:py-14" data-cid="n352" id="pricing">
@@ -31,14 +29,7 @@ export default function ProductGridSection({ products = productsContent } = {}) 
             </button>
           </div>
         </Reveal>
-        {loading ? (
-          <div className="w-full grid gap-8 grid-cols-1 lg:grid-cols-3" aria-hidden="true">
-            {[0, 1, 2].map((i) => (
-              <CardSkeleton key={i} tone="light" />
-            ))}
-          </div>
-        ) : (
-          <Stagger className="w-full grid gap-8 grid-cols-1 lg:grid-cols-3">
+        <Stagger className="w-full grid gap-8 grid-cols-1 lg:grid-cols-3">
             {products.map((d, i) => (
               <StaggerItem key={d.variant} className="h-full">
                 <SpotlightCard>
@@ -46,8 +37,7 @@ export default function ProductGridSection({ products = productsContent } = {}) 
                 </SpotlightCard>
               </StaggerItem>
             ))}
-          </Stagger>
-        )}
+        </Stagger>
 
       </div>
     </section>
