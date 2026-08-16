@@ -5,6 +5,6 @@ export type Logo2Data = {
 /** A logo. */
 export default function Logo2({ d, cids }: { d: Logo2Data; cids: string[] }) {
   return (
-    <img data-cid={cids[0]} className="w-7 h-7 block opacity-72 max-w-full overflow-clip [filter:grayscale(1)]" data-component="image" alt={d.alt} src={d.imgSrc} />
+    <img data-cid={cids[0]} className="w-7 h-7 block opacity-72 max-w-full overflow-clip [filter:grayscale(1)]" data-component="image" alt={d.alt} src={d.imgSrc} width="28" height="28" loading="lazy" decoding="async" />
   );
 }
