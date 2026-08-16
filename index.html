@@ -9,6 +9,28 @@
     <meta name="author" content="Conveero" />
     <link rel="icon" type="image/png" href="/favicon.png" />
 
+    <!-- Perf: primary fonts (display + body, latin subset) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/cloned/fonts/40c2cb34afaa.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/cloned/fonts/6ab57b19c69b.woff2"
+      crossorigin
+    />
+    <!-- Perf: app entry (Vite injects the hashed CSS/JS bundle links at build time) -->
+    <link rel="modulepreload" href="/src/main.tsx" />
+
+
+
 
     <meta property="og:title" content="Conveero" />
     <meta property="og:description" content="Lovable Generated Project" />
