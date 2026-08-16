@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { ArrowUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -46,29 +47,31 @@ export function BackToTop() {
 
   return (
     <AnimatePresence>
-      {visible && (
-        <motion.button
-          type="button"
-          initial={{ opacity: 0, scale: 0.8, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.8, y: 10 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
-          onClick={smoothScrollToTop}
-          aria-label="Back to top"
-          className={cn(
-            "fixed bottom-6 right-6 z-50 hidden md:flex",
-            "h-12 w-12 items-center justify-center rounded-full",
-            "bg-[#0f1011] text-[#f7f8f8]",
-            "border border-[#23252a]",
-            "shadow-[0_4px_14px_rgba(0,0,0,0.35)]",
-            "transition-all duration-200 ease-out",
-            "hover:bg-[#141516] hover:-translate-y-0.5 hover:shadow-[0_8px_22px_rgba(0,0,0,0.45)]",
-            "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5e6ad2]/50"
-          )}
-        >
-          <ArrowUp className="h-5 w-5" strokeWidth={2} />
-        </motion.button>
-      )}
+      {visible &&
+        createPortal(
+          <motion.button
+            type="button"
+            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 10 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            onClick={smoothScrollToTop}
+            aria-label="Back to top"
+            className={cn(
+              "fixed bottom-6 right-6 z-50 hidden md:flex",
+              "h-12 w-12 items-center justify-center rounded-full",
+              "bg-[#0f1011] text-[#f7f8f8]",
+              "border border-[#23252a]",
+              "shadow-[0_4px_14px_rgba(0,0,0,0.35)]",
+              "transition-all duration-200 ease-out",
+              "hover:bg-[#141516] hover:-translate-y-0.5 hover:shadow-[0_8px_22px_rgba(0,0,0,0.45)]",
+              "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5e6ad2]/50"
+            )}
+          >
+            <ArrowUp className="h-5 w-5" strokeWidth={2} />
+          </motion.button>,
+          document.body
+        )}
     </AnimatePresence>
   );
 }
