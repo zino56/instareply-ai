@@ -3,6 +3,8 @@ import { Heart, MessageSquare, Search, Share2, MessagesSquare } from "lucide-rea
 import "../app/globals.css";
 import Navbar from "../app/sections/navbar";
 import Footer from "../app/sections/footer";
+import { CommentSkeleton, useSkeleton } from "../app/components/skeleton";
+
 
 type Topic = "Question" | "Tip" | "Showcase" | "Other";
 
@@ -235,7 +237,14 @@ export default function CommentsPage() {
             </div>
 
             <div className="mt-6 rounded-xl border border-solid border-[#23252a] bg-[#0f1011] p-6">
-              {visible.length === 0 ? (
+              {loadingComments ? (
+                <div className="space-y-3" aria-hidden="true">
+                  {[0, 1, 2, 3].map((i) => (
+                    <CommentSkeleton key={i} />
+                  ))}
+                </div>
+              ) : visible.length === 0 ? (
+
                 <div className="mx-auto max-w-md rounded-xl border border-solid border-[#23252a] bg-[#141516] px-6 py-12 text-center">
                   <MessagesSquare className="mx-auto h-8 w-8 text-[#8a8f98]" aria-hidden="true" strokeWidth={1.5} />
                   <p className="mt-4 text-base text-[#d0d6e0]">No comments yet — be the first to share your thoughts.</p>
