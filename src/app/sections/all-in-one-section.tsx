@@ -2,7 +2,6 @@ import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Video, MessageSquare, Info } from "lucide-react";
 import { easeOutQuiet, Lift, Reveal } from "../motion";
-import { Skeleton, useSkeleton } from "../components/skeleton";
 
 
 type UseCase = {
@@ -74,7 +73,6 @@ export default function AllInOneSection() {
   const reduce = useReducedMotion();
   const [activeId, setActiveId] = useState(USE_CASES[0].id);
   const active = USE_CASES.find((u) => u.id === activeId)!;
-  const loading = useSkeleton(450, [activeId]);
 
 
   return (
@@ -126,19 +124,7 @@ export default function AllInOneSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* Left card */}
           <div className="bg-background rounded-2xl p-8 shadow-[0_10px_40px_rgba(0,0,0,0.12)] transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.18)]">
-            {loading ? (
-              <div aria-hidden="true">
-                <Skeleton tone="light" className="h-6 w-28 rounded-full" />
-                <Skeleton tone="light" className="mt-4 h-8 w-full" />
-                <Skeleton tone="light" className="mt-2 h-8 w-3/4" />
-                <div className="mt-5 space-y-2.5">
-                  <Skeleton tone="light" className="h-3.5 w-full" />
-                  <Skeleton tone="light" className="h-3.5 w-11/12" />
-                  <Skeleton tone="light" className="h-3.5 w-2/3" />
-                </div>
-              </div>
-            ) : (
-              <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait">
                 <motion.div
                   key={active.id}
                   initial={{ opacity: 0, y: reduce ? 0 : 10 }}
@@ -155,7 +141,6 @@ export default function AllInOneSection() {
                   <p className="mt-4 text-foreground/70 leading-relaxed">{active.blurb}</p>
                 </motion.div>
               </AnimatePresence>
-            )}
 
 
             <Lift className="mt-8">
@@ -183,22 +168,6 @@ export default function AllInOneSection() {
                   </div>
                 </div>
 
-                {loading ? (
-                  <div className="px-4 py-4 space-y-3" aria-hidden="true">
-                    <div className="flex justify-end">
-                      <Skeleton className="h-9 w-[70%] rounded-2xl" />
-                    </div>
-                    <div className="flex justify-start">
-                      <Skeleton className="h-14 w-[80%] rounded-2xl" />
-                    </div>
-                    <div className="rounded-2xl bg-white/5 p-3">
-                      <Skeleton className="h-32 w-full rounded-xl" />
-                      <Skeleton className="mt-3 h-3.5 w-2/3" />
-                      <Skeleton className="mt-2 h-3 w-1/2" />
-                      <Skeleton className="mt-3 h-9 w-full rounded-lg" />
-                    </div>
-                  </div>
-                ) : (
                 <AnimatePresence mode="wait">
 
                   <motion.div
