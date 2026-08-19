@@ -6,13 +6,11 @@ import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { isAuthenticated } from '@/lib/api';
 
 /**
- * DEV BYPASS — active only when `import.meta.env.DEV` is true (local `vite`
- * / `vite dev`). In every non-DEV build — production AND Lovable preview —
- * the bypass is fully inert and any lingering flag is removed from
- * localStorage so it can never be re-used.
+ * DEMO BYPASS — lets anyone preview the dashboard without a backend session.
+ * Enabled by the "Demo mode" button on /login (or ?demo=1), stored in
+ * localStorage. Remove before handling real customer data.
  */
-function hasDevBypass(): boolean {
-  if (!import.meta.env.DEV) return false;
+function hasDemoBypass(): boolean {
   if (typeof window === 'undefined') return false;
   return window.localStorage.getItem('conveero_dev_bypass') === '1';
 }
@@ -21,13 +19,13 @@ export function AppLayout() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   useEffect(() => {
-    // Defense in depth: in any non-DEV build, purge the bypass flag if present.
-    if (!import.meta.env.DEV && typeof window !== 'undefined') {
-      try { window.localStorage.removeItem('conveero_dev_bypass'); } catch { /* noop */ }
+    if (typeof window === 'undefined') return;
+    if (new URLSearchParams(window.location.search).get('demo') === '1') {
+      try { window.localStorage.setItem('conveero_dev_bypass', '1'); } catch { /* noop */ }
     }
   }, []);
 
-  if (!isAuthenticated() && !hasDevBypass()) {
+  if (!isAuthenticated() && !hasDemoBypass()) {
     return <Navigate to="/" replace />;
   }
 

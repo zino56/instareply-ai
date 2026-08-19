@@ -8,10 +8,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthBrandPanel from '@/components/auth/AuthBrandPanel';
 
-/* DEV BYPASS — visible only in local `vite dev` (import.meta.env.DEV).
- * Never rendered in production builds or Lovable preview deployments. */
+/* DEMO BYPASS — always available so the dashboard can be previewed. */
 function showDevBypass(): boolean {
-  return import.meta.env.DEV;
+  return true;
 }
 
 export default function Login() {
