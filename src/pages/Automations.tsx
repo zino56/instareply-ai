@@ -62,8 +62,8 @@ function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: 
       aria-checked={checked}
       aria-label={label}
       onClick={() => onChange(!checked)}
-      className={`relative h-5 w-9 shrink-0 rounded-full border transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/60 ${
-        checked ? 'bg-[hsl(var(--primary))] border-[hsl(var(--primary))]' : 'bg-[hsl(var(--muted))] border-[hsl(var(--border))]'
+      className={`relative h-5 w-9 shrink-0 rounded-full border transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5e6ad2]/60 ${
+        checked ? 'bg-[#5e6ad2] border-[#5e6ad2]' : 'bg-[#18191a] border-[#34343a]'
       }`}
     >
       <motion.span
@@ -78,13 +78,13 @@ function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: 
 
 function Check2({ checked, onChange, children }: { checked: boolean; onChange: (v: boolean) => void; children: React.ReactNode }) {
   return (
-    <button type="button" onClick={() => onChange(!checked)} className="flex items-center gap-2 text-[13px] text-[hsl(var(--foreground))]">
+    <button type="button" onClick={() => onChange(!checked)} className="flex items-center gap-2 text-[13px] text-[#f7f8f8]">
       <span
         className={`grid h-4 w-4 place-items-center rounded-[4px] border transition-colors ${
-          checked ? 'bg-[hsl(var(--primary))] border-[hsl(var(--primary))]' : 'bg-[hsl(var(--background))] border-[hsl(var(--border))]'
+          checked ? 'bg-[#5e6ad2] border-[#5e6ad2]' : 'bg-[#141516] border-[#34343a]'
         }`}
       >
-        {checked && <Check className="h-3 w-3 text-[hsl(var(--primary-foreground))]" strokeWidth={3} />}
+        {checked && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
       </span>
       {children}
     </button>
