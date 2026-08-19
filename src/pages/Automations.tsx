@@ -457,9 +457,9 @@ export default function Automations() {
   const { toast } = useToast();
   const [tab, setTab] = useState<'rules' | 'queue' | 'logs'>('rules');
   const [killswitch, setKillswitch] = useState(true);
-  const [rules, setRules] = useState<AutomationRule[]>(mockRules);
-  const [approvals, setApprovals] = useState<ApprovalItem[]>(mockApprovals);
-  const [logs] = useState<ActivityLog[]>(mockLogs);
+  const [rules, setRules] = useState<AutomationRule[]>([]);
+  const [approvals, setApprovals] = useState<ApprovalItem[]>([]);
+  const [logs] = useState<ActivityLog[]>([]);
   const [drawer, setDrawer] = useState<{ open: boolean; rule: AutomationRule | null }>({ open: false, rule: null });
 
   const [query, setQuery] = useState('');
