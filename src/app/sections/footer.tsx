@@ -70,9 +70,12 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-sm text-background/75 transition-colors duration-300 hover:text-accent"
+                      className="group relative inline-flex items-center text-sm text-background/75 transition-colors duration-300 hover:text-accent active:scale-[0.98]"
                     >
-                      {link.label}
+                      <span className="relative">
+                        {link.label}
+                        <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full group-active:w-full" />
+                      </span>
                     </a>
                   </li>
                 ))}
