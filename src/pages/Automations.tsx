@@ -96,24 +96,20 @@ function MetricsStrip({ pending }: { pending: number }) {
   const cards = [
     {
       label: 'Total Comments Captured',
-      value: mockMetrics.captured.toLocaleString(),
-      foot: (
-        <span className="inline-flex items-center gap-1 text-emerald-600">
-          <ArrowUpRight className="h-3.5 w-3.5" /> {mockMetrics.capturedTrend}% vs last 7d
-        </span>
-      ),
+      value: '0',
+      foot: <span className={S.subtle}>No comments received yet</span>,
     },
     {
       label: 'DMs Triggered',
-      value: mockMetrics.dmsTriggered.toLocaleString(),
-      foot: <Pill tone="green">{mockMetrics.conversionRate}% conversion</Pill>,
+      value: '0',
+      foot: <Pill tone="slate">0% trigger rate</Pill>,
     },
     {
       label: 'Pending Approvals',
       value: String(pending),
       foot: (
-        <span className="inline-flex items-center gap-1 rounded-full border border-amber-400/30 bg-amber-500/10 px-2 py-0.5 text-[11px] font-medium text-amber-600 shadow-[0_0_16px_-4px_rgba(251,191,36,0.6)]">
-          Awaiting review
+        <span className="inline-flex items-center gap-1 rounded-full border border-[#5e6ad2]/30 bg-[#5e6ad2]/10 px-2 py-0.5 text-[11px] font-medium text-[#8b9cf0]">
+          Queue Clear
         </span>
       ),
     },
