@@ -3,11 +3,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import {
   Zap, Plus, MessageSquare, Send, Reply, MoreHorizontal, Pencil, FlaskConical,
   ScrollText, Trash2, Check, X, ArrowUpRight, ShieldAlert, Search, ChevronLeft,
-  ChevronRight, Inbox, AlertTriangle,
+  ChevronRight, Inbox, AlertTriangle, Sparkles, CheckCircle,
 } from 'lucide-react';
 import {
   AutomationRule, ApprovalItem, ActivityLog, LogStatus, emptyRule, matchKeywords,
-  mockApprovals, mockLogs, mockMetrics, mockRules, relativeTime,
+  relativeTime,
 } from '@/lib/automationsMock';
 import { useToast } from '@/hooks/use-toast';
 
@@ -16,26 +16,27 @@ import { useToast } from '@/hooks/use-toast';
    dashboard theme is untouched.
 --------------------------------------------------------------------------- */
 const S = {
-  canvas: 'bg-[hsl(var(--background))]',
-  s1: 'bg-[hsl(var(--card))]',
-  s2: 'bg-[hsl(var(--background))]',
-  s3: 'bg-[hsl(var(--muted))]',
-  line: 'border-[hsl(var(--border))]',
-  line2: 'border-[hsl(var(--border))]',
-  ink: 'text-[hsl(var(--foreground))]',
-  muted: 'text-[hsl(var(--foreground))]',
-  subtle: 'text-[hsl(var(--muted-foreground))]',
+  canvas: 'bg-[#010102]',
+  s1: 'bg-[#0f1011]',
+  s2: 'bg-[#141516]',
+  s3: 'bg-[#18191a]',
+  line: 'border-[#23252a]',
+  line2: 'border-[#34343a]',
+  ink: 'text-[#f7f8f8]',
+  muted: 'text-[#d0d6e0]',
+  subtle: 'text-[#8a8f98]',
 };
-const ACCENT = 'hsl(var(--primary))';
+const ACCENT = '#5e6ad2';
 
 const btnBase =
-  'inline-flex items-center justify-center gap-1.5 rounded-lg text-[13px] font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/60 disabled:opacity-50 active:scale-[0.98]';
-const btnPrimary = `${btnBase} h-9 px-3.5 bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:brightness-95`;
-const btnGhost = `${btnBase} h-9 px-3 border border-[hsl(var(--border))] ${'text-[hsl(var(--foreground))]'} hover:bg-[hsl(var(--muted))]`;
+  'inline-flex items-center justify-center gap-1.5 rounded-lg text-[13px] font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5e6ad2]/60 disabled:opacity-50 active:scale-[0.98]';
+const btnPrimary = `${btnBase} h-9 px-3.5 bg-[#5e6ad2] text-white hover:brightness-95`;
+const btnGhost = `${btnBase} h-9 px-3 border border-[#34343a] text-[#f7f8f8] hover:bg-[#18191a]`;
 const inputCls =
-  'w-full h-9 rounded-lg bg-[hsl(var(--background))] border border-[hsl(var(--border))] px-3 text-[13px] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] outline-none focus:border-[hsl(var(--primary))] transition-colors';
+  'w-full h-9 rounded-lg bg-[#141516] border border-[#23252a] px-3 text-[13px] text-[#f7f8f8] placeholder:text-[#8a8f98] outline-none focus:border-[#5e6ad2] transition-colors';
 const areaCls =
-  'w-full rounded-lg bg-[hsl(var(--background))] border border-[hsl(var(--border))] px-3 py-2 text-[13px] leading-relaxed text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] outline-none focus:border-[hsl(var(--primary))] transition-colors resize-y';
+  'w-full rounded-lg bg-[#141516] border border-[#23252a] px-3 py-2 text-[13px] leading-relaxed text-[#f7f8f8] placeholder:text-[#8a8f98] outline-none focus:border-[#5e6ad2] transition-colors resize-y';
+
 
 function Pill({ tone, children }: { tone: 'amber' | 'blue' | 'green' | 'slate' | 'purple' | 'red'; children: React.ReactNode }) {
   const tones: Record<string, string> = {
