@@ -631,17 +631,17 @@ export default function Automations() {
                   <table className="w-full text-left">
                     <thead>
                       <tr className={`border-b ${S.line} text-[11px] uppercase tracking-[0.06em] ${S.subtle}`}>
-                        <th className="px-4 py-2.5 font-medium">Time</th>
+                        <th className="px-4 py-2.5 font-medium">Timestamp</th>
                         <th className="px-4 py-2.5 font-medium">Commenter</th>
-                        <th className="px-4 py-2.5 font-medium">Comment</th>
-                        <th className="px-4 py-2.5 font-medium">Rule / keyword</th>
+                        <th className="px-4 py-2.5 font-medium">Comment Text</th>
+                        <th className="px-4 py-2.5 font-medium">Triggered Rule</th>
                         <th className="px-4 py-2.5 font-medium">Status</th>
-                        <th className="px-4 py-2.5" />
+                        <th className="px-4 py-2.5 font-medium">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {rows.map((l) => (
-                        <tr key={l.id} className={`border-b ${S.line} transition-colors hover:bg-[hsl(var(--muted))]`}>
+                        <tr key={l.id} className={`border-b ${S.line} transition-colors hover:bg-[#18191a]`}>
                           <td className={`whitespace-nowrap px-4 py-2.5 text-[12px] ${S.subtle}`}>{relativeTime(l.at)}</td>
                           <td className={`whitespace-nowrap px-4 py-2.5 text-[13px] ${S.ink}`}>{l.handle}</td>
                           <td className={`max-w-[260px] truncate px-4 py-2.5 text-[13px] ${S.muted}`} title={l.comment}>{l.comment}</td>
@@ -650,10 +650,18 @@ export default function Automations() {
                           </td>
                           <td className="px-4 py-2.5"><Pill tone={STATUS[l.status].tone}>{STATUS[l.status].label}</Pill></td>
                           <td className="px-4 py-2.5 text-right">
-                            <button className={`text-[12px] ${S.subtle} hover:text-[hsl(var(--foreground))]`} onClick={() => setDetail(l)}>View detail</button>
+                            <button className={`text-[12px] ${S.subtle} hover:text-[#f7f8f8]`} onClick={() => setDetail(l)}>View detail</button>
                           </td>
                         </tr>
                       ))}
+                      {rows.length === 0 && (
+                        <tr>
+                          <td colSpan={6} className="px-4 py-14 text-center">
+                            <ScrollText className={`mx-auto h-6 w-6 ${S.subtle}`} />
+                            <p className={`mt-3 text-[13px] ${S.muted}`}>No comment activity recorded yet. Incoming comments from connected Instagram accounts will appear here in real time.</p>
+                          </td>
+                        </tr>
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -673,14 +681,13 @@ export default function Automations() {
                       </div>
                     </button>
                   ))}
+                  {rows.length === 0 && (
+                    <div className="py-10 text-center">
+                      <ScrollText className={`mx-auto h-6 w-6 ${S.subtle}`} />
+                      <p className={`mt-3 px-4 text-[13px] ${S.muted}`}>No comment activity recorded yet. Incoming comments from connected Instagram accounts will appear here in real time.</p>
+                    </div>
+                  )}
                 </div>
-
-                {rows.length === 0 && (
-                  <div className="py-14 text-center">
-                    <ScrollText className={`mx-auto h-6 w-6 ${S.subtle}`} />
-                    <p className={`mt-3 text-[13px] ${S.muted}`}>No log entries match your filters.</p>
-                  </div>
-                )}
 
                 <div className={`flex items-center justify-between border-t ${S.line} px-4 py-3 text-[12px] ${S.subtle}`}>
                   <span>{filtered.length} events</span>
