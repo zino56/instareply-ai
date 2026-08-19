@@ -539,16 +539,16 @@ export default function Automations() {
             <button
               key={t.id}
               onClick={() => setTab(t.id)}
-              className={`relative rounded-md px-3 py-1.5 text-[13px] font-medium transition-colors ${tab === t.id ? 'text-[hsl(var(--foreground))]' : 'text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))]'}`}
+              className={`relative rounded-md px-3 py-1.5 text-[13px] font-medium transition-colors ${tab === t.id ? 'text-[#f7f8f8]' : 'text-[#8a8f98] hover:text-[#f7f8f8]'}`}
             >
               {tab === t.id && (
                 <motion.span layoutId="automation-tab" transition={{ type: 'spring', stiffness: 500, damping: 38 }}
-                  className="absolute inset-0 rounded-md bg-[hsl(var(--border))]" />
+                  className="absolute inset-0 rounded-md bg-[#18191a]" />
               )}
               <span className="relative inline-flex items-center gap-1.5">
                 {t.label}
                 {'count' in t && t.count > 0 && (
-                  <span className="rounded-full bg-amber-400/15 px-1.5 text-[10px] text-amber-600">{t.count}</span>
+                  <span className="rounded-full bg-amber-400/15 px-1.5 text-[10px] text-amber-500">{t.count}</span>
                 )}
               </span>
             </button>
