@@ -297,7 +297,7 @@ function RuleDrawer({
                 <h2 className={`text-[15px] font-medium ${S.ink}`}>{initial ? 'Edit automation' : 'Create automation'}</h2>
                 <p className={`text-[12px] ${S.subtle}`}>Trigger DMs or public replies from Instagram comments.</p>
               </div>
-              <button onClick={onClose} aria-label="Close" className={`grid h-8 w-8 place-items-center rounded-lg border ${S.line2} ${S.subtle} hover:bg-[hsl(var(--muted))]`}>
+              <button onClick={onClose} aria-label="Close" className={`grid h-8 w-8 place-items-center rounded-lg border ${S.line2} ${S.subtle} hover:bg-[#18191a]`}>
                 <X className="h-4 w-4" />
               </button>
             </header>
@@ -305,7 +305,7 @@ function RuleDrawer({
             <div className="flex-1 space-y-5 overflow-y-auto px-5 py-5">
               <div>
                 <label className={`mb-1.5 block text-[12px] font-medium ${S.muted}`}>Rule name</label>
-                <input className={inputCls} value={draft.name} onChange={(e) => set('name', e.target.value)} placeholder="Sizing Guide Auto-DM" />
+                <input className={inputCls} value={draft.name} onChange={(e) => set('name', e.target.value)} placeholder="e.g. Sizing Guide Auto-DM" />
                 {errors.name && <p className="mt-1 text-[11px] text-red-600">{errors.name}</p>}
               </div>
 
@@ -315,10 +315,10 @@ function RuleDrawer({
                   {([['all', 'All current & future posts'], ['post', 'Specific post media ID']] as const).map(([v, l]) => (
                     <button key={v} type="button" onClick={() => set('scope', v)}
                       className={`flex w-full items-center gap-2.5 rounded-lg border px-3 py-2 text-left text-[13px] transition-colors ${
-                        draft.scope === v ? 'border-[hsl(var(--primary))] bg-[hsl(var(--primary))]/10 text-[hsl(var(--foreground))]' : `${S.line2} ${S.s2} text-[hsl(var(--foreground))]`
+                        draft.scope === v ? 'border-[#5e6ad2] bg-[#5e6ad2]/10 text-[#f7f8f8]' : `${S.line2} ${S.s2} text-[#f7f8f8]`
                       }`}>
-                      <span className={`grid h-4 w-4 place-items-center rounded-full border ${draft.scope === v ? 'border-[hsl(var(--primary))]' : 'border-[hsl(var(--border))]'}`}>
-                        {draft.scope === v && <span className="h-2 w-2 rounded-full bg-[hsl(var(--primary))]" />}
+                      <span className={`grid h-4 w-4 place-items-center rounded-full border ${draft.scope === v ? 'border-[#5e6ad2]' : 'border-[#34343a]'}`}>
+                        {draft.scope === v && <span className="h-2 w-2 rounded-full bg-[#5e6ad2]" />}
                       </span>
                       {l}
                     </button>
@@ -326,7 +326,7 @@ function RuleDrawer({
                 </div>
                 {draft.scope === 'post' && (
                   <>
-                    <input className={`${inputCls} mt-2`} placeholder="17924412331100234" value={draft.postId ?? ''} onChange={(e) => set('postId', e.target.value)} />
+                    <input className={`${inputCls} mt-2`} placeholder="Instagram media ID" value={draft.postId ?? ''} onChange={(e) => set('postId', e.target.value)} />
                     {errors.postId && <p className="mt-1 text-[11px] text-red-600">{errors.postId}</p>}
                   </>
                 )}
@@ -349,7 +349,7 @@ function RuleDrawer({
                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); addKeyword(); } }}
                     onBlur={addKeyword}
                     placeholder="Type a keyword, press Enter"
-                    className="min-w-[160px] flex-1 bg-transparent px-1 text-[13px] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] outline-none"
+                    className="min-w-[160px] flex-1 bg-transparent px-1 text-[13px] text-[#f7f8f8] placeholder:text-[#8a8f98] outline-none"
                   />
                 </div>
                 {errors.keywords && <p className="mt-1 text-[11px] text-red-600">{errors.keywords}</p>}
@@ -365,11 +365,18 @@ function RuleDrawer({
                   <label className={`text-[12px] font-medium ${S.muted}`}>Private DM message</label>
                   <Toggle checked={draft.dmEnabled} onChange={(v) => set('dmEnabled', v)} label="Enable private DM" />
                 </div>
-                <textarea rows={4} className={areaCls} value={draft.dmMessage} onChange={(e) => set('dmMessage', e.target.value)} disabled={!draft.dmEnabled} />
+                <textarea
+                  rows={4}
+                  className={areaCls}
+                  value={draft.dmMessage}
+                  onChange={(e) => set('dmMessage', e.target.value)}
+                  disabled={!draft.dmEnabled}
+                  placeholder="Hi {username}, thanks for your comment! ..."
+                />
                 <div className="mt-1.5 flex items-center gap-1.5">
                   {['{username}', '{keyword}'].map((v) => (
                     <button key={v} type="button" onClick={() => set('dmMessage', `${draft.dmMessage}${v}`)}
-                      className={`rounded-md border ${S.line2} ${S.s2} px-2 py-0.5 text-[11px] ${S.subtle} hover:text-[hsl(var(--foreground))]`}>{v}</button>
+                      className={`rounded-md border ${S.line2} ${S.s2} px-2 py-0.5 text-[11px] ${S.subtle} hover:text-[#f7f8f8]`}>{v}</button>
                   ))}
                 </div>
                 {errors.dmMessage && <p className="mt-1 text-[11px] text-red-600">{errors.dmMessage}</p>}
@@ -417,15 +424,17 @@ function RuleDrawer({
                 </p>
                 <input className={`${inputCls} mt-2`} placeholder="Type a sample comment..." value={sample} onChange={(e) => setSample(e.target.value)} />
                 <div className="mt-2 text-[12px]">
-                  {!sample.trim() ? (
-                    <span className={S.subtle}>Live feedback appears as you type.</span>
+                  {draft.keywords.length === 0 && !sample.trim() ? (
+                    <span className={S.subtle}>Enter keywords and type a sample comment above to test matching...</span>
+                  ) : !sample.trim() ? (
+                    <span className={S.subtle}>Type a sample comment to see which keywords match.</span>
                   ) : matched.length ? (
-                    <span className="text-emerald-600">
+                    <span className="text-emerald-500">
                       MATCHED: {matched.map((m) => `'${m}'`).join(', ')} → will trigger{' '}
                       {draft.dryRun ? 'a dry-run log only' : draft.requireApproval ? 'an approval queue item' : 'the DM template'}
                     </span>
                   ) : (
-                    <span className="text-amber-600">NO MATCH — this comment would be ignored.</span>
+                    <span className="text-amber-500">NO MATCH — this comment would be ignored.</span>
                   )}
                 </div>
               </div>
