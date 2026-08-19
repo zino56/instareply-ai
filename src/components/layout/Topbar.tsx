@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { LogOut, User, ChevronDown, Menu, Bell, HelpCircle, CreditCard } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -11,26 +11,14 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useAuthStore } from '@/store/authStore';
 
-const routeTitles: Record<string, { title: string; subtitle?: string }> = {
-  '/dashboard': { title: 'Dashboard', subtitle: 'Overview of your Instagram automation' },
-  '/conversations': { title: 'Conversations', subtitle: 'Your AI-handled Instagram inbox' },
-  '/products': { title: 'Products', subtitle: 'Catalog powering AI responses' },
-  '/ai-knowledge': { title: 'AI Knowledge', subtitle: 'Documents that train your assistant' },
-  '/analytics': { title: 'Analytics', subtitle: 'Performance of your automation' },
-  '/settings': { title: 'Settings', subtitle: 'Account and integrations' },
-  '/pricing': { title: 'Pricing', subtitle: 'Plans and billing' },
-};
 
 interface TopbarProps {
   onOpenMobileNav: () => void;
 }
 
 export function Topbar({ onOpenMobileNav }: TopbarProps) {
-  const { pathname } = useLocation();
   const navigate = useNavigate();
   const { clientStatus, logout } = useAuthStore();
-
-  const meta = routeTitles[pathname] ?? { title: 'Conveero' };
 
   const initials = (clientStatus?.name || 'U')
     .split(' ')
@@ -57,16 +45,7 @@ export function Topbar({ onOpenMobileNav }: TopbarProps) {
           >
             <Menu className="w-5 h-5" strokeWidth={1.75} />
           </Button>
-          <div className="min-w-0">
-            <h1 className="text-[16px] md:text-[18px] font-semibold tracking-tight md:tracking-[-0.01em] leading-tight truncate">
-              {meta.title}
-            </h1>
-            {meta.subtitle && (
-              <p className="hidden lg:block text-[13px] text-muted-foreground truncate">
-                {meta.subtitle}
-              </p>
-            )}
-          </div>
+          {/* Page title removed per request */}
         </div>
 
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
