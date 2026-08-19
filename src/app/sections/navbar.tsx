@@ -28,7 +28,7 @@ export default function Navbar({ listRowData = listRowDataContent } = {}) {
     <header className={`h-19 block sticky top-0 z-50 max-lg:h-16.5 transition-all duration-300 ease-out ${scrolled ? "backdrop-blur-md bg-background/80 border-b border-solid border-b-clr-0 shadow-[0_1px_20px_-12px_rgba(0,0,0,0.5)]" : "bg-background border-b border-solid border-b-transparent"}`} data-cid="n2">
       <div className="h-full block max-w-300 mx-auto px-8" data-cid="n3">
         <nav className="h-full flex py-3 justify-between items-center gap-8" data-cid="n4" data-component="nav" aria-label="Primary">
-          <a className="h-8 flex items-center cursor-pointer" data-cid="n5" data-component="link" href="#" aria-label="Conveero home">
+          <a className="h-8 flex items-center cursor-pointer" data-cid="n5" data-component="link" href="/" aria-label="Conveero home">
             <Logo size="nav" />
           </a>
 

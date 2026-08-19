@@ -5,11 +5,11 @@ export type ListRowDataItem = {
   label: string;
 };
 export const listRowData: ListRowDataItem[] = [
-    { href: "#product", label: "Product" },
-    { href: "#testimonials", label: "Customers" },
-    { href: "#integrations", label: "Integrations" },
-    { href: "#pricing", label: "Pricing" },
-    { href: "#faq", label: "FAQ" }
+    { href: "/#product", label: "Product" },
+    { href: "/#testimonials", label: "Customers" },
+    { href: "/#integrations", label: "Integrations" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/#faq", label: "FAQ" }
 ];
 
 export type LogosItem = {
