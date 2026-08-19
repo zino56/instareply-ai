@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { LogOut, User, ChevronDown, Menu, Bell, HelpCircle, CreditCard } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -11,26 +11,14 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useAuthStore } from '@/store/authStore';
 
-const routeTitles: Record<string, { title: string; subtitle?: string }> = {
-  '/dashboard': { title: 'Dashboard', subtitle: 'Overview of your Instagram automation' },
-  '/conversations': { title: 'Conversations', subtitle: 'Your AI-handled Instagram inbox' },
-  '/products': { title: 'Products', subtitle: 'Catalog powering AI responses' },
-  '/ai-knowledge': { title: 'AI Knowledge', subtitle: 'Documents that train your assistant' },
-  '/analytics': { title: 'Analytics', subtitle: 'Performance of your automation' },
-  '/settings': { title: 'Settings', subtitle: 'Account and integrations' },
-  '/pricing': { title: 'Pricing', subtitle: 'Plans and billing' },
-};
 
 interface TopbarProps {
   onOpenMobileNav: () => void;
 }
 
 export function Topbar({ onOpenMobileNav }: TopbarProps) {
-  const { pathname } = useLocation();
   const navigate = useNavigate();
   const { clientStatus, logout } = useAuthStore();
-
-  const meta = routeTitles[pathname] ?? { title: 'Conveero' };
 
   const initials = (clientStatus?.name || 'U')
     .split(' ')
