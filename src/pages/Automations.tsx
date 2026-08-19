@@ -16,33 +16,33 @@ import { useToast } from '@/hooks/use-toast';
    dashboard theme is untouched.
 --------------------------------------------------------------------------- */
 const S = {
-  canvas: 'bg-[#010102]',
-  s1: 'bg-[#0f1011]',
-  s2: 'bg-[#141516]',
-  s3: 'bg-[#18191a]',
-  line: 'border-[#23252a]',
-  line2: 'border-[#34343a]',
-  ink: 'text-[#f7f8f8]',
-  muted: 'text-[#d0d6e0]',
-  subtle: 'text-[#8a8f98]',
+  canvas: 'bg-[hsl(var(--background))]',
+  s1: 'bg-[hsl(var(--card))]',
+  s2: 'bg-[hsl(var(--background))]',
+  s3: 'bg-[hsl(var(--muted))]',
+  line: 'border-[hsl(var(--border))]',
+  line2: 'border-[hsl(var(--border))]',
+  ink: 'text-[hsl(var(--foreground))]',
+  muted: 'text-[hsl(var(--foreground))]',
+  subtle: 'text-[hsl(var(--muted-foreground))]',
 };
-const ACCENT = '#5e6ad2';
+const ACCENT = 'hsl(var(--primary))';
 
 const btnBase =
-  'inline-flex items-center justify-center gap-1.5 rounded-lg text-[13px] font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5e6ad2]/60 disabled:opacity-50 active:scale-[0.98]';
-const btnPrimary = `${btnBase} h-9 px-3.5 bg-[#5e6ad2] text-white hover:bg-[#6b76dc]`;
-const btnGhost = `${btnBase} h-9 px-3 border border-[#34343a] ${'text-[#d0d6e0]'} hover:bg-[#18191a]`;
+  'inline-flex items-center justify-center gap-1.5 rounded-lg text-[13px] font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/60 disabled:opacity-50 active:scale-[0.98]';
+const btnPrimary = `${btnBase} h-9 px-3.5 bg-[hsl(var(--primary))] text-white hover:bg-[hsl(var(--primary))]`;
+const btnGhost = `${btnBase} h-9 px-3 border border-[hsl(var(--border))] ${'text-[hsl(var(--foreground))]'} hover:bg-[hsl(var(--muted))]`;
 const inputCls =
-  'w-full h-9 rounded-lg bg-[#141516] border border-[#34343a] px-3 text-[13px] text-[#f7f8f8] placeholder:text-[#8a8f98] outline-none focus:border-[#5e6ad2] transition-colors';
+  'w-full h-9 rounded-lg bg-[hsl(var(--background))] border border-[hsl(var(--border))] px-3 text-[13px] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] outline-none focus:border-[hsl(var(--primary))] transition-colors';
 const areaCls =
-  'w-full rounded-lg bg-[#141516] border border-[#34343a] px-3 py-2 text-[13px] leading-relaxed text-[#f7f8f8] placeholder:text-[#8a8f98] outline-none focus:border-[#5e6ad2] transition-colors resize-y';
+  'w-full rounded-lg bg-[hsl(var(--background))] border border-[hsl(var(--border))] px-3 py-2 text-[13px] leading-relaxed text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] outline-none focus:border-[hsl(var(--primary))] transition-colors resize-y';
 
 function Pill({ tone, children }: { tone: 'amber' | 'blue' | 'green' | 'slate' | 'purple' | 'red'; children: React.ReactNode }) {
   const tones: Record<string, string> = {
     amber: 'bg-amber-400/10 text-amber-300 border-amber-400/25',
-    blue: 'bg-[#5e6ad2]/15 text-[#a7aef0] border-[#5e6ad2]/35',
+    blue: 'bg-[hsl(var(--primary))]/15 text-[hsl(var(--foreground))] border-[hsl(var(--primary))]/35',
     green: 'bg-emerald-400/10 text-emerald-300 border-emerald-400/25',
-    slate: 'bg-white/[0.04] text-[#8a8f98] border-[#34343a]',
+    slate: 'bg-white/[0.04] text-[hsl(var(--muted-foreground))] border-[hsl(var(--border))]',
     purple: 'bg-fuchsia-400/10 text-fuchsia-300 border-fuchsia-400/25',
     red: 'bg-red-500/10 text-red-300 border-red-500/25',
   };
@@ -61,8 +61,8 @@ function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: 
       aria-checked={checked}
       aria-label={label}
       onClick={() => onChange(!checked)}
-      className={`relative h-5 w-9 shrink-0 rounded-full border transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5e6ad2]/60 ${
-        checked ? 'bg-[#5e6ad2] border-[#5e6ad2]' : 'bg-[#18191a] border-[#34343a]'
+      className={`relative h-5 w-9 shrink-0 rounded-full border transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/60 ${
+        checked ? 'bg-[hsl(var(--primary))] border-[hsl(var(--primary))]' : 'bg-[hsl(var(--muted))] border-[hsl(var(--border))]'
       }`}
     >
       <motion.span
@@ -77,10 +77,10 @@ function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: 
 
 function Check2({ checked, onChange, children }: { checked: boolean; onChange: (v: boolean) => void; children: React.ReactNode }) {
   return (
-    <button type="button" onClick={() => onChange(!checked)} className="flex items-center gap-2 text-[13px] text-[#d0d6e0]">
+    <button type="button" onClick={() => onChange(!checked)} className="flex items-center gap-2 text-[13px] text-[hsl(var(--foreground))]">
       <span
         className={`grid h-4 w-4 place-items-center rounded-[4px] border transition-colors ${
-          checked ? 'bg-[#5e6ad2] border-[#5e6ad2]' : 'bg-[#141516] border-[#34343a]'
+          checked ? 'bg-[hsl(var(--primary))] border-[hsl(var(--primary))]' : 'bg-[hsl(var(--background))] border-[hsl(var(--border))]'
         }`}
       >
         {checked && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
@@ -180,7 +180,7 @@ function RuleCard({
               type="button"
               aria-label="Rule actions"
               onClick={(e) => { e.stopPropagation(); setMenu((v) => !v); }}
-              className={`grid h-8 w-8 place-items-center rounded-lg border ${S.line2} ${S.subtle} hover:bg-[#18191a]`}
+              className={`grid h-8 w-8 place-items-center rounded-lg border ${S.line2} ${S.subtle} hover:bg-[hsl(var(--muted))]`}
             >
               <MoreHorizontal className="h-4 w-4" />
             </button>
@@ -202,7 +202,7 @@ function RuleCard({
                     <button
                       key={i.label}
                       onClick={() => { setMenu(false); i.fn(); }}
-                      className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-[#d0d6e0] hover:bg-white/[0.05]"
+                      className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-[hsl(var(--foreground))] hover:bg-white/[0.05]"
                     >
                       <i.icon className="h-3.5 w-3.5" /> {i.label}
                     </button>
@@ -228,10 +228,10 @@ function RuleCard({
       </div>
 
       <div className={`mt-3 flex items-center gap-3 border-t ${S.line} pt-3 text-[12px] ${S.subtle}`}>
-        <span className={`inline-flex items-center gap-1.5 ${rule.dmEnabled ? 'text-[#a7aef0]' : ''}`}>
+        <span className={`inline-flex items-center gap-1.5 ${rule.dmEnabled ? 'text-[hsl(var(--foreground))]' : ''}`}>
           <Send className="h-3.5 w-3.5" /> Private DM
         </span>
-        <span className={`inline-flex items-center gap-1.5 ${rule.publicReplyEnabled ? 'text-[#a7aef0]' : ''}`}>
+        <span className={`inline-flex items-center gap-1.5 ${rule.publicReplyEnabled ? 'text-[hsl(var(--foreground))]' : ''}`}>
           <Reply className="h-3.5 w-3.5" /> Public Reply
         </span>
       </div>
@@ -300,7 +300,7 @@ function RuleDrawer({
                 <h2 className={`text-[15px] font-medium ${S.ink}`}>{initial ? 'Edit automation' : 'Create automation'}</h2>
                 <p className={`text-[12px] ${S.subtle}`}>Trigger DMs or public replies from Instagram comments.</p>
               </div>
-              <button onClick={onClose} aria-label="Close" className={`grid h-8 w-8 place-items-center rounded-lg border ${S.line2} ${S.subtle} hover:bg-[#18191a]`}>
+              <button onClick={onClose} aria-label="Close" className={`grid h-8 w-8 place-items-center rounded-lg border ${S.line2} ${S.subtle} hover:bg-[hsl(var(--muted))]`}>
                 <X className="h-4 w-4" />
               </button>
             </header>
@@ -318,10 +318,10 @@ function RuleDrawer({
                   {([['all', 'All current & future posts'], ['post', 'Specific post media ID']] as const).map(([v, l]) => (
                     <button key={v} type="button" onClick={() => set('scope', v)}
                       className={`flex w-full items-center gap-2.5 rounded-lg border px-3 py-2 text-left text-[13px] transition-colors ${
-                        draft.scope === v ? 'border-[#5e6ad2] bg-[#5e6ad2]/10 text-[#f7f8f8]' : `${S.line2} ${S.s2} text-[#d0d6e0]`
+                        draft.scope === v ? 'border-[hsl(var(--primary))] bg-[hsl(var(--primary))]/10 text-[hsl(var(--foreground))]' : `${S.line2} ${S.s2} text-[hsl(var(--foreground))]`
                       }`}>
-                      <span className={`grid h-4 w-4 place-items-center rounded-full border ${draft.scope === v ? 'border-[#5e6ad2]' : 'border-[#34343a]'}`}>
-                        {draft.scope === v && <span className="h-2 w-2 rounded-full bg-[#5e6ad2]" />}
+                      <span className={`grid h-4 w-4 place-items-center rounded-full border ${draft.scope === v ? 'border-[hsl(var(--primary))]' : 'border-[hsl(var(--border))]'}`}>
+                        {draft.scope === v && <span className="h-2 w-2 rounded-full bg-[hsl(var(--primary))]" />}
                       </span>
                       {l}
                     </button>
@@ -352,7 +352,7 @@ function RuleDrawer({
                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); addKeyword(); } }}
                     onBlur={addKeyword}
                     placeholder="Type a keyword, press Enter"
-                    className="min-w-[160px] flex-1 bg-transparent px-1 text-[13px] text-[#f7f8f8] placeholder:text-[#8a8f98] outline-none"
+                    className="min-w-[160px] flex-1 bg-transparent px-1 text-[13px] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] outline-none"
                   />
                 </div>
                 {errors.keywords && <p className="mt-1 text-[11px] text-red-300">{errors.keywords}</p>}
@@ -372,7 +372,7 @@ function RuleDrawer({
                 <div className="mt-1.5 flex items-center gap-1.5">
                   {['{username}', '{keyword}'].map((v) => (
                     <button key={v} type="button" onClick={() => set('dmMessage', `${draft.dmMessage}${v}`)}
-                      className={`rounded-md border ${S.line2} ${S.s2} px-2 py-0.5 text-[11px] ${S.subtle} hover:text-[#f7f8f8]`}>{v}</button>
+                      className={`rounded-md border ${S.line2} ${S.s2} px-2 py-0.5 text-[11px] ${S.subtle} hover:text-[hsl(var(--foreground))]`}>{v}</button>
                   ))}
                 </div>
                 {errors.dmMessage && <p className="mt-1 text-[11px] text-red-300">{errors.dmMessage}</p>}
@@ -533,11 +533,11 @@ export default function Automations() {
             <button
               key={t.id}
               onClick={() => setTab(t.id)}
-              className={`relative rounded-md px-3 py-1.5 text-[13px] font-medium transition-colors ${tab === t.id ? 'text-[#f7f8f8]' : 'text-[#8a8f98] hover:text-[#d0d6e0]'}`}
+              className={`relative rounded-md px-3 py-1.5 text-[13px] font-medium transition-colors ${tab === t.id ? 'text-[hsl(var(--foreground))]' : 'text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))]'}`}
             >
               {tab === t.id && (
                 <motion.span layoutId="automation-tab" transition={{ type: 'spring', stiffness: 500, damping: 38 }}
-                  className="absolute inset-0 rounded-md bg-[#23252a]" />
+                  className="absolute inset-0 rounded-md bg-[hsl(var(--border))]" />
               )}
               <span className="relative inline-flex items-center gap-1.5">
                 {t.label}
@@ -642,7 +642,7 @@ export default function Automations() {
                           </td>
                           <td className="px-4 py-2.5"><Pill tone={STATUS[l.status].tone}>{STATUS[l.status].label}</Pill></td>
                           <td className="px-4 py-2.5 text-right">
-                            <button className={`text-[12px] ${S.subtle} hover:text-[#f7f8f8]`} onClick={() => setDetail(l)}>View detail</button>
+                            <button className={`text-[12px] ${S.subtle} hover:text-[hsl(var(--foreground))]`} onClick={() => setDetail(l)}>View detail</button>
                           </td>
                         </tr>
                       ))}
@@ -712,9 +712,9 @@ export default function Automations() {
                 </div>
                 <Pill tone={STATUS[detail.status].tone}>{STATUS[detail.status].label}</Pill>
               </div>
-              <blockquote className={`mt-3 rounded-lg border-l-2 border-[#5e6ad2] ${S.s2} px-3 py-2 text-[13px] ${S.muted}`}>{detail.comment}</blockquote>
-              <p className={`mt-3 text-[12px] ${S.subtle}`}>Matched <span className="text-[#a7aef0]">{detail.keyword}</span> via {detail.ruleName}</p>
-              <pre className={`mt-3 max-h-[220px] overflow-auto rounded-lg border ${S.line2} ${S.s2} p-3 text-[11px] leading-relaxed text-[#d0d6e0]`}>
+              <blockquote className={`mt-3 rounded-lg border-l-2 border-[hsl(var(--primary))] ${S.s2} px-3 py-2 text-[13px] ${S.muted}`}>{detail.comment}</blockquote>
+              <p className={`mt-3 text-[12px] ${S.subtle}`}>Matched <span className="text-[hsl(var(--foreground))]">{detail.keyword}</span> via {detail.ruleName}</p>
+              <pre className={`mt-3 max-h-[220px] overflow-auto rounded-lg border ${S.line2} ${S.s2} p-3 text-[11px] leading-relaxed text-[hsl(var(--foreground))]`}>
 {JSON.stringify(detail.payload, null, 2)}
               </pre>
               <div className="mt-4 flex justify-end">
@@ -741,7 +741,7 @@ function ApprovalCard({ item, onResolve }: { item: ApprovalItem; onResolve: (kin
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <span className="grid h-7 w-7 place-items-center rounded-full bg-[#5e6ad2]/20 text-[11px] font-medium text-[#a7aef0]">
+          <span className="grid h-7 w-7 place-items-center rounded-full bg-[hsl(var(--primary))]/20 text-[11px] font-medium text-[hsl(var(--foreground))]">
             {item.handle.replace('@', '').slice(0, 2).toUpperCase()}
           </span>
           <span className={`text-[13px] ${S.ink}`}>{item.handle}</span>
@@ -752,7 +752,7 @@ function ApprovalCard({ item, onResolve }: { item: ApprovalItem; onResolve: (kin
         </Pill>
       </div>
 
-      <blockquote className={`mt-3 rounded-lg border-l-2 border-[#34343a] ${S.s2} px-3 py-2 text-[13px] italic ${S.muted}`}>
+      <blockquote className={`mt-3 rounded-lg border-l-2 border-[hsl(var(--border))] ${S.s2} px-3 py-2 text-[13px] italic ${S.muted}`}>
         “{item.comment}”
       </blockquote>
 
