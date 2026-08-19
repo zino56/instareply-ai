@@ -26,6 +26,7 @@ const AIKnowledge = lazy(() => import("./pages/AIKnowledge"));
 const Settings = lazy(() => import("./pages/Settings"));
 const Analytics = lazy(() => import("./pages/Analytics"));
 const Subscriptions = lazy(() => import("./pages/Subscriptions"));
+const Automations = lazy(() => import("./pages/Automations"));
 
 // Static marketing/legal pages
 const About = lazy(() => import("./pages/About"));
