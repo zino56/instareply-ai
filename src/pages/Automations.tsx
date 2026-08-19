@@ -599,10 +599,14 @@ export default function Automations() {
                   />
                 ))}
                 {approvals.length === 0 && (
-                  <div className={`rounded-xl border ${S.line} ${S.s1} py-16 text-center`}>
-                    <Inbox className={`mx-auto h-6 w-6 ${S.subtle}`} />
-                    <p className={`mt-3 text-[14px] ${S.ink}`}>All caught up!</p>
-                    <p className={`mt-1 text-[12px] ${S.subtle}`}>No pending comment approvals.</p>
+                  <div className={`rounded-xl border ${S.line} ${S.s1} p-6 text-center`}>
+                    <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-[#18191a]">
+                      <CheckCircle className="h-5 w-5 text-[#8b9cf0]" />
+                    </div>
+                    <h3 className={`mt-4 text-[15px] font-medium ${S.ink}`}>Approval queue is empty</h3>
+                    <p className={`mx-auto mt-1 max-w-[420px] text-[13px] ${S.subtle}`}>
+                      When comment automation rules with manual approval enabled are triggered, drafted replies will appear here for your review.
+                    </p>
                   </div>
                 )}
               </div>
