@@ -57,16 +57,7 @@ export function Topbar({ onOpenMobileNav }: TopbarProps) {
           >
             <Menu className="w-5 h-5" strokeWidth={1.75} />
           </Button>
-          <div className="min-w-0">
-            <h1 className="text-[16px] md:text-[18px] font-semibold tracking-tight md:tracking-[-0.01em] leading-tight truncate">
-              {meta.title}
-            </h1>
-            {meta.subtitle && (
-              <p className="hidden lg:block text-[13px] text-muted-foreground truncate">
-                {meta.subtitle}
-              </p>
-            )}
-          </div>
+          {/* Page title removed per request */}
         </div>
 
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
