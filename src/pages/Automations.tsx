@@ -177,7 +177,7 @@ function RuleCard({
               type="button"
               aria-label="Rule actions"
               onClick={(e) => { e.stopPropagation(); setMenu((v) => !v); }}
-              className={`grid h-8 w-8 place-items-center rounded-lg border ${S.line2} ${S.subtle} hover:bg-[hsl(var(--muted))]`}
+              className={`grid h-8 w-8 place-items-center rounded-lg border ${S.line2} ${S.subtle} hover:bg-[#18191a]`}
             >
               <MoreHorizontal className="h-4 w-4" />
             </button>
@@ -199,14 +199,14 @@ function RuleCard({
                     <button
                       key={i.label}
                       onClick={() => { setMenu(false); i.fn(); }}
-                      className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-[hsl(var(--foreground))] hover:bg-[hsl(var(--muted))]"
+                      className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-[#f7f8f8] hover:bg-[#18191a]"
                     >
                       <i.icon className="h-3.5 w-3.5" /> {i.label}
                     </button>
                   ))}
                   <button
                     onClick={() => { setMenu(false); onDelete(); }}
-                    className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-red-600 hover:bg-red-500/10"
+                    className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-red-500 hover:bg-red-500/10"
                   >
                     <Trash2 className="h-3.5 w-3.5" /> Delete
                   </button>
@@ -225,10 +225,10 @@ function RuleCard({
       </div>
 
       <div className={`mt-3 flex items-center gap-3 border-t ${S.line} pt-3 text-[12px] ${S.subtle}`}>
-        <span className={`inline-flex items-center gap-1.5 ${rule.dmEnabled ? 'text-[hsl(var(--foreground))]' : ''}`}>
+        <span className={`inline-flex items-center gap-1.5 ${rule.dmEnabled ? 'text-[#f7f8f8]' : ''}`}>
           <Send className="h-3.5 w-3.5" /> Private DM
         </span>
-        <span className={`inline-flex items-center gap-1.5 ${rule.publicReplyEnabled ? 'text-[hsl(var(--foreground))]' : ''}`}>
+        <span className={`inline-flex items-center gap-1.5 ${rule.publicReplyEnabled ? 'text-[#f7f8f8]' : ''}`}>
           <Reply className="h-3.5 w-3.5" /> Public Reply
         </span>
       </div>
