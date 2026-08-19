@@ -736,9 +736,9 @@ export default function Automations() {
                 </div>
                 <Pill tone={STATUS[detail.status].tone}>{STATUS[detail.status].label}</Pill>
               </div>
-              <blockquote className={`mt-3 rounded-lg border-l-2 border-[hsl(var(--primary))] ${S.s2} px-3 py-2 text-[13px] ${S.muted}`}>{detail.comment}</blockquote>
-              <p className={`mt-3 text-[12px] ${S.subtle}`}>Matched <span className="text-[hsl(var(--foreground))]">{detail.keyword}</span> via {detail.ruleName}</p>
-              <pre className={`mt-3 max-h-[220px] overflow-auto rounded-lg border ${S.line2} ${S.s2} p-3 text-[11px] leading-relaxed text-[hsl(var(--foreground))]`}>
+              <blockquote className={`mt-3 rounded-lg border-l-2 border-[#5e6ad2] ${S.s2} px-3 py-2 text-[13px] ${S.muted}`}>{detail.comment}</blockquote>
+              <p className={`mt-3 text-[12px] ${S.subtle}`}>Matched <span className="text-[#f7f8f8]">{detail.keyword}</span> via {detail.ruleName}</p>
+              <pre className={`mt-3 max-h-[220px] overflow-auto rounded-lg border ${S.line2} ${S.s2} p-3 text-[11px] leading-relaxed text-[#f7f8f8]`}>
 {JSON.stringify(detail.payload, null, 2)}
               </pre>
               <div className="mt-4 flex justify-end">
