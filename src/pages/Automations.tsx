@@ -566,10 +566,17 @@ export default function Automations() {
                   />
                 ))}
                 {rules.length === 0 && (
-                  <div className={`rounded-xl border ${S.line} ${S.s1} py-14 text-center`}>
-                    <Zap className={`mx-auto h-6 w-6 ${S.subtle}`} />
-                    <p className={`mt-3 text-[14px] ${S.ink}`}>No automations yet</p>
-                    <p className={`mt-1 text-[12px] ${S.subtle}`}>Create your first rule to reply to comments automatically.</p>
+                  <div className={`rounded-xl border ${S.line} ${S.s1} p-6 text-center`}>
+                    <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-[#18191a]">
+                      <Sparkles className="h-5 w-5 text-[#8b9cf0]" />
+                    </div>
+                    <h3 className={`mt-4 text-[15px] font-medium ${S.ink}`}>No automation rules configured</h3>
+                    <p className={`mx-auto mt-1 max-w-[420px] text-[13px] ${S.subtle}`}>
+                      Create your first keyword trigger to automatically send private DMs or public replies when customers comment on your Instagram posts.
+                    </p>
+                    <button className={`${btnPrimary} mt-4`} onClick={() => setDrawer({ open: true, rule: null })}>
+                      <Plus className="h-4 w-4" /> Create your first rule
+                    </button>
                   </div>
                 )}
               </div>
