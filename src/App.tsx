@@ -26,6 +26,7 @@ const AIKnowledge = lazy(() => import("./pages/AIKnowledge"));
 const Settings = lazy(() => import("./pages/Settings"));
 const Analytics = lazy(() => import("./pages/Analytics"));
 const Subscriptions = lazy(() => import("./pages/Subscriptions"));
+const Automations = lazy(() => import("./pages/Automations"));
 
 // Static marketing/legal pages
 const About = lazy(() => import("./pages/About"));
@@ -72,6 +73,9 @@ const App = () => (
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/conversations" element={<Suspense fallback={<RouteFallback />}><Conversations /></Suspense>} />
               <Route path="/products" element={<Suspense fallback={<RouteFallback />}><Products /></Suspense>} />
+              <Route path="/automations" element={<Suspense fallback={<RouteFallback />}><Automations /></Suspense>} />
+              <Route path="/dashboard/automations" element={<Suspense fallback={<RouteFallback />}><Automations /></Suspense>} />
+              <Route path="/dashboard/comments" element={<Suspense fallback={<RouteFallback />}><Automations /></Suspense>} />
               <Route path="/ai-knowledge" element={<Suspense fallback={<RouteFallback />}><AIKnowledge /></Suspense>} />
               <Route path="/settings" element={<Suspense fallback={<RouteFallback />}><Settings /></Suspense>} />
               <Route path="/analytics" element={<Suspense fallback={<RouteFallback />}><Analytics /></Suspense>} />

@@ -8,12 +8,14 @@ import {
   BookOpen,
   BarChart3,
   Settings,
+  Zap,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const mainLinks = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/conversations', label: 'Conversations', icon: MessageSquare },
+  { href: '/automations', label: 'Comment Automation', icon: Zap },
   { href: '/products', label: 'Products', icon: Package },
   { href: '/ai-knowledge', label: 'AI Knowledge', icon: BookOpen },
   { href: '/analytics', label: 'Analytics', icon: BarChart3 },
