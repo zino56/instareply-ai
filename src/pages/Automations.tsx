@@ -3,11 +3,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import {
   Zap, Plus, MessageSquare, Send, Reply, MoreHorizontal, Pencil, FlaskConical,
   ScrollText, Trash2, Check, X, ArrowUpRight, ShieldAlert, Search, ChevronLeft,
-  ChevronRight, Inbox, AlertTriangle,
+  ChevronRight, Inbox, AlertTriangle, Sparkles, CheckCircle,
 } from 'lucide-react';
 import {
   AutomationRule, ApprovalItem, ActivityLog, LogStatus, emptyRule, matchKeywords,
-  mockApprovals, mockLogs, mockMetrics, mockRules, relativeTime,
+  relativeTime,
 } from '@/lib/automationsMock';
 import { useToast } from '@/hooks/use-toast';
 
@@ -16,35 +16,36 @@ import { useToast } from '@/hooks/use-toast';
    dashboard theme is untouched.
 --------------------------------------------------------------------------- */
 const S = {
-  canvas: 'bg-[hsl(var(--background))]',
-  s1: 'bg-[hsl(var(--card))]',
-  s2: 'bg-[hsl(var(--background))]',
-  s3: 'bg-[hsl(var(--muted))]',
-  line: 'border-[hsl(var(--border))]',
-  line2: 'border-[hsl(var(--border))]',
-  ink: 'text-[hsl(var(--foreground))]',
-  muted: 'text-[hsl(var(--foreground))]',
-  subtle: 'text-[hsl(var(--muted-foreground))]',
+  canvas: 'bg-[#010102]',
+  s1: 'bg-[#0f1011]',
+  s2: 'bg-[#141516]',
+  s3: 'bg-[#18191a]',
+  line: 'border-[#23252a]',
+  line2: 'border-[#34343a]',
+  ink: 'text-[#f7f8f8]',
+  muted: 'text-[#d0d6e0]',
+  subtle: 'text-[#8a8f98]',
 };
-const ACCENT = 'hsl(var(--primary))';
+const ACCENT = '#5e6ad2';
 
 const btnBase =
-  'inline-flex items-center justify-center gap-1.5 rounded-lg text-[13px] font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/60 disabled:opacity-50 active:scale-[0.98]';
-const btnPrimary = `${btnBase} h-9 px-3.5 bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:brightness-95`;
-const btnGhost = `${btnBase} h-9 px-3 border border-[hsl(var(--border))] ${'text-[hsl(var(--foreground))]'} hover:bg-[hsl(var(--muted))]`;
+  'inline-flex items-center justify-center gap-1.5 rounded-lg text-[13px] font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5e6ad2]/60 disabled:opacity-50 active:scale-[0.98]';
+const btnPrimary = `${btnBase} h-9 px-3.5 bg-[#5e6ad2] text-white hover:brightness-95`;
+const btnGhost = `${btnBase} h-9 px-3 border border-[#34343a] text-[#f7f8f8] hover:bg-[#18191a]`;
 const inputCls =
-  'w-full h-9 rounded-lg bg-[hsl(var(--background))] border border-[hsl(var(--border))] px-3 text-[13px] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] outline-none focus:border-[hsl(var(--primary))] transition-colors';
+  'w-full h-9 rounded-lg bg-[#141516] border border-[#23252a] px-3 text-[13px] text-[#f7f8f8] placeholder:text-[#8a8f98] outline-none focus:border-[#5e6ad2] transition-colors';
 const areaCls =
-  'w-full rounded-lg bg-[hsl(var(--background))] border border-[hsl(var(--border))] px-3 py-2 text-[13px] leading-relaxed text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] outline-none focus:border-[hsl(var(--primary))] transition-colors resize-y';
+  'w-full rounded-lg bg-[#141516] border border-[#23252a] px-3 py-2 text-[13px] leading-relaxed text-[#f7f8f8] placeholder:text-[#8a8f98] outline-none focus:border-[#5e6ad2] transition-colors resize-y';
+
 
 function Pill({ tone, children }: { tone: 'amber' | 'blue' | 'green' | 'slate' | 'purple' | 'red'; children: React.ReactNode }) {
   const tones: Record<string, string> = {
-    amber: 'bg-amber-500/10 text-amber-600 border-amber-400/25',
-    blue: 'bg-[hsl(var(--primary))]/15 text-[hsl(var(--foreground))] border-[hsl(var(--primary))]/35',
-    green: 'bg-emerald-500/10 text-emerald-600 border-emerald-400/25',
-    slate: 'bg-[hsl(var(--muted))] text-[hsl(var(--muted-foreground))] border-[hsl(var(--border))]',
-    purple: 'bg-fuchsia-500/10 text-fuchsia-600 border-fuchsia-400/25',
-    red: 'bg-red-500/10 text-red-600 border-red-500/25',
+    amber: 'bg-amber-500/10 text-amber-500 border-amber-400/25',
+    blue: 'bg-[#5e6ad2]/15 text-[#8b9cf0] border-[#5e6ad2]/35',
+    green: 'bg-emerald-500/10 text-emerald-500 border-emerald-400/25',
+    slate: 'bg-[#18191a] text-[#8a8f98] border-[#34343a]',
+    purple: 'bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-400/25',
+    red: 'bg-red-500/10 text-red-500 border-red-500/25',
   };
   return (
     <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] font-medium ${tones[tone]}`}>
@@ -61,8 +62,8 @@ function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: 
       aria-checked={checked}
       aria-label={label}
       onClick={() => onChange(!checked)}
-      className={`relative h-5 w-9 shrink-0 rounded-full border transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/60 ${
-        checked ? 'bg-[hsl(var(--primary))] border-[hsl(var(--primary))]' : 'bg-[hsl(var(--muted))] border-[hsl(var(--border))]'
+      className={`relative h-5 w-9 shrink-0 rounded-full border transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5e6ad2]/60 ${
+        checked ? 'bg-[#5e6ad2] border-[#5e6ad2]' : 'bg-[#18191a] border-[#34343a]'
       }`}
     >
       <motion.span
@@ -77,13 +78,13 @@ function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: 
 
 function Check2({ checked, onChange, children }: { checked: boolean; onChange: (v: boolean) => void; children: React.ReactNode }) {
   return (
-    <button type="button" onClick={() => onChange(!checked)} className="flex items-center gap-2 text-[13px] text-[hsl(var(--foreground))]">
+    <button type="button" onClick={() => onChange(!checked)} className="flex items-center gap-2 text-[13px] text-[#f7f8f8]">
       <span
         className={`grid h-4 w-4 place-items-center rounded-[4px] border transition-colors ${
-          checked ? 'bg-[hsl(var(--primary))] border-[hsl(var(--primary))]' : 'bg-[hsl(var(--background))] border-[hsl(var(--border))]'
+          checked ? 'bg-[#5e6ad2] border-[#5e6ad2]' : 'bg-[#141516] border-[#34343a]'
         }`}
       >
-        {checked && <Check className="h-3 w-3 text-[hsl(var(--primary-foreground))]" strokeWidth={3} />}
+        {checked && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
       </span>
       {children}
     </button>
@@ -95,24 +96,20 @@ function MetricsStrip({ pending }: { pending: number }) {
   const cards = [
     {
       label: 'Total Comments Captured',
-      value: mockMetrics.captured.toLocaleString(),
-      foot: (
-        <span className="inline-flex items-center gap-1 text-emerald-600">
-          <ArrowUpRight className="h-3.5 w-3.5" /> {mockMetrics.capturedTrend}% vs last 7d
-        </span>
-      ),
+      value: '0',
+      foot: <span className={S.subtle}>No comments received yet</span>,
     },
     {
       label: 'DMs Triggered',
-      value: mockMetrics.dmsTriggered.toLocaleString(),
-      foot: <Pill tone="green">{mockMetrics.conversionRate}% conversion</Pill>,
+      value: '0',
+      foot: <Pill tone="slate">0% trigger rate</Pill>,
     },
     {
       label: 'Pending Approvals',
       value: String(pending),
       foot: (
-        <span className="inline-flex items-center gap-1 rounded-full border border-amber-400/30 bg-amber-500/10 px-2 py-0.5 text-[11px] font-medium text-amber-600 shadow-[0_0_16px_-4px_rgba(251,191,36,0.6)]">
-          Awaiting review
+        <span className="inline-flex items-center gap-1 rounded-full border border-[#5e6ad2]/30 bg-[#5e6ad2]/10 px-2 py-0.5 text-[11px] font-medium text-[#8b9cf0]">
+          Queue Clear
         </span>
       ),
     },
@@ -180,7 +177,7 @@ function RuleCard({
               type="button"
               aria-label="Rule actions"
               onClick={(e) => { e.stopPropagation(); setMenu((v) => !v); }}
-              className={`grid h-8 w-8 place-items-center rounded-lg border ${S.line2} ${S.subtle} hover:bg-[hsl(var(--muted))]`}
+              className={`grid h-8 w-8 place-items-center rounded-lg border ${S.line2} ${S.subtle} hover:bg-[#18191a]`}
             >
               <MoreHorizontal className="h-4 w-4" />
             </button>
@@ -202,14 +199,14 @@ function RuleCard({
                     <button
                       key={i.label}
                       onClick={() => { setMenu(false); i.fn(); }}
-                      className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-[hsl(var(--foreground))] hover:bg-[hsl(var(--muted))]"
+                      className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-[#f7f8f8] hover:bg-[#18191a]"
                     >
                       <i.icon className="h-3.5 w-3.5" /> {i.label}
                     </button>
                   ))}
                   <button
                     onClick={() => { setMenu(false); onDelete(); }}
-                    className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-red-600 hover:bg-red-500/10"
+                    className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-red-500 hover:bg-red-500/10"
                   >
                     <Trash2 className="h-3.5 w-3.5" /> Delete
                   </button>
@@ -228,10 +225,10 @@ function RuleCard({
       </div>
 
       <div className={`mt-3 flex items-center gap-3 border-t ${S.line} pt-3 text-[12px] ${S.subtle}`}>
-        <span className={`inline-flex items-center gap-1.5 ${rule.dmEnabled ? 'text-[hsl(var(--foreground))]' : ''}`}>
+        <span className={`inline-flex items-center gap-1.5 ${rule.dmEnabled ? 'text-[#f7f8f8]' : ''}`}>
           <Send className="h-3.5 w-3.5" /> Private DM
         </span>
-        <span className={`inline-flex items-center gap-1.5 ${rule.publicReplyEnabled ? 'text-[hsl(var(--foreground))]' : ''}`}>
+        <span className={`inline-flex items-center gap-1.5 ${rule.publicReplyEnabled ? 'text-[#f7f8f8]' : ''}`}>
           <Reply className="h-3.5 w-3.5" /> Public Reply
         </span>
       </div>
@@ -300,7 +297,7 @@ function RuleDrawer({
                 <h2 className={`text-[15px] font-medium ${S.ink}`}>{initial ? 'Edit automation' : 'Create automation'}</h2>
                 <p className={`text-[12px] ${S.subtle}`}>Trigger DMs or public replies from Instagram comments.</p>
               </div>
-              <button onClick={onClose} aria-label="Close" className={`grid h-8 w-8 place-items-center rounded-lg border ${S.line2} ${S.subtle} hover:bg-[hsl(var(--muted))]`}>
+              <button onClick={onClose} aria-label="Close" className={`grid h-8 w-8 place-items-center rounded-lg border ${S.line2} ${S.subtle} hover:bg-[#18191a]`}>
                 <X className="h-4 w-4" />
               </button>
             </header>
@@ -308,7 +305,7 @@ function RuleDrawer({
             <div className="flex-1 space-y-5 overflow-y-auto px-5 py-5">
               <div>
                 <label className={`mb-1.5 block text-[12px] font-medium ${S.muted}`}>Rule name</label>
-                <input className={inputCls} value={draft.name} onChange={(e) => set('name', e.target.value)} placeholder="Sizing Guide Auto-DM" />
+                <input className={inputCls} value={draft.name} onChange={(e) => set('name', e.target.value)} placeholder="e.g. Sizing Guide Auto-DM" />
                 {errors.name && <p className="mt-1 text-[11px] text-red-600">{errors.name}</p>}
               </div>
 
@@ -318,10 +315,10 @@ function RuleDrawer({
                   {([['all', 'All current & future posts'], ['post', 'Specific post media ID']] as const).map(([v, l]) => (
                     <button key={v} type="button" onClick={() => set('scope', v)}
                       className={`flex w-full items-center gap-2.5 rounded-lg border px-3 py-2 text-left text-[13px] transition-colors ${
-                        draft.scope === v ? 'border-[hsl(var(--primary))] bg-[hsl(var(--primary))]/10 text-[hsl(var(--foreground))]' : `${S.line2} ${S.s2} text-[hsl(var(--foreground))]`
+                        draft.scope === v ? 'border-[#5e6ad2] bg-[#5e6ad2]/10 text-[#f7f8f8]' : `${S.line2} ${S.s2} text-[#f7f8f8]`
                       }`}>
-                      <span className={`grid h-4 w-4 place-items-center rounded-full border ${draft.scope === v ? 'border-[hsl(var(--primary))]' : 'border-[hsl(var(--border))]'}`}>
-                        {draft.scope === v && <span className="h-2 w-2 rounded-full bg-[hsl(var(--primary))]" />}
+                      <span className={`grid h-4 w-4 place-items-center rounded-full border ${draft.scope === v ? 'border-[#5e6ad2]' : 'border-[#34343a]'}`}>
+                        {draft.scope === v && <span className="h-2 w-2 rounded-full bg-[#5e6ad2]" />}
                       </span>
                       {l}
                     </button>
@@ -329,7 +326,7 @@ function RuleDrawer({
                 </div>
                 {draft.scope === 'post' && (
                   <>
-                    <input className={`${inputCls} mt-2`} placeholder="17924412331100234" value={draft.postId ?? ''} onChange={(e) => set('postId', e.target.value)} />
+                    <input className={`${inputCls} mt-2`} placeholder="Instagram media ID" value={draft.postId ?? ''} onChange={(e) => set('postId', e.target.value)} />
                     {errors.postId && <p className="mt-1 text-[11px] text-red-600">{errors.postId}</p>}
                   </>
                 )}
@@ -352,7 +349,7 @@ function RuleDrawer({
                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); addKeyword(); } }}
                     onBlur={addKeyword}
                     placeholder="Type a keyword, press Enter"
-                    className="min-w-[160px] flex-1 bg-transparent px-1 text-[13px] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] outline-none"
+                    className="min-w-[160px] flex-1 bg-transparent px-1 text-[13px] text-[#f7f8f8] placeholder:text-[#8a8f98] outline-none"
                   />
                 </div>
                 {errors.keywords && <p className="mt-1 text-[11px] text-red-600">{errors.keywords}</p>}
@@ -368,11 +365,18 @@ function RuleDrawer({
                   <label className={`text-[12px] font-medium ${S.muted}`}>Private DM message</label>
                   <Toggle checked={draft.dmEnabled} onChange={(v) => set('dmEnabled', v)} label="Enable private DM" />
                 </div>
-                <textarea rows={4} className={areaCls} value={draft.dmMessage} onChange={(e) => set('dmMessage', e.target.value)} disabled={!draft.dmEnabled} />
+                <textarea
+                  rows={4}
+                  className={areaCls}
+                  value={draft.dmMessage}
+                  onChange={(e) => set('dmMessage', e.target.value)}
+                  disabled={!draft.dmEnabled}
+                  placeholder="Hi {username}, thanks for your comment! ..."
+                />
                 <div className="mt-1.5 flex items-center gap-1.5">
                   {['{username}', '{keyword}'].map((v) => (
                     <button key={v} type="button" onClick={() => set('dmMessage', `${draft.dmMessage}${v}`)}
-                      className={`rounded-md border ${S.line2} ${S.s2} px-2 py-0.5 text-[11px] ${S.subtle} hover:text-[hsl(var(--foreground))]`}>{v}</button>
+                      className={`rounded-md border ${S.line2} ${S.s2} px-2 py-0.5 text-[11px] ${S.subtle} hover:text-[#f7f8f8]`}>{v}</button>
                   ))}
                 </div>
                 {errors.dmMessage && <p className="mt-1 text-[11px] text-red-600">{errors.dmMessage}</p>}
@@ -420,15 +424,17 @@ function RuleDrawer({
                 </p>
                 <input className={`${inputCls} mt-2`} placeholder="Type a sample comment..." value={sample} onChange={(e) => setSample(e.target.value)} />
                 <div className="mt-2 text-[12px]">
-                  {!sample.trim() ? (
-                    <span className={S.subtle}>Live feedback appears as you type.</span>
+                  {draft.keywords.length === 0 && !sample.trim() ? (
+                    <span className={S.subtle}>Enter keywords and type a sample comment above to test matching...</span>
+                  ) : !sample.trim() ? (
+                    <span className={S.subtle}>Type a sample comment to see which keywords match.</span>
                   ) : matched.length ? (
-                    <span className="text-emerald-600">
+                    <span className="text-emerald-500">
                       MATCHED: {matched.map((m) => `'${m}'`).join(', ')} → will trigger{' '}
                       {draft.dryRun ? 'a dry-run log only' : draft.requireApproval ? 'an approval queue item' : 'the DM template'}
                     </span>
                   ) : (
-                    <span className="text-amber-600">NO MATCH — this comment would be ignored.</span>
+                    <span className="text-amber-500">NO MATCH — this comment would be ignored.</span>
                   )}
                 </div>
               </div>
@@ -460,9 +466,9 @@ export default function Automations() {
   const { toast } = useToast();
   const [tab, setTab] = useState<'rules' | 'queue' | 'logs'>('rules');
   const [killswitch, setKillswitch] = useState(true);
-  const [rules, setRules] = useState<AutomationRule[]>(mockRules);
-  const [approvals, setApprovals] = useState<ApprovalItem[]>(mockApprovals);
-  const [logs] = useState<ActivityLog[]>(mockLogs);
+  const [rules, setRules] = useState<AutomationRule[]>([]);
+  const [approvals, setApprovals] = useState<ApprovalItem[]>([]);
+  const [logs] = useState<ActivityLog[]>([]);
   const [drawer, setDrawer] = useState<{ open: boolean; rule: AutomationRule | null }>({ open: false, rule: null });
 
   const [query, setQuery] = useState('');
@@ -533,16 +539,16 @@ export default function Automations() {
             <button
               key={t.id}
               onClick={() => setTab(t.id)}
-              className={`relative rounded-md px-3 py-1.5 text-[13px] font-medium transition-colors ${tab === t.id ? 'text-[hsl(var(--foreground))]' : 'text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))]'}`}
+              className={`relative rounded-md px-3 py-1.5 text-[13px] font-medium transition-colors ${tab === t.id ? 'text-[#f7f8f8]' : 'text-[#8a8f98] hover:text-[#f7f8f8]'}`}
             >
               {tab === t.id && (
                 <motion.span layoutId="automation-tab" transition={{ type: 'spring', stiffness: 500, damping: 38 }}
-                  className="absolute inset-0 rounded-md bg-[hsl(var(--border))]" />
+                  className="absolute inset-0 rounded-md bg-[#18191a]" />
               )}
               <span className="relative inline-flex items-center gap-1.5">
                 {t.label}
                 {'count' in t && t.count > 0 && (
-                  <span className="rounded-full bg-amber-400/15 px-1.5 text-[10px] text-amber-600">{t.count}</span>
+                  <span className="rounded-full bg-amber-400/15 px-1.5 text-[10px] text-amber-500">{t.count}</span>
                 )}
               </span>
             </button>
@@ -569,10 +575,17 @@ export default function Automations() {
                   />
                 ))}
                 {rules.length === 0 && (
-                  <div className={`rounded-xl border ${S.line} ${S.s1} py-14 text-center`}>
-                    <Zap className={`mx-auto h-6 w-6 ${S.subtle}`} />
-                    <p className={`mt-3 text-[14px] ${S.ink}`}>No automations yet</p>
-                    <p className={`mt-1 text-[12px] ${S.subtle}`}>Create your first rule to reply to comments automatically.</p>
+                  <div className={`rounded-xl border ${S.line} ${S.s1} p-6 text-center`}>
+                    <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-[#18191a]">
+                      <Sparkles className="h-5 w-5 text-[#8b9cf0]" />
+                    </div>
+                    <h3 className={`mt-4 text-[15px] font-medium ${S.ink}`}>No automation rules configured</h3>
+                    <p className={`mx-auto mt-1 max-w-[420px] text-[13px] ${S.subtle}`}>
+                      Create your first keyword trigger to automatically send private DMs or public replies when customers comment on your Instagram posts.
+                    </p>
+                    <button className={`${btnPrimary} mt-4`} onClick={() => setDrawer({ open: true, rule: null })}>
+                      <Plus className="h-4 w-4" /> Create your first rule
+                    </button>
                   </div>
                 )}
               </div>
@@ -595,10 +608,14 @@ export default function Automations() {
                   />
                 ))}
                 {approvals.length === 0 && (
-                  <div className={`rounded-xl border ${S.line} ${S.s1} py-16 text-center`}>
-                    <Inbox className={`mx-auto h-6 w-6 ${S.subtle}`} />
-                    <p className={`mt-3 text-[14px] ${S.ink}`}>All caught up!</p>
-                    <p className={`mt-1 text-[12px] ${S.subtle}`}>No pending comment approvals.</p>
+                  <div className={`rounded-xl border ${S.line} ${S.s1} p-6 text-center`}>
+                    <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-[#18191a]">
+                      <CheckCircle className="h-5 w-5 text-[#8b9cf0]" />
+                    </div>
+                    <h3 className={`mt-4 text-[15px] font-medium ${S.ink}`}>Approval queue is empty</h3>
+                    <p className={`mx-auto mt-1 max-w-[420px] text-[13px] ${S.subtle}`}>
+                      When comment automation rules with manual approval enabled are triggered, drafted replies will appear here for your review.
+                    </p>
                   </div>
                 )}
               </div>
@@ -623,17 +640,17 @@ export default function Automations() {
                   <table className="w-full text-left">
                     <thead>
                       <tr className={`border-b ${S.line} text-[11px] uppercase tracking-[0.06em] ${S.subtle}`}>
-                        <th className="px-4 py-2.5 font-medium">Time</th>
+                        <th className="px-4 py-2.5 font-medium">Timestamp</th>
                         <th className="px-4 py-2.5 font-medium">Commenter</th>
-                        <th className="px-4 py-2.5 font-medium">Comment</th>
-                        <th className="px-4 py-2.5 font-medium">Rule / keyword</th>
+                        <th className="px-4 py-2.5 font-medium">Comment Text</th>
+                        <th className="px-4 py-2.5 font-medium">Triggered Rule</th>
                         <th className="px-4 py-2.5 font-medium">Status</th>
-                        <th className="px-4 py-2.5" />
+                        <th className="px-4 py-2.5 font-medium">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {rows.map((l) => (
-                        <tr key={l.id} className={`border-b ${S.line} transition-colors hover:bg-[hsl(var(--muted))]`}>
+                        <tr key={l.id} className={`border-b ${S.line} transition-colors hover:bg-[#18191a]`}>
                           <td className={`whitespace-nowrap px-4 py-2.5 text-[12px] ${S.subtle}`}>{relativeTime(l.at)}</td>
                           <td className={`whitespace-nowrap px-4 py-2.5 text-[13px] ${S.ink}`}>{l.handle}</td>
                           <td className={`max-w-[260px] truncate px-4 py-2.5 text-[13px] ${S.muted}`} title={l.comment}>{l.comment}</td>
@@ -642,10 +659,18 @@ export default function Automations() {
                           </td>
                           <td className="px-4 py-2.5"><Pill tone={STATUS[l.status].tone}>{STATUS[l.status].label}</Pill></td>
                           <td className="px-4 py-2.5 text-right">
-                            <button className={`text-[12px] ${S.subtle} hover:text-[hsl(var(--foreground))]`} onClick={() => setDetail(l)}>View detail</button>
+                            <button className={`text-[12px] ${S.subtle} hover:text-[#f7f8f8]`} onClick={() => setDetail(l)}>View detail</button>
                           </td>
                         </tr>
                       ))}
+                      {rows.length === 0 && (
+                        <tr>
+                          <td colSpan={6} className="px-4 py-14 text-center">
+                            <ScrollText className={`mx-auto h-6 w-6 ${S.subtle}`} />
+                            <p className={`mt-3 text-[13px] ${S.muted}`}>No comment activity recorded yet. Incoming comments from connected Instagram accounts will appear here in real time.</p>
+                          </td>
+                        </tr>
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -665,14 +690,13 @@ export default function Automations() {
                       </div>
                     </button>
                   ))}
+                  {rows.length === 0 && (
+                    <div className="py-10 text-center">
+                      <ScrollText className={`mx-auto h-6 w-6 ${S.subtle}`} />
+                      <p className={`mt-3 px-4 text-[13px] ${S.muted}`}>No comment activity recorded yet. Incoming comments from connected Instagram accounts will appear here in real time.</p>
+                    </div>
+                  )}
                 </div>
-
-                {rows.length === 0 && (
-                  <div className="py-14 text-center">
-                    <ScrollText className={`mx-auto h-6 w-6 ${S.subtle}`} />
-                    <p className={`mt-3 text-[13px] ${S.muted}`}>No log entries match your filters.</p>
-                  </div>
-                )}
 
                 <div className={`flex items-center justify-between border-t ${S.line} px-4 py-3 text-[12px] ${S.subtle}`}>
                   <span>{filtered.length} events</span>
@@ -712,9 +736,9 @@ export default function Automations() {
                 </div>
                 <Pill tone={STATUS[detail.status].tone}>{STATUS[detail.status].label}</Pill>
               </div>
-              <blockquote className={`mt-3 rounded-lg border-l-2 border-[hsl(var(--primary))] ${S.s2} px-3 py-2 text-[13px] ${S.muted}`}>{detail.comment}</blockquote>
-              <p className={`mt-3 text-[12px] ${S.subtle}`}>Matched <span className="text-[hsl(var(--foreground))]">{detail.keyword}</span> via {detail.ruleName}</p>
-              <pre className={`mt-3 max-h-[220px] overflow-auto rounded-lg border ${S.line2} ${S.s2} p-3 text-[11px] leading-relaxed text-[hsl(var(--foreground))]`}>
+              <blockquote className={`mt-3 rounded-lg border-l-2 border-[#5e6ad2] ${S.s2} px-3 py-2 text-[13px] ${S.muted}`}>{detail.comment}</blockquote>
+              <p className={`mt-3 text-[12px] ${S.subtle}`}>Matched <span className="text-[#f7f8f8]">{detail.keyword}</span> via {detail.ruleName}</p>
+              <pre className={`mt-3 max-h-[220px] overflow-auto rounded-lg border ${S.line2} ${S.s2} p-3 text-[11px] leading-relaxed text-[#f7f8f8]`}>
 {JSON.stringify(detail.payload, null, 2)}
               </pre>
               <div className="mt-4 flex justify-end">
@@ -741,7 +765,7 @@ function ApprovalCard({ item, onResolve }: { item: ApprovalItem; onResolve: (kin
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <span className="grid h-7 w-7 place-items-center rounded-full bg-[hsl(var(--primary))]/20 text-[11px] font-medium text-[hsl(var(--foreground))]">
+          <span className="grid h-7 w-7 place-items-center rounded-full bg-[#5e6ad2]/20 text-[11px] font-medium text-[#f7f8f8]">
             {item.handle.replace('@', '').slice(0, 2).toUpperCase()}
           </span>
           <span className={`text-[13px] ${S.ink}`}>{item.handle}</span>
@@ -752,7 +776,7 @@ function ApprovalCard({ item, onResolve }: { item: ApprovalItem; onResolve: (kin
         </Pill>
       </div>
 
-      <blockquote className={`mt-3 rounded-lg border-l-2 border-[hsl(var(--border))] ${S.s2} px-3 py-2 text-[13px] italic ${S.muted}`}>
+      <blockquote className={`mt-3 rounded-lg border-l-2 border-[#34343a] ${S.s2} px-3 py-2 text-[13px] italic ${S.muted}`}>
         “{item.comment}”
       </blockquote>
 
