@@ -765,7 +765,7 @@ function ApprovalCard({ item, onResolve }: { item: ApprovalItem; onResolve: (kin
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <span className="grid h-7 w-7 place-items-center rounded-full bg-[hsl(var(--primary))]/20 text-[11px] font-medium text-[hsl(var(--foreground))]">
+          <span className="grid h-7 w-7 place-items-center rounded-full bg-[#5e6ad2]/20 text-[11px] font-medium text-[#f7f8f8]">
             {item.handle.replace('@', '').slice(0, 2).toUpperCase()}
           </span>
           <span className={`text-[13px] ${S.ink}`}>{item.handle}</span>
@@ -776,7 +776,7 @@ function ApprovalCard({ item, onResolve }: { item: ApprovalItem; onResolve: (kin
         </Pill>
       </div>
 
-      <blockquote className={`mt-3 rounded-lg border-l-2 border-[hsl(var(--border))] ${S.s2} px-3 py-2 text-[13px] italic ${S.muted}`}>
+      <blockquote className={`mt-3 rounded-lg border-l-2 border-[#34343a] ${S.s2} px-3 py-2 text-[13px] italic ${S.muted}`}>
         “{item.comment}”
       </blockquote>
 
