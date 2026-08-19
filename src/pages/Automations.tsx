@@ -40,12 +40,12 @@ const areaCls =
 
 function Pill({ tone, children }: { tone: 'amber' | 'blue' | 'green' | 'slate' | 'purple' | 'red'; children: React.ReactNode }) {
   const tones: Record<string, string> = {
-    amber: 'bg-amber-500/10 text-amber-600 border-amber-400/25',
-    blue: 'bg-[hsl(var(--primary))]/15 text-[hsl(var(--foreground))] border-[hsl(var(--primary))]/35',
-    green: 'bg-emerald-500/10 text-emerald-600 border-emerald-400/25',
-    slate: 'bg-[hsl(var(--muted))] text-[hsl(var(--muted-foreground))] border-[hsl(var(--border))]',
-    purple: 'bg-fuchsia-500/10 text-fuchsia-600 border-fuchsia-400/25',
-    red: 'bg-red-500/10 text-red-600 border-red-500/25',
+    amber: 'bg-amber-500/10 text-amber-500 border-amber-400/25',
+    blue: 'bg-[#5e6ad2]/15 text-[#8b9cf0] border-[#5e6ad2]/35',
+    green: 'bg-emerald-500/10 text-emerald-500 border-emerald-400/25',
+    slate: 'bg-[#18191a] text-[#8a8f98] border-[#34343a]',
+    purple: 'bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-400/25',
+    red: 'bg-red-500/10 text-red-500 border-red-500/25',
   };
   return (
     <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] font-medium ${tones[tone]}`}>
