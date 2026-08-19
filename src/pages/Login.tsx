@@ -119,7 +119,7 @@ export default function Login() {
                 onClick={handleDevBypass}
                 className="w-full h-10 text-xs font-medium border-dashed"
               >
-                Dev preview (bypass auth) — dev only
+                Enter demo mode (skip sign-in)
               </Button>
             </div>
           )}
