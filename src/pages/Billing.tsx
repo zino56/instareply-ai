@@ -79,10 +79,6 @@ const PayPalLogo = () => (
   </svg>
 );
 
-function useCheck(status: "loading" | "ready" | "error") {
-  return status;
-}
-
 /** Loads the PayPal SDK once and renders subscription buttons. */
 function PayPalButton({
   containerId,
