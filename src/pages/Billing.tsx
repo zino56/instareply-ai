@@ -294,19 +294,22 @@ export default function Billing() {
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <p className="text-[15px] font-semibold" style={{ color: INK }}>
-                Current Plan: Free
+                Current Plan: 7-Day Free Trial
+              </p>
+              <p className="mt-1 text-[13px]" style={{ color: MUTED }}>
+                7 days remaining in your trial
               </p>
               <ul className="mt-4 space-y-2.5">
-                {["1 Instagram account", "50 AI replies/month", "Basic analytics"].map((f) => (
+                {["All Pro features included during trial", "No credit card required", "Cancel anytime"].map((f) => (
                   <FeatureItem key={f} label={f} />
                 ))}
               </ul>
             </div>
             <span
               className="rounded-full px-2.5 py-1 text-[11px] font-semibold"
-              style={{ background: "rgba(16,185,129,0.12)", color: "#34d399", border: "1px solid rgba(16,185,129,0.3)" }}
+              style={{ background: "rgba(94,106,210,0.12)", color: ACCENT, border: "1px solid rgba(94,106,210,0.3)" }}
             >
-              Active
+              Trial Active
             </span>
           </div>
           <button
@@ -315,7 +318,7 @@ export default function Billing() {
             className="mt-6 inline-flex h-11 min-h-[44px] items-center justify-center rounded-lg px-5 text-[13.5px] font-semibold transition-opacity duration-200 hover:opacity-90 active:scale-[0.98]"
             style={{ background: ACCENT, color: "#fff" }}
           >
-            Upgrade to Pro
+            Start Your Free Trial
           </button>
         </section>
 
