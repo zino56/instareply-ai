@@ -28,6 +28,7 @@ const Analytics = lazy(() => import("./pages/Analytics"));
 const Subscriptions = lazy(() => import("./pages/Subscriptions"));
 const Automations = lazy(() => import("./pages/Automations"));
 const Leads = lazy(() => import("./pages/Leads"));
+const Billing = lazy(() => import("./pages/Billing"));
 
 // Static marketing/legal pages
 const About = lazy(() => import("./pages/About"));
