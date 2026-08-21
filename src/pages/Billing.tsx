@@ -7,6 +7,7 @@ import {
   XCircle,
   LifeBuoy,
   Loader2,
+  Calendar,
 } from "lucide-react";
 
 /**
@@ -30,6 +31,7 @@ const HAIRLINE = "#23252a";
 type Billing = "monthly" | "annual";
 
 const proFeatures = [
+  "7-day free trial",
   "3 Instagram accounts",
   "Unlimited AI replies",
   "Comment automation (coming soon)",
@@ -37,10 +39,10 @@ const proFeatures = [
   "Approval queue",
   "Analytics dashboard",
   "Priority email support",
-  "7-day free trial",
 ];
 
 const scaleFeatures = [
+  "7-day free trial",
   "Everything in Pro",
   "10 Instagram accounts",
   "Custom AI prompts",
@@ -50,7 +52,6 @@ const scaleFeatures = [
   "Dedicated Slack support",
   "99.9% uptime SLA",
   "Priority onboarding",
-  "7-day free trial",
 ];
 
 const faqs = [
@@ -68,7 +69,15 @@ const faqs = [
   },
   {
     q: "What happens after my trial?",
-    a: "Your subscription will automatically continue at the listed price. You can cancel before the trial ends to avoid charges.",
+    a: "Your account will switch to read-only mode. You can upgrade to Pro or Scale at any time to continue using all features. Your data is preserved for 30 days.",
+  },
+  {
+    q: "Do I need a credit card to start the trial?",
+    a: "No! You can start your 7-day free trial without entering payment information. You'll only be charged if you choose to upgrade after the trial.",
+  },
+  {
+    q: "What happens after my trial ends?",
+    a: "Your account will switch to read-only mode. You can upgrade to Pro or Scale at any time to continue using all features. Your data is preserved for 30 days.",
   },
 ];
 
@@ -210,33 +219,33 @@ const PlanCard = ({
           Most Popular
         </span>
       )}
+      <span
+        className="absolute left-5 top-[-11px] rounded-full px-2.5 py-1 text-[11px] font-semibold"
+        style={{ background: "rgba(16,185,129,0.12)", color: "#34d399", border: "1px solid rgba(16,185,129,0.3)" }}
+      >
+        7-Day Free Trial
+      </span>
 
       <h3 className="text-[15px] font-semibold" style={{ color: INK }}>
         {name}
       </h3>
 
-      <div className="mt-4 flex items-baseline gap-1.5">
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.span
-            key={price}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.22 }}
-            className="text-4xl font-bold tracking-[-0.02em]"
-            style={{ color: INK }}
-          >
-            ${price}
-          </motion.span>
-        </AnimatePresence>
-        <span className="text-sm" style={{ color: SUBTLE }}>
-          /month
-        </span>
+      <div className="mt-4 flex flex-col">
+        <div className="flex items-baseline gap-2">
+          <span className="text-lg" style={{ color: SUBTLE, textDecoration: "line-through" }}>
+            ${price}/month
+          </span>
+        </div>
+        <div className="mt-1 flex items-baseline gap-1.5">
+          <span className="text-4xl font-bold tracking-[-0.02em]" style={{ color: INK }}>
+            Free for 7 days
+          </span>
+        </div>
       </div>
       <p className="mt-1.5 text-[12.5px]" style={{ color: SUBTLE }}>
         {billing === "annual"
-          ? `$${annual} billed yearly (save 2 months)`
-          : `or $${annual}/year (save 2 months)`}
+          ? `Then $${annual}/year billed yearly`
+          : `Then $${monthly}/month`}
       </p>
 
       <ul className="mt-6 space-y-2.5 border-t pt-6" style={{ borderColor: HAIRLINE }}>
@@ -247,8 +256,8 @@ const PlanCard = ({
 
       <div className="mt-6">
         <PayPalButton containerId={containerId} planId={planId} />
-        <p className="mt-3 text-center text-[12px]" style={{ color: SUBTLE }}>
-          7-day free trial • Cancel anytime • Secure payment
+        <p className="mt-3 text-center text-[12px]" style={{ color: "#34d399" }}>
+          Start your free trial today • No credit card required
         </p>
       </div>
     </div>
@@ -285,19 +294,22 @@ export default function Billing() {
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <p className="text-[15px] font-semibold" style={{ color: INK }}>
-                Current Plan: Free
+                Current Plan: 7-Day Free Trial
+              </p>
+              <p className="mt-1 text-[13px]" style={{ color: MUTED }}>
+                7 days remaining in your trial
               </p>
               <ul className="mt-4 space-y-2.5">
-                {["1 Instagram account", "50 AI replies/month", "Basic analytics"].map((f) => (
+                {["All Pro features included during trial", "No credit card required", "Cancel anytime"].map((f) => (
                   <FeatureItem key={f} label={f} />
                 ))}
               </ul>
             </div>
             <span
               className="rounded-full px-2.5 py-1 text-[11px] font-semibold"
-              style={{ background: "rgba(16,185,129,0.12)", color: "#34d399", border: "1px solid rgba(16,185,129,0.3)" }}
+              style={{ background: "rgba(94,106,210,0.12)", color: ACCENT, border: "1px solid rgba(94,106,210,0.3)" }}
             >
-              Active
+              Trial Active
             </span>
           </div>
           <button
@@ -306,7 +318,7 @@ export default function Billing() {
             className="mt-6 inline-flex h-11 min-h-[44px] items-center justify-center rounded-lg px-5 text-[13.5px] font-semibold transition-opacity duration-200 hover:opacity-90 active:scale-[0.98]"
             style={{ background: ACCENT, color: "#fff" }}
           >
-            Upgrade to Pro
+            Start Your Free Trial
           </button>
         </section>
 
@@ -420,6 +432,35 @@ export default function Billing() {
                 style={{ background: "#141516", border: `1px solid ${HAIRLINE}` }}
               >
                 <Icon className="h-4.5 w-4.5" style={{ color: ACCENT }} aria-hidden />
+              </span>
+              <div>
+                <p className="text-[13.5px] font-semibold" style={{ color: INK }}>
+                  {title}
+                </p>
+                <p className="mt-0.5 text-[12.5px]" style={{ color: SUBTLE }}>
+                  {sub}
+                </p>
+              </div>
+            </div>
+          ))}
+        </section>
+
+        {/* Trial trust badges */}
+        <section className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {[
+            { icon: ShieldCheck, title: "No credit card required", sub: "Start your trial instantly" },
+            { icon: Calendar, title: "Cancel anytime during trial", sub: "You're in control" },
+          ].map(({ icon: Icon, title, sub }) => (
+            <div
+              key={title}
+              className="flex items-start gap-3 rounded-xl p-4"
+              style={{ background: "#0f1011", border: `1px solid ${HAIRLINE}` }}
+            >
+              <span
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+                style={{ background: "#141516", border: `1px solid ${HAIRLINE}` }}
+              >
+                <Icon className="h-4.5 w-4.5" style={{ color: "#34d399" }} aria-hidden />
               </span>
               <div>
                 <p className="text-[13.5px] font-semibold" style={{ color: INK }}>
