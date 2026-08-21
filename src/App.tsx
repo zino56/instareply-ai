@@ -79,6 +79,7 @@ const App = () => (
               <Route path="/dashboard/automations" element={<Suspense fallback={<RouteFallback />}><Automations /></Suspense>} />
               <Route path="/dashboard/comments" element={<Suspense fallback={<RouteFallback />}><Automations /></Suspense>} />
               <Route path="/dashboard/leads" element={<Suspense fallback={<RouteFallback />}><Leads /></Suspense>} />
+              <Route path="/dashboard/billing" element={<Suspense fallback={<RouteFallback />}><Billing /></Suspense>} />
               <Route path="/ai-knowledge" element={<Suspense fallback={<RouteFallback />}><AIKnowledge /></Suspense>} />
               <Route path="/settings" element={<Suspense fallback={<RouteFallback />}><Settings /></Suspense>} />
               <Route path="/analytics" element={<Suspense fallback={<RouteFallback />}><Analytics /></Suspense>} />
