@@ -444,6 +444,35 @@ export default function Billing() {
             </div>
           ))}
         </section>
+
+        {/* Trial trust badges */}
+        <section className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {[
+            { icon: ShieldCheck, title: "No credit card required", sub: "Start your trial instantly" },
+            { icon: Calendar, title: "Cancel anytime during trial", sub: "You're in control" },
+          ].map(({ icon: Icon, title, sub }) => (
+            <div
+              key={title}
+              className="flex items-start gap-3 rounded-xl p-4"
+              style={{ background: "#0f1011", border: `1px solid ${HAIRLINE}` }}
+            >
+              <span
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+                style={{ background: "#141516", border: `1px solid ${HAIRLINE}` }}
+              >
+                <Icon className="h-4.5 w-4.5" style={{ color: "#34d399" }} aria-hidden />
+              </span>
+              <div>
+                <p className="text-[13.5px] font-semibold" style={{ color: INK }}>
+                  {title}
+                </p>
+                <p className="mt-0.5 text-[12.5px]" style={{ color: SUBTLE }}>
+                  {sub}
+                </p>
+              </div>
+            </div>
+          ))}
+        </section>
       </div>
     </div>
   );
