@@ -68,7 +68,15 @@ const faqs = [
   },
   {
     q: "What happens after my trial?",
-    a: "Your subscription will automatically continue at the listed price. You can cancel before the trial ends to avoid charges.",
+    a: "Your account will switch to read-only mode. You can upgrade to Pro or Scale at any time to continue using all features. Your data is preserved for 30 days.",
+  },
+  {
+    q: "Do I need a credit card to start the trial?",
+    a: "No! You can start your 7-day free trial without entering payment information. You'll only be charged if you choose to upgrade after the trial.",
+  },
+  {
+    q: "What happens after my trial ends?",
+    a: "Your account will switch to read-only mode. You can upgrade to Pro or Scale at any time to continue using all features. Your data is preserved for 30 days.",
   },
 ];
 
