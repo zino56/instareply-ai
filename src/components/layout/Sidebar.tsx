@@ -10,6 +10,7 @@ import {
   Settings,
   Zap,
   Table2,
+  CreditCard,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -24,6 +25,7 @@ const mainLinks = [
 ];
 
 const workspaceLinks = [
+  { href: '/dashboard/billing', label: 'Billing', icon: CreditCard },
   { href: '/settings', label: 'Settings', icon: Settings },
 ];
 
