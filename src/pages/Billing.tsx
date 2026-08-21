@@ -30,6 +30,7 @@ const HAIRLINE = "#23252a";
 type Billing = "monthly" | "annual";
 
 const proFeatures = [
+  "7-day free trial",
   "3 Instagram accounts",
   "Unlimited AI replies",
   "Comment automation (coming soon)",
@@ -37,10 +38,10 @@ const proFeatures = [
   "Approval queue",
   "Analytics dashboard",
   "Priority email support",
-  "7-day free trial",
 ];
 
 const scaleFeatures = [
+  "7-day free trial",
   "Everything in Pro",
   "10 Instagram accounts",
   "Custom AI prompts",
@@ -50,7 +51,6 @@ const scaleFeatures = [
   "Dedicated Slack support",
   "99.9% uptime SLA",
   "Priority onboarding",
-  "7-day free trial",
 ];
 
 const faqs = [
