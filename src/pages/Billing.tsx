@@ -219,33 +219,33 @@ const PlanCard = ({
           Most Popular
         </span>
       )}
+      <span
+        className="absolute left-5 top-[-11px] rounded-full px-2.5 py-1 text-[11px] font-semibold"
+        style={{ background: "rgba(16,185,129,0.12)", color: "#34d399", border: "1px solid rgba(16,185,129,0.3)" }}
+      >
+        7-Day Free Trial
+      </span>
 
       <h3 className="text-[15px] font-semibold" style={{ color: INK }}>
         {name}
       </h3>
 
-      <div className="mt-4 flex items-baseline gap-1.5">
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.span
-            key={price}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.22 }}
-            className="text-4xl font-bold tracking-[-0.02em]"
-            style={{ color: INK }}
-          >
-            ${price}
-          </motion.span>
-        </AnimatePresence>
-        <span className="text-sm" style={{ color: SUBTLE }}>
-          /month
-        </span>
+      <div className="mt-4 flex flex-col">
+        <div className="flex items-baseline gap-2">
+          <span className="text-lg" style={{ color: SUBTLE, textDecoration: "line-through" }}>
+            ${price}/month
+          </span>
+        </div>
+        <div className="mt-1 flex items-baseline gap-1.5">
+          <span className="text-4xl font-bold tracking-[-0.02em]" style={{ color: INK }}>
+            Free for 7 days
+          </span>
+        </div>
       </div>
       <p className="mt-1.5 text-[12.5px]" style={{ color: SUBTLE }}>
         {billing === "annual"
-          ? `$${annual} billed yearly (save 2 months)`
-          : `or $${annual}/year (save 2 months)`}
+          ? `Then $${annual}/year billed yearly`
+          : `Then $${monthly}/month`}
       </p>
 
       <ul className="mt-6 space-y-2.5 border-t pt-6" style={{ borderColor: HAIRLINE }}>
@@ -256,8 +256,8 @@ const PlanCard = ({
 
       <div className="mt-6">
         <PayPalButton containerId={containerId} planId={planId} />
-        <p className="mt-3 text-center text-[12px]" style={{ color: SUBTLE }}>
-          7-day free trial • Cancel anytime • Secure payment
+        <p className="mt-3 text-center text-[12px]" style={{ color: "#34d399" }}>
+          Start your free trial today • No credit card required
         </p>
       </div>
     </div>
