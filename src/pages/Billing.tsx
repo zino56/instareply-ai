@@ -9,10 +9,14 @@ import {
   Loader2,
   Calendar,
 } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { pageContainer as container, pageItem as item } from "@/lib/motion";
 
 /**
- * Billing / Upgrade page.
- * Scoped Linear-style dark theme (does not affect the rest of the dashboard).
+ * Billing / Upgrade page — uses the shared light dashboard design system.
  */
 
 // TODO: replace with real credentials
@@ -21,12 +25,6 @@ const PLAN_IDS = {
   pro: { monthly: "P-XXXXXXXXXXXXXXXX", annual: "P-XXXXXXXXXXXXXXXX" },
   scale: { monthly: "P-YYYYYYYYYYYYYYYY", annual: "P-YYYYYYYYYYYYYYYY" },
 };
-
-const INK = "#f7f8f8";
-const MUTED = "#d0d6e0";
-const SUBTLE = "#8a8f98";
-const ACCENT = "#5e6ad2";
-const HAIRLINE = "#23252a";
 
 type Billing = "monthly" | "annual";
 
@@ -62,14 +60,6 @@ const faqs = [
   {
     q: "What payment methods do you accept?",
     a: "We accept all major credit cards, PayPal, and Apple Pay via secure PayPal checkout.",
-  },
-  {
-    q: "Is there a free trial?",
-    a: "Yes! All plans include a 7-day free trial. You won't be charged until the trial ends.",
-  },
-  {
-    q: "What happens after my trial?",
-    a: "Your account will switch to read-only mode. You can upgrade to Pro or Scale at any time to continue using all features. Your data is preserved for 30 days.",
   },
   {
     q: "Do I need a credit card to start the trial?",
@@ -154,19 +144,13 @@ function PayPalButton({
     <div>
       <div id={containerId} ref={ref} className="min-h-[46px]" />
       {status === "loading" && (
-        <div
-          className="flex min-h-[46px] items-center justify-center gap-2 rounded-lg text-[13px]"
-          style={{ border: `1px solid ${HAIRLINE}`, color: SUBTLE }}
-        >
+        <div className="flex min-h-[46px] items-center justify-center gap-2 rounded-lg border border-border/70 bg-muted/30 text-[13px] text-muted-foreground">
           <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
           Loading payment options…
         </div>
       )}
       {status === "error" && (
-        <div
-          className="rounded-lg px-3 py-3 text-[13px] leading-relaxed"
-          style={{ border: `1px solid ${HAIRLINE}`, background: "#141516", color: MUTED }}
-        >
+        <div className="rounded-lg border border-border/70 bg-muted/30 px-3 py-3 text-[13px] leading-relaxed text-muted-foreground">
           Payment options loading… Please refresh the page or contact support.
         </div>
       )}
@@ -175,8 +159,10 @@ function PayPalButton({
 }
 
 const FeatureItem = ({ label }: { label: string }) => (
-  <li className="flex items-start gap-2.5 text-[13.5px] leading-relaxed" style={{ color: MUTED }}>
-    <Check className="mt-0.5 h-4 w-4 shrink-0" style={{ color: ACCENT }} aria-hidden />
+  <li className="flex items-start gap-2.5 text-[13.5px] leading-relaxed text-foreground">
+    <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-foreground/5">
+      <Check className="h-3 w-3 text-foreground" strokeWidth={2.5} aria-hidden />
+    </span>
     <span>{label}</span>
   </li>
 );
@@ -203,64 +189,63 @@ const PlanCard = ({
   const price = billing === "annual" ? Math.round(annual / 12) : monthly;
 
   return (
-    <div
-      className="relative flex h-full flex-col rounded-xl p-6 transition-transform duration-300 hover:-translate-y-1"
-      style={{
-        background: popular ? "#141516" : "#0f1011",
-        border: `1px solid ${popular ? ACCENT : HAIRLINE}`,
-        boxShadow: popular ? `0 0 0 1px rgba(94,106,210,0.15), 0 18px 60px -24px rgba(94,106,210,0.55)` : "none",
-      }}
-    >
-      {popular && (
-        <span
-          className="absolute right-5 top-[-11px] rounded-full px-2.5 py-1 text-[11px] font-semibold"
-          style={{ background: ACCENT, color: "#fff" }}
-        >
-          Most Popular
-        </span>
+    <Card
+      className={cn(
+        "relative flex h-full flex-col rounded-2xl border shadow-[var(--shadow-sm)] bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-md)]",
+        popular ? "border-primary/50 bg-primary/[0.03]" : "border-border/70",
       )}
-      <span
-        className="absolute left-5 top-[-11px] rounded-full px-2.5 py-1 text-[11px] font-semibold"
-        style={{ background: "rgba(16,185,129,0.12)", color: "#34d399", border: "1px solid rgba(16,185,129,0.3)" }}
-      >
-        7-Day Free Trial
-      </span>
-
-      <h3 className="text-[15px] font-semibold" style={{ color: INK }}>
-        {name}
-      </h3>
-
-      <div className="mt-4 flex flex-col">
-        <div className="flex items-baseline gap-2">
-          <span className="text-lg" style={{ color: SUBTLE, textDecoration: "line-through" }}>
-            ${price}/month
-          </span>
+    >
+      <CardContent className="flex flex-1 flex-col p-6">
+        <div className="flex items-center justify-between gap-2">
+          <h3 className="text-[17px] font-semibold tracking-[-0.005em] text-foreground">{name}</h3>
+          <div className="flex items-center gap-2">
+            <Badge
+              variant="secondary"
+              className="h-5 border-0 bg-[hsl(var(--success)/0.12)] text-[11px] font-medium text-[hsl(var(--success))]"
+            >
+              7-Day Free Trial
+            </Badge>
+            {popular && (
+              <Badge className="h-5 border-0 bg-primary text-[11px] font-semibold text-primary-foreground">
+                Most Popular
+              </Badge>
+            )}
+          </div>
         </div>
-        <div className="mt-1 flex items-baseline gap-1.5">
-          <span className="text-4xl font-bold tracking-[-0.02em]" style={{ color: INK }}>
-            Free for 7 days
-          </span>
+
+        <div className="mt-4">
+          <p className="text-[13px] text-muted-foreground line-through">${price}/month</p>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.p
+              key={`${billing}-${price}`}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2 }}
+              className="mt-1 text-[26px] font-semibold tracking-[-0.015em] leading-none text-foreground"
+            >
+              Free for 7 days
+            </motion.p>
+          </AnimatePresence>
+          <p className="mt-2 text-[12.5px] text-muted-foreground">
+            {billing === "annual" ? `Then $${annual}/year billed yearly` : `Then $${monthly}/month`}
+          </p>
         </div>
-      </div>
-      <p className="mt-1.5 text-[12.5px]" style={{ color: SUBTLE }}>
-        {billing === "annual"
-          ? `Then $${annual}/year billed yearly`
-          : `Then $${monthly}/month`}
-      </p>
 
-      <ul className="mt-6 space-y-2.5 border-t pt-6" style={{ borderColor: HAIRLINE }}>
-        {features.map((f) => (
-          <FeatureItem key={f} label={f} />
-        ))}
-      </ul>
+        <ul className="mt-6 flex-1 space-y-2.5 border-t border-border/70 pt-6">
+          {features.map((f) => (
+            <FeatureItem key={f} label={f} />
+          ))}
+        </ul>
 
-      <div className="mt-6">
-        <PayPalButton containerId={containerId} planId={planId} />
-        <p className="mt-3 text-center text-[12px]" style={{ color: "#34d399" }}>
-          Start your free trial today • No credit card required
-        </p>
-      </div>
-    </div>
+        <div className="mt-6">
+          <PayPalButton containerId={containerId} planId={planId} />
+          <p className="mt-3 text-center text-[12px] text-muted-foreground">
+            Start your free trial today • No credit card required
+          </p>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
@@ -270,65 +255,91 @@ export default function Billing() {
   const pricingRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="-m-4 min-h-screen px-4 py-8 sm:-m-6 sm:px-6 lg:px-8" style={{ background: "#010102" }}>
-      <div className="mx-auto max-w-[1080px]">
-        {/* Header */}
-        <header>
-          <h1 className="font-poppins text-[28px] font-bold tracking-[-0.02em]" style={{ color: INK }}>
-            Upgrade your plan
-          </h1>
-          <p className="mt-2 text-[14.5px]" style={{ color: MUTED }}>
-            Start your 7-day free trial. Cancel anytime.
-          </p>
-          <div className="mt-3 inline-flex items-center gap-2 text-[12.5px]" style={{ color: SUBTLE }}>
-            <PayPalLogo />
-            Secure payment via PayPal
-          </div>
-        </header>
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className="container py-8 space-y-8"
+    >
+      {/* Header */}
+      <motion.div variants={item}>
+        <h1 className="text-[26px] md:text-[28px] font-semibold tracking-[-0.015em] leading-tight">
+          Upgrade your plan
+        </h1>
+        <p className="mt-1 text-[14px] text-muted-foreground">
+          Start your 7-day free trial. Cancel anytime.
+        </p>
+        <div className="mt-3 inline-flex items-center gap-2 text-[12.5px] text-muted-foreground">
+          <PayPalLogo />
+          Secure payment via PayPal
+        </div>
+      </motion.div>
 
-        {/* Current plan */}
-        <section
-          className="mt-8 rounded-2xl p-6"
-          style={{ background: "#0f1011", border: `1px solid ${HAIRLINE}` }}
-        >
-          <div className="flex flex-wrap items-start justify-between gap-4">
-            <div>
-              <p className="text-[15px] font-semibold" style={{ color: INK }}>
-                Current Plan: 7-Day Free Trial
-              </p>
-              <p className="mt-1 text-[13px]" style={{ color: MUTED }}>
-                7 days remaining in your trial
-              </p>
-              <ul className="mt-4 space-y-2.5">
-                {["All Pro features included during trial", "No credit card required", "Cancel anytime"].map((f) => (
-                  <FeatureItem key={f} label={f} />
-                ))}
-              </ul>
+      {/* Current plan */}
+      <motion.div variants={item}>
+        <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-card overflow-hidden">
+          <CardContent className="p-0">
+            <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border/70">
+              <div className="p-6 md:p-7">
+                <p className="text-[11px] font-semibold tracking-[0.08em] text-muted-foreground uppercase">
+                  Current plan
+                </p>
+                <div className="mt-2 flex items-center gap-2.5">
+                  <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-foreground">
+                    7-Day Free Trial
+                  </h2>
+                  <Badge
+                    variant="secondary"
+                    className="h-5 border-0 bg-primary/15 text-[11px] font-medium text-foreground"
+                  >
+                    Trial Active
+                  </Badge>
+                </div>
+                <p className="mt-2 text-[13.5px] text-muted-foreground">
+                  7 days remaining in your trial
+                </p>
+                <Button
+                  onClick={() => pricingRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                  className="mt-6 h-11 press-scale"
+                >
+                  Start Your Free Trial
+                </Button>
+              </div>
+
+              <div className="p-6 md:p-7 bg-muted/30">
+                <p className="text-[11px] font-semibold tracking-[0.08em] text-muted-foreground uppercase">
+                  Trial includes
+                </p>
+                <ul className="mt-3 space-y-2.5">
+                  {["All Pro features included during trial", "No credit card required", "Cancel anytime"].map(
+                    (f) => (
+                      <FeatureItem key={f} label={f} />
+                    ),
+                  )}
+                </ul>
+              </div>
             </div>
-            <span
-              className="rounded-full px-2.5 py-1 text-[11px] font-semibold"
-              style={{ background: "rgba(94,106,210,0.12)", color: ACCENT, border: "1px solid rgba(94,106,210,0.3)" }}
-            >
-              Trial Active
-            </span>
-          </div>
-          <button
-            type="button"
-            onClick={() => pricingRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
-            className="mt-6 inline-flex h-11 min-h-[44px] items-center justify-center rounded-lg px-5 text-[13.5px] font-semibold transition-opacity duration-200 hover:opacity-90 active:scale-[0.98]"
-            style={{ background: ACCENT, color: "#fff" }}
-          >
-            Start Your Free Trial
-          </button>
-        </section>
+          </CardContent>
+        </Card>
+      </motion.div>
 
-        {/* Billing toggle */}
-        <div ref={pricingRef} className="mt-12 flex justify-center scroll-mt-24">
+      {/* Plans */}
+      <motion.div variants={item} className="space-y-4">
+        <div
+          ref={pricingRef}
+          className="scroll-mt-24 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3"
+        >
+          <div>
+            <h2 className="text-[16px] font-semibold tracking-[-0.005em] text-foreground">
+              Choose a plan
+            </h2>
+            <p className="text-[13px] text-muted-foreground">Switch billing period to compare pricing.</p>
+          </div>
+
           <div
             role="radiogroup"
             aria-label="Billing period"
-            className="inline-flex items-center rounded-lg p-1"
-            style={{ background: "#0f1011", border: `1px solid ${HAIRLINE}` }}
+            className="inline-flex items-center rounded-lg border border-border/70 bg-muted/40 p-0.5 text-[12.5px]"
           >
             {(["monthly", "annual"] as Billing[]).map((option) => (
               <button
@@ -337,12 +348,12 @@ export default function Billing() {
                 role="radio"
                 aria-checked={billing === option}
                 onClick={() => setBilling(option)}
-                className="min-h-[40px] rounded-lg px-4 text-[13px] font-medium transition-colors duration-200"
-                style={
+                className={cn(
+                  "min-h-[36px] rounded-md px-3 py-1.5 font-medium transition-colors duration-200 press-scale",
                   billing === option
-                    ? { background: ACCENT, color: "#fff" }
-                    : { color: SUBTLE, background: "transparent" }
-                }
+                    ? "bg-card text-foreground shadow-[var(--shadow-sm)]"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
               >
                 {option === "monthly" ? "Monthly" : "Annual (Save 17%)"}
               </button>
@@ -350,8 +361,7 @@ export default function Billing() {
           </div>
         </div>
 
-        {/* Pricing cards */}
-        <section className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <PlanCard
             name="Conveero Pro"
             monthly={49}
@@ -371,28 +381,29 @@ export default function Billing() {
             containerId="paypal-scale-plan"
             planId={PLAN_IDS.scale[billing]}
           />
-        </section>
+        </div>
+      </motion.div>
 
-        {/* FAQ */}
-        <section className="mt-14">
-          <h2 className="font-poppins text-xl font-semibold" style={{ color: INK }}>
-            Frequently asked questions
-          </h2>
-          <div className="mt-5 rounded-2xl" style={{ background: "#0f1011", border: `1px solid ${HAIRLINE}` }}>
+      {/* FAQ */}
+      <motion.div variants={item} className="space-y-3">
+        <h2 className="text-[16px] font-semibold tracking-[-0.005em] text-foreground">
+          Frequently asked questions
+        </h2>
+        <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-card overflow-hidden">
+          <CardContent className="p-0">
             {faqs.map((f, i) => {
               const isOpen = openFaq === i;
               return (
-                <div key={f.q} className="border-b last:border-b-0" style={{ borderColor: HAIRLINE }}>
+                <div key={f.q} className="border-b border-border/70 last:border-b-0">
                   <button
                     type="button"
                     aria-expanded={isOpen}
                     onClick={() => setOpenFaq(isOpen ? -1 : i)}
-                    className="flex min-h-[56px] w-full items-center justify-between gap-4 px-6 py-4 text-left text-[14px] font-medium"
-                    style={{ color: INK }}
+                    className="flex min-h-[56px] w-full items-center justify-between gap-4 px-5 py-4 text-left text-[14px] font-medium text-foreground transition-colors hover:bg-muted/40"
                   >
                     {f.q}
                     <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.22 }}>
-                      <ChevronDown className="h-4 w-4" style={{ color: SUBTLE }} aria-hidden />
+                      <ChevronDown className="h-4 w-4 text-muted-foreground" strokeWidth={1.75} aria-hidden />
                     </motion.span>
                   </button>
                   <AnimatePresence initial={false}>
@@ -404,7 +415,7 @@ export default function Billing() {
                         transition={{ duration: 0.26 }}
                         className="overflow-hidden"
                       >
-                        <p className="px-6 pb-5 text-[13.5px] leading-relaxed" style={{ color: MUTED }}>
+                        <p className="px-5 pb-5 text-[13.5px] leading-relaxed text-muted-foreground">
                           {f.a}
                         </p>
                       </motion.div>
@@ -413,67 +424,52 @@ export default function Billing() {
                 </div>
               );
             })}
-          </div>
-        </section>
+          </CardContent>
+        </Card>
+      </motion.div>
 
-        {/* Trust */}
-        <section
-          className="mt-12 grid grid-cols-1 gap-6 rounded-2xl p-6 sm:grid-cols-3"
-          style={{ background: "#0f1011", border: `1px solid ${HAIRLINE}` }}
-        >
-          {[
-            { icon: ShieldCheck, title: "Secure Payments", sub: "Powered by PayPal" },
-            { icon: XCircle, title: "Cancel Anytime", sub: "No hidden fees" },
-            { icon: LifeBuoy, title: "24/7 Support", sub: "We're here to help" },
-          ].map(({ icon: Icon, title, sub }) => (
-            <div key={title} className="flex items-start gap-3">
-              <span
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
-                style={{ background: "#141516", border: `1px solid ${HAIRLINE}` }}
-              >
-                <Icon className="h-4.5 w-4.5" style={{ color: ACCENT }} aria-hidden />
+      {/* Trust */}
+      <motion.div variants={item}>
+        <Card className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-card">
+          <CardContent className="grid grid-cols-1 gap-6 p-6 sm:grid-cols-3">
+            {[
+              { icon: ShieldCheck, title: "Secure Payments", sub: "Powered by PayPal" },
+              { icon: XCircle, title: "Cancel Anytime", sub: "No hidden fees" },
+              { icon: LifeBuoy, title: "24/7 Support", sub: "We're here to help" },
+            ].map(({ icon: Icon, title, sub }) => (
+              <div key={title} className="flex items-start gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted">
+                  <Icon className="h-4 w-4 text-muted-foreground" strokeWidth={1.75} aria-hidden />
+                </span>
+                <div>
+                  <p className="text-[14px] font-medium text-foreground">{title}</p>
+                  <p className="mt-0.5 text-[13px] text-muted-foreground">{sub}</p>
+                </div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      {/* Trial trust badges */}
+      <motion.div variants={item} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {[
+          { icon: ShieldCheck, title: "No credit card required", sub: "Start your trial instantly" },
+          { icon: Calendar, title: "Cancel anytime during trial", sub: "You're in control" },
+        ].map(({ icon: Icon, title, sub }) => (
+          <Card key={title} className="rounded-2xl border border-border/70 shadow-[var(--shadow-sm)] bg-card">
+            <CardContent className="flex items-start gap-3 p-5">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted">
+                <Icon className="h-4 w-4 text-muted-foreground" strokeWidth={1.75} aria-hidden />
               </span>
               <div>
-                <p className="text-[13.5px] font-semibold" style={{ color: INK }}>
-                  {title}
-                </p>
-                <p className="mt-0.5 text-[12.5px]" style={{ color: SUBTLE }}>
-                  {sub}
-                </p>
+                <p className="text-[14px] font-medium text-foreground">{title}</p>
+                <p className="mt-0.5 text-[13px] text-muted-foreground">{sub}</p>
               </div>
-            </div>
-          ))}
-        </section>
-
-        {/* Trial trust badges */}
-        <section className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {[
-            { icon: ShieldCheck, title: "No credit card required", sub: "Start your trial instantly" },
-            { icon: Calendar, title: "Cancel anytime during trial", sub: "You're in control" },
-          ].map(({ icon: Icon, title, sub }) => (
-            <div
-              key={title}
-              className="flex items-start gap-3 rounded-xl p-4"
-              style={{ background: "#0f1011", border: `1px solid ${HAIRLINE}` }}
-            >
-              <span
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
-                style={{ background: "#141516", border: `1px solid ${HAIRLINE}` }}
-              >
-                <Icon className="h-4.5 w-4.5" style={{ color: "#34d399" }} aria-hidden />
-              </span>
-              <div>
-                <p className="text-[13.5px] font-semibold" style={{ color: INK }}>
-                  {title}
-                </p>
-                <p className="mt-0.5 text-[12.5px]" style={{ color: SUBTLE }}>
-                  {sub}
-                </p>
-              </div>
-            </div>
-          ))}
-        </section>
-      </div>
-    </div>
+            </CardContent>
+          </Card>
+        ))}
+      </motion.div>
+    </motion.div>
   );
 }
