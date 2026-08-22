@@ -19,11 +19,14 @@ import { pageContainer as container, pageItem as item } from "@/lib/motion";
  * Billing / Upgrade page — uses the shared light dashboard design system.
  */
 
-// TODO: replace with real credentials
-const PAYPAL_CLIENT_ID = "YOUR_CLIENT_ID";
+// Replace these with your actual PayPal credentials
+const PAYPAL_CLIENT_ID = "YOUR_CLIENT_ID_HERE";
+const PAYPAL_PRO_PLAN_ID = "P-PRO_PLAN_ID_HERE";
+const PAYPAL_SCALE_PLAN_ID = "P-SCALE_PLAN_ID_HERE";
+
 const PLAN_IDS = {
-  pro: { monthly: "P-XXXXXXXXXXXXXXXX", annual: "P-XXXXXXXXXXXXXXXX" },
-  scale: { monthly: "P-YYYYYYYYYYYYYYYY", annual: "P-YYYYYYYYYYYYYYYY" },
+  pro: { monthly: PAYPAL_PRO_PLAN_ID, annual: PAYPAL_PRO_PLAN_ID },
+  scale: { monthly: PAYPAL_SCALE_PLAN_ID, annual: PAYPAL_SCALE_PLAN_ID },
 };
 
 type Billing = "monthly" | "annual";
@@ -99,9 +102,21 @@ function PayPalButton({
       try {
         paypal
           .Buttons({
-            style: { shape: "rect", color: "blue", layout: "vertical", label: "subscribe", height: 46 },
+            style: {
+              layout: "vertical",
+              color: "gold",
+              shape: "rect",
+              label: "subscribe",
+              height: 44,
+            },
             createSubscription: (_data: unknown, actions: any) =>
               actions.subscription.create({ plan_id: planId }),
+            onApprove: (data: any) => {
+              alert("Subscription created! ID: " + data.subscriptionID);
+            },
+            onError: () => {
+              if (!cancelled) setStatus("error");
+            },
           })
           .render(ref.current);
         setStatus("ready");
@@ -113,20 +128,24 @@ function PayPalButton({
     };
 
     const load = () => {
-      if (render()) return;
-      const existing = document.querySelector<HTMLScriptElement>("script[data-paypal-sdk]");
-      if (existing) {
-        existing.addEventListener("load", () => render());
-        existing.addEventListener("error", () => !cancelled && setStatus("error"));
-        return;
+      try {
+        if (render()) return;
+        const existing = document.querySelector<HTMLScriptElement>("script[data-paypal-sdk]");
+        if (existing) {
+          existing.addEventListener("load", () => render());
+          existing.addEventListener("error", () => !cancelled && setStatus("error"));
+          return;
+        }
+        const script = document.createElement("script");
+        script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&vault=true&intent=subscription`;
+        script.async = true;
+        script.dataset.paypalSdk = "true";
+        script.onload = () => render();
+        script.onerror = () => !cancelled && setStatus("error");
+        document.head.appendChild(script);
+      } catch {
+        if (!cancelled) setStatus("error");
       }
-      const script = document.createElement("script");
-      script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&vault=true&intent=subscription`;
-      script.async = true;
-      script.dataset.paypalSdk = "true";
-      script.onload = () => render();
-      script.onerror = () => !cancelled && setStatus("error");
-      document.head.appendChild(script);
     };
 
     load();
@@ -141,17 +160,17 @@ function PayPalButton({
   }, [planId]);
 
   return (
-    <div>
-      <div id={containerId} ref={ref} className="min-h-[46px]" />
+    <div className="my-4">
+      <div id={containerId} ref={ref} className="min-h-[44px]" />
       {status === "loading" && (
-        <div className="flex min-h-[46px] items-center justify-center gap-2 rounded-lg border border-border/70 bg-muted/30 text-[13px] text-muted-foreground">
+        <div className="flex min-h-[44px] items-center justify-center gap-2 rounded-lg border border-border/70 bg-muted/30 text-[13px] text-muted-foreground">
           <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
           Loading payment options…
         </div>
       )}
       {status === "error" && (
         <div className="rounded-lg border border-border/70 bg-muted/30 px-3 py-3 text-[13px] leading-relaxed text-muted-foreground">
-          Payment options loading… Please refresh the page or contact support.
+          Payment options unavailable. Please refresh or contact support.
         </div>
       )}
     </div>
@@ -369,7 +388,7 @@ export default function Billing() {
             billing={billing}
             features={proFeatures}
             popular
-            containerId="paypal-pro-plan"
+            containerId="paypal-pro-plan-button"
             planId={PLAN_IDS.pro[billing]}
           />
           <PlanCard
@@ -378,7 +397,7 @@ export default function Billing() {
             annual={990}
             billing={billing}
             features={scaleFeatures}
-            containerId="paypal-scale-plan"
+            containerId="paypal-scale-plan-button"
             planId={PLAN_IDS.scale[billing]}
           />
         </div>
