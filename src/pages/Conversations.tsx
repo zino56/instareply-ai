@@ -38,6 +38,7 @@ import {
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import { MessageRowSkeleton } from '@/components/dashboard/Skeletons';
+import { EmptyState } from '@/components/dashboard/EmptyState';
 import { formatDistanceToNow, format, isToday, isYesterday, differenceInMinutes } from 'date-fns';
 import { mockConversations, type MockConversation, type ConvAssignee } from '@/lib/conversationsMock';
 import { api } from '@/lib/api';
