@@ -402,6 +402,7 @@ const STATUS: Record<LogStatus, { label: string; tone: 'green' | 'amber' | 'slat
 /* --------------------------------- Page ---------------------------------- */
 export default function Automations() {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [tab, setTab] = useState<'rules' | 'queue' | 'logs'>('rules');
   const [killswitch, setKillswitch] = useState(true);
   const [rules, setRules] = useState<AutomationRule[]>([]);
