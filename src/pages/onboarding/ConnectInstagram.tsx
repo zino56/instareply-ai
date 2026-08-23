@@ -1,12 +1,11 @@
 import { Logo } from '@/components/brand/Logo';
 import { motion } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { loginWithInstagram } from '@/lib/api';
 
 export default function ConnectInstagram() {
-  const navigate = useNavigate();
 
   return (
     <motion.div
@@ -36,16 +35,6 @@ export default function ConnectInstagram() {
             <Instagram className="w-5 h-5" />
             Connect Instagram
           </Button>
-
-          <div className="text-center">
-            <button
-              type="button"
-              onClick={() => navigate('/dashboard')}
-              className="text-sm text-muted-foreground hover:text-foreground hover:underline rounded-sm focus-ring px-2 py-1"
-            >
-              Skip for now
-            </button>
-          </div>
         </div>
       </div>
     </motion.div>
