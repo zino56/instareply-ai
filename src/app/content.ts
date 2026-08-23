@@ -53,15 +53,16 @@ export type ProductsItem = {
   title: string;
   description: string;
   price: string;
+  monthlyAmount: number;
   label: string;
   stat: string;
   description2: string;
   description3: string;
 };
 export const products: ProductsItem[] = [
-    { variant: "starter", title: "Starter", description: "Automate the questions you answer every day", price: "$49", label: "Choose Starter", stat: "1", description2: "For solo operators", description3: "1 Instagram account · DM auto-replies · Email support" },
-    { variant: "pro", title: "Growth", description: "Handle repetitive DMs at scale with a shared inbox", price: "$99", label: "Choose Growth", stat: "3", description2: "Most popular", description3: "Up to 3 Instagram accounts · Shared inbox · Saved FAQs" },
-    { variant: "enterprise", title: "Scale", description: "For teams running high-volume community inboxes", price: "$199", label: "Choose Scale", stat: "10", description2: "For growing teams", description3: "Up to 10 accounts · Priority support · Advanced automation" }
+    { variant: "starter", title: "Starter", description: "Automate the questions you answer every day", price: "$49", monthlyAmount: 49, label: "Choose Starter", stat: "1", description2: "For solo operators", description3: "1 Instagram account · DM auto-replies · Email support" },
+    { variant: "pro", title: "Growth", description: "Handle repetitive DMs at scale with a shared inbox", price: "$99", monthlyAmount: 99, label: "Choose Growth", stat: "3", description2: "Most popular", description3: "Up to 3 Instagram accounts · Shared inbox · Saved FAQs" },
+    { variant: "enterprise", title: "Scale", description: "For teams running high-volume community inboxes", price: "$199", monthlyAmount: 199, label: "Choose Scale", stat: "10", description2: "For growing teams", description3: "Up to 10 accounts · Priority support · Advanced automation" }
 ];
 
 export type MediaTile3DataItem = {
