@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useMemo, KeyboardEvent, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import {
   Search,
   Send,
@@ -86,6 +86,7 @@ function coerceConversations(raw: unknown): MockConversation[] {
 }
 
 export default function Conversations() {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const qaState: QaState = IS_DEV
     ? ((searchParams.get('convState') as QaState) || 'ready')
