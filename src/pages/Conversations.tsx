@@ -1154,30 +1154,6 @@ function ThreadError({ onRetry }: { onRetry: () => void }) {
   );
 }
 
-function RailEmpty({
-  icon,
-  title,
-  subtitle,
-  action,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  subtitle: string;
-  action?: React.ReactNode;
-}) {
-  return (
-    <div className="h-full flex items-center justify-center px-6">
-      <div className="text-center">
-        <div className="w-10 h-10 rounded-xl bg-muted mx-auto mb-3 flex items-center justify-center text-muted-foreground">
-          {icon}
-        </div>
-        <p className="text-[13px] font-semibold text-foreground">{title}</p>
-        <p className="text-[12px] text-muted-foreground mt-1 max-w-[220px]">{subtitle}</p>
-        {action && <div className="mt-3">{action}</div>}
-      </div>
-    </div>
-  );
-}
 
 function RailError({ onRetry }: { onRetry: () => void }) {
   return (
