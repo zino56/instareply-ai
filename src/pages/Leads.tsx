@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Table2, RefreshCw, Download, MoreHorizontal, Copy, ExternalLink, Inbox,
+  Table2, RefreshCw, Download, MoreHorizontal, Copy, ExternalLink,
   Users, Sparkles, Rocket, Loader2, Link2Off, Search,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';

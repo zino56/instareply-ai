@@ -9,12 +9,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area,
 } from 'recharts';
+import { useNavigate } from 'react-router-dom';
 import { api } from '@/lib/api';
+import { EmptyState } from '@/components/dashboard/EmptyState';
 import { cn } from '@/lib/utils';
 
 import { pageContainer as container, pageItem as item } from '@/lib/motion';
 
 export default function Analytics() {
+  const navigate = useNavigate();
   const [dateRange, setDateRange] = useState('30');
   const [loading, setLoading] = useState(true);
   const [conversations, setConversations] = useState<any[]>([]);
@@ -72,6 +75,18 @@ export default function Analytics() {
           </div>
         </motion.div>
 
+        {conversations.length === 0 ? (
+          <motion.div variants={item}>
+            <EmptyState
+              icon={BarChart3}
+              title="No data yet"
+              description="Start using Conveero to see your conversation analytics"
+              actionLabel="View inbox"
+              onAction={() => navigate('/conversations')}
+            />
+          </motion.div>
+        ) : (
+        <>
         <motion.div variants={item} className="space-y-3">
           <h2 className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">Overview</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -129,8 +144,9 @@ export default function Analytics() {
             </Card>
           </div>
         </motion.div>
+        </>
+        )}
       </motion.div>
     </div>
   );
 }
-
