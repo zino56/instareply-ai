@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { PlanCardSkeleton } from "@/components/dashboard/Skeletons";
 import {
   Check,
   ChevronDown,

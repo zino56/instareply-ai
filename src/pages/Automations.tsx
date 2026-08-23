@@ -518,7 +518,7 @@ export default function Automations() {
             )}
 
             {tab === 'rules' && !loading && (
-              <div className="grid gap-3">
+              <div className="grid gap-3 animate-fade-in">
                 {rules.map((r) => (
                   <RuleCard
                     key={r.id}
