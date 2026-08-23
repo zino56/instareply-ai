@@ -4,24 +4,24 @@ import { easeOutQuiet, Lift, Reveal } from "../motion";
 
 const faqs = [
   {
-    q: "Is this automation safe for my Instagram account?",
-    a: "Yes. We use Meta's official Graph API, the same one Instagram business tools use, so there is zero account risk. Your account stays safe.",
+    q: "How does the AI know what to reply?",
+    a: "You train it with your store's FAQ, policies, and common responses. The AI uses this to draft accurate replies that match your brand voice.",
   },
   {
-    q: "Can the AI say wrong things (hallucinate)?",
-    a: "The AI only answers from the catalog and documents you upload. When it isn't confident, it hands the conversation to you instead of guessing.",
+    q: "Can I review replies before they're sent?",
+    a: "Yes! Every AI-drafted reply goes to your approval queue. You can edit or approve with one click.",
   },
   {
-    q: "Do I need coding skills?",
-    a: "No. Connect your account, upload your product info, and turn on replies. Everything is configured from the dashboard.",
+    q: "Does it work with my existing Instagram?",
+    a: "Yes! Just connect your Instagram Business account and you're ready to go. No need to change accounts.",
   },
   {
-    q: "What if a customer asks something outside my catalog?",
-    a: "The conversation is flagged in your inbox and routed to a human, so nothing important slips through.",
+    q: "What if I get hundreds of DMs?",
+    a: "Conveero scales automatically. Whether you get 10 or 10,000 DMs per day, the AI handles them all instantly.",
   },
   {
-    q: "What if I need help setting things up?",
-    a: "Our team helps with onboarding and can review your first automations before you switch them live.",
+    q: "Is there a free trial?",
+    a: "Yes! All plans include a 7-day free trial. No credit card required to start.",
   },
 ];
 
@@ -34,9 +34,9 @@ export default function QuestionsAnsweredSection() {
       <div className="block max-w-300 mx-auto px-8" data-cid="n535">
         <Reveal className="block max-w-160 mb-14 mx-auto text-center">
           <h2 className="block [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-[3.1875rem] font-bold leading-[3.1875rem] tracking-[-1.28px] text-balance max-lg:text-4xl max-lg:leading-9 max-lg:tracking-[-0.9px] 2xl:text-[3.25rem] 2xl:leading-13 2xl:tracking-[-1.3px]" data-cid="n537" data-component="heading">
-            {"Questions, "}
+            {"Frequently asked "}
             <mark className="inline px-[0.575rem] rounded-sm bg-color-010 max-lg:px-[6.5px] 2xl:px-[0.5875rem]" data-cid="n538">
-              answered
+              questions
             </mark>
           </h2>
           <p className="block max-w-[44rem] my-5 text-primary text-lg leading-[1.8125rem]" data-cid="n539">
