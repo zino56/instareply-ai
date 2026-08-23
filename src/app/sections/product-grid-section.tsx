@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Reveal, Stagger, StaggerItem } from "../motion";
 import ProductCard from "../components/product-card";
 import SpotlightCard from "../components/spotlight-card";
@@ -5,8 +6,13 @@ import { CardSkeleton, useSkeleton } from "../components/skeleton";
 import { ProductCard_cids } from "../_cids";
 import { ProductCard_styles } from "../_styles";
 import { products as productsContent } from "../content";
+import { cn } from "../../lib/utils";
+
+export type Billing = "monthly" | "yearly";
+
 /** Product Grid section. */
 export default function ProductGridSection({ products = productsContent } = {}) {
+  const [billing, setBilling] = useState<Billing>("monthly");
   const loading = useSkeleton(700);
 
   return (
@@ -22,13 +28,47 @@ export default function ProductGridSection({ products = productsContent } = {}) 
           <p className="block max-w-[44rem] my-5 text-primary text-lg leading-[1.8125rem]" data-cid="n357">
             Starter, Pro, or Enterprise. Choose the plan that fits your volume.
           </p>
-          <div className="border border-solid border-color-002 inline-flex mt-8 p-1.5 rounded-[999px] items-center gap-1 bg-background" data-cid="n358" aria-label="Monthly" role="group">
-            <button className="h-10 flex px-4.5 rounded-[999px] items-center gap-2 text-background text-sm font-semibold leading-[1.0625rem] bg-foreground cursor-pointer" data-cid="n359" data-component="button" aria-pressed="true" type="button">
-              Monthly
-            </button>
-            <button className="h-10 flex px-4.5 rounded-[999px] items-center gap-2 text-primary text-sm font-semibold leading-[1.0625rem] cursor-pointer hover:border-foreground hover:text-foreground hover:outline-foreground hover:[text-decoration-color:var(--foreground)]" data-cid="n360" data-component="button" aria-pressed="false" type="button">
-              Yearly
-            </button>
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
+            <div
+              className="border border-solid border-color-002 inline-flex p-1.5 rounded-[999px] items-center gap-1 bg-background"
+              data-cid="n358"
+              aria-label="Billing period"
+              role="group"
+            >
+              <button
+                type="button"
+                aria-pressed={billing === "monthly"}
+                onClick={() => setBilling("monthly")}
+                className={cn(
+                  "h-10 flex px-4.5 rounded-[999px] items-center gap-2 text-sm font-semibold leading-[1.0625rem] transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[rgb(26,14,8)]/20 focus-visible:outline-none",
+                  billing === "monthly"
+                    ? "text-background bg-foreground"
+                    : "text-primary hover:text-foreground"
+                )}
+                data-cid="n359"
+                data-component="button"
+              >
+                Monthly
+              </button>
+              <button
+                type="button"
+                aria-pressed={billing === "yearly"}
+                onClick={() => setBilling("yearly")}
+                className={cn(
+                  "h-10 flex px-4.5 rounded-[999px] items-center gap-2 text-sm font-semibold leading-[1.0625rem] transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[rgb(26,14,8)]/20 focus-visible:outline-none",
+                  billing === "yearly"
+                    ? "text-background bg-foreground"
+                    : "text-primary hover:text-foreground"
+                )}
+                data-cid="n360"
+                data-component="button"
+              >
+                Yearly
+                <span className="inline-flex items-center rounded-full bg-[rgb(0,182,122)] px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
+                  Save 17%
+                </span>
+              </button>
+            </div>
           </div>
         </Reveal>
         {loading ? (
@@ -42,7 +82,7 @@ export default function ProductGridSection({ products = productsContent } = {}) 
             {products.map((d, i) => (
               <StaggerItem key={d.variant} className="h-full">
                 <SpotlightCard>
-                  <ProductCard d={d} cids={ProductCard_cids[i]} styles={ProductCard_styles[i]} />
+                  <ProductCard d={d} cids={ProductCard_cids[i]} styles={ProductCard_styles[i]} billing={billing} />
                 </SpotlightCard>
               </StaggerItem>
             ))}
