@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Table2, RefreshCw, Download, MoreHorizontal, Copy, ExternalLink, Inbox,
+  Table2, RefreshCw, Download, MoreHorizontal, Copy, ExternalLink,
   Users, Sparkles, Rocket, Loader2, Link2Off, Search,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/hooks/use-toast';
+import { EmptyState } from '@/components/dashboard/EmptyState';
 import { cn } from '@/lib/utils';
 import {
   Lead, LeadStatus, SheetConnection, clearConnection, fetchLeads, formatTimestamp,
@@ -366,14 +367,23 @@ export default function Leads() {
               ) : filtered.length === 0 ? (
                 <tr>
                   <td colSpan={7} className="px-4 py-16 text-center">
-                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-muted">
-                      <Inbox className="h-5 w-5 text-muted-foreground" strokeWidth={1.75} />
-                    </div>
-                    <p className="mt-4 text-[13px] text-muted-foreground">
-                      {query
-                        ? 'No leads match your search.'
-                        : 'Sheet is empty. New leads from your website will appear here automatically.'}
-                    </p>
+                    {query ? (
+                      <EmptyState
+                        bare
+                        icon={Search}
+                        title="No matching leads"
+                        description="No leads match your search. Try a different name, email, or company."
+                      />
+                    ) : (
+                      <EmptyState
+                        bare
+                        icon={Users}
+                        title="No leads yet"
+                        description="When visitors fill out your contact form, they&rsquo;ll appear here"
+                        actionLabel="View contact form"
+                        onAction={() => window.open('/contact', '_blank', 'noopener,noreferrer')}
+                      />
+                    )}
                   </td>
                 </tr>
               ) : (

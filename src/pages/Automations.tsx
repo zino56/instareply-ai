@@ -9,7 +9,9 @@ import {
   AutomationRule, ApprovalItem, ActivityLog, LogStatus, emptyRule, matchKeywords,
   relativeTime,
 } from '@/lib/automationsMock';
+import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
+import { EmptyState } from '@/components/dashboard/EmptyState';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -400,6 +402,7 @@ const STATUS: Record<LogStatus, { label: string; tone: 'green' | 'amber' | 'slat
 /* --------------------------------- Page ---------------------------------- */
 export default function Automations() {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [tab, setTab] = useState<'rules' | 'queue' | 'logs'>('rules');
   const [killswitch, setKillswitch] = useState(true);
   const [rules, setRules] = useState<AutomationRule[]>([]);
@@ -511,18 +514,13 @@ export default function Automations() {
                   />
                 ))}
                 {rules.length === 0 && (
-                  <div className="rounded-2xl border border-border/70 bg-card p-6 text-center shadow-[var(--shadow-sm)]">
-                    <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-muted">
-                      <Sparkles className="h-5 w-5 text-primary" />
-                    </div>
-                    <h3 className="mt-4 text-[15px] font-medium text-foreground">No automation rules configured</h3>
-                    <p className="mx-auto mt-1 max-w-[420px] text-[13px] text-muted-foreground">
-                      Create your first keyword trigger to automatically send private DMs or public replies when customers comment on your Instagram posts.
-                    </p>
-                    <Button onClick={() => setDrawer({ open: true, rule: null })} className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90">
-                      <Plus className="h-4 w-4" /> Create your first rule
-                    </Button>
-                  </div>
+                  <EmptyState
+                    icon={Zap}
+                    title="No automations yet"
+                    description="Create your first automation rule to auto-reply to comments"
+                    actionLabel="Create automation"
+                    onAction={() => setDrawer({ open: true, rule: null })}
+                  />
                 )}
               </div>
             )}
@@ -544,15 +542,13 @@ export default function Automations() {
                   />
                 ))}
                 {approvals.length === 0 && (
-                  <div className="rounded-2xl border border-border/70 bg-card p-6 text-center shadow-[var(--shadow-sm)]">
-                    <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-muted">
-                      <CheckCircle className="h-5 w-5 text-primary" />
-                    </div>
-                    <h3 className="mt-4 text-[15px] font-medium text-foreground">Approval queue is empty</h3>
-                    <p className="mx-auto mt-1 max-w-[420px] text-[13px] text-muted-foreground">
-                      When comment automation rules with manual approval enabled are triggered, drafted replies will appear here for your review.
-                    </p>
-                  </div>
+                  <EmptyState
+                    icon={CheckCircle}
+                    title="No pending approvals"
+                    description="When AI drafts replies, they&rsquo;ll appear here for your review"
+                    actionLabel="View inbox"
+                    onAction={() => navigate('/conversations')}
+                  />
                 )}
               </div>
             )}
