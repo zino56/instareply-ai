@@ -8,27 +8,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthBrandPanel from '@/components/auth/AuthBrandPanel';
 
-/* DEMO BYPASS — development builds only, never shipped to production. */
-function showDevBypass(): boolean {
-  return import.meta.env.DEV;
-}
-
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
   };
-
-  /* DEV BYPASS — REMOVE BEFORE PRODUCTION */
-  const handleDevBypass = () => {
-    window.localStorage.setItem('conveero_dev_bypass', '1');
-    navigate('/dashboard', { replace: true });
-  };
-  /* END DEV BYPASS */
 
   return (
     <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-surface">

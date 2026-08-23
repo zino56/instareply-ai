@@ -1,37 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Topbar } from './Topbar';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { isAuthenticated } from '@/lib/api';
 
-/**
- * DEMO BYPASS — lets anyone preview the dashboard without a backend session.
- * Enabled by the "Demo mode" button on /login (or ?demo=1), stored in
- * localStorage. Remove before handling real customer data.
- */
-function hasDemoBypass(): boolean {
-  if (typeof window === 'undefined') return false;
-  if (!import.meta.env.DEV) return false;
-  if (new URLSearchParams(window.location.search).get('demo') === '1') {
-    try { window.localStorage.setItem('conveero_dev_bypass', '1'); } catch { /* noop */ }
-    return true;
-  }
-  return window.localStorage.getItem('conveero_dev_bypass') === '1';
-}
-
 export function AppLayout() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    if (new URLSearchParams(window.location.search).get('demo') === '1') {
-      try { window.localStorage.setItem('conveero_dev_bypass', '1'); } catch { /* noop */ }
-    }
-  }, []);
-
-  if (!isAuthenticated() && !hasDemoBypass()) {
-    return <Navigate to="/" replace />;
+  if (!isAuthenticated()) {
+    return <Navigate to="/login" replace />;
   }
 
   return (
