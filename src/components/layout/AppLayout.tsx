@@ -12,6 +12,7 @@ import { isAuthenticated } from '@/lib/api';
  */
 function hasDemoBypass(): boolean {
   if (typeof window === 'undefined') return false;
+  if (!import.meta.env.DEV) return false;
   if (new URLSearchParams(window.location.search).get('demo') === '1') {
     try { window.localStorage.setItem('conveero_dev_bypass', '1'); } catch { /* noop */ }
     return true;
