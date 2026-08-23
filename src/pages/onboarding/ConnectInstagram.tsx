@@ -36,16 +36,6 @@ export default function ConnectInstagram() {
             <Instagram className="w-5 h-5" />
             Connect Instagram
           </Button>
-
-          <div className="text-center">
-            <button
-              type="button"
-              onClick={() => navigate('/dashboard')}
-              className="text-sm text-muted-foreground hover:text-foreground hover:underline rounded-sm focus-ring px-2 py-1"
-            >
-              Skip for now
-            </button>
-          </div>
         </div>
       </div>
     </motion.div>
