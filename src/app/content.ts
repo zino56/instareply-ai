@@ -29,8 +29,9 @@ export type Logos2Item = {
   imgSrc: string;
 };
 export const logos2: Logos2Item[] = [
-    { alt: "Meta", imgSrc: "/assets/cloned/svg/40930dd1cb5b.svg" },
-    { alt: "TikTok Business Partner", imgSrc: "/assets/cloned/svg/a8649324be4f.svg" },
+    { alt: "Instagram", imgSrc: "/assets/cloned/svg/40930dd1cb5b.svg" },
+    { alt: "Business Partner", imgSrc: "/assets/cloned/svg/a8649324be4f.svg" },
+
     { alt: "Cloudflare", imgSrc: "/assets/cloned/svg/819ec794ed59.svg" },
     { alt: "Alibaba Cloud", imgSrc: "/assets/cloned/svg/3194f4d64061.svg" }
 ];

@@ -69,7 +69,7 @@ export function ChannelHealthCard({ status, channel, onRetry }: Props) {
                 )}
                 {channel.webhook !== 'unknown' && (
                   <div className="flex items-center justify-between">
-                    <dt className="text-muted-foreground">Webhook</dt>
+                    <dt className="text-muted-foreground">Real-time sync</dt>
                     <dd className={cn('font-medium', channel.webhook === 'ok' ? 'text-success' : 'text-destructive')}>
                       {channel.webhook === 'ok' ? 'Delivering' : 'Failing'}
                     </dd>

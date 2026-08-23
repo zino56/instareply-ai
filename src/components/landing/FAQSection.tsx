@@ -10,11 +10,12 @@ import { Link } from "react-router-dom";
 const faqs = [
   {
     question: "Is this automation safe for my Instagram account?",
-    answer: "Yes. We use Meta's official Graph API (same as Instagram business tools). Zero account risk. We're an Official Meta Business Partner. Your account stays safe.",
+    answer: "Yes. Conveero connects through Instagram's official business integration, so your account stays fully secure and compliant. Nothing is automated outside what Instagram allows.",
   },
   {
     question: "Can the AI say wrong things (hallucinate)?",
-    answer: "No. We use strict Row-Level Security validation. AI only recommends products in your catalog. If you have 24 products, it can only mention those 24. 100% hallucination-proof.",
+    answer: "No. Conveero AI only replies using your catalog and the knowledge you upload. If you have 24 products, it can only mention those 24 — no invented answers.",
+
   },
   {
     question: "Do I need coding skills?",
