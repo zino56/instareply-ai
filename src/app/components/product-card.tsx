@@ -1,18 +1,29 @@
+import { motion } from "framer-motion";
 import type { ProductCardStyles } from "../_styles";
 import Icon5 from "../svgs/svg-icon5";
 import { cn } from "../../lib/utils";
+import { easeOutQuiet } from "../motion";
+
+export type Billing = "monthly" | "yearly";
+
 export type ProductCardData = {
   variant: string;
   title: string;
   description: string;
   price: string;
+  monthlyAmount: number;
   label: string;
   stat: string;
   description2: string;
   description3: string;
 };
 /** A product card. */
-export default function ProductCard({ d, cids, styles }: { d: ProductCardData; cids: string[]; styles: ProductCardStyles }) {
+export default function ProductCard({ d, cids, styles, billing = "monthly" }: { d: ProductCardData; cids: string[]; styles: ProductCardStyles; billing?: Billing }) {
+  const isYearly = billing === "yearly";
+  const yearlyPrice = d.monthlyAmount * 10;
+  const originalYearly = d.monthlyAmount * 12;
+  const savings = d.monthlyAmount * 2;
+
   return (
     <article data-cid={cids[0]} className={cn("border border-solid flex p-7 rounded-4xl flex-col bg-color-003", styles.className)}>
       <h3 data-cid={cids[1]} className="block mb-3 [font-family:'Bricolage_Grotesque',_Inter,_system-ui,_sans-serif] text-[1.375rem] font-bold leading-[1.5625rem] tracking-[-0.22px] text-balance" data-component="heading">
@@ -21,21 +32,52 @@ export default function ProductCard({ d, cids, styles }: { d: ProductCardData; c
       <p data-cid={cids[2]} className="w-full max-w-[39.1125rem] block">
         {d.description2}
       </p>
-      <div data-cid={cids[3]} className="flex my-5 items-baseline gap-1">
-        <span data-cid={cids[4]} className="block [font-family:'JetBrains_Mono',_ui-monospace,_'SF_Mono',_Menlo,_monospace] text-2xl font-medium leading-[1.625rem] tracking-[-0.48px]">
-          {d.price}
-        </span>
-        <span data-cid={cids[5]} className="block text-primary text-sm leading-[1.375rem]">
-          /mo
-        </span>
+      <div data-cid={cids[3]} className="flex my-5 items-baseline gap-1 overflow-hidden">
+        <motion.span
+          key={billing}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25, ease: easeOutQuiet }}
+          data-cid={cids[4]}
+          className="block [font-family:'JetBrains_Mono',_ui-monospace,_'SF_Mono',_Menlo,_monospace] text-2xl font-medium leading-[1.625rem] tracking-[-0.48px]"
+        >
+          {isYearly ? `$${yearlyPrice}` : d.price}
+        </motion.span>
+        <motion.span
+          key={`${billing}-period`}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25, delay: 0.03, ease: easeOutQuiet }}
+          data-cid={cids[5]}
+          className="block text-primary text-sm leading-[1.375rem]"
+        >
+          {isYearly ? "/year" : "/mo"}
+        </motion.span>
       </div>
-      <p data-cid={cids[6]} className="w-full max-w-[34.225rem] block -mt-2 mb-5 text-primary text-sm leading-[1.375rem]">
-        {d.description3}
-      </p>
+      <motion.div
+        key={`${billing}-meta`}
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25, delay: 0.05, ease: easeOutQuiet }}
+        data-cid={cids[6]}
+        className="w-full max-w-[34.225rem] block -mt-2 mb-5 text-sm leading-[1.375rem]"
+      >
+        {isYearly ? (
+          <span>
+            <span className="line-through text-primary/60">${originalYearly}</span>{" "}
+            <span className="text-[rgb(0,182,122)] font-medium">Save ${savings} (17%)</span>
+          </span>
+        ) : (
+          <span className="text-primary">{d.description3}</span>
+        )}
+      </motion.div>
       <ProductCardSlot1 d={d} />
       <a data-cid={cids[7]} className={cn("h-12 border border-solid border-[rgb(255,241,0)] flex mt-8 px-6.5 rounded-[999px] justify-center items-center gap-2 font-semibold leading-4 tracking-[-0.08px] whitespace-nowrap text-nowrap cursor-pointer bg-[rgb(255,241,0)] text-[rgb(26,14,8)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(255,241,0,0.35)] active:scale-[0.98] active:translate-y-0 focus-visible:ring-2 focus-visible:ring-[rgb(26,14,8)]/20 focus-visible:outline-none", styles.className2)} data-component="button" href="/signup">
         Get started
       </a>
+      <p className="mt-3 text-center text-xs text-primary/70">
+        or start with 7-day free trial
+      </p>
     </article>
   );
 }
