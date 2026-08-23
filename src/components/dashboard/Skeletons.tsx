@@ -6,7 +6,7 @@ export function FadeIn({ children, className }: { children: React.ReactNode; cla
   return <div className={cn('animate-fade-in', className)}>{children}</div>;
 }
 
-const S = (props: { className?: string }) => <Skeleton variant="shimmer" {...props} />;
+const S = (props: React.HTMLAttributes<HTMLDivElement>) => <Skeleton variant="shimmer" {...props} />;
 
 /** Inbox / conversation list row. */
 export function MessageRowSkeleton() {
