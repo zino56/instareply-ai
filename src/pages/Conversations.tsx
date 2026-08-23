@@ -504,8 +504,16 @@ export default function Conversations() {
                 ) : (
                   <RailEmpty
                     icon={<Inbox className="w-5 h-5" />}
-                    title="No conversations yet"
-                    subtitle="New Instagram DMs will show up here."
+                    title="No messages yet"
+                    subtitle="When you receive Instagram DMs, they&rsquo;ll appear here"
+                    action={
+                      <Button
+                        size="sm"
+                        onClick={() => navigate('/onboarding/connect-instagram')}
+                      >
+                        Connect Instagram
+                      </Button>
+                    }
                   />
                 )
               ) : (
