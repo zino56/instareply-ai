@@ -46,7 +46,7 @@ const Footer = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Newsletter signup:", email);
+    // Do not log user-entered PII (emails) to the console.
     setEmail("");
   };
 

@@ -8,9 +8,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthBrandPanel from '@/components/auth/AuthBrandPanel';
 
-/* DEMO BYPASS — always available so the dashboard can be previewed. */
+/* DEMO BYPASS — development builds only, never shipped to production. */
 function showDevBypass(): boolean {
-  return true;
+  return import.meta.env.DEV;
 }
 
 export default function Login() {
