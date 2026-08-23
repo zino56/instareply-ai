@@ -272,6 +272,12 @@ export default function Billing() {
   const [billing, setBilling] = useState<Billing>("monthly");
   const [openFaq, setOpenFaq] = useState<number>(0);
   const pricingRef = useRef<HTMLDivElement>(null);
+  const [plansLoading, setPlansLoading] = useState(true);
+
+  useEffect(() => {
+    const t = window.setTimeout(() => setPlansLoading(false), 600);
+    return () => window.clearTimeout(t);
+  }, []);
 
   return (
     <motion.div
@@ -380,7 +386,13 @@ export default function Billing() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {plansLoading ? (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <PlanCardSkeleton />
+            <PlanCardSkeleton />
+          </div>
+        ) : (
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 animate-fade-in">
           <PlanCard
             name="Conveero Pro"
             monthly={49}
@@ -401,6 +413,7 @@ export default function Billing() {
             planId={PLAN_IDS.scale[billing]}
           />
         </div>
+        )}
       </motion.div>
 
       {/* FAQ */}
