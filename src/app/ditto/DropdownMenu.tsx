@@ -1,17 +1,48 @@
 import { useEffect, useState } from "react";
 
+export type DittoMenuItem = {
+  label: string;
+  secondaryLabel?: string;
+  active?: boolean;
+  onClick?: () => void;
+  href?: string;
+};
+
 export type DittoMenu = {
   trigger: string;
   hoverOpen?: boolean;
   gap?: number;
   align?: "left" | "right" | string;
-  html: string;
+  label?: string;
+  items: DittoMenuItem[];
+};
+
+const menuContainerStyles: React.CSSProperties = {
+  position: "absolute",
+  margin: 0,
+  display: "block",
+  boxSizing: "border-box",
+  minWidth: "168px",
+  padding: "5.6px",
+  border: "1px solid rgba(26, 14, 8, 0.12)",
+  borderRadius: "13.6px",
+  backgroundColor: "rgb(251, 246, 234)",
+  color: "rgb(26, 14, 8)",
+  boxShadow: "rgba(26, 14, 8, 0.12) 0px 12px 32px 0px",
+  fontFamily: "Inter, system-ui, -apple-system, sans-serif",
+  fontSize: "16px",
+  fontWeight: 400,
+  lineHeight: "25.6px",
+  listStyleType: "none",
+  flexDirection: "row",
+  flexWrap: "nowrap",
+  zIndex: 60,
 };
 
 /**
  * Lightweight runtime for the cloned design's dropdown menus.
  * Attaches to the element carrying `data-cid={trigger}` and toggles an
- * absolutely-positioned panel rendered from the captured markup.
+ * absolutely-positioned panel rendered from structured menu items.
  */
 export default function DropdownMenu({ menus = [] }: { menus?: DittoMenu[] }) {
   const [open, setOpen] = useState<string | null>(null);
@@ -57,17 +88,95 @@ export default function DropdownMenu({ menus = [] }: { menus?: DittoMenu[] }) {
   const rect = trigger.getBoundingClientRect();
   const gap = active.gap ?? 6;
 
+  const positionStyles: React.CSSProperties = {
+    top: rect.bottom + gap,
+    left: active.align === "right" ? undefined : rect.left,
+    right: active.align === "right" ? Math.max(8, window.innerWidth - rect.right) : undefined,
+  };
+
   return (
-    <div
+    <ul
       data-ditto-menu={active.trigger}
-      style={{
-        position: "fixed",
-        top: rect.bottom + gap,
-        left: active.align === "right" ? undefined : rect.left,
-        right: active.align === "right" ? Math.max(8, window.innerWidth - rect.right) : undefined,
-        zIndex: 60,
-      }}
-      dangerouslySetInnerHTML={{ __html: active.html }}
-    />
+      aria-label={active.label || "Menu"}
+      style={{ ...menuContainerStyles, ...positionStyles }}
+    >
+      {active.items.map((item, index) => {
+        const activeStyles: React.CSSProperties = item.active
+          ? { backgroundColor: "rgba(255, 241, 0, 0.18)" }
+          : {};
+
+        const content = (
+          <>
+            <span>{item.label}</span>
+            {item.secondaryLabel && <span>{item.secondaryLabel}</span>}
+          </>
+        );
+
+        return (
+          <li
+            key={index}
+            style={{
+              display: "list-item",
+              width: "100%",
+              listStyleType: "none",
+            }}
+          >
+            {item.href ? (
+              <a
+                href={item.href}
+                onClick={(event) => {
+                  item.onClick?.();
+                  setOpen(null);
+                }}
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  padding: "8px 10.4px",
+                  borderRadius: "8.8px",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: "12px",
+                  fontSize: "14px",
+                  lineHeight: "22.4px",
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  color: "inherit",
+                  backgroundColor: "transparent",
+                  ...activeStyles,
+                }}
+              >
+                {content}
+              </a>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  item.onClick?.();
+                  setOpen(null);
+                }}
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  padding: "8px 10.4px",
+                  border: "none",
+                  borderRadius: "8.8px",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: "12px",
+                  fontSize: "14px",
+                  lineHeight: "22.4px",
+                  cursor: "pointer",
+                  backgroundColor: "transparent",
+                  color: "inherit",
+                  ...activeStyles,
+                }}
+              >
+                {content}
+              </button>
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }
