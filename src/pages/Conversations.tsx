@@ -489,30 +489,31 @@ export default function Conversations() {
                 </div>
               ) : status === 'error' ? (
                 <RailError onRetry={() => setStatus('ready')} />
-              ) : filtered.length === 0 ? (
-                anyFilterActive ? (
-                  <RailEmpty
-                    icon={<Search className="w-5 h-5" />}
-                    title="No matches"
-                    subtitle="Try clearing filters or searching differently."
-                    action={<Button variant="outline" size="sm" onClick={clearFilters}>Clear filters</Button>}
-                  />
+                ) : filtered.length === 0 ? (
+                  anyFilterActive ? (
+                    <div className="h-full flex items-center justify-center">
+                      <EmptyState
+                        bare
+                        icon={Search}
+                        title="No matches"
+                        description="Try clearing filters or searching differently."
+                        actionLabel="Clear filters"
+                        onAction={clearFilters}
+                      />
+                    </div>
+                  ) : (
+                    <div className="h-full flex items-center justify-center">
+                      <EmptyState
+                        bare
+                        icon={Inbox}
+                        title="No messages yet"
+                        description="When you receive Instagram DMs, they'll appear here"
+                        actionLabel="Connect Instagram"
+                        onAction={() => navigate('/onboarding/connect-instagram')}
+                      />
+                    </div>
+                  )
                 ) : (
-                  <RailEmpty
-                    icon={<Inbox className="w-5 h-5" />}
-                    title="No messages yet"
-                    subtitle="When you receive Instagram DMs, they&rsquo;ll appear here"
-                    action={
-                      <Button
-                        size="sm"
-                        onClick={() => navigate('/onboarding/connect-instagram')}
-                      >
-                        Connect Instagram
-                      </Button>
-                    }
-                  />
-                )
-              ) : (
                 <ScrollArea className="h-full">
                   <ul className="p-1.5">
                     {filtered.map((c) => (
