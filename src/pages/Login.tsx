@@ -97,21 +97,6 @@ export default function Login() {
             </Button>
           </form>
 
-          {/* DEV BYPASS — REMOVE BEFORE PRODUCTION */}
-          {showDevBypass() && (
-            <div className="pt-4">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={handleDevBypass}
-                className="w-full h-10 text-xs font-medium border-dashed"
-              >
-                Enter demo mode (skip sign-in)
-              </Button>
-            </div>
-          )}
-          {/* END DEV BYPASS */}
-
           <p className="text-center text-sm text-muted-foreground mt-8">
             New to Conveero?{' '}
             <Link to="/signup" className="text-primary font-medium hover:underline rounded-sm focus-ring">
