@@ -27,7 +27,6 @@ import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Skeleton } from '@/components/ui/skeleton';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -38,6 +37,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
+import { MessageRowSkeleton } from '@/components/dashboard/Skeletons';
 import { formatDistanceToNow, format, isToday, isYesterday, differenceInMinutes } from 'date-fns';
 import { mockConversations, type MockConversation, type ConvAssignee } from '@/lib/conversationsMock';
 import { api } from '@/lib/api';
@@ -482,14 +482,8 @@ export default function Conversations() {
             <div className="flex-1 min-h-0">
               {status === 'loading' ? (
                 <div className="p-2 space-y-1">
-                  {Array.from({ length: 7 }).map((_, i) => (
-                    <div key={i} className="flex items-center gap-3 p-3">
-                      <Skeleton variant="shimmer" className="h-10 w-10 rounded-full" />
-                      <div className="flex-1 space-y-2">
-                        <Skeleton variant="shimmer" className="h-3 w-1/2" />
-                        <Skeleton variant="shimmer" className="h-3 w-4/5" />
-                      </div>
-                    </div>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <MessageRowSkeleton key={i} />
                   ))}
                 </div>
               ) : status === 'error' ? (

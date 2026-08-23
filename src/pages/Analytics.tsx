@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
-  BarChart3, MessageSquare, Clock, TrendingUp, Calendar, ArrowUp, ArrowDown, Loader2,
+  BarChart3, MessageSquare, Clock, TrendingUp, Calendar,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -12,6 +12,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { api } from '@/lib/api';
 import { EmptyState } from '@/components/dashboard/EmptyState';
+import { StatCardSkeleton, ChartSkeleton } from '@/components/dashboard/Skeletons';
+import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
 import { pageContainer as container, pageItem as item } from '@/lib/motion';
@@ -51,12 +53,34 @@ export default function Analytics() {
   ];
 
   if (loading) {
-    return <div className="flex items-center justify-center min-h-[60vh]"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>;
+    return (
+      <div className="px-4 sm:px-6 lg:px-8 py-6 md:py-8 max-w-[1400px] mx-auto w-full">
+        <div className="space-y-6 md:space-y-8">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div className="space-y-2.5">
+              <Skeleton variant="shimmer" className="h-6 w-40" />
+              <Skeleton variant="shimmer" className="h-3.5 w-64" />
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Skeleton variant="shimmer" className="h-9 w-[160px] rounded-lg" />
+              <Skeleton variant="shimmer" className="h-9 w-20 rounded-lg" />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {Array.from({ length: 3 }).map((_, i) => <StatCardSkeleton key={i} />)}
+          </div>
+          <div className="grid lg:grid-cols-2 gap-5">
+            <ChartSkeleton />
+            <ChartSkeleton />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-6 md:py-8 max-w-[1400px] mx-auto w-full">
-      <motion.div variants={container} initial="hidden" animate="show" className="space-y-6 md:space-y-8">
+      <motion.div variants={container} initial="hidden" animate="show" className="space-y-6 md:space-y-8 animate-fade-in">
         <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
             <h1 className="text-[22px] md:text-[26px] font-semibold md:tracking-[-0.015em] leading-tight text-foreground">Analytics</h1>

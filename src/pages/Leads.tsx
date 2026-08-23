@@ -16,6 +16,7 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/hooks/use-toast';
 import { EmptyState } from '@/components/dashboard/EmptyState';
+import { LeadRowSkeleton } from '@/components/dashboard/Skeletons';
 import { cn } from '@/lib/utils';
 import {
   Lead, LeadStatus, SheetConnection, clearConnection, fetchLeads, formatTimestamp,
@@ -357,13 +358,7 @@ export default function Leads() {
             </thead>
             <tbody>
               {loading ? (
-                Array.from({ length: 4 }).map((_, i) => (
-                  <tr key={i} className="border-b border-border/50 last:border-0">
-                    {Array.from({ length: 7 }).map((__, j) => (
-                      <td key={j} className="px-4 py-3"><Skeleton className="h-4 w-full max-w-[120px]" /></td>
-                    ))}
-                  </tr>
-                ))
+                Array.from({ length: 5 }).map((_, i) => <LeadRowSkeleton key={i} />)
               ) : filtered.length === 0 ? (
                 <tr>
                   <td colSpan={7} className="px-4 py-16 text-center">

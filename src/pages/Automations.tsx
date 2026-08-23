@@ -7,11 +7,12 @@ import {
 } from 'lucide-react';
 import {
   AutomationRule, ApprovalItem, ActivityLog, LogStatus, emptyRule, matchKeywords,
-  relativeTime,
+  relativeTime, fetchAutomations, fetchApprovals,
 } from '@/lib/automationsMock';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { EmptyState } from '@/components/dashboard/EmptyState';
+import { AutomationCardSkeleton } from '@/components/dashboard/Skeletons';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -409,6 +410,19 @@ export default function Automations() {
   const [approvals, setApprovals] = useState<ApprovalItem[]>([]);
   const [logs] = useState<ActivityLog[]>([]);
   const [drawer, setDrawer] = useState<{ open: boolean; rule: AutomationRule | null }>({ open: false, rule: null });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all([fetchAutomations(), fetchApprovals()])
+      .then(([r, a]) => {
+        if (cancelled) return;
+        setRules(r);
+        setApprovals(a);
+      })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, []);
 
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState<'all' | LogStatus>('all');
@@ -497,8 +511,14 @@ export default function Automations() {
         <AnimatePresence mode="wait">
           <motion.div key={tab} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.18 }}>
             {/* -------------------------- Tab 1 -------------------------- */}
-            {tab === 'rules' && (
+            {tab === 'rules' && loading && (
               <div className="grid gap-3">
+                {Array.from({ length: 3 }).map((_, i) => <AutomationCardSkeleton key={i} />)}
+              </div>
+            )}
+
+            {tab === 'rules' && !loading && (
+              <div className="grid gap-3 animate-fade-in">
                 {rules.map((r) => (
                   <RuleCard
                     key={r.id}
@@ -526,8 +546,14 @@ export default function Automations() {
             )}
 
             {/* -------------------------- Tab 2 -------------------------- */}
-            {tab === 'queue' && (
+            {tab === 'queue' && loading && (
               <div className="grid gap-3">
+                {Array.from({ length: 2 }).map((_, i) => <AutomationCardSkeleton key={i} />)}
+              </div>
+            )}
+
+            {tab === 'queue' && !loading && (
+              <div className="grid gap-3 animate-fade-in">
                 {approvals.map((a) => (
                   <ApprovalCard
                     key={a.id}
